@@ -1,18 +1,22 @@
 package ar.utn.dds.POI;
 
 import java.util.ArrayList;
+
+import org.uqbar.geodds.*;
+
+import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.servicios.Servicio;
 
 public class CentroGestionParticipacion extends POI{
 
 	ArrayList <Servicio> listaServicios = new ArrayList <Servicio>();
+	Comuna comuna;
 	
-	/*
-	private Boolean estaCercaDe(Point otroPOI){
-		return ubicacionActual.distance(otroPOI) * 100 < DISTANCIA_MINIMA_DE_CERCANIA;
+	public Boolean estaCercaDe(Point unPunto){
+		return comuna.estaCercaDe(unPunto);
 	}
-	
-	*/
-	
-	
+
+	public void setComuna(Comuna comunaNueva) {
+		comuna = comunaNueva;
+	}	
 }

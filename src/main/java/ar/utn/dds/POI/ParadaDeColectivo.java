@@ -4,12 +4,12 @@ import org.uqbar.geodds.Point;
 
 public class ParadaDeColectivo extends POI{
 	
-	static float DISTANCIA_MINIMA_DE_CERCANIA = 100;
-	
+	static double DISTANCIA_MINIMA_DE_CERCANIA = 0.1;
+
 	public Boolean estaCercaDe(Point ubicacionTerminal){
-		return ubicacionActual.distance(ubicacionTerminal) * 100 < DISTANCIA_MINIMA_DE_CERCANIA;
+		double d = ubicacionActual.distance(ubicacionTerminal);	
+		return d < DISTANCIA_MINIMA_DE_CERCANIA;
 	}
-	
 	
 }	
 
