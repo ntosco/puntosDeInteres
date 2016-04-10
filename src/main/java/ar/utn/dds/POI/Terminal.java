@@ -1,15 +1,15 @@
 package ar.utn.dds.POI;
+import org.uqbar.geodds.*;
 
 public class Terminal{
 
 	POI poiABuscar;
-	Float Latitud;
-	Float Longitud;
-	
+	Point ubicacion;
 	
 	public void setPoiABuscar (POI poiABuscar){
 		this.poiABuscar = poiABuscar;
 	}
 	
+
 	
 }
