@@ -4,25 +4,24 @@ import org.uqbar.geodds.Point;
 
 public class ParadaDeColectivo extends POI{
 	
-	static float DISTANCIA_MINIMA_DE_CERCANIA = 100;
-	
+	static double DISTANCIA_MINIMA_DE_CERCANIA = 0.1;
 	String linea; //Agrego linea tipo String para cada parada. "linea" es String porque puede incluir el ramal.
 	
 	
-	
 	public Boolean estaCercaDe(Point ubicacionTerminal){
-		return ubicacionActual.distance(ubicacionTerminal) * 100 < DISTANCIA_MINIMA_DE_CERCANIA;
+		double d = ubicacionActual.distance(ubicacionTerminal);	
+		return d < DISTANCIA_MINIMA_DE_CERCANIA;
 	}
 	
+
 	public boolean CumpleCondicionBusqueda(String textoLibre){
 		if (linea.toLowerCase().contains(textoLibre.toLowerCase())){
 			return true;
 		}else {	
 			return contieneKeyword(textoLibre);
-		}
-			
-			
+		}		
 	}
+
 }	
 
 
