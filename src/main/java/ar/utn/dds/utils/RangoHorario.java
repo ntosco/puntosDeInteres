@@ -13,14 +13,17 @@ public class RangoHorario {
 	
 	public RangoHorario(Integer horarioInicial, Integer horarioFinal) {
 		super();
-		// FIXME : controlar  que horario inicial sea menor que final
-		this.horarioInicial = horarioInicial;
-		this.horarioFinal = horarioFinal;
+		if(horarioFinal>horarioInicial){
+			this.horarioInicial = horarioInicial;
+			this.horarioFinal = horarioFinal;
+		}else{
+			this.horarioInicial = horarioFinal;
+			this.horarioFinal = horarioInicial;
+		}
 	}
 
 	public Boolean DentroRangoHorario(Integer _horarioConsultado){
 		
-		//FIXME buscar operador para comparar horarios
 		return (_horarioConsultado >= this.getHorarioInicial() && _horarioConsultado <= this.getHorarioFinal());
 		
 	}

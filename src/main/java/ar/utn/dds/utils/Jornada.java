@@ -1,6 +1,7 @@
 package ar.utn.dds.utils;
 
 import java.time.DayOfWeek;
+import java.util.PrimitiveIterator.OfDouble;
 
 public class Jornada {
 	
@@ -16,10 +17,12 @@ public class Jornada {
 		super();
 		this.diaSemanal = _diaSemanal;
 		this.horarioDeAtencion = _horarioDeAtencion;
+		
 	}
 
 	public DayOfWeek getDiaSemanal() {
 		return diaSemanal;
+		
 	}
 
 	public void setDiaSemanal(DayOfWeek diaSemanal) {
