@@ -8,6 +8,16 @@ public class ParadaDeColectivo extends POI{
 	String linea; //Agrego linea tipo String para cada parada. "linea" es String porque puede incluir el ramal.
 	
 	
+	public String getLinea() {
+		return linea;
+	}
+
+
+	public void setLinea(String linea) {
+		this.linea = linea;
+	}
+
+
 	public Boolean estaCercaDe(Point ubicacionTerminal){
 		double d = ubicacionActual.distance(ubicacionTerminal);	
 		return d < DISTANCIA_MINIMA_DE_CERCANIA;

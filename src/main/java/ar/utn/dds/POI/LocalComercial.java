@@ -8,6 +8,14 @@ import ar.utn.dds.servicios.Servicio;
 
 public class LocalComercial extends POI{
 	
+	public ArrayList<Rubro> getListaRubros() {
+		return listaRubros;
+	}
+
+	public void setListaRubros(ArrayList<Rubro> listaRubros) {
+		this.listaRubros = listaRubros;
+	}
+
 	ArrayList <Rubro> listaRubros = new ArrayList <Rubro>();
 
 	double DISTANCIA_MINIMA_DE_CERCANIA =  0.5; 

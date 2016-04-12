@@ -16,6 +16,14 @@ public abstract class POI {
 	ArrayList <String> listaPalabrasClave = new ArrayList <String>(); //Creo lista de palabras clave
 	
 	
+	public ArrayList<String> getListaPalabrasClave() {
+		return listaPalabrasClave;
+	}
+
+	public void setListaPalabrasClave(ArrayList<String> listaPalabrasClave) {
+		this.listaPalabrasClave = listaPalabrasClave;
+	}
+
 	public void setUbicacionActual(Point unPunto){
 		ubicacionActual = unPunto;
 	}

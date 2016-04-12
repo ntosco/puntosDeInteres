@@ -20,6 +20,14 @@ public class CentroGestionParticipacion extends POI{
 		return false;
 	}
 	
+	public ArrayList<Servicio> getListaServicios() {
+		return listaServicios;
+	}
+
+	public void setListaServicios(ArrayList<Servicio> listaServicios) {
+		this.listaServicios = listaServicios;
+	}
+
 	public boolean cumpleCondicionBusqueda(String textoLibre){
 		if (contieneServicio(textoLibre)){
 			return true;

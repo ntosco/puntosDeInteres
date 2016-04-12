@@ -5,8 +5,14 @@ package ar.utn.dds.POI;
 public class Rubro {
 	String nombre;
 	
-	public String nombre(){
+
+
+	public String getNombre() {
 		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	
 }
