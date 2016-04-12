@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.uqbar.geodds.*;
 
+import java.time.LocalDateTime;
 import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.servicios.Servicio;
 
@@ -43,5 +44,12 @@ public class CentroGestionParticipacion extends POI{
 
 	public void setComuna(Comuna comunaNueva) {
 		comuna = comunaNueva;
-	}	
+	}
+	
+	public Boolean estaDisponible(POI poi, String _nombreServicio,
+			LocalDateTime _horarioConsultado) {
+		 return this.getEstrategiasDisponibilidad().stream().anyMatch((estrategiaDisponibilidad)->estrategiaDisponibilidad.estaDisponible(this,this.listaServicios, _nombreServicio, _horarioConsultado));
+		
+	}
+
 }
