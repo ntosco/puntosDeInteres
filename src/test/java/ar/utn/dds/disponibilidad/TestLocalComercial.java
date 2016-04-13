@@ -70,7 +70,7 @@ public class TestLocalComercial {
 
 	@Test
 	public void estoyDisponibleHorarioOut(){
-		assertFalse(cafeMartinez.estaDisponible(cafeMartinez,null, lunes23hs));
+		assertFalse(cafeMartinez.estaDisponible(cafeMartinez,null,lunes23hs));
 	}
 	
 	@Test

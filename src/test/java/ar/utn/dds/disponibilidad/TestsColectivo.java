@@ -18,6 +18,9 @@ public class TestsColectivo {
 	private Point ubicacionParada114;
 	private Point ubicacionParada11;
 	
+	private LocalDateTime lunes1210hs ;
+	private LocalDateTime lunes23hs ;
+	
 	@Before
 	public void SetUp(){
 
@@ -32,6 +35,8 @@ public class TestsColectivo {
 		ubicacionParada11 = new Point(150,200);
 		parada11.setUbicacionActual(ubicacionParada11);
 		
+		lunes1210hs =LocalDateTime.of(2016,4,11,12,10,00);
+		lunes23hs= LocalDateTime.of(2016,4,11,23,10,00);	
 			
 	}
 
@@ -39,6 +44,7 @@ public class TestsColectivo {
 	public void estoyDisponibleAhoraSinServicio(){
 		assertTrue(parada114.estaDisponible(parada11,null, LocalDateTime.now()));
 	}
+	
 	@Test
 	public void estoyDisponibleAhoraConServicio(){
 		assertTrue(parada11.estaDisponible(parada11,"Rentas", LocalDateTime.now()));
