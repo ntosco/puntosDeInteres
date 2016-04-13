@@ -47,7 +47,7 @@ public abstract class POI {
 	}
 	
 	public boolean contieneKeyword(String palabraClave){
-		return listaPalabrasClave.equals(palabraClave);
+		return listaPalabrasClave.contains(palabraClave);
 	}
 	
 	public Boolean estaDisponible(POI poi, String _nombreServicio,

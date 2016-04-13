@@ -17,7 +17,7 @@ public class CentroGestionParticipacion extends POI{
 			
 	public boolean contieneServicio(String textoLibre){
 		for (Servicio servicio : listaServicios){
-			if (servicio.nombre().toLowerCase().contains(textoLibre))
+			if (servicio.getNombre() == textoLibre)
 				return true;
 		}
 		return false;

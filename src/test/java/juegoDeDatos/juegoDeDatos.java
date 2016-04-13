@@ -183,13 +183,5 @@ public class juegoDeDatos {
 		
 	
 	}
-	
 
-	
-	
-	@Test
-	public void estoyCercaDeUnCGP(){
-	
-		assertTrue(cgpCaballito.estaCercaDe(puntoTerminal));
-	}
 }
