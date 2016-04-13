@@ -1,4 +1,4 @@
-package testBusquedaPalabrasClave;
+package ar.utn.dds.busquedaDePuntos;
 
 import static org.junit.Assert.*;
 

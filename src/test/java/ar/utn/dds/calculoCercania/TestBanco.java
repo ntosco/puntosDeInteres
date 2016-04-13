@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.*;
 import org.uqbar.geodds.Point;
+
 import ar.utn.dds.POI.*;
 
 
@@ -15,6 +16,7 @@ public class TestBanco {
 	private Point ubicacionSucursalLejana;
 	private Point puntoTerminal;
 	private Point puntoTerminal2;
+	
 	
 	@Before
 	public void SetUp(){
@@ -30,6 +32,7 @@ public class TestBanco {
 		sucursalMartinez = new SucursalBanco();
 		ubicacionSucursalLejana = new Point(800, 200);
 		sucursalMartinez.setUbicacionActual(ubicacionSucursalLejana);
+
 	}
 	
 	@Test
@@ -41,5 +44,5 @@ public class TestBanco {
 	public void noEstoyCercaDeUnaSucursalLejana(){
 		assertFalse(sucursalMartinez.estaCercaDe(puntoTerminal));
 	}
-
+	
 } 

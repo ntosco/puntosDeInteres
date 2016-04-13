@@ -1,4 +1,4 @@
-package testBusquedaPalabrasClave;
+package ar.utn.dds.busquedaDePuntos;
 
 import static org.junit.Assert.*;
 
@@ -43,4 +43,5 @@ public class TestBanco {
 	public void testElBancoPrestaAlgunoDeLosServiciosBuscados(){
 		assertTrue(sucursalRetiro.contieneKeyword("Pago"));
 	}
+	
 }
