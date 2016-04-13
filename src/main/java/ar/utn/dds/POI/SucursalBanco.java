@@ -51,6 +51,16 @@ public class SucursalBanco extends POI{
 		this.setJornadaDisponible(jornadasSemanales);
 
 	}
+
+
+	public List<Servicio> getListaServicios() {
+		return listaServicios;
+	}
+
+
+	public void setListaServicios(List<Servicio> listaServicios) {
+		this.listaServicios = listaServicios;
+	}
 	
 	
 	

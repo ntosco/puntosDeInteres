@@ -52,7 +52,7 @@ public abstract class POI {
 	
 	public Boolean estaDisponible(POI poi, String _nombreServicio,
 			LocalDateTime _horarioConsultado) {
-		 return this.getEstrategiasDisponibilidad().stream().anyMatch((estrategiaDisponibilidad)->estrategiaDisponibilidad.estaDisponible(this,null, _nombreServicio, _horarioConsultado));
+		 return this.getEstrategiasDisponibilidad().stream().allMatch((estrategiaDisponibilidad)->estrategiaDisponibilidad.estaDisponible(this,null, _nombreServicio, _horarioConsultado));
 		
 	}
 
