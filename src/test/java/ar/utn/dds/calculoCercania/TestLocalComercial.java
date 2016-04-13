@@ -19,16 +19,18 @@ public class TestLocalComercial {
 	private Point puntoTerminal;
 	private Point ubicacionLocalCafeMartinez;
 	private Point ubicacionLocalNike;
+	private Point ubicacionLibreriaAlmagro;
+	private Point ubicacionPuestoDiariosJose;
 	
 	private LocalComercial nike;//solo un rubro: indumentaria
 	private LocalComercial falabella; //varios rubros: indumentaria, muebleria, perfumeria, etc
+	private LocalComercial libreriaAlmagro;
+	private LocalComercial puestoDiariosJose;
 	private Rubro indumentaria;
 	private Rubro muebleria;
 	private Rubro perfumeria;
-	
-	private Servicio asesoramientoLegal;
-	private Servicio pagoDeFacturas;
-	private Servicio asesoramientoTecnico;
+	private Rubro libreriaEscolar;
+	private Rubro puestoDiarios;
 
 
 	
@@ -49,6 +51,18 @@ public class TestLocalComercial {
 		nike.setUbicacionActual(ubicacionLocalNike);		
 		nike.setRadioDeCercania(0.2);
 		
+		libreriaAlmagro = new LocalComercial();
+		ubicacionLibreriaAlmagro = new Point(10,20.2);
+		libreriaAlmagro.setUbicacionActual(ubicacionLibreriaAlmagro);
+		libreriaAlmagro.setRadioDeCercania(10);
+		
+		puestoDiariosJose = new LocalComercial();
+		ubicacionPuestoDiariosJose = new Point(10,20.2);
+		puestoDiariosJose.setUbicacionActual(ubicacionPuestoDiariosJose);
+		puestoDiariosJose.setRadioDeCercania(0.2);
+		
+		
+		
 	}
 	
 	@Test
@@ -61,4 +75,10 @@ public class TestLocalComercial {
 		assertFalse(nike.estaCercaDe(puntoTerminal));
 	}
 	
+	@Test
+	public void estoyLejosDeUnaLibreriaPeroCercaDeUnKioscoDeDiarios(){
+		assertFalse(puestoDiariosJose.estaCercaDe(puntoTerminal));
+		//assertTrue(libreriaAlmagro.estaCercaDe(puntoTerminal));
+
+	}
 }

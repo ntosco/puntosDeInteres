@@ -25,10 +25,14 @@ public class LocalComercial extends POI{
 	
 	public boolean perteneceAlRubro(String textoLibre){
 		for (Rubro rubro : listaRubros){
-			if (textoLibre.equals(rubro))
+			if (textoLibre.equals(rubro.getNombre()))
 				return true;
 		}
 		return false;
+	}
+	
+	public boolean perteneceAlRubro2(String textoLibre){
+		return listaRubros.stream().anyMatch(rubro -> (rubro.getNombre() == textoLibre));
 	}
 
 	public boolean cumpleCondicionBusqueda(String textoLibre){
