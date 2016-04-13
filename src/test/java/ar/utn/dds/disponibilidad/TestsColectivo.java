@@ -1,4 +1,4 @@
-package ar.utn.dds.calculoCercania;
+package ar.utn.dds.disponibilidad;
 
 import static org.junit.Assert.*;
 
@@ -26,26 +26,24 @@ public class TestsColectivo {
 
 		//Parada de colectivo - Parada 114
 		parada114 = new ParadaDeColectivo();
-		ubicacionParada114 = new Point(10.0008,20);
-		parada114.setUbicacionActual(ubicacionParada114);
+		parada114.setJornadaDisponible(null);
 		
 		parada11 = new ParadaDeColectivo();
 		ubicacionParada11 = new Point(150,200);
 		parada11.setUbicacionActual(ubicacionParada11);
+		
 			
 	}
-	
-	@Test
-	public void estoyCercaDeUnaParadaDeColectivoCercana(){
-		assertTrue(parada114.estaCercaDe(puntoTerminal));
-	}
-	
-	@Test 
-	public void noEstoyCercaDeUnaParadaDeColectivoLejana(){
-		assertFalse(parada11.estaCercaDe(puntoTerminal));
-	}
-	
 
+	@Test
+	public void estoyDisponibleAhoraSinServicio(){
+		assertTrue(parada114.estaDisponible(parada11,null, LocalDateTime.now()));
+	}
+	@Test
+	public void estoyDisponibleAhoraConServicio(){
+		assertTrue(parada11.estaDisponible(parada11,"Rentas", LocalDateTime.now()));
+	}
+	
 }
 
 

@@ -6,6 +6,8 @@ import org.uqbar.geodds.*;
 
 import java.time.LocalDateTime;
 import ar.utn.dds.comunas.Comuna;
+import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
+import ar.utn.dds.estrategias.implementacion.DisponibilidadxServicio;
 import ar.utn.dds.servicios.Servicio;
 
 public class CentroGestionParticipacion extends POI{
@@ -50,6 +52,16 @@ public class CentroGestionParticipacion extends POI{
 			LocalDateTime _horarioConsultado) {
 		 return this.getEstrategiasDisponibilidad().stream().anyMatch((estrategiaDisponibilidad)->estrategiaDisponibilidad.estaDisponible(this,this.listaServicios, _nombreServicio, _horarioConsultado));
 		
+	}
+
+	/**
+	 * 
+	 */
+	public CentroGestionParticipacion() {
+		super();
+		ArrayList<EstrategiaDisponibilidad> estrategias = new ArrayList<EstrategiaDisponibilidad>();
+		estrategias.add(new DisponibilidadxServicio());
+		this.setEstrategiasDisponibilidad(estrategias);
 	}
 
 }

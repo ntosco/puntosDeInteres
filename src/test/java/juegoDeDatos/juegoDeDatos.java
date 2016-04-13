@@ -45,7 +45,7 @@ public class juegoDeDatos {
 	private Servicio asesoramientoTecnico;
 	
 	
-	//juego de datos pensado para el PUNTO1  calculo de cercania
+	//juego de datos pensado para el PUNTO1  calculo de cercania 
 	
 		//Bondis
 	private ParadaDeColectivo parada15;
@@ -155,7 +155,7 @@ public class juegoDeDatos {
 	comuna1.setAreaDeComuna(punto2comuna);
 	comuna1.setAreaDeComuna(punto3comuna);
 	
-	comuna2.setAreaDeComuna(punto2comuna);// los 3 puntos son el mismo. Entonces la comuna es del tamaño de un punto diferente al de la terminal
+	comuna2.setAreaDeComuna(punto2comuna);// los 3 puntos son el mismo. Entonces la comuna es del tamaï¿½o de un punto diferente al de la terminal
 	comuna2.setAreaDeComuna(punto2comuna);//la terminal esta fuera de la comuna2
 	comuna2.setAreaDeComuna(punto2comuna);
 	
@@ -180,10 +180,12 @@ public class juegoDeDatos {
 	ubicacionLocalPanquequesCarlitos = new Point(10,20);
 	panquequesCarlitos.setUbicacionActual(ubicacionLocalPanquequesCarlitos);
 	panquequesCarlitos.setRadioDeCercania(0.0);// esta en el mismo punto que la terminal y no tiene radio de cercania
-	
-	
+		
 	
 	}
+	
+
+	
 	
 	@Test
 	public void estoyCercaDeUnCGP(){

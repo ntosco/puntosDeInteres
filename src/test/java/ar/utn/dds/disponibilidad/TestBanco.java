@@ -1,4 +1,4 @@
-package ar.utn.dds.calculoCercania;
+package ar.utn.dds.disponibilidad;
 
 import static org.junit.Assert.*;
 

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 import org.uqbar.geodds.Point;
 
+import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
+import ar.utn.dds.estrategias.implementacion.DisponibilidadxRangoHorario;
+import ar.utn.dds.estrategias.implementacion.DisponibilidadxServicio;
 import ar.utn.dds.servicios.Servicio;
 
 public class LocalComercial extends POI{
@@ -44,6 +47,16 @@ public class LocalComercial extends POI{
 	public Boolean estaCercaDe(Point ubicacionTerminal){
 		double d = ubicacionActual.distance(ubicacionTerminal);	
 		return d < DISTANCIA_MINIMA_DE_CERCANIA;
+	}
+
+	/**
+	 * 
+	 */
+	public LocalComercial() {
+		super();
+		ArrayList<EstrategiaDisponibilidad> estrategias = new ArrayList<EstrategiaDisponibilidad>();
+		estrategias.add(new DisponibilidadxRangoHorario());
+		this.setEstrategiasDisponibilidad(estrategias);
 	}
 
 }
