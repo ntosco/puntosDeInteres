@@ -2,39 +2,27 @@ package ar.utn.dds.calculoCercania;
 
 import static org.junit.Assert.*;
 
+import java.lang.annotation.Annotation;
+
+import juegoDeDatos.TestPrueba;
+
 import org.junit.*;
 import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.*;
+import juegoDeDatos.JuegoDeDatos;
 
 
-public class TestBanco {
+public class TestBanco extends TestPrueba {
 
-	private SucursalBanco sucursalRetiro;
-	private SucursalBanco sucursalMartinez;
-	private Point ubicacionSucursal;
-	private Point ubicacionSucursalLejana;
-	private Point puntoTerminal;
-	private Point puntoTerminal2;
-	
-	
+
 	@Before
 	public void SetUp(){
-
-		// Terminal de consulta
-		puntoTerminal = new Point(10,20);
-		puntoTerminal2 = new Point(1000,2000);
-
-		//Sucursal Banco
-		sucursalRetiro = new SucursalBanco();
-		ubicacionSucursal = new Point(10.004,20);
-		sucursalRetiro.setUbicacionActual(ubicacionSucursal);
-		sucursalMartinez = new SucursalBanco();
-		ubicacionSucursalLejana = new Point(800, 200);
-		sucursalMartinez.setUbicacionActual(ubicacionSucursalLejana);
+		
+		super.setUp();
 
 	}
-	
+	 
 	@Test
 	public void estoyCercaDeUnaSucursalCercana(){
 		assertTrue(sucursalRetiro.estaCercaDe(puntoTerminal));
