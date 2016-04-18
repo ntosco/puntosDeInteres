@@ -11,6 +11,9 @@ import ar.utn.dds.servicios.Servicio;
 
 public class LocalComercial extends POI {
 
+	double cercania = 0.5;
+	ArrayList<Rubro> listaRubros = new ArrayList<Rubro>();
+	
 	public ArrayList<Rubro> getListaRubros() {
 		return listaRubros;
 	}
@@ -19,9 +22,18 @@ public class LocalComercial extends POI {
 		this.listaRubros = listaRubros;
 	}
 
-	ArrayList<Rubro> listaRubros = new ArrayList<Rubro>();
+//	public void setRadioDeCercania(double d) {
+//		cercania = d;
+//	}
 
-	double DISTANCIA_MINIMA_DE_CERCANIA = 0.5;
+	public Boolean estaCercaDe(Point ubicacionTerminal) {
+		//me fijo en la lista de rubros cual es la distancia. tomo la más amplia
+		listaRubros.forEach(rubro -> {	if( cercania > rubro.radioCercania)
+											cercania = rubro.radioCercania;
+									 }
+							);
+		return ubicacionActual.distance(ubicacionTerminal) < cercania;
+	}
 
 	public boolean perteneceAlRubro(String textoLibre) {
 		for (Rubro rubro : listaRubros) {
@@ -40,18 +52,6 @@ public class LocalComercial extends POI {
 		}
 	}
 
-	public void setRadioDeCercania(double d) {
-		DISTANCIA_MINIMA_DE_CERCANIA = d;
-	}
-
-	public Boolean estaCercaDe(Point ubicacionTerminal) {
-		double d = ubicacionActual.distance(ubicacionTerminal);
-		return d < DISTANCIA_MINIMA_DE_CERCANIA;
-	}
-
-	/**
-	 * 
-	 */
 	public LocalComercial() {
 		super();
 		ArrayList<EstrategiaDisponibilidad> estrategias = new ArrayList<EstrategiaDisponibilidad>();

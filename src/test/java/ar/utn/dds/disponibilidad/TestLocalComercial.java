@@ -48,7 +48,7 @@ public class TestLocalComercial {
 		cafeMartinez = new LocalComercial();
 		ubicacionLocalCafeMartinez = new Point(10.003,20);
 		cafeMartinez.setUbicacionActual(ubicacionLocalCafeMartinez);
-		cafeMartinez.setRadioDeCercania(0.4);
+//		cafeMartinez.setRadioDeCercania(0.4);
 		
 		//
 		RangoHorario rangolaboral = new RangoHorario(100000, 200000);

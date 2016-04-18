@@ -18,19 +18,22 @@ public class TestLocalComercial {
 	private LocalComercial cafeMartinez;
 	private Point puntoTerminal;
 	private Point ubicacionLocalCafeMartinez;
-	private Point ubicacionLocalNike;
-	private Point ubicacionLibreriaAlmagro;
-	private Point ubicacionPuestoDiariosJose;
 	
-	private LocalComercial nike;//solo un rubro: indumentaria
-	private LocalComercial falabella; //varios rubros: indumentaria, muebleria, perfumeria, etc
-	private LocalComercial libreriaAlmagro;
-	private LocalComercial puestoDiariosJose;
-	private Rubro indumentaria;
-	private Rubro muebleria;
-	private Rubro perfumeria;
-	private Rubro libreriaEscolar;
-	private Rubro puestoDiarios;
+//	private Point ubicacionLocalNike;
+//	private Point ubicacionLibreriaAlmagro;
+//	private Point ubicacionPuestoDiariosJose;
+//	
+//	private LocalComercial nike;//solo un rubro: indumentaria
+//	private LocalComercial falabella; //varios rubros: indumentaria, muebleria, perfumeria, etc
+//	private LocalComercial libreriaAlmagro;
+//	private LocalComercial puestoDiariosJose;
+//	private Rubro indumentaria;
+//	private Rubro muebleria;
+//	private Rubro perfumeria;
+//	private Rubro libreriaEscolar;
+//	private Rubro puestoDiarios;
+	private Rubro cafeteria;
+	ArrayList<Rubro> listaRubrosCafeMartinez;
 
 
 	
@@ -44,24 +47,31 @@ public class TestLocalComercial {
 		cafeMartinez = new LocalComercial();
 		ubicacionLocalCafeMartinez = new Point(10.003,20);
 		cafeMartinez.setUbicacionActual(ubicacionLocalCafeMartinez);
-		cafeMartinez.setRadioDeCercania(0.4);
 		
-		nike = new LocalComercial();//esta cerca de la terminal
-		ubicacionLocalNike = new Point(150,200);
-		nike.setUbicacionActual(ubicacionLocalNike);		
-		nike.setRadioDeCercania(0.2);
-		
-		libreriaAlmagro = new LocalComercial();
-		ubicacionLibreriaAlmagro = new Point(10,20.2);
-		libreriaAlmagro.setUbicacionActual(ubicacionLibreriaAlmagro);
-		libreriaAlmagro.setRadioDeCercania(10);
-		
-		puestoDiariosJose = new LocalComercial();
-		ubicacionPuestoDiariosJose = new Point(10,20.2);
-		puestoDiariosJose.setUbicacionActual(ubicacionPuestoDiariosJose);
-		puestoDiariosJose.setRadioDeCercania(0.2);
+		cafeteria = new Rubro("Cafeteria",0.9);
+		listaRubrosCafeMartinez = new ArrayList<Rubro>();
+		listaRubrosCafeMartinez.add(cafeteria);
+		cafeMartinez.setListaRubros(listaRubrosCafeMartinez);
 		
 		
+		
+//		nike = new LocalComercial();//esta cerca de la terminal
+//		ubicacionLocalNike = new Point(150,200);
+//		nike.setUbicacionActual(ubicacionLocalNike);		
+//		nike.setRadioDeCercania(0.2);
+//		
+//		libreriaAlmagro = new LocalComercial();
+//		ubicacionLibreriaAlmagro = new Point(10,20.2);
+//		libreriaAlmagro.setUbicacionActual(ubicacionLibreriaAlmagro);
+//		libreriaAlmagro.setRadioDeCercania(10);
+//		
+//		puestoDiariosJose = new LocalComercial();
+//		ubicacionPuestoDiariosJose = new Point(10,20.2);
+//		puestoDiariosJose.setUbicacionActual(ubicacionPuestoDiariosJose);
+//		puestoDiariosJose.setRadioDeCercania(0.2);
+//		
+//		
+//		
 		
 	}
 	
@@ -69,16 +79,24 @@ public class TestLocalComercial {
 	public void estoyCercaDeUnLocalComercial(){
 		assertTrue(cafeMartinez.estaCercaDe(puntoTerminal));
 	}
-	
-	@Test
-	public void estoyLejosDeUnLocalComercialLejano(){
-		assertFalse(nike.estaCercaDe(puntoTerminal));
-	}
-	
-	@Test
-	public void estoyLejosDeUnaLibreriaPeroCercaDeUnKioscoDeDiarios(){
-		assertFalse(puestoDiariosJose.estaCercaDe(puntoTerminal));
-		//assertTrue(libreriaAlmagro.estaCercaDe(puntoTerminal));
 
+	@Test
+	public void noEstoyCercaDeUnLocalComercial(){
+		cafeteria.setRadioCercania(0.1);
+		assertFalse(cafeMartinez.estaCercaDe(puntoTerminal));
 	}
+	
+//	@Test
+//	public void estoyLejosDeUnLocalComercialLejano(){
+//		assertFalse(nike.estaCercaDe(puntoTerminal));
+//	}
+//	
+//	@Test
+//	public void estoyLejosDeUnaLibreriaPeroCercaDeUnKioscoDeDiarios(){
+//		assertFalse(puestoDiariosJose.estaCercaDe(puntoTerminal));
+//		//assertTrue(libreriaAlmagro.estaCercaDe(puntoTerminal));
+//
+//	}
+//	
+	
 }

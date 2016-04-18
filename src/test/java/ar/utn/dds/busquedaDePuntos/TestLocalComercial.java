@@ -47,10 +47,8 @@ public class TestLocalComercial {
 		cafeMartinez = new LocalComercial();
 		ubicacionLocalCafeMartinez = new Point(10.003, 20);
 		cafeMartinez.setUbicacionActual(ubicacionLocalCafeMartinez);
-		cafeMartinez.setRadioDeCercania(0.4);
 		ArrayList<Rubro> listaRubros = new ArrayList<Rubro>();
-		Rubro cafeteria = new Rubro();
-		cafeteria.setNombre("cafeteria");
+		Rubro cafeteria = new Rubro("cafeteria",0.5);
 		listaRubros.add(cafeteria);
 		
 		cafeMartinez.setListaRubros(listaRubros);
