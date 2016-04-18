@@ -18,6 +18,8 @@ public class TestLocalComercial {
 	private LocalComercial cafeMartinez;
 	private Point puntoTerminal;
 	private Point ubicacionLocalCafeMartinez;
+	private Rubro cafeteria;
+	ArrayList<Rubro> listaRubrosCafeMartinez;
 	
 //	private Point ubicacionLocalNike;
 //	private Point ubicacionLibreriaAlmagro;
@@ -32,10 +34,13 @@ public class TestLocalComercial {
 //	private Rubro perfumeria;
 //	private Rubro libreriaEscolar;
 //	private Rubro puestoDiarios;
-	private Rubro cafeteria;
-	ArrayList<Rubro> listaRubrosCafeMartinez;
 
-
+	private LocalComercial falabella; //varios rubros: indumentaria, muebleria, perfumeria, etc
+	ArrayList<Rubro> listaRubrosDeFallabella;
+	private Point puntoFalabella;
+	private Rubro indumentaria;
+	private Rubro muebleria;
+	private Rubro perfumeria;
 	
 	@Before
 	public void SetUp(){
@@ -52,6 +57,20 @@ public class TestLocalComercial {
 		listaRubrosCafeMartinez = new ArrayList<Rubro>();
 		listaRubrosCafeMartinez.add(cafeteria);
 		cafeMartinez.setListaRubros(listaRubrosCafeMartinez);
+		
+		//Local Falabella tiene muchos rubros
+		falabella = new LocalComercial();
+		puntoFalabella = new Point(10.005,20);
+		falabella.setUbicacionActual(puntoFalabella);
+		indumentaria = new Rubro("indumentaria",0.2);
+		muebleria = new Rubro("muebleria",0.3);
+		perfumeria = new Rubro("perfumeria",0.7);
+		
+		listaRubrosDeFallabella = new ArrayList<Rubro>();
+		listaRubrosDeFallabella.add(indumentaria);
+		listaRubrosDeFallabella.add(muebleria);
+		listaRubrosDeFallabella.add(perfumeria);
+		falabella.setListaRubros(listaRubrosDeFallabella);
 		
 		
 		
@@ -84,6 +103,17 @@ public class TestLocalComercial {
 	public void noEstoyCercaDeUnLocalComercial(){
 		cafeteria.setRadioCercania(0.1);
 		assertFalse(cafeMartinez.estaCercaDe(puntoTerminal));
+	}
+
+	@Test
+	public void estoyCercaDeUnLocalQueTieneMasDeUnRubro(){
+		assertTrue(falabella.estaCercaDe(puntoTerminal));
+	}
+
+	@Test
+	public void noEstoyCercaDeUnLocalQueTieneMasDeUnRubro(){
+		perfumeria.setRadioCercania(0.1);
+		assertFalse(falabella.estaCercaDe(puntoTerminal));
 	}
 	
 //	@Test

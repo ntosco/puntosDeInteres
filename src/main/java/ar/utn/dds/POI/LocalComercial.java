@@ -11,7 +11,7 @@ import ar.utn.dds.servicios.Servicio;
 
 public class LocalComercial extends POI {
 
-	double cercania = 0.5;
+	double cercania = 0;
 	ArrayList<Rubro> listaRubros = new ArrayList<Rubro>();
 	
 	public ArrayList<Rubro> getListaRubros() {
@@ -28,7 +28,7 @@ public class LocalComercial extends POI {
 
 	public Boolean estaCercaDe(Point ubicacionTerminal) {
 		//me fijo en la lista de rubros cual es la distancia. tomo la más amplia
-		listaRubros.forEach(rubro -> {	if( cercania > rubro.radioCercania)
+		listaRubros.forEach(rubro -> {	if( cercania < rubro.radioCercania)
 											cercania = rubro.radioCercania;
 									 }
 							);
