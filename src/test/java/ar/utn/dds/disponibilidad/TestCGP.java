@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import org.junit.*;
@@ -66,8 +67,8 @@ public class TestCGP {
 	
 		
 		//
-		RangoHorario rangolaboral_10a20 = new RangoHorario(100000, 200000);
-		RangoHorario rangolaboral_13a15 = new RangoHorario(130000, 150000);
+		RangoHorario rangolaboral_10a20 = new RangoHorario(LocalTime.of(10, 0, 0),LocalTime.of(20, 0, 0));
+		RangoHorario rangolaboral_13a15 = new RangoHorario(LocalTime.of(13, 0, 0),LocalTime.of(15, 0, 0));
 		Jornada jornadaLaboral_Lunes_10a20 = new Jornada(DayOfWeek.MONDAY, rangolaboral_10a20);
 		Jornada jornadaLaboral_Jueves_13a15 = new Jornada(DayOfWeek.TUESDAY, rangolaboral_13a15);
 		ArrayList<Jornada> jornadas = new ArrayList<>();

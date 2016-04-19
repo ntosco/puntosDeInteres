@@ -2,6 +2,7 @@ package ar.utn.dds.POI;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,12 +37,13 @@ public class SucursalBanco extends POI{
 	 */
 	public SucursalBanco() {
 		super();
+		
 		List<EstrategiaDisponibilidad> estrategias = new ArrayList<EstrategiaDisponibilidad>();
 		estrategias.add(new DisponibilidadxServicio());
 		estrategias.add(new DisponibilidadxRangoHorario());
 		this.setEstrategiasDisponibilidad(estrategias);
 
-		RangoHorario rangoAtencion = new RangoHorario(100000, 150000);
+		RangoHorario rangoAtencion = new RangoHorario(LocalTime.of(10, 0, 0),LocalTime.of(15, 0, 0));
 		List<Jornada> jornadasSemanales = new ArrayList<>();
 		for (DayOfWeek dia : DIAS_LABORABLES) {
 			Jornada jornada = new Jornada(dia, rangoAtencion);
