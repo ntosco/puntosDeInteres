@@ -113,31 +113,31 @@ public class TestCGP {
 	// el horario ingresado se encuentra en el servicio seleccionado
 	@Test
 	public void estoyDisponibleconServicioHorarioIN(){
-		assertTrue(cgpAlmagro.estaDisponible(cgpAlmagro,"CP", lunes1210hs));
+		assertTrue(cgpAlmagro.estaDisponible("CP", lunes1210hs));
 	}	
 	
 	// el horario ingresado no se encuentra en el servicio seleccionado
 	@Test
 	public void estoyDisponibleconServicioHorarioOUT(){
-		assertFalse(cgpAlmagro.estaDisponible(cgpAlmagro,"CP", lunes23hs));
+		assertFalse(cgpAlmagro.estaDisponible("CP", lunes23hs));
 	}
 	
 	// el nombre del Servicio no existe
 	@Test
 	public void estoyDisponibleconServicioInexisitenteHorarioIN(){
-		assertFalse(cgpAlmagro.estaDisponible(cgpAlmagro,"NombreInexistente", lunes1210hs));
+		assertFalse(cgpAlmagro.estaDisponible("NombreInexistente", lunes1210hs));
 	}
 	
 	// No se ingresa nombre del servicio ,pero horario es del servicio CP
 	@Test
 	public void estoyDisponibleSinServicioHorarioIN(){
-		assertTrue(cgpAlmagro.estaDisponible(cgpAlmagro,null,lunes1210hs));
+		assertTrue(cgpAlmagro.estaDisponible(null,lunes1210hs));
 	}
 	
 	// No se ingresa nombre del servicio ,el horario no es de ningun servicio
 	@Test
 	public void estoyDisponibleSinServicioHorarioOUT(){
-		assertFalse(cgpAlmagro.estaDisponible(cgpCaballito,null,lunes23hs));
+		assertFalse(cgpAlmagro.estaDisponible(null,lunes23hs));
 	}
 	
 	

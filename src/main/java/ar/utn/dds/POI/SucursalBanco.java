@@ -25,10 +25,11 @@ public class SucursalBanco extends POI{
 	}
 	
 
-	public Boolean estaDisponible(POI poi, String _nombreServicio,
-			LocalDateTime _horarioConsultado) {
-		 return this.getEstrategiasDisponibilidad().stream().anyMatch((estrategiaDisponibilidad)->estrategiaDisponibilidad.estaDisponible(this,this.listaServicios, _nombreServicio, _horarioConsultado));
-		
+	public Boolean estaDisponible(String _nombreServicio, LocalDateTime _horarioConsultado) {
+		return this.getEstrategiasDisponibilidad().stream()
+				.anyMatch((estrategiaDisponibilidad) -> estrategiaDisponibilidad.estaDisponible(this,
+						this.listaServicios, _nombreServicio, _horarioConsultado));
+
 	}
 
 

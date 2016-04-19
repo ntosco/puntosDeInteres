@@ -50,10 +50,11 @@ public abstract class POI {
 		return listaPalabrasClave.contains(palabraClave);
 	}
 	
-	public Boolean estaDisponible(POI poi, String _nombreServicio,
-			LocalDateTime _horarioConsultado) {
-		 return this.getEstrategiasDisponibilidad().stream().allMatch((estrategiaDisponibilidad)->estrategiaDisponibilidad.estaDisponible(this,null, _nombreServicio, _horarioConsultado));
-		
+	public Boolean estaDisponible(String _nombreServicio, LocalDateTime _horarioConsultado) {
+		return this.getEstrategiasDisponibilidad().stream()
+				.allMatch((estrategiaDisponibilidad) -> estrategiaDisponibilidad.estaDisponible(this, null,
+						_nombreServicio, _horarioConsultado));
+
 	}
 
 	public List<Jornada> getJornadaDisponible() {

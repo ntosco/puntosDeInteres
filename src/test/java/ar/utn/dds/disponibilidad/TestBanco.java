@@ -84,28 +84,28 @@ public class TestBanco {
 	// y se encuentra en rango horario banco
 	@Test
 	public void estoyDisponibleconServicioHorarioIN(){
-		assertTrue(sucursalRetiro.estaDisponible(sucursalRetiro,"CP", lunes12hs));
+		assertTrue(sucursalRetiro.estaDisponible("CP", lunes12hs));
 	}	
 	
 	// el horario ingresado no se encuentra en el servicio seleccionado
 		// pero se encuentra en rango horario banco
 	@Test
 	public void estoyDisponibleconServicioHorarioINBancoOUTServicio(){
-		assertTrue(sucursalRetiro.estaDisponible(sucursalRetiro,"Rentas", jueves11hs));
+		assertTrue(sucursalRetiro.estaDisponible("Rentas", jueves11hs));
 	}
 	
 	// el horario ingresado  se encuentra en el servicio seleccionado
 	// pero no se encuentra en rango horario banco
 	@Test
 	public void estoyDisponibleconServicioInexisitenteHorarioINServicioOUTBanco(){
-		assertFalse(sucursalRetiro.estaDisponible(sucursalRetiro,"Rentas", sabado1210hs));
+		assertFalse(sucursalRetiro.estaDisponible("Rentas", sabado1210hs));
 	}
 	
 	// el horario ingresado no se encuentra en el servicio seleccionado
 	// y no se encuentra en rango horario banco
 	@Test
 	public void estoyDisponibleconServicioHorarioOUTBancoOUTServicio(){
-		assertFalse(sucursalRetiro.estaDisponible(sucursalRetiro,"CP", sabado23hs));
+		assertFalse(sucursalRetiro.estaDisponible("CP", sabado23hs));
 	}
 	
 

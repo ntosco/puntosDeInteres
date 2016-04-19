@@ -42,12 +42,12 @@ public class TestsColectivo {
 
 	@Test
 	public void estoyDisponibleAhoraSinServicio(){
-		assertTrue(parada114.estaDisponible(parada11,null, LocalDateTime.now()));
+		assertTrue(parada114.estaDisponible(null, LocalDateTime.now()));
 	}
 	
 	@Test
 	public void estoyDisponibleAhoraConServicio(){
-		assertTrue(parada11.estaDisponible(parada11,"Rentas", LocalDateTime.now()));
+		assertTrue(parada11.estaDisponible("Rentas", LocalDateTime.now()));
 	}
 	
 }

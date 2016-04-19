@@ -71,22 +71,22 @@ public class TestLocalComercial {
 
 	@Test
 	public void estoyDisponibleHorarioOut(){
-		assertFalse(cafeMartinez.estaDisponible(cafeMartinez,null,lunes23hs));
+		assertFalse(cafeMartinez.estaDisponible(null,lunes23hs));
 	}
 	
 	@Test
 	public void estoyDisponibleHorarioIn(){
-		assertFalse(cafeMartinez.estaDisponible(cafeMartinez,null, lunes1210hs));
+		assertFalse(cafeMartinez.estaDisponible(null, lunes1210hs));
 	}
 	
 	@Test
 	public void estoyDisponibleConServicioHorarioOut(){
-		assertFalse(cafeMartinez.estaDisponible(cafeMartinez,"Rentas", lunes23hs));
+		assertFalse(cafeMartinez.estaDisponible("Rentas", lunes23hs));
 	}
 	
 	@Test
 	public void estoyDisponibleConServicioHorarioIn(){
-		assertFalse(cafeMartinez.estaDisponible(cafeMartinez,"Rentas", lunes1210hs));
+		assertFalse(cafeMartinez.estaDisponible("Rentas", lunes1210hs));
 	}
 
 	

@@ -49,7 +49,7 @@ public class CentroGestionParticipacion extends POI{
 		comuna = comunaNueva;
 	}
 	
-	public Boolean estaDisponible(POI poi, String _nombreServicio,
+	public Boolean estaDisponible(String _nombreServicio,
 			LocalDateTime _horarioConsultado) {
 		 return this.getEstrategiasDisponibilidad().stream().anyMatch((estrategiaDisponibilidad)->estrategiaDisponibilidad.estaDisponible(this,this.listaServicios, _nombreServicio, _horarioConsultado));
 		
