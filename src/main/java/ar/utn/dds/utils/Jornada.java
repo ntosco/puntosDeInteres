@@ -1,9 +1,7 @@
 package ar.utn.dds.utils;
 
 import java.time.DayOfWeek;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PrimitiveIterator.OfDouble;
+import java.time.LocalTime;
 
 public class Jornada {
 	
@@ -39,9 +37,9 @@ public class Jornada {
 		this.horarioDeAtencion = horarioDeAtencion;
 	}
 	
-	public Boolean DentroHorarioDeRango(DayOfWeek _diaSemana, Integer _HHMMSS) {
+	public Boolean DentroHorarioDeRango(DayOfWeek _diaSemana, LocalTime _horarioConsultado) {
 
-		return (this.getHorarioDeAtencion().DentroRangoHorario(_HHMMSS) && this.getDiaSemanal().equals(_diaSemana));
+		return (this.getHorarioDeAtencion().DentroRangoHorario(_horarioConsultado) && this.getDiaSemanal().equals(_diaSemana));
 	}
 
 	

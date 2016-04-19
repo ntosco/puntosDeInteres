@@ -20,14 +20,14 @@ public abstract class POI {
 
 	
 	
-	ArrayList <String> listaPalabrasClave = new ArrayList <String>(); //Creo lista de palabras clave
+	List<String> listaPalabrasClave = new ArrayList <String>(); //Creo lista de palabras clave
 	
 	
-	public ArrayList<String> getListaPalabrasClave() {
+	public List<String> getListaPalabrasClave() {
 		return listaPalabrasClave;
 	}
 
-	public void setListaPalabrasClave(ArrayList<String> listaPalabrasClave) {
+	public void setListaPalabrasClave(List<String> listaPalabrasClave) {
 		this.listaPalabrasClave = listaPalabrasClave;
 	}
 
@@ -50,10 +50,11 @@ public abstract class POI {
 		return listaPalabrasClave.contains(palabraClave);
 	}
 	
-	public Boolean estaDisponible(POI poi, String _nombreServicio,
-			LocalDateTime _horarioConsultado) {
-		 return this.getEstrategiasDisponibilidad().stream().allMatch((estrategiaDisponibilidad)->estrategiaDisponibilidad.estaDisponible(this,null, _nombreServicio, _horarioConsultado));
-		
+	public Boolean estaDisponible(String _nombreServicio, LocalDateTime _horarioConsultado) {
+		return this.getEstrategiasDisponibilidad().stream()
+				.allMatch((estrategiaDisponibilidad) -> estrategiaDisponibilidad.estaDisponible(this, null,
+						_nombreServicio, _horarioConsultado));
+
 	}
 
 	public List<Jornada> getJornadaDisponible() {

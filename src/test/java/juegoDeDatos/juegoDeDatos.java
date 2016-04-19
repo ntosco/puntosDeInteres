@@ -87,9 +87,9 @@ public class juegoDeDatos {
 	//RUBROS
 	nike = new LocalComercial();//esta cerca de la terminal
 	falabella = new LocalComercial();//esta cerca de la terminal
-	indumentaria.setNombre("indumentaria");
-	muebleria.setNombre("muebleria");
-	perfumeria.setNombre("perfumeria");
+	indumentaria = new Rubro("indumentaria",0.2);
+	muebleria = new Rubro("muebleria",0.3);
+	perfumeria = new Rubro("perfumeria",0.1);
 	
 	ArrayList<Rubro> listaRubrosDeNike = new ArrayList<Rubro>();
 	listaRubrosDeNike.add(indumentaria);
@@ -169,17 +169,14 @@ public class juegoDeDatos {
 	cafeMartinez = new LocalComercial();//esta cerca de la terminal
 	ubicacionLocalCafeMartinez = new Point(10.003,20);
 	cafeMartinez.setUbicacionActual(ubicacionLocalCafeMartinez);
-	cafeMartinez.setRadioDeCercania(0.4);
 	
 	addidas = new LocalComercial();//esta lejos de la terminal
 	ubicacionLocalAddidas = new Point(14,22);
 	addidas.setUbicacionActual(ubicacionLocalAddidas);
-	addidas.setRadioDeCercania(0.4);
 	
 	panquequesCarlitos = new LocalComercial();
 	ubicacionLocalPanquequesCarlitos = new Point(10,20);
 	panquequesCarlitos.setUbicacionActual(ubicacionLocalPanquequesCarlitos);
-	panquequesCarlitos.setRadioDeCercania(0.0);// esta en el mismo punto que la terminal y no tiene radio de cercania
 		
 	
 	}

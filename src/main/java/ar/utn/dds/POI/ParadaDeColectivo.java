@@ -1,12 +1,12 @@
 package ar.utn.dds.POI;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.uqbar.geodds.Point;
 
 import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
 import ar.utn.dds.estrategias.implementacion.DisponibilidadFullTime;
-import ar.utn.dds.estrategias.implementacion.DisponibilidadxServicio;
 
 public class ParadaDeColectivo extends POI{
 	
@@ -48,7 +48,7 @@ public class ParadaDeColectivo extends POI{
 	 */
 	public ParadaDeColectivo() {
 		super();
-		ArrayList<EstrategiaDisponibilidad> estrategias = new ArrayList<EstrategiaDisponibilidad>();
+		List<EstrategiaDisponibilidad> estrategias = new ArrayList<EstrategiaDisponibilidad>();
 		estrategias.add(new DisponibilidadFullTime());
 		this.setEstrategiasDisponibilidad(estrategias);
 	}

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import org.junit.Before;
@@ -47,19 +48,17 @@ public class TestLocalComercial {
 		cafeMartinez = new LocalComercial();
 		ubicacionLocalCafeMartinez = new Point(10.003, 20);
 		cafeMartinez.setUbicacionActual(ubicacionLocalCafeMartinez);
-		cafeMartinez.setRadioDeCercania(0.4);
 		ArrayList<Rubro> listaRubros = new ArrayList<Rubro>();
-		Rubro cafeteria = new Rubro();
-		cafeteria.setNombre("cafeteria");
+		Rubro cafeteria = new Rubro("cafeteria",0.5);
 		listaRubros.add(cafeteria);
 		
 		cafeMartinez.setListaRubros(listaRubros);
 
 		//
-		RangoHorario rangolaboral = new RangoHorario(100000, 200000);
+		RangoHorario rangolaboral = new RangoHorario(LocalTime.of(10, 0, 0),LocalTime.of(20, 0, 0));
 		Jornada jornadaLaboral = new Jornada(DayOfWeek.FRIDAY, rangolaboral);
 		Jornada jornadaLaboral2 = new Jornada(DayOfWeek.TUESDAY, rangolaboral);
-		RangoHorario rangolaboral2 = new RangoHorario(130000, 150000);
+		RangoHorario rangolaboral2 = new RangoHorario(LocalTime.of(13, 0, 0),LocalTime.of(15, 0, 0));
 		ArrayList<Jornada> jornadas = new ArrayList<>();
 		jornadas.add(jornadaLaboral);
 		jornadas.add(jornadaLaboral2);

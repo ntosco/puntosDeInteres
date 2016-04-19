@@ -1,46 +1,40 @@
 package ar.utn.dds.utils;
 
+import java.time.LocalTime;
 
 public class RangoHorario {
 	
 
-	/**
-	 * HHMMSS
-	 * Ejemplo 23:12:00 -> 231200
-	 */
-	Integer horarioInicial;
-	Integer horarioFinal;
+	LocalTime horarioInicial;
+	LocalTime horarioFinal;
 	
-	public RangoHorario(Integer horarioInicial, Integer horarioFinal) {
+	public RangoHorario(LocalTime horarioInicial, LocalTime horarioFinal) {
 		super();
-		if(horarioFinal>horarioInicial){
-			this.horarioInicial = horarioInicial;
-			this.horarioFinal = horarioFinal;
-		}else{
-			this.horarioInicial = horarioFinal;
-			this.horarioFinal = horarioInicial;
-		}
-	}
-
-	public Boolean DentroRangoHorario(Integer _horarioConsultado){
 		
-		return (_horarioConsultado >= this.getHorarioInicial() && _horarioConsultado <= this.getHorarioFinal());
+		this.horarioInicial=horarioInicial;
+		this.horarioFinal=horarioFinal;
 		
 	}
 
-	public Integer getHorarioInicial() {
+	public Boolean DentroRangoHorario(LocalTime _horarioConsultado){
+		
+		return (_horarioConsultado.isAfter(this.getHorarioInicial()) && _horarioConsultado.isBefore(this.getHorarioFinal()));
+		
+	}
+
+	public LocalTime getHorarioInicial() {
 		return horarioInicial;
 	}
 
-	public void setHorarioInicial(Integer horarioInicial) {
+	public void setHorarioInicial(LocalTime horarioInicial) {
 		this.horarioInicial = horarioInicial;
 	}
 
-	public Integer getHorarioFinal() {
+	public LocalTime getHorarioFinal() {
 		return horarioFinal;
 	}
 
-	public void setHorarioFinal(Integer horarioFinal) {
+	public void setHorarioFinal(LocalTime horarioFinal) {
 		this.horarioFinal = horarioFinal;
 	}
 	

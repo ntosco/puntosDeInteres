@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import org.junit.*;
@@ -66,8 +67,8 @@ public class TestCGP {
 	
 		
 		//
-		RangoHorario rangolaboral_10a20 = new RangoHorario(100000, 200000);
-		RangoHorario rangolaboral_13a15 = new RangoHorario(130000, 150000);
+		RangoHorario rangolaboral_10a20 = new RangoHorario(LocalTime.of(10, 0, 0),LocalTime.of(20, 0, 0));
+		RangoHorario rangolaboral_13a15 = new RangoHorario(LocalTime.of(13, 0, 0),LocalTime.of(15, 0, 0));
 		Jornada jornadaLaboral_Lunes_10a20 = new Jornada(DayOfWeek.MONDAY, rangolaboral_10a20);
 		Jornada jornadaLaboral_Jueves_13a15 = new Jornada(DayOfWeek.TUESDAY, rangolaboral_13a15);
 		ArrayList<Jornada> jornadas = new ArrayList<>();
@@ -112,31 +113,31 @@ public class TestCGP {
 	// el horario ingresado se encuentra en el servicio seleccionado
 	@Test
 	public void estoyDisponibleconServicioHorarioIN(){
-		assertTrue(cgpAlmagro.estaDisponible(cgpAlmagro,"CP", lunes1210hs));
+		assertTrue(cgpAlmagro.estaDisponible("CP", lunes1210hs));
 	}	
 	
 	// el horario ingresado no se encuentra en el servicio seleccionado
 	@Test
 	public void estoyDisponibleconServicioHorarioOUT(){
-		assertFalse(cgpAlmagro.estaDisponible(cgpAlmagro,"CP", lunes23hs));
+		assertFalse(cgpAlmagro.estaDisponible("CP", lunes23hs));
 	}
 	
 	// el nombre del Servicio no existe
 	@Test
 	public void estoyDisponibleconServicioInexisitenteHorarioIN(){
-		assertFalse(cgpAlmagro.estaDisponible(cgpAlmagro,"NombreInexistente", lunes1210hs));
+		assertFalse(cgpAlmagro.estaDisponible("NombreInexistente", lunes1210hs));
 	}
 	
 	// No se ingresa nombre del servicio ,pero horario es del servicio CP
 	@Test
 	public void estoyDisponibleSinServicioHorarioIN(){
-		assertTrue(cgpAlmagro.estaDisponible(cgpAlmagro,null,lunes1210hs));
+		assertTrue(cgpAlmagro.estaDisponible(null,lunes1210hs));
 	}
 	
 	// No se ingresa nombre del servicio ,el horario no es de ningun servicio
 	@Test
 	public void estoyDisponibleSinServicioHorarioOUT(){
-		assertFalse(cgpAlmagro.estaDisponible(cgpCaballito,null,lunes23hs));
+		assertFalse(cgpAlmagro.estaDisponible(null,lunes23hs));
 	}
 	
 	

@@ -1,27 +1,39 @@
 package ar.utn.dds.POI;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.uqbar.geodds.Point;
 
 import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
 import ar.utn.dds.estrategias.implementacion.DisponibilidadxRangoHorario;
-import ar.utn.dds.estrategias.implementacion.DisponibilidadxServicio;
-import ar.utn.dds.servicios.Servicio;
+
 
 public class LocalComercial extends POI {
 
-	public ArrayList<Rubro> getListaRubros() {
+	double cercania = 0;
+	List<Rubro> listaRubros = new ArrayList<Rubro>();
+	
+	public List<Rubro> getListaRubros() {
 		return listaRubros;
 	}
 
-	public void setListaRubros(ArrayList<Rubro> listaRubros) {
+	public void setListaRubros(List<Rubro> listaRubros) {
 		this.listaRubros = listaRubros;
 	}
 
-	ArrayList<Rubro> listaRubros = new ArrayList<Rubro>();
+//	public void setRadioDeCercania(double d) {
+//		cercania = d;
+//	}
 
-	double DISTANCIA_MINIMA_DE_CERCANIA = 0.5;
+	public Boolean estaCercaDe(Point ubicacionTerminal) {
+		//me fijo en la lista de rubros cual es la distancia. tomo la más amplia
+		listaRubros.forEach(rubro -> {	if( cercania < rubro.radioCercania)
+											cercania = rubro.radioCercania;
+									 }
+							);
+		return ubicacionActual.distance(ubicacionTerminal) < cercania;
+	}
 
 	public boolean perteneceAlRubro(String textoLibre) {
 		for (Rubro rubro : listaRubros) {
@@ -40,21 +52,9 @@ public class LocalComercial extends POI {
 		}
 	}
 
-	public void setRadioDeCercania(double d) {
-		DISTANCIA_MINIMA_DE_CERCANIA = d;
-	}
-
-	public Boolean estaCercaDe(Point ubicacionTerminal) {
-		double d = ubicacionActual.distance(ubicacionTerminal);
-		return d < DISTANCIA_MINIMA_DE_CERCANIA;
-	}
-
-	/**
-	 * 
-	 */
 	public LocalComercial() {
 		super();
-		ArrayList<EstrategiaDisponibilidad> estrategias = new ArrayList<EstrategiaDisponibilidad>();
+		List<EstrategiaDisponibilidad> estrategias = new ArrayList<EstrategiaDisponibilidad>();
 		estrategias.add(new DisponibilidadxRangoHorario());
 		this.setEstrategiasDisponibilidad(estrategias);
 	}
