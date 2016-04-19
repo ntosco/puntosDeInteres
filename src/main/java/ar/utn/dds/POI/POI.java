@@ -20,14 +20,14 @@ public abstract class POI {
 
 	
 	
-	ArrayList <String> listaPalabrasClave = new ArrayList <String>(); //Creo lista de palabras clave
+	List<String> listaPalabrasClave = new ArrayList <String>(); //Creo lista de palabras clave
 	
 	
-	public ArrayList<String> getListaPalabrasClave() {
+	public List<String> getListaPalabrasClave() {
 		return listaPalabrasClave;
 	}
 
-	public void setListaPalabrasClave(ArrayList<String> listaPalabrasClave) {
+	public void setListaPalabrasClave(List<String> listaPalabrasClave) {
 		this.listaPalabrasClave = listaPalabrasClave;
 	}
 

@@ -1,6 +1,7 @@
 package ar.utn.dds.POI;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.uqbar.geodds.*;
 
@@ -12,7 +13,7 @@ import ar.utn.dds.servicios.Servicio;
 
 public class CentroGestionParticipacion extends POI{
 
-	ArrayList <Servicio> listaServicios = new ArrayList <Servicio>();
+	List<Servicio> listaServicios = new ArrayList <Servicio>();
 	Comuna comuna;	
 			
 	public boolean contieneServicio(String textoLibre){
@@ -23,11 +24,11 @@ public class CentroGestionParticipacion extends POI{
 		return false;
 	}
 	
-	public ArrayList<Servicio> getListaServicios() {
+	public List<Servicio> getListaServicios() {
 		return listaServicios;
 	}
 
-	public void setListaServicios(ArrayList<Servicio> listaServicios) {
+	public void setListaServicios(List<Servicio> listaServicios) {
 		this.listaServicios = listaServicios;
 	}
 
@@ -59,7 +60,7 @@ public class CentroGestionParticipacion extends POI{
 	 */
 	public CentroGestionParticipacion() {
 		super();
-		ArrayList<EstrategiaDisponibilidad> estrategias = new ArrayList<EstrategiaDisponibilidad>();
+		List<EstrategiaDisponibilidad> estrategias = new ArrayList<EstrategiaDisponibilidad>();
 		estrategias.add(new DisponibilidadxServicio());
 		this.setEstrategiasDisponibilidad(estrategias);
 	}

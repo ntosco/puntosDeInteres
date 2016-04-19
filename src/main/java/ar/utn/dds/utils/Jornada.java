@@ -1,9 +1,6 @@
 package ar.utn.dds.utils;
 
 import java.time.DayOfWeek;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PrimitiveIterator.OfDouble;
 
 public class Jornada {
 	

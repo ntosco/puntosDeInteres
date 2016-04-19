@@ -16,7 +16,7 @@ import ar.utn.dds.utils.RangoHorario;
 public class SucursalBanco extends POI{
 	
 	private List<Servicio> listaServicios = new ArrayList<Servicio>();
-	private static ArrayList<DayOfWeek> DIAS_LABORABLES = new ArrayList<>(Arrays.asList(DayOfWeek.MONDAY,DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY));	
+	private static List<DayOfWeek> DIAS_LABORABLES = new ArrayList<>(Arrays.asList(DayOfWeek.MONDAY,DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY));	
 
 	public boolean cumpleCondicionBusqueda(String textoLibre){
 		return contieneKeyword(textoLibre);		
@@ -36,13 +36,13 @@ public class SucursalBanco extends POI{
 	 */
 	public SucursalBanco() {
 		super();
-		ArrayList<EstrategiaDisponibilidad> estrategias = new ArrayList<EstrategiaDisponibilidad>();
+		List<EstrategiaDisponibilidad> estrategias = new ArrayList<EstrategiaDisponibilidad>();
 		estrategias.add(new DisponibilidadxServicio());
 		estrategias.add(new DisponibilidadxRangoHorario());
 		this.setEstrategiasDisponibilidad(estrategias);
 
 		RangoHorario rangoAtencion = new RangoHorario(100000, 150000);
-		ArrayList<Jornada> jornadasSemanales = new ArrayList<>();
+		List<Jornada> jornadasSemanales = new ArrayList<>();
 		for (DayOfWeek dia : DIAS_LABORABLES) {
 			Jornada jornada = new Jornada(dia, rangoAtencion);
 			jornadasSemanales.add(jornada);
