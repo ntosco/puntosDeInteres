@@ -24,6 +24,10 @@ public class CentroGestionParticipacion extends POI{
 		return false;
 	}
 	
+	public Comuna getComuna() {
+		return comuna;
+	}
+
 	public List<Servicio> getListaServicios() {
 		return listaServicios;
 	}

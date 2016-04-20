@@ -18,6 +18,14 @@ public class LocalComercial extends POI {
 		return listaRubros;
 	}
 
+	public double getCercania() {
+		return cercania;
+	}
+
+	public void setCercania(double cercania) {
+		this.cercania = cercania;
+	}
+
 	public void setListaRubros(List<Rubro> listaRubros) {
 		this.listaRubros = listaRubros;
 	}

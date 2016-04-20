@@ -10,7 +10,7 @@ import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
 import ar.utn.dds.utils.Jornada;
 
 public abstract class POI {
-	
+
 	String direccionNombre;
 	int direccionNumero;
 	Point ubicacionActual;
@@ -22,6 +22,33 @@ public abstract class POI {
 	
 	List<String> listaPalabrasClave = new ArrayList <String>(); //Creo lista de palabras clave
 	
+	public String getDireccionNombre() {
+		return direccionNombre;
+	}
+
+	public void setDireccionNombre(String direccionNombre) {
+		this.direccionNombre = direccionNombre;
+	}
+
+	public int getDireccionNumero() {
+		return direccionNumero;
+	}
+
+	public void setDireccionNumero(int direccionNumero) {
+		this.direccionNumero = direccionNumero;
+	}
+
+	public static double getDISTANCIA_MINIMA_DE_CERCANIA() {
+		return DISTANCIA_MINIMA_DE_CERCANIA;
+	}
+
+	public static void setDISTANCIA_MINIMA_DE_CERCANIA(double dISTANCIA_MINIMA_DE_CERCANIA) {
+		DISTANCIA_MINIMA_DE_CERCANIA = dISTANCIA_MINIMA_DE_CERCANIA;
+	}
+
+	public Point getUbicacionActual() {
+		return ubicacionActual;
+	}
 	
 	public List<String> getListaPalabrasClave() {
 		return listaPalabrasClave;

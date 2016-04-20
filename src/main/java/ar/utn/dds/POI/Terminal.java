@@ -15,5 +15,17 @@ public class Terminal{
 			poiABuscar.cumpleCondicionBusqueda(textoLibre);
 	
 	}
+
+	public Point getUbicacion() {
+		return ubicacion;
+	}
+
+	public void setUbicacion(Point ubicacion) {
+		this.ubicacion = ubicacion;
+	}
+
+	public POI getPoiABuscar() {
+		return poiABuscar;
+	}
 	
 }

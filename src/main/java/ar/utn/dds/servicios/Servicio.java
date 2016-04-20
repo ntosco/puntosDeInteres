@@ -12,6 +12,14 @@ public class Servicio {
 	private List<Jornada> jornadaDisponible = new ArrayList<Jornada>();
 	private DisponibilidadxRangoHorario estrategiaDisponibilidad = new DisponibilidadxRangoHorario();
 
+	public DisponibilidadxRangoHorario getEstrategiaDisponibilidad() {
+		return estrategiaDisponibilidad;
+	}
+
+	public void setEstrategiaDisponibilidad(DisponibilidadxRangoHorario estrategiaDisponibilidad) {
+		this.estrategiaDisponibilidad = estrategiaDisponibilidad;
+	}
+
 	public Servicio(String nombre, List<Jornada> jornadaDisponible) {
 		this.nombre = nombre;
 		setJornadaDisponible(jornadaDisponible);

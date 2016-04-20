@@ -147,7 +147,7 @@ abstract public class JuegoDeDatos {
 		asesoramientoTecnico = new Servicio("Asesoramieno Tecnico", jornadaNormal);
 		rentas = new Servicio("rentas", jornadaInversa);
 		servicioCP = new Servicio("servicio CP", jornadaInversa);
-		
+			
 		servicioAsesoramientoLegalYTecnico = new ArrayList<Servicio>();
 		servicioAsesoramientoLegalYTecnico.add(asesoramientoLegal);
 		servicioAsesoramientoLegalYTecnico.add(asesoramientoTecnico);
@@ -161,40 +161,45 @@ abstract public class JuegoDeDatos {
 		servicioCPyRentas.add(rentas);
 
 	}
+	
+	public void setUpUbicaciones() { 
+		ubicacionLocalCafeMartinez = new Point(10.003, 20);
+		ubicacionLocalAddidas = new Point(14, 22);
+		ubicacionLocalPanquequesCarlitos = new Point(10, 20);
+		ubicacionLocalNike = new Point(10, 20);
+		ubicacionLocalFallabella = new Point(10, 15);
+	}
 
 	public void setUpLocalComercial() {
-
+		setUpUbicaciones();
+		
 		nike = new LocalComercial();// esta cerca de la terminal
 		fallabella = new LocalComercial();// esta cerca de la terminal
 		cafeMartinez = new LocalComercial();// esta cerca de la terminal
 		addidas = new LocalComercial();// esta lejos de la terminal
 		panquequesCarlitos = new LocalComercial();
 
-		ubicacionLocalCafeMartinez = new Point(10.003, 20);
 		cafeMartinez.setUbicacionActual(ubicacionLocalCafeMartinez);
-
-		ubicacionLocalAddidas = new Point(14, 22);
 		addidas.setUbicacionActual(ubicacionLocalAddidas);
-
-		ubicacionLocalPanquequesCarlitos = new Point(10, 20);
 		panquequesCarlitos.setUbicacionActual(ubicacionLocalPanquequesCarlitos);
-
-		ubicacionLocalNike = new Point(10, 20);
 		nike.setUbicacionActual(ubicacionLocalNike);
-
-		ubicacionLocalFallabella = new Point(10, 15);
 		fallabella.setUbicacionActual(ubicacionLocalFallabella);
 
 	}
 
 	public void setUpCGP() {
 
+		setUpComunas();
+		setUpServicios();
+		
 		cgpCaballito = new CentroGestionParticipacion();
 		cgpCaballito.setComuna(comuna1);// cgp Cercano a la terminal
+		cgpCaballito.setListaServicios(servicioCPyRentas);
 
 		cgpAlmagro = new CentroGestionParticipacion();
 		cgpAlmagro.setComuna(comuna2);// cgp lejano a la termianl
-
+		cgpAlmagro.setListaServicios(servicioCPyRentas);
+		
 		cgpVillaCrespo.setListaServicios(servicioAsesoramientoLegalYTecnico);
 		cgpPalermo.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
 
@@ -257,10 +262,9 @@ abstract public class JuegoDeDatos {
 		listaPalabrasClaveFalabella.add("running");
 		fallabella.setListaPalabrasClave(listaPalabrasClaveFalabella);
 		
-		
 	}
 
-	public void setUpColectivo() {
+	public void setUpColectivos() {
 
 		parada15 = new ParadaDeColectivo();
 		ubicacionParada15 = new Point(10.0008, 20);
@@ -306,6 +310,10 @@ abstract public class JuegoDeDatos {
 
 		puntoTerminal = new Point(10, 20);
 		puntoTerminal2 = new Point(1000, 2000);
+	}
+	
+	public void setUpLocales(){
+		
 	}
 	
 

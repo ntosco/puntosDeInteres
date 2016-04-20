@@ -19,6 +19,16 @@ public class ParadaDeColectivo extends POI{
 	}
 
 
+	public static double getDISTANCIA_MINIMA_DE_CERCANIA() {
+		return DISTANCIA_MINIMA_DE_CERCANIA;
+	}
+
+
+	public static void setDISTANCIA_MINIMA_DE_CERCANIA(double dISTANCIA_MINIMA_DE_CERCANIA) {
+		DISTANCIA_MINIMA_DE_CERCANIA = dISTANCIA_MINIMA_DE_CERCANIA;
+	}
+
+
 	public void setLinea(String linea) {
 		this.linea = linea;
 	}

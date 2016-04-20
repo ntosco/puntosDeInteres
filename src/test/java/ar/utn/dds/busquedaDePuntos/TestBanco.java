@@ -38,7 +38,7 @@ public class TestBanco {
 		RangoHorario rangolaboral_13a15 = new RangoHorario(LocalTime.of(13, 0, 0),LocalTime.of(15, 0, 0));
 		Jornada jornadaLaboral_Lunes_10a20 = new Jornada(DayOfWeek.MONDAY, rangolaboral_10a20);
 		Jornada jornadaLaboral_Jueves_13a15 = new Jornada(DayOfWeek.TUESDAY, rangolaboral_13a15);
-		ArrayList<Jornada> jornadas = new ArrayList<>();
+		ArrayList<Jornada> jornadas = new ArrayList<Jornada>();
 		jornadas.add(jornadaLaboral_Lunes_10a20);
 		jornadas.add(jornadaLaboral_Jueves_13a15);
 		//
@@ -52,7 +52,7 @@ public class TestBanco {
 		RangoHorario rangolaboral_17a20 = new RangoHorario(LocalTime.of(17, 0, 0),LocalTime.of(20, 0, 0));
 		Jornada jornadaLaboral_Sabado_13a15 = new Jornada(DayOfWeek.SATURDAY, rangolaboral_13a15);
 		Jornada jornadaLaboral_Jueves_17a20 = new Jornada(DayOfWeek.TUESDAY, rangolaboral_17a20);
-		ArrayList<Jornada> jornadasInversas = new ArrayList<>();
+		ArrayList<Jornada> jornadasInversas = new ArrayList<Jornada>();
 		jornadasInversas.add(jornadaLaboral_Sabado_13a15);
 		jornadasInversas.add(jornadaLaboral_Jueves_17a20);
 		//
@@ -63,7 +63,7 @@ public class TestBanco {
 
 		//Sucursal Banco
 		sucursalRetiro = new SucursalBanco();
-		ArrayList<Servicio> servicios = new ArrayList<>();
+		ArrayList<Servicio> servicios = new ArrayList<Servicio>();
 		servicios.add(serivcioCP);
 		servicios.add(servicioRentas);
 		sucursalRetiro.setListaServicios(servicios);
@@ -73,7 +73,7 @@ public class TestBanco {
 		sucursalRetiro.setListaPalabrasClave(palabrasClave);
 		
 		sucursalMartinez = new SucursalBanco();
-		ArrayList<Servicio> servicios2 = new ArrayList<>();
+		ArrayList<Servicio> servicios2 = new ArrayList<Servicio>();
 		servicios2.add(serivcioCP);
 		ubicacionSucursalLejana = new Point(800, 200);
 		sucursalMartinez.setUbicacionActual(ubicacionSucursalLejana);
