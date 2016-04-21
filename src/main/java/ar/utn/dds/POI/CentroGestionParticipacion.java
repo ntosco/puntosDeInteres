@@ -2,9 +2,7 @@ package ar.utn.dds.POI;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.uqbar.geodds.*;
-
 import java.time.LocalDateTime;
 import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
