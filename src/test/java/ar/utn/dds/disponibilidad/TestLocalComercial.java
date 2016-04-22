@@ -13,62 +13,22 @@ import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.LocalComercial;
 import ar.utn.dds.POI.Rubro;
+import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.servicios.Servicio;
 import ar.utn.dds.utils.Jornada;
 import ar.utn.dds.utils.RangoHorario;
 
 
-public class TestLocalComercial {
-
-	private LocalComercial cafeMartinez;
-	private Point puntoTerminal;
-	private Point ubicacionLocalCafeMartinez;
-	private Point ubicacionLocalNike;
-	
-	private LocalComercial nike;//solo un rubro: indumentaria
-	private LocalComercial falabella; //varios rubros: indumentaria, muebleria, perfumeria, etc
-	private Rubro indumentaria;
-	private Rubro muebleria;
-	private Rubro perfumeria;
-	
-	private Servicio asesoramientoLegal;
-	private Servicio pagoDeFacturas;
-	private Servicio asesoramientoTecnico;
-	
-	private LocalDateTime lunes1210hs ;
-	private LocalDateTime lunes23hs ;
+public class TestLocalComercial extends JuegoDeDatos {
 
 	
 	@Before
 	public void SetUp(){
-
-		// Terminal de consulta
-		puntoTerminal = new Point(10,20);
- 
-		//Local comercial
-		cafeMartinez = new LocalComercial();
-		ubicacionLocalCafeMartinez = new Point(10.003,20);
-		cafeMartinez.setUbicacionActual(ubicacionLocalCafeMartinez);
-//		cafeMartinez.setRadioDeCercania(0.4);
-		
-		//
-		RangoHorario rangolaboral = new RangoHorario(LocalTime.of(10, 0, 0),LocalTime.of(20, 0, 0));
-		Jornada jornadaLaboral = new Jornada(DayOfWeek.FRIDAY, rangolaboral);
-		Jornada jornadaLaboral2 = new Jornada(DayOfWeek.TUESDAY, rangolaboral);
-		RangoHorario rangolaboral2 = new RangoHorario(LocalTime.of(13, 0, 0),LocalTime.of(15, 0, 0));
-		ArrayList<Jornada> jornadas = new ArrayList<>();
-		jornadas.add(jornadaLaboral);
-		jornadas.add(jornadaLaboral2);
-		//
-		
-		cafeMartinez.setJornadaDisponible(jornadas);
-		
-		lunes1210hs =LocalDateTime.of(2016,4,11,12,10,00);
-		lunes23hs= LocalDateTime.of(2016,4,11,23,10,00);
+		setUpGeneral();
+		setUpLocalComercial();
 		
 	}
 	
-
 	@Test
 	public void estoyDisponibleHorarioOut(){
 		assertFalse(cafeMartinez.estaDisponible(null,lunes23hs));
@@ -76,7 +36,7 @@ public class TestLocalComercial {
 	
 	@Test
 	public void estoyDisponibleHorarioIn(){
-		assertFalse(cafeMartinez.estaDisponible(null, lunes1210hs));
+		assertTrue(cafeMartinez.estaDisponible(null, lunes1210hs));
 	}
 	
 	@Test
@@ -86,10 +46,7 @@ public class TestLocalComercial {
 	
 	@Test
 	public void estoyDisponibleConServicioHorarioIn(){
-		assertFalse(cafeMartinez.estaDisponible("Rentas", lunes1210hs));
+		assertTrue(cafeMartinez.estaDisponible("Rentas", lunes1210hs));
 	}
-
-	
-
-	
+		
 }

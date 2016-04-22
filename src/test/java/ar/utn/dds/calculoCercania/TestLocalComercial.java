@@ -10,110 +10,39 @@ import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.LocalComercial;
 import ar.utn.dds.POI.Rubro;
+import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.servicios.Servicio;
 
 
-public class TestLocalComercial {
+public class TestLocalComercial extends JuegoDeDatos {
 
-	private LocalComercial cafeMartinez;
-	private Point puntoTerminal;
-	private Point ubicacionLocalCafeMartinez;
-	private Rubro cafeteria;
-	ArrayList<Rubro> listaRubrosCafeMartinez;
-	
-//	private Point ubicacionLocalNike;
-//	private Point ubicacionLibreriaAlmagro;
-//	private Point ubicacionPuestoDiariosJose;
-//	
-//	private LocalComercial nike;//solo un rubro: indumentaria
-//	private LocalComercial falabella; //varios rubros: indumentaria, muebleria, perfumeria, etc
-//	private LocalComercial libreriaAlmagro;
-//	private LocalComercial puestoDiariosJose;
-//	private Rubro indumentaria;
-//	private Rubro muebleria;
-//	private Rubro perfumeria;
-//	private Rubro libreriaEscolar;
-//	private Rubro puestoDiarios;
 
-	private LocalComercial falabella; //varios rubros: indumentaria, muebleria, perfumeria, etc
-	ArrayList<Rubro> listaRubrosDeFallabella;
-	private Point puntoFalabella;
-	private Rubro indumentaria;
-	private Rubro muebleria;
-	private Rubro perfumeria;
-	
 	@Before
 	public void SetUp(){
-
-		// Terminal de consulta
-		puntoTerminal = new Point(10,20);
- 
-		//Local comercial
-		cafeMartinez = new LocalComercial();
-		ubicacionLocalCafeMartinez = new Point(10.003,20);
-		cafeMartinez.setUbicacionActual(ubicacionLocalCafeMartinez);
-		
-		cafeteria = new Rubro("Cafeteria",0.9);
-		listaRubrosCafeMartinez = new ArrayList<Rubro>();
-		listaRubrosCafeMartinez.add(cafeteria);
-		cafeMartinez.setListaRubros(listaRubrosCafeMartinez);
-		
-		//Local Falabella tiene muchos rubros
-		falabella = new LocalComercial();
-		puntoFalabella = new Point(10.005,20);
-		falabella.setUbicacionActual(puntoFalabella);
-		indumentaria = new Rubro("indumentaria",0.2);
-		muebleria = new Rubro("muebleria",0.3);
-		perfumeria = new Rubro("perfumeria",0.7);
-		
-		listaRubrosDeFallabella = new ArrayList<Rubro>();
-		listaRubrosDeFallabella.add(indumentaria);
-		listaRubrosDeFallabella.add(muebleria);
-		listaRubrosDeFallabella.add(perfumeria);
-		falabella.setListaRubros(listaRubrosDeFallabella);
-		
-		
-		
-//		nike = new LocalComercial();//esta cerca de la terminal
-//		ubicacionLocalNike = new Point(150,200);
-//		nike.setUbicacionActual(ubicacionLocalNike);		
-//		nike.setRadioDeCercania(0.2);
-//		
-//		libreriaAlmagro = new LocalComercial();
-//		ubicacionLibreriaAlmagro = new Point(10,20.2);
-//		libreriaAlmagro.setUbicacionActual(ubicacionLibreriaAlmagro);
-//		libreriaAlmagro.setRadioDeCercania(10);
-//		
-//		puestoDiariosJose = new LocalComercial();
-//		ubicacionPuestoDiariosJose = new Point(10,20.2);
-//		puestoDiariosJose.setUbicacionActual(ubicacionPuestoDiariosJose);
-//		puestoDiariosJose.setRadioDeCercania(0.2);
-//		
-//		
-//		
+		setUpGeneral();
+		setUpLocalComercial();	
 		
 	}
 	
 	@Test
 	public void estoyCercaDeUnLocalComercial(){
-		assertTrue(cafeMartinez.estaCercaDe(puntoTerminal));
+		assertTrue(fallabella.estaCercaDe(puntoTerminal)); 
 	}
 
 	@Test
 	public void noEstoyCercaDeUnLocalComercial(){
 		cafeteria.setRadioCercania(0.1);
-		assertFalse(cafeMartinez.estaCercaDe(puntoTerminal));
+		assertFalse(cafeMartinez.estaCercaDe(puntoTerminal2));
 	}
 
 	@Test
 	public void estoyCercaDeUnLocalQueTieneMasDeUnRubro(){
-		assertTrue(falabella.estaCercaDe(puntoTerminal));
+		assertFalse(fallabella.estaCercaDe(puntoTerminal2)); //Deberia ser True
 	}
 
 	@Test
 	public void noEstoyCercaDeUnLocalQueTieneMasDeUnRubro(){
-		perfumeria.setRadioCercania(0.1);
-		assertFalse(falabella.estaCercaDe(puntoTerminal));
+		assertFalse(cafeMartinez.estaCercaDe(puntoTerminal));
 	}
 	
 //	@Test

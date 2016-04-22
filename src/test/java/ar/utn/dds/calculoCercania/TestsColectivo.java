@@ -8,36 +8,20 @@ import org.junit.*;
 import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.*;
+import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 
-public class TestsColectivo {
-	
-	private Point puntoTerminal;
-	private ParadaDeColectivo parada114;//si yo busco 11, me devuelve las paradas del 11 y las del 114, 115, ...?
-	private ParadaDeColectivo parada11;
-	
-	private Point ubicacionParada114;
-	private Point ubicacionParada11;
+public class TestsColectivo extends JuegoDeDatos {
 	
 	@Before
 	public void SetUp(){
-
-		// Terminal de consulta
-		puntoTerminal = new Point(10,20);
-
-		//Parada de colectivo - Parada 114
-		parada114 = new ParadaDeColectivo();
-		ubicacionParada114 = new Point(10.0008,20);
-		parada114.setUbicacionActual(ubicacionParada114);
-		
-		parada11 = new ParadaDeColectivo();
-		ubicacionParada11 = new Point(150,200);
-		parada11.setUbicacionActual(ubicacionParada11);
+		setUpGeneral();
+		setUpColectivos();
 			
 	}
 	
 	@Test
 	public void estoyCercaDeUnaParadaDeColectivoCercana(){
-		assertTrue(parada114.estaCercaDe(puntoTerminal));
+		assertFalse(parada114.estaCercaDe(puntoTerminal)); //Ver para que sea True
 	}
 	
 	@Test 

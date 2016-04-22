@@ -1,11 +1,11 @@
 package ar.utn.dds.juegoDeDatos;
 
-import static org.junit.Assert.*;
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.*;
+
 import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.CentroGestionParticipacion;
@@ -20,107 +20,131 @@ import ar.utn.dds.utils.RangoHorario;
 
 abstract public class JuegoDeDatos {
 
-	private Point puntoTerminal;
-	private Point puntoTerminal2;
+	public Point puntoTerminal;
+	public Point puntoTerminal2;
 
 	// Servicios
 
-	private Servicio servicioCP;
-	private Servicio rentas;
-	private Servicio asesoramientoLegal;
-	private Servicio pagoDeFacturas;
-	private Servicio asesoramientoTecnico;
+	public Servicio servicioCP;
+	public Servicio rentas;
+	public Servicio asesoramientoLegal;
+	public Servicio pagoDeFacturas;
+	public Servicio asesoramientoTecnico;
 
-	List<Servicio> servicioAsesoramientoLegalyPagoFacturas;
-	List<Servicio> servicioAsesoramientoLegalYTecnico;
-	List<Servicio> servicioCPyRentas;
-	List<Servicio> servicioTecnico;
+	public List<Servicio> servicioAsesoramientoLegalyPagoFacturas;
+	public List<Servicio> servicioAsesoramientoLegalYTecnico;
+	public List<Servicio> servicioCPyRentas;
+	public List<Servicio> servicioTecnico;
 
 	// Rubros
 
-	private Rubro indumentaria;
-	private Rubro muebleria;
-	private Rubro perfumeria;
-
-	List<Rubro> rubrosIndumentariaMuebleriaPerfumeria;
-	List<Rubro> rubroIndumentaria;
+	public Rubro indumentaria;
+	public Rubro muebleria;
+	public Rubro perfumeria;
+	public Rubro cafeteria;
+	public Rubro comidas;
+	
+	public List<Rubro> rubrosIndumentariaMuebleriaPerfumeria;
+	public List<Rubro> rubroIndumentaria;
+	public List<Rubro> cafeteriaYComidas;
 
 	// Colectivos
 
-	private ParadaDeColectivo parada15;
-	private ParadaDeColectivo parada114;
-	private ParadaDeColectivo parada11;
-	private ParadaDeColectivo parada7Rojo;
-	private ParadaDeColectivo parada7Amarillo;
+	public ParadaDeColectivo parada15;
+	public ParadaDeColectivo parada114;
+	public ParadaDeColectivo parada11;
+	public ParadaDeColectivo parada7Rojo;
+	public ParadaDeColectivo parada7Amarillo;
 
-	private Point ubicacionParada15;
-	private Point ubicacionParada114;
-	private Point ubicacionParada11;
-	private Point ubicacionParada7Rojo;
-	private Point ubicacionParada7Amarillo;
+	public Point ubicacionParada15;
+	public Point ubicacionParada114;
+	public Point ubicacionParada11;
+	public Point ubicacionParada7Rojo;
+	public Point ubicacionParada7Amarillo;
 
-	List<String> paradaDel7Amarillo;
-	List<String> paradaDel7Rojo;
-	List<String> paradaDel11;
-	List<String> paradaDel114;
-	List<String> paradaDel15;
+	public List<String> paradaDel7Amarillo;
+	public List<String> paradaDel7Rojo;
+	public List<String> paradaDel11;
+	public List<String> paradaDel114;
+	public List<String> paradaDel15;
 
 	// CGPS
 
-	private CentroGestionParticipacion cgpCaballito;
-	private CentroGestionParticipacion cgpAlmagro;
-	private CentroGestionParticipacion cgpPalermo;
+	public CentroGestionParticipacion cgpCaballito;
+	public CentroGestionParticipacion cgpAlmagro;
+	public CentroGestionParticipacion cgpPalermo;
 
-	private Point ubicacionCGPCaballito;
-	private Point ubicacionCGPAlmagro;
-	private Point ubicacionCGPPalermo;
+	public Point ubicacionCGPCaballito;
+	public Point ubicacionCGPAlmagro;
+	public Point ubicacionCGPPalermo;
+	
+	public List<String> palabrasClaveCGPAlmagro;
 
 	// comunas
 
-	private Comuna comuna1;
-	private Comuna comuna2;
-	private Point punto1comuna;
-	private Point punto2comuna;
-	private Point punto3comuna;
-	private Point punto4comuna;
-	private Point punto5comuna;
-	private Point punto6comuna;
+	public Comuna comuna1;
+	public Comuna comuna2;
+	public Point punto1comuna;
+	public Point punto2comuna;
+	public Point punto3comuna;
+	public Point punto4comuna;
+	public Point punto5comuna;
+	public Point punto6comuna;
 
 	// Locales comerciales
 
-	private LocalComercial nike;// solo un rubro: indumentaria
-	private Point ubicacionLocalNike;
-	private List<String> listaPalabrasClaveNike;
+	public LocalComercial nike;// solo un rubro: indumentaria
+	public Point ubicacionLocalNike;
+	public List<String> listaPalabrasClaveNike;
 
-	private LocalComercial fallabella;
-	private Point ubicacionLocalFallabella;
-	private List<String> listaPalabrasClaveFallabella;
+	public LocalComercial fallabella;
+	public Point ubicacionLocalFallabella;
+	public List<String> listaPalabrasClaveFallabella;
 
-	private LocalComercial cafeMartinez;
-	private Point ubicacionLocalCafeMartinez;
-	private List<String> palabrasClaveCafeMartinez;
+	public LocalComercial cafeMartinez;
+	public Point ubicacionLocalCafeMartinez;
+	public List<String> palabrasClaveCafeMartinez;
 	
-	private LocalComercial addidas;
-	private Point ubicacionLocalAddidas;
+	public LocalComercial addidas;
+	public Point ubicacionLocalAddidas;
 
-	private LocalComercial panquequesCarlitos;
-	private Point ubicacionLocalPanquequesCarlitos;
+	public LocalComercial panquequesCarlitos;
+	public Point ubicacionLocalPanquequesCarlitos;
 
 	// Bancos
 
-	private SucursalBanco sucursalRetiro;
-	private SucursalBanco sucursalMartinez;
+	public SucursalBanco sucursalRetiro;
+	public SucursalBanco sucursalMartinez;
 
-	private Point ubicacionSucursalRetiro;
-	private Point ubicacionSucursalMartinez;
+	public Point ubicacionSucursalRetiro;
+	public Point ubicacionSucursalMartinez;
+	
+	public List<String> palabrasClaveBancoRetiro;
 
 	// Jornadas
 
-	List<Jornada> jornadaInversa;
-	List<Jornada> jornadaNormal;
+	public List<Jornada> jornadaBancaria;
+	public List<Jornada> jornadaNormalLunesAViernes;
+	
+	// LOCAL DATE TIME
+	
+	public LocalDateTime lunes1210hs;
+	public LocalDateTime lunes23hs;
+	public LocalDateTime martes04hs;
+	public LocalDateTime sabado1210hs ;
+	public LocalDateTime lunes12hs ;
+	public LocalDateTime jueves11hs ;
+	public LocalDateTime sabado23hs;
+	
 
-	public void setUp() {
-
+	public void setUpGeneral() {
+		setUpLocalDateTime();
+		setUpJornadas();
+		setUpServicios();
+		setUpUbicaciones();
+		setUpComunas();
+		setUpRubro();
+		setUpPuntos();
 	}
 
 	public void setUpBanco() {
@@ -128,47 +152,59 @@ abstract public class JuegoDeDatos {
 		sucursalRetiro = new SucursalBanco();
 		sucursalRetiro.setListaServicios(servicioCPyRentas);
 		sucursalRetiro.setUbicacionActual(ubicacionSucursalRetiro);
+		sucursalRetiro.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
+		palabrasClaveBancoRetiro = new ArrayList<String>();
+		palabrasClaveBancoRetiro.add("Rentas");
+		palabrasClaveBancoRetiro.add("Pago de facturas");
+		sucursalRetiro.setListaPalabrasClave(palabrasClaveBancoRetiro);
 
 		sucursalMartinez = new SucursalBanco();
-		sucursalMartinez
-				.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
+		sucursalMartinez.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
 		sucursalMartinez.setUbicacionActual(ubicacionSucursalMartinez);
+		sucursalMartinez.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
 	}
 
-	public void sepUpJornadas() {
+	public void setUpJornadas() {
 
-		RangoHorario rangolaboral_10a20 = new RangoHorario(LocalTime.of(10, 0,
-				0), LocalTime.of(20, 0, 0));
-		RangoHorario rangolaboral_13a15 = new RangoHorario(LocalTime.of(13, 0,
-				0), LocalTime.of(15, 0, 0));
-		Jornada jornadaLaboral_Lunes_10a20 = new Jornada(DayOfWeek.MONDAY,
-				rangolaboral_10a20);
-		Jornada jornadaLaboral_Jueves_13a15 = new Jornada(DayOfWeek.TUESDAY,
-				rangolaboral_13a15);
-		jornadaNormal = new ArrayList<>();
-		jornadaNormal.add(jornadaLaboral_Lunes_10a20);
-		jornadaNormal.add(jornadaLaboral_Jueves_13a15);
-
-		RangoHorario rangolaboral_17a20 = new RangoHorario(LocalTime.of(17, 0,
-				0), LocalTime.of(20, 0, 0));
-		Jornada jornadaLaboral_Sabado_13a15 = new Jornada(DayOfWeek.SATURDAY,
-				rangolaboral_13a15);
-		Jornada jornadaLaboral_Jueves_17a20 = new Jornada(DayOfWeek.TUESDAY,
-				rangolaboral_17a20);
-		jornadaInversa = new ArrayList<>();
-		jornadaInversa.add(jornadaLaboral_Sabado_13a15);
-		jornadaInversa.add(jornadaLaboral_Jueves_17a20);
+		RangoHorario rangolaboral_10a20 = new RangoHorario(LocalTime.of(10, 0,0), LocalTime.of(20, 0, 0));
+		RangoHorario rangolaboral_9a13 = new RangoHorario(LocalTime.of(9, 0,0), LocalTime.of(13, 0, 0));
+		Jornada jornadaLaboral_Lunes_10a20 = new Jornada(DayOfWeek.MONDAY,rangolaboral_10a20);
+		Jornada jornadaLaboral_Martes_10a20 = new Jornada(DayOfWeek.TUESDAY,rangolaboral_10a20);
+		Jornada jornadaLaboral_Miercoles_10a20 = new Jornada(DayOfWeek.WEDNESDAY,rangolaboral_10a20);
+		Jornada jornadaLaboral_Jueves_13a15 = new Jornada(DayOfWeek.THURSDAY,rangolaboral_10a20);
+		Jornada jornadaLaboral_Viernes_10a20 = new Jornada(DayOfWeek.FRIDAY,rangolaboral_10a20);
+		Jornada jornadaLaboral_Sabado_10a13 = new Jornada(DayOfWeek.SATURDAY,rangolaboral_9a13);
+		jornadaNormalLunesAViernes = new ArrayList<>();
+		jornadaNormalLunesAViernes.add(jornadaLaboral_Lunes_10a20);
+		jornadaNormalLunesAViernes.add(jornadaLaboral_Martes_10a20);
+		jornadaNormalLunesAViernes.add(jornadaLaboral_Miercoles_10a20);
+		jornadaNormalLunesAViernes.add(jornadaLaboral_Jueves_13a15);
+		jornadaNormalLunesAViernes.add(jornadaLaboral_Viernes_10a20);
+		jornadaNormalLunesAViernes.add(jornadaLaboral_Sabado_10a13);
+		
+		RangoHorario rangoBancario = new RangoHorario(LocalTime.of(10, 0, 0),LocalTime.of(15, 0, 0));
+		Jornada jornadaBancariaDe10a15LUNES = new Jornada(DayOfWeek.MONDAY, rangoBancario);
+		Jornada jornadaBancariaDe10a15MARTES = new Jornada(DayOfWeek.TUESDAY, rangoBancario);
+		Jornada jornadaBancariaDe10a15MIERCOLES = new Jornada(DayOfWeek.WEDNESDAY, rangoBancario);
+		Jornada jornadaBancariaDe10a15JUEVES = new Jornada(DayOfWeek.THURSDAY, rangoBancario);
+		Jornada jornadaBancariaDe10a15VIERNES = new Jornada(DayOfWeek.FRIDAY, rangoBancario);
+		ArrayList<Jornada> jornadaBancaria = new ArrayList<>();
+		jornadaBancaria.add(jornadaBancariaDe10a15LUNES);
+		jornadaBancaria.add(jornadaBancariaDe10a15MARTES);
+		jornadaBancaria.add(jornadaBancariaDe10a15MIERCOLES);
+		jornadaBancaria.add(jornadaBancariaDe10a15JUEVES);
+		jornadaBancaria.add(jornadaBancariaDe10a15VIERNES);
+		
 
 	}
 
 	public void setUpServicios() {
 
-		pagoDeFacturas = new Servicio("Pago de facturas", jornadaNormal);
-		asesoramientoLegal = new Servicio("Asesoramiento Legal", jornadaNormal);
-		asesoramientoTecnico = new Servicio("Asesoramieno Tecnico",
-				jornadaNormal);
-		rentas = new Servicio("rentas", jornadaInversa);
-		servicioCP = new Servicio("servicio CP", jornadaInversa);
+		pagoDeFacturas = new Servicio("Pago de facturas", jornadaNormalLunesAViernes);
+		asesoramientoLegal = new Servicio("Asesoramiento Legal", jornadaNormalLunesAViernes);
+		asesoramientoTecnico = new Servicio("Asesoramieno Tecnico",	jornadaNormalLunesAViernes);
+		rentas = new Servicio("rentas", jornadaBancaria);
+		servicioCP = new Servicio("servicio CP", jornadaBancaria);
 
 		servicioAsesoramientoLegalYTecnico = new ArrayList<Servicio>();
 		servicioAsesoramientoLegalYTecnico.add(asesoramientoLegal);
@@ -186,52 +222,68 @@ abstract public class JuegoDeDatos {
 
 	public void setUpUbicaciones() {
 
-		ubicacionLocalCafeMartinez = new Point(10.003, 20);
+		ubicacionLocalCafeMartinez = new Point(10.002, 15);
 		ubicacionLocalAddidas = new Point(14, 22);
 		ubicacionLocalPanquequesCarlitos = new Point(10, 20);
 		ubicacionLocalNike = new Point(10, 20);
-		ubicacionLocalFallabella = new Point(10, 15);
 
-		ubicacionSucursalRetiro = new Point(13, 14);
+		ubicacionSucursalRetiro = new Point(10, 15);
 		ubicacionSucursalMartinez = new Point(14, 18);
 
-		ubicacionCGPAlmagro = new Point(11, 16);
+		ubicacionCGPAlmagro = new Point(10, 15.005);
 		ubicacionCGPCaballito = new Point(8, 10);
 		ubicacionCGPPalermo = new Point(15, 15);
 
 	}
 
 	public void setUpLocalComercial() {
-		setUpUbicaciones();
 
 		nike = new LocalComercial();
-		fallabella = new LocalComercial();
-		cafeMartinez = new LocalComercial();
-		addidas = new LocalComercial();
-		panquequesCarlitos = new LocalComercial();
-
-		cafeMartinez.setUbicacionActual(ubicacionLocalCafeMartinez);
-		addidas.setUbicacionActual(ubicacionLocalAddidas);
-		panquequesCarlitos.setUbicacionActual(ubicacionLocalPanquequesCarlitos);
 		nike.setUbicacionActual(ubicacionLocalNike);
+		nike.setListaRubros(rubroIndumentaria);
+		nike.setListaPalabrasClave(listaPalabrasClaveNike);
+		
+		fallabella = new LocalComercial();
+		ubicacionLocalFallabella = new Point(10, 15);
 		fallabella.setUbicacionActual(ubicacionLocalFallabella);
+		fallabella.setJornadaDisponible(jornadaNormalLunesAViernes);
+		fallabella.setListaRubros(rubrosIndumentariaMuebleriaPerfumeria);
+		fallabella.setListaPalabrasClave(listaPalabrasClaveFallabella);
+
+		
+		cafeMartinez = new LocalComercial();
+		cafeMartinez.setUbicacionActual(ubicacionLocalCafeMartinez);
+		cafeMartinez.setJornadaDisponible(jornadaNormalLunesAViernes);
+		cafeMartinez.setListaPalabrasClave(palabrasClaveCafeMartinez);
+		cafeMartinez.setListaRubros(cafeteriaYComidas);
+
+		
+		addidas = new LocalComercial();
+		addidas.setUbicacionActual(ubicacionLocalAddidas);
+		
+		panquequesCarlitos = new LocalComercial();
+		panquequesCarlitos.setUbicacionActual(ubicacionLocalPanquequesCarlitos);
+
 
 	}
 
 	public void setUpCGP() {
 
-		setUpComunas();
-		setUpServicios();
-
 		cgpCaballito = new CentroGestionParticipacion();
 		cgpCaballito.setUbicacionActual(ubicacionCGPCaballito);
-		cgpCaballito.setComuna(comuna1);
+		cgpCaballito.setComuna(comuna2);
 		cgpCaballito.setListaServicios(servicioCPyRentas);
 
 		cgpAlmagro = new CentroGestionParticipacion();
 		cgpAlmagro.setUbicacionActual(ubicacionCGPAlmagro);
-		cgpAlmagro.setComuna(comuna2);
+		cgpAlmagro.setComuna(comuna1);
 		cgpAlmagro.setListaServicios(servicioCPyRentas);
+		palabrasClaveCGPAlmagro = new ArrayList<String>();
+		palabrasClaveCGPAlmagro.add("almagro");
+		palabrasClaveCGPAlmagro.add("CP");
+		palabrasClaveCGPAlmagro.add("Rentas");
+		cgpAlmagro.setListaPalabrasClave(palabrasClaveCGPAlmagro);
+		cgpAlmagro.setJornadaDisponible(jornadaNormalLunesAViernes);
 
 		cgpPalermo = new CentroGestionParticipacion();
 		cgpPalermo.setUbicacionActual(ubicacionCGPPalermo);
@@ -248,14 +300,18 @@ abstract public class JuegoDeDatos {
 		punto1comuna = new Point(11, 20);
 		punto2comuna = new Point(10.005, 20.001);
 		punto3comuna = new Point(10.009, 20.005);
+		
+		punto4comuna = new Point(10,20);
+		punto5comuna = new Point(20,20);
+		punto6comuna = new Point(15,10);
 
 		comuna1.setAreaDeComuna(punto1comuna);
 		comuna1.setAreaDeComuna(punto2comuna);
 		comuna1.setAreaDeComuna(punto3comuna);
 		
-		comuna2.setAreaDeComuna(punto2comuna);
-		comuna2.setAreaDeComuna(punto2comuna);
-		comuna2.setAreaDeComuna(punto2comuna);
+		comuna2.setAreaDeComuna(punto4comuna);
+		comuna2.setAreaDeComuna(punto5comuna);
+		comuna2.setAreaDeComuna(punto6comuna);
 	}
 
 	public void setUpRubro() {
@@ -263,16 +319,20 @@ abstract public class JuegoDeDatos {
 		indumentaria = new Rubro("indumentaria", 0.2);
 		muebleria = new Rubro("muebleria", 0.3);
 		perfumeria = new Rubro("perfumeria", 0.1);
-
+		cafeteria = new Rubro("cafeteria",0.2);
+		comidas = new Rubro("comidas", 0.1);
+		
+		cafeteriaYComidas = new ArrayList<Rubro>();
+		cafeteriaYComidas.add(cafeteria);
+		cafeteriaYComidas.add(comidas);
+		
 		rubroIndumentaria = new ArrayList<Rubro>();
 		rubroIndumentaria.add(indumentaria);
-		nike.setListaRubros(rubroIndumentaria);
 
 		rubrosIndumentariaMuebleriaPerfumeria = new ArrayList<Rubro>();
 		rubrosIndumentariaMuebleriaPerfumeria.add(indumentaria);
 		rubrosIndumentariaMuebleriaPerfumeria.add(muebleria);
 		rubrosIndumentariaMuebleriaPerfumeria.add(perfumeria);
-		fallabella.setListaRubros(rubrosIndumentariaMuebleriaPerfumeria);
 
 	}
 
@@ -283,20 +343,21 @@ abstract public class JuegoDeDatos {
 		listaPalabrasClaveNike.add("basket");
 		listaPalabrasClaveNike.add("running");
 		listaPalabrasClaveNike.add("tenis");
-		nike.setListaPalabrasClave(listaPalabrasClaveNike);
 
 		listaPalabrasClaveFallabella = new ArrayList<String>();
 		listaPalabrasClaveFallabella.add("new port");
 		listaPalabrasClaveFallabella.add("levis");
 		listaPalabrasClaveFallabella.add("running");
-		fallabella.setListaPalabrasClave(listaPalabrasClaveFallabella);
 		
 		palabrasClaveCafeMartinez = new ArrayList<String>();
 		palabrasClaveCafeMartinez.add("cafe");
 		palabrasClaveCafeMartinez.add("martinez");
 		palabrasClaveCafeMartinez.add("desayuno");
 		palabrasClaveCafeMartinez.add("merienda");
-		cafeMartinez.setListaPalabrasClave(palabrasClaveCafeMartinez);
+		
+		
+		
+		
 		
 	}
 
@@ -343,17 +404,17 @@ abstract public class JuegoDeDatos {
 
 	public void setUpPuntos() {
 
-		puntoTerminal = new Point(10, 20);
+		puntoTerminal = new Point(10, 15);
 		puntoTerminal2 = new Point(1000, 2000);
 	}
-
-	public void setUpLocales() {
-
-	}
-
-	@Test
-	public void testColectivoParaprobarQueAnda() {
-		setUpColectivos();
-		assertEquals(parada11.getLinea(), "11");
-	}
+	 public void setUpLocalDateTime(){
+		 
+		lunes1210hs =LocalDateTime.of(2016,4,11,12,10,00);
+		lunes23hs= LocalDateTime.of(2016,4,11,23,10,00);
+		martes04hs = LocalDateTime.of(2016,4,21,04,00,00);
+		lunes12hs =LocalDateTime.of(2016,4,11,12,00,00);
+		jueves11hs = LocalDateTime.of(2016,4,7,11,00,00);
+		sabado1210hs = LocalDateTime.of(2016,4,2,12,10,00);
+		sabado23hs = LocalDateTime.of(2016,4,2,23,00,00);
+	 }
 }

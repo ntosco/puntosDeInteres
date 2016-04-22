@@ -12,71 +12,17 @@ import org.junit.Test;
 import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.SucursalBanco;
+import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.servicios.Servicio;
 import ar.utn.dds.utils.Jornada;
 import ar.utn.dds.utils.RangoHorario;
 
-public class TestBanco {
-
-	private SucursalBanco sucursalRetiro;
-	private SucursalBanco sucursalMartinez;
-	
-	private Servicio asesoramientoLegal;
-	private Servicio pagoDeFacturas;
-	private Servicio Rentas;
-	
-	private LocalDateTime sabado1210hs ;
-	private LocalDateTime lunes12hs ;
-	private LocalDateTime jueves11hs ;
-	private LocalDateTime sabado23hs;
-	private Point ubicacionSucursalLejana;
+public class TestBanco extends JuegoDeDatos {
 
 	@Before
 	public void SetUp() {
-		
-		RangoHorario rangolaboral_10a20 = new RangoHorario(LocalTime.of(10, 0, 0),LocalTime.of(20, 0, 0));
-		RangoHorario rangolaboral_13a15 = new RangoHorario(LocalTime.of(13, 0, 0),LocalTime.of(15, 0, 0));
-		Jornada jornadaLaboral_Lunes_10a20 = new Jornada(DayOfWeek.MONDAY, rangolaboral_10a20);
-		Jornada jornadaLaboral_Jueves_13a15 = new Jornada(DayOfWeek.TUESDAY, rangolaboral_13a15);
-		ArrayList<Jornada> jornadas = new ArrayList<Jornada>();
-		jornadas.add(jornadaLaboral_Lunes_10a20);
-		jornadas.add(jornadaLaboral_Jueves_13a15);
-		//
-		
-		lunes12hs =LocalDateTime.of(2016,4,11,12,00,00);
-		jueves11hs = LocalDateTime.of(2016,4,7,11,00,00);
-		sabado1210hs = LocalDateTime.of(2016,4,2,12,10,00);
-		sabado23hs = LocalDateTime.of(2016,4,2,23,00,00);
-		
-		//
-		RangoHorario rangolaboral_17a20 = new RangoHorario(LocalTime.of(17, 0, 0),LocalTime.of(20, 0, 0));
-		Jornada jornadaLaboral_Sabado_13a15 = new Jornada(DayOfWeek.SATURDAY, rangolaboral_13a15);
-		Jornada jornadaLaboral_Jueves_17a20 = new Jornada(DayOfWeek.TUESDAY, rangolaboral_17a20);
-		ArrayList<Jornada> jornadasInversas = new ArrayList<Jornada>();
-		jornadasInversas.add(jornadaLaboral_Sabado_13a15);
-		jornadasInversas.add(jornadaLaboral_Jueves_17a20);
-		//
-		
-		Servicio servicioRentas =new Servicio("Rentas", jornadasInversas);
-		Servicio serivcioCP = new Servicio("CP", jornadas);
-		
-
-		//Sucursal Banco
-		sucursalRetiro = new SucursalBanco();
-		ArrayList<Servicio> servicios = new ArrayList<Servicio>();
-		servicios.add(serivcioCP);
-		servicios.add(servicioRentas);
-		sucursalRetiro.setListaServicios(servicios);
-		ArrayList<String> palabrasClave = new ArrayList<String>();
-		palabrasClave.add("Rentas");
-		palabrasClave.add("CP");
-		sucursalRetiro.setListaPalabrasClave(palabrasClave);
-		
-		sucursalMartinez = new SucursalBanco();
-		ArrayList<Servicio> servicios2 = new ArrayList<Servicio>();
-		servicios2.add(serivcioCP);
-		ubicacionSucursalLejana = new Point(800, 200);
-		sucursalMartinez.setUbicacionActual(ubicacionSucursalLejana);
+		setUpGeneral();
+		setUpBanco();
 	}
 
 	
