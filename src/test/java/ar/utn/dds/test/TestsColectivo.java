@@ -1,4 +1,4 @@
-package ar.utn.dds.calculoCercania;
+package ar.utn.dds.test;
 
 import static org.junit.Assert.*;
 
@@ -27,6 +27,27 @@ public class TestsColectivo extends JuegoDeDatos {
 	@Test 
 	public void noEstoyCercaDeUnaParadaDeColectivoLejana(){
 		assertFalse(parada11.estaCercaDe(puntoTerminal));
+	}
+	
+	@Test
+	public void busquedaDeParadaIngresandoTexto() {
+		assertTrue(parada114.cumpleCondicionBusqueda("114"));
+	}
+
+	@Test
+	public void noEncuentraParadaQueNoCoincideConLaBusqueda() {
+		assertFalse(parada114.cumpleCondicionBusqueda("7"));
+
+	}
+	
+	@Test
+	public void estoyDisponibleAhoraSinServicio(){
+		assertTrue(parada114.estaDisponible(null, LocalDateTime.now()));
+	}
+	
+	@Test
+	public void estoyDisponibleAhoraConServicio(){
+		assertTrue(parada11.estaDisponible("Rentas", LocalDateTime.now()));
 	}
 	
 

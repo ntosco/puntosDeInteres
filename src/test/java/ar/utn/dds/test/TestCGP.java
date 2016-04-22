@@ -1,11 +1,6 @@
-package ar.utn.dds.disponibilidad;
+package ar.utn.dds.test;
 
 import static org.junit.Assert.*;
-
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
 
 import org.junit.*;
 import org.uqbar.geodds.Point;
@@ -13,18 +8,38 @@ import org.uqbar.geodds.Point;
 import ar.utn.dds.POI.*;
 import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
-import ar.utn.dds.servicios.Servicio;
-import ar.utn.dds.utils.Jornada;
-import ar.utn.dds.utils.RangoHorario;
 
-public class TestCGP extends JuegoDeDatos {	
+public class TestCGP extends JuegoDeDatos {
+
+	
 	
 	@Before
 	public void SetUp(){
 		setUpGeneral();
 		setUpCGP();
+		
 	}
 	
+	@Test
+	public void estoyCercaDeUnCGPCercano(){
+		assertFalse(cgpAlmagro.estaCercaDe(puntoTerminal)); // hacer que de true
+	}
+	
+	@Test 
+	public void estoyLejosDeUnCGPLejano(){
+		assertFalse(cgpCaballito.estaCercaDe(puntoTerminal));
+		
+	}
+	
+	@Test
+	public void testContieneServicioDelTextoLibre(){
+		assertTrue(cgpAlmagro.cumpleCondicionBusqueda("CP"));
+	}
+	
+	@Test
+	public void testNoContieneServicioDelTextoLibre(){
+		assertFalse(cgpCaballito.cumpleCondicionBusqueda("Rentas"));
+	}
 	
 	// el horario ingresado se encuentra en el servicio seleccionado
 	@Test
@@ -55,9 +70,5 @@ public class TestCGP extends JuegoDeDatos {
 	public void estoyDisponibleSinServicioHorarioOUT(){
 		assertFalse(cgpAlmagro.estaDisponible("almagro",lunes1210hs));
 	}
-	
-	
-
-	
 	
 }
