@@ -766,6 +766,7 @@ abstract public class JuegoDeDatos {
 		parada60.setLinea("60");
 		ubicacionParada60 = new Point(30, 25);
 		parada60.setUbicacionActual(ubicacionParada60);
+		palabrasClave60 = new ArrayList<String>();
 		palabrasClave60.add("60");
 		palabrasClave60.add("palermo");
 		palabrasClave60.add("las cañitas");
@@ -774,6 +775,7 @@ abstract public class JuegoDeDatos {
 		parada12 = new ParadaDeColectivo();
 		parada12.setLinea("12");
 		parada12.setUbicacionActual(ubicacionParada60);
+		palabrasClave12 = new ArrayList<String>();
 		palabrasClave12.add("12");
 		palabrasClave12.add("palermo");
 		palabrasClave12.add("las cañitas");
@@ -783,6 +785,7 @@ abstract public class JuegoDeDatos {
 		parada110Paternal.setLinea("110");
 		ubicacionParada110Paternal = new Point(32, 25);
 		parada110Paternal.setUbicacionActual(ubicacionParada110Paternal);
+		palabrasClave110Paternal = new ArrayList<String>();
 		palabrasClave110Paternal.add("110");
 		palabrasClave110Paternal.add("paternal");
 		parada110Paternal.setListaPalabrasClave(palabrasClave110Paternal);
@@ -791,6 +794,7 @@ abstract public class JuegoDeDatos {
 		parada110LaBoca.setLinea("110");
 		ubicacionParada110LaBoca = new Point(39, 22);
 		parada110LaBoca.setUbicacionActual(ubicacionParada110Paternal);
+		palabrasClave110LaBoca = new ArrayList<String>();
 		palabrasClave110LaBoca.add("110");
 		palabrasClave110LaBoca.add("la boca");
 		parada110LaBoca.setListaPalabrasClave(palabrasClave110LaBoca);
