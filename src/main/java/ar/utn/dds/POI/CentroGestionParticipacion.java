@@ -35,11 +35,7 @@ public class CentroGestionParticipacion extends POI{
 	}
 
 	public boolean cumpleCondicionBusqueda(String textoLibre){
-		if (contieneServicio(textoLibre)){
-			return true;
-		}else {		
-			return contieneKeyword(textoLibre);		
-		}
+		return(contieneServicio(textoLibre));
 	}
 	
 	

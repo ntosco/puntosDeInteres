@@ -31,12 +31,12 @@ public class TestsColectivo extends JuegoDeDatos {
 	
 	@Test
 	public void busquedaDeParadaIngresandoTexto() {
-		assertTrue(parada114.cumpleCondicionBusqueda("114"));
+		assertTrue(parada114.buscarPOI("114"));
 	}
 
 	@Test
 	public void noEncuentraParadaQueNoCoincideConLaBusqueda() {
-		assertFalse(parada114.cumpleCondicionBusqueda("7"));
+		assertFalse(parada114.buscarPOI("7"));
 
 	}
 	

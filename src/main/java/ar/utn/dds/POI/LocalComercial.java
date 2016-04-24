@@ -52,13 +52,9 @@ public class LocalComercial extends POI {
 	}
 
 	public boolean cumpleCondicionBusqueda(String textoLibre) {
-		if (perteneceAlRubro(textoLibre)) {
-			return true;
-
-		} else {
-			return contieneKeyword(textoLibre);
-		}
+		return (perteneceAlRubro(textoLibre));
 	}
+	
 
 	public LocalComercial() {
 		super();

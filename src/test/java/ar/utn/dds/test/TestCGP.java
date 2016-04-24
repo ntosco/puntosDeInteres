@@ -29,7 +29,7 @@ public class TestCGP extends JuegoDeDatos {
 	
 	@Test
 	public void testContieneServicioDelTextoLibre(){
-		assertTrue(cgpAlmagro.cumpleCondicionBusqueda("CP"));
+		assertTrue(cgpAlmagro.buscarPOI("CP"));
 	}
 	
 	@Test
@@ -39,12 +39,12 @@ public class TestCGP extends JuegoDeDatos {
 	
 	@Test
 	public void testContieneServicioDelTextoLibre2(){
-		assertTrue(cgpPaternal.cumpleCondicionBusqueda("rentas"));
+		assertTrue(cgpPaternal.buscarPOI("rentas"));
 	}
 	
 	@Test
 	public void testNoContieneServicioDelTextoLibre(){
-		assertFalse(cgpCaballito.cumpleCondicionBusqueda("Rentas"));
+		assertFalse(cgpCaballito.buscarPOI("Rentas"));
 	}
 	
 	// el horario ingresado se encuentra en el servicio seleccionado

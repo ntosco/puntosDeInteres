@@ -52,7 +52,7 @@ public class TestLocalComercial extends JuegoDeDatos {
 
 	@Test
 	public void testPerteneceAUnRubroQueEstaEnSuLista() {
-		assertTrue(cafeMartinez.cumpleCondicionBusqueda("cafeteria"));
+		assertTrue(cafeMartinez.buscarPOI("cafeteria"));
 	}
 
 	// Revisar test que rompe cuando se le pone una palabra que no esta en su

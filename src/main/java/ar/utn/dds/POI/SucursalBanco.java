@@ -20,7 +20,7 @@ public class SucursalBanco extends POI{
 	private static List<DayOfWeek> DIAS_LABORABLES = new ArrayList<DayOfWeek>(Arrays.asList(DayOfWeek.MONDAY,DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY));	
 
 	public boolean cumpleCondicionBusqueda(String textoLibre){
-		return contieneKeyword(textoLibre);		
+		return false;		
 		
 	}
 	

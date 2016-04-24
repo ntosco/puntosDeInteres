@@ -17,10 +17,9 @@ public abstract class POI {
 	static double DISTANCIA_MINIMA_DE_CERCANIA = 0.5;
 	private List<Jornada> JornadaDisponible = new ArrayList<Jornada>();
 	private List<EstrategiaDisponibilidad> EstrategiasDisponibilidad = new ArrayList<EstrategiaDisponibilidad>();
-
+	boolean a;
 	
-	
-	List<String> listaPalabrasClave = new ArrayList <String>(); //Creo lista de palabras clave
+	private List<String> listaPalabrasClave = new ArrayList <String>(); //Creo lista de palabras clave
 	
 	public String getDireccionNombre() {
 		return direccionNombre;
@@ -60,14 +59,17 @@ public abstract class POI {
 
 	}
 	
-	public boolean cumpleCondicionBusqueda(String textoLibre) {
-		return false;
-		
+	
+	public boolean buscarPOI(String textoAbuscar){
+		return(contieneKeyword(textoAbuscar)||cumpleCondicionBusqueda(textoAbuscar));
 	}
+	
 	
 	public boolean contieneKeyword(String palabraClave){
 		return listaPalabrasClave.contains(palabraClave);
 	}
+	
+	abstract public boolean cumpleCondicionBusqueda(String textoAbuscar);
 	
 	public Boolean estaDisponible(String _nombreServicio, LocalDateTime _horarioConsultado) {
 		return this.getEstrategiasDisponibilidad().stream()

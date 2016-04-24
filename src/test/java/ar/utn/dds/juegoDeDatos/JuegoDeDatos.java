@@ -93,7 +93,7 @@ abstract public class JuegoDeDatos {
 
 	public CentroGestionParticipacion cgpPaternal;
 	public CentroGestionParticipacion cgpLaBoca;
-	public CentroGestionParticipacion cgpNuñez;
+	public CentroGestionParticipacion cgpNunez;
 	public CentroGestionParticipacion cgpBoedo;
 	public CentroGestionParticipacion cgpCaballito;
 	public CentroGestionParticipacion cgpAlmagro;
@@ -101,7 +101,7 @@ abstract public class JuegoDeDatos {
 
 	public Point ubicacionCGPPaternal;
 	public Point ubicacionCGPLaBoca;
-	public Point ubicacionCGPNuñez;
+	public Point ubicacionCGPNunez;
 	public Point ubicacionCGPBoedo;
 	public Point ubicacionCGPCaballito;
 	public Point ubicacionCGPAlmagro;
@@ -110,7 +110,7 @@ abstract public class JuegoDeDatos {
 	public List<String> palabrasClaveCGPAlmagro;
 	public List<String> palabrasClaveCGPLaBoca;
 	public List<String> palabrasClaveCGPPaternal;
-	public List<String> palabrasClaveCGPNuñez;
+	public List<String> palabrasClaveCGPNunez;
 	public List<String> palabrasClaveCGPBoedo;
 
 	// comunas
@@ -224,6 +224,7 @@ abstract public class JuegoDeDatos {
 		setUpComunas();
 		setUpRubro();
 		setUpPuntos();
+		setUpPalabrasClave();
 	}
 
 	public void setUpBanco() {
@@ -423,7 +424,7 @@ abstract public class JuegoDeDatos {
 
 		ubicacionCGPPaternal = new Point(30, 20);
 		ubicacionCGPLaBoca = new Point(40, 30);
-		ubicacionCGPNuñez = new Point(50, 30);
+		ubicacionCGPNunez = new Point(50, 30);
 		ubicacionCGPBoedo = new Point(50, 20);
 		ubicacionCGPAlmagro = new Point(10, 15.005);
 		ubicacionCGPCaballito = new Point(8, 10);
@@ -508,12 +509,12 @@ abstract public class JuegoDeDatos {
 		cgpLaBoca.setListaPalabrasClave(palabrasClaveCGPLaBoca);
 		cgpLaBoca.setJornadaDisponible(jornada24x7);
 		
-		cgpNuñez = new CentroGestionParticipacion();
-		cgpNuñez.setUbicacionActual(ubicacionCGPNuñez);
-		cgpNuñez.setComuna(comuna5);
-		cgpNuñez.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
-		cgpNuñez.setListaPalabrasClave(palabrasClaveCGPNuñez);
-		cgpNuñez.setJornadaDisponible(noche);
+		cgpNunez = new CentroGestionParticipacion();
+		cgpNunez.setUbicacionActual(ubicacionCGPNunez);
+		cgpNunez.setComuna(comuna5);
+		cgpNunez.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
+		cgpNunez.setListaPalabrasClave(palabrasClaveCGPNunez);
+		cgpNunez.setJornadaDisponible(noche);
 		
 		cgpBoedo = new CentroGestionParticipacion();
 		cgpBoedo.setUbicacionActual(ubicacionCGPBoedo);
@@ -705,9 +706,9 @@ abstract public class JuegoDeDatos {
 		palabrasClaveCGPLaBoca.add("la boca");
 		palabrasClaveCGPLaBoca.add("caminito");
 		
-		palabrasClaveCGPNuñez = new ArrayList<String>();
-		palabrasClaveCGPNuñez.add("nuñez");
-		palabrasClaveCGPNuñez.add("belgrano");
+		palabrasClaveCGPNunez = new ArrayList<String>();
+		palabrasClaveCGPNunez.add("nunez");
+		palabrasClaveCGPNunez.add("belgrano");
 		
 		palabrasClaveCGPBoedo = new ArrayList<String>();
 		palabrasClaveCGPBoedo.add("boedo");
@@ -770,7 +771,7 @@ abstract public class JuegoDeDatos {
 		palabrasClave60 = new ArrayList<String>();
 		palabrasClave60.add("60");
 		palabrasClave60.add("palermo");
-		palabrasClave60.add("las cañitas");
+		palabrasClave60.add("las canitas");
 		parada60.setListaPalabrasClave(palabrasClave60);
 		
 		parada12 = new ParadaDeColectivo();
@@ -779,7 +780,7 @@ abstract public class JuegoDeDatos {
 		palabrasClave12 = new ArrayList<String>();
 		palabrasClave12.add("12");
 		palabrasClave12.add("palermo");
-		palabrasClave12.add("las cañitas");
+		palabrasClave12.add("las canitas");
 		parada12.setListaPalabrasClave(palabrasClave12);
 		
 		parada110Paternal = new ParadaDeColectivo();

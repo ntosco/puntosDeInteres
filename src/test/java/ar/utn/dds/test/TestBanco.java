@@ -31,12 +31,12 @@ public class TestBanco extends JuegoDeDatos {
 	
 	@Test
 	public void testElBancoPrestaAlgunoDeLosServiciosBuscados(){
-		assertTrue(sucursalRetiro.cumpleCondicionBusqueda("Rentas"));
+		assertTrue(sucursalRetiro.buscarPOI("Rentas"));
 	}
 	
 	@Test
 	public void testElBancoNoPRestaAlgunoDeLosServiciosBuscados(){
-		assertFalse(sucursalMartinez.cumpleCondicionBusqueda("CP"));
+		assertFalse(sucursalMartinez.buscarPOI("CP"));
 	}
 	
 	@Test

@@ -30,12 +30,9 @@ public class ParadaDeColectivo extends POI{
 	
 
 	public boolean cumpleCondicionBusqueda(String textoLibre){
-		if (linea.toLowerCase().contains(textoLibre.toLowerCase())){
-			return true;
-		}else {	
-			return contieneKeyword(textoLibre);
-		}			
+		return(linea.toLowerCase().contains(textoLibre.toLowerCase()));
 	}
+	
 	
 	public boolean cumpleCondicionBusqueda2(String textoLibre){
 		return (this.linea == textoLibre);
