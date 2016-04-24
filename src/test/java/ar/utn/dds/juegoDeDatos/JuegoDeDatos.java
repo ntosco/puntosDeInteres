@@ -366,7 +366,7 @@ abstract public class JuegoDeDatos {
 		Jornada jornadaBancariaDe10a15MIERCOLES = new Jornada(DayOfWeek.WEDNESDAY, rangoBancario);
 		Jornada jornadaBancariaDe10a15JUEVES = new Jornada(DayOfWeek.THURSDAY, rangoBancario);
 		Jornada jornadaBancariaDe10a15VIERNES = new Jornada(DayOfWeek.FRIDAY, rangoBancario);
-		ArrayList<Jornada> jornadaBancaria = new ArrayList<Jornada>();
+		jornadaBancaria = new ArrayList<Jornada>();
 		jornadaBancaria.add(jornadaBancariaDe10a15LUNES);
 		jornadaBancaria.add(jornadaBancariaDe10a15MARTES);
 		jornadaBancaria.add(jornadaBancariaDe10a15MIERCOLES);

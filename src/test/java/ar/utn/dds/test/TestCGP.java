@@ -50,7 +50,7 @@ public class TestCGP extends JuegoDeDatos {
 	// el horario ingresado se encuentra en el servicio seleccionado
 	@Test
 	public void estoyDisponibleconServicioHorarioIN(){
-		assertFalse(cgpAlmagro.estaDisponible("CP", lunes1210hs));
+		assertTrue(cgpAlmagro.estaDisponible("CP", lunes1210hs));
 	}	
 	
 	// el horario ingresado no se encuentra en el servicio seleccionado
