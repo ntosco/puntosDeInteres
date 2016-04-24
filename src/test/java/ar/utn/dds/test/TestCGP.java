@@ -3,10 +3,6 @@ package ar.utn.dds.test;
 import static org.junit.Assert.*;
 
 import org.junit.*;
-import org.uqbar.geodds.Point;
-
-import ar.utn.dds.POI.*;
-import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 
 public class TestCGP extends JuegoDeDatos {
@@ -37,6 +33,16 @@ public class TestCGP extends JuegoDeDatos {
 	}
 	
 	@Test
+	public void contieneServicio(){
+		assertTrue(cgpAlmagro.contieneServicio("rentas"));
+	}
+	
+	@Test
+	public void testContieneServicioDelTextoLibre2(){
+		assertTrue(cgpPaternal.cumpleCondicionBusqueda("rentas"));
+	}
+	
+	@Test
 	public void testNoContieneServicioDelTextoLibre(){
 		assertFalse(cgpCaballito.cumpleCondicionBusqueda("Rentas"));
 	}
@@ -62,13 +68,13 @@ public class TestCGP extends JuegoDeDatos {
 	// No se ingresa nombre del servicio ,pero horario es del servicio CP
 	@Test
 	public void estoyDisponibleSinServicioHorarioIN(){
-		assertFalse(cgpAlmagro.estaDisponible("",lunes1210hs));
+		assertFalse(cgpAlmagro.estaDisponible("asdasdasd",lunes1210hs));
 	}
 	
 	// No se ingresa nombre del servicio ,el horario no es de ningun servicio
 	@Test
 	public void estoyDisponibleSinServicioHorarioOUT(){
-		assertFalse(cgpAlmagro.estaDisponible("almagro",lunes1210hs));
+		assertFalse(cgpAlmagro.estaDisponible("almagro",sabado23hs));
 	}
 	
 }

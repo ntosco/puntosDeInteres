@@ -201,7 +201,7 @@ abstract public class JuegoDeDatos {
 	public List<Jornada> jornadaBancaria;
 	public List<Jornada> jornadaNormalLunesAViernes;
 	public List<Jornada> noche;//los 7 dias
-	public List<Jornada> mañana;//los 7 dias
+	public List<Jornada> manana;//los 7 dias
 	public List<Jornada> tarde;//los 7 dias
 	public List<Jornada> jornada24x7;//24 hs los 7 dias
 	
@@ -308,22 +308,22 @@ abstract public class JuegoDeDatos {
 		jornada24x7.add(jornadaSabado24hs);
 		jornada24x7.add(jornadaDomingo24hs);
 		
-		RangoHorario rangoMañana = new RangoHorario(LocalTime.of(8, 0,0), LocalTime.of(12, 0, 0));
-		Jornada jornadaLunesM = new Jornada(DayOfWeek.MONDAY,rangoMañana);
-		Jornada jornadaMartesM = new Jornada(DayOfWeek.TUESDAY,rangoMañana);
-		Jornada jornadaMiercolesM = new Jornada(DayOfWeek.WEDNESDAY,rangoMañana);
-		Jornada jornadaJuevesM = new Jornada(DayOfWeek.THURSDAY,rangoMañana);
-		Jornada jornadaViernesM = new Jornada(DayOfWeek.FRIDAY,rangoMañana);
-		Jornada jornadaSabadoM = new Jornada(DayOfWeek.SATURDAY,rangoMañana);
-		Jornada jornadaDomingoM = new Jornada(DayOfWeek.SUNDAY,rangoMañana);
-		mañana = new ArrayList<Jornada>();
-		mañana.add(jornadaLunesM);
-		mañana.add(jornadaMartesM);
-		mañana.add(jornadaMiercolesM);
-		mañana.add(jornadaJuevesM);
-		mañana.add(jornadaViernesM);
-		mañana.add(jornadaSabadoM);
-		mañana.add(jornadaDomingoM);
+		RangoHorario rangomanana = new RangoHorario(LocalTime.of(8, 0,0), LocalTime.of(12, 0, 0));
+		Jornada jornadaLunesM = new Jornada(DayOfWeek.MONDAY,rangomanana);
+		Jornada jornadaMartesM = new Jornada(DayOfWeek.TUESDAY,rangomanana);
+		Jornada jornadaMiercolesM = new Jornada(DayOfWeek.WEDNESDAY,rangomanana);
+		Jornada jornadaJuevesM = new Jornada(DayOfWeek.THURSDAY,rangomanana);
+		Jornada jornadaViernesM = new Jornada(DayOfWeek.FRIDAY,rangomanana);
+		Jornada jornadaSabadoM = new Jornada(DayOfWeek.SATURDAY,rangomanana);
+		Jornada jornadaDomingoM = new Jornada(DayOfWeek.SUNDAY,rangomanana);
+		manana = new ArrayList<Jornada>();
+		manana.add(jornadaLunesM);
+		manana.add(jornadaMartesM);
+		manana.add(jornadaMiercolesM);
+		manana.add(jornadaJuevesM);
+		manana.add(jornadaViernesM);
+		manana.add(jornadaSabadoM);
+		manana.add(jornadaDomingoM);
 		
 		RangoHorario rangoTarde = new RangoHorario(LocalTime.of(12, 0,0), LocalTime.of(18, 0, 0));
 		Jornada jornadaLunesT = new Jornada(DayOfWeek.MONDAY,rangoTarde);
@@ -334,13 +334,13 @@ abstract public class JuegoDeDatos {
 		Jornada jornadaSabadoT = new Jornada(DayOfWeek.SATURDAY,rangoTarde);
 		Jornada jornadaDomingoT = new Jornada(DayOfWeek.SUNDAY,rangoTarde);
 		tarde = new ArrayList<Jornada>();
-		mañana.add(jornadaLunesT);
-		mañana.add(jornadaMartesT);
-		mañana.add(jornadaMiercolesT);
-		mañana.add(jornadaJuevesT);
-		mañana.add(jornadaViernesT);
-		mañana.add(jornadaSabadoT);
-		mañana.add(jornadaDomingoT);
+		manana.add(jornadaLunesT);
+		manana.add(jornadaMartesT);
+		manana.add(jornadaMiercolesT);
+		manana.add(jornadaJuevesT);
+		manana.add(jornadaViernesT);
+		manana.add(jornadaSabadoT);
+		manana.add(jornadaDomingoT);
 		
 		
 		RangoHorario rangoNoche = new RangoHorario(LocalTime.of(18, 0,0), LocalTime.of(23, 0, 0));
@@ -352,13 +352,13 @@ abstract public class JuegoDeDatos {
 		Jornada jornadaSabadoN = new Jornada(DayOfWeek.SATURDAY,rangoNoche);
 		Jornada jornadaDomingoN = new Jornada(DayOfWeek.SUNDAY,rangoNoche);
 		noche = new ArrayList<Jornada>();
-		mañana.add(jornadaLunesN);
-		mañana.add(jornadaMartesN);
-		mañana.add(jornadaMiercolesN);
-		mañana.add(jornadaJuevesN);
-		mañana.add(jornadaViernesN);
-		mañana.add(jornadaSabadoN);
-		mañana.add(jornadaDomingoN);
+		manana.add(jornadaLunesN);
+		manana.add(jornadaMartesN);
+		manana.add(jornadaMiercolesN);
+		manana.add(jornadaJuevesN);
+		manana.add(jornadaViernesN);
+		manana.add(jornadaSabadoN);
+		manana.add(jornadaDomingoN);
 		
 		RangoHorario rangoBancario = new RangoHorario(LocalTime.of(10, 0, 0),LocalTime.of(15, 0, 0));
 		Jornada jornadaBancariaDe10a15LUNES = new Jornada(DayOfWeek.MONDAY, rangoBancario);
@@ -382,6 +382,7 @@ abstract public class JuegoDeDatos {
 		asesoramientoLegal = new Servicio("Asesoramiento Legal", jornadaNormalLunesAViernes);
 		asesoramientoTecnico = new Servicio("Asesoramieno Tecnico",	jornadaNormalLunesAViernes);
 		rentas = new Servicio("rentas", jornadaBancaria);
+		servicioCP = new Servicio("CP", jornadaBancaria);
 		depositos = new Servicio("depositos", jornadaBancaria);
 		extracciones = new Servicio("extracciones", jornada24x7); 
 		consultarSaldo = new Servicio("consultar saldo", jornada24x7);
@@ -460,7 +461,7 @@ abstract public class JuegoDeDatos {
 		libreria.setUbicacionActual(ubicacionLibreria);
 		libreria.setListaRubros(rubroLibreria);
 		libreria.setListaPalabrasClave(listaPalabrasClaveLibreria);
-		libreria.setJornadaDisponible(mañana);
+		libreria.setJornadaDisponible(manana);
 		
 		nike = new LocalComercial();
 		nike.setUbicacionActual(ubicacionLocalNike);

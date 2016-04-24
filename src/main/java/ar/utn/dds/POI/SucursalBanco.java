@@ -45,7 +45,7 @@ public class SucursalBanco extends POI{
 		this.setEstrategiasDisponibilidad(estrategias);
 
 		RangoHorario rangoAtencion = new RangoHorario(LocalTime.of(10, 0, 0),LocalTime.of(15, 0, 0));
-		List<Jornada> jornadasSemanales = new ArrayList<>();
+		List<Jornada> jornadasSemanales = new ArrayList<Jornada>();
 		for (DayOfWeek dia : DIAS_LABORABLES) {
 			Jornada jornada = new Jornada(dia, rangoAtencion);
 			jornadasSemanales.add(jornada);
