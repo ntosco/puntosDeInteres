@@ -16,18 +16,8 @@ import ar.utn.dds.utils.RangoHorario;
 
 public class SucursalBanco extends POI{
 	
-	public static List<DayOfWeek> getDIAS_LABORABLES() {
-		return DIAS_LABORABLES;
-	}
-
-
-	public static void setDIAS_LABORABLES(List<DayOfWeek> dIAS_LABORABLES) {
-		DIAS_LABORABLES = dIAS_LABORABLES;
-	}
-
-
 	private List<Servicio> listaServicios = new ArrayList<Servicio>();
-	private static List<DayOfWeek> DIAS_LABORABLES = new ArrayList<>(Arrays.asList(DayOfWeek.MONDAY,DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY));	
+	private static List<DayOfWeek> DIAS_LABORABLES = new ArrayList<DayOfWeek>(Arrays.asList(DayOfWeek.MONDAY,DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY));	
 
 	public boolean cumpleCondicionBusqueda(String textoLibre){
 		return contieneKeyword(textoLibre);		

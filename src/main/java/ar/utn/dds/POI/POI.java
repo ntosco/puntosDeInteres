@@ -38,14 +38,6 @@ public abstract class POI {
 		this.direccionNumero = direccionNumero;
 	}
 
-	public static double getDISTANCIA_MINIMA_DE_CERCANIA() {
-		return DISTANCIA_MINIMA_DE_CERCANIA;
-	}
-
-	public static void setDISTANCIA_MINIMA_DE_CERCANIA(double dISTANCIA_MINIMA_DE_CERCANIA) {
-		DISTANCIA_MINIMA_DE_CERCANIA = dISTANCIA_MINIMA_DE_CERCANIA;
-	}
-
 	public Point getUbicacionActual() {
 		return ubicacionActual;
 	}
