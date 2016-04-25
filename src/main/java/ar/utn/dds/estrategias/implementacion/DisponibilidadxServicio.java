@@ -9,24 +9,24 @@ import ar.utn.dds.servicios.Servicio;
 
 public class DisponibilidadxServicio implements EstrategiaDisponibilidad {
 
-	public Boolean estaDisponible(POI poi, List<Servicio> _totalidadDeservicios, String _nombreServicio,
-			LocalDateTime _horarioConsultado) {
+	public Boolean estaDisponible(POI poi, List<Servicio> totalidadDeservicios, String nombreServicio,
+			LocalDateTime horarioConsultado) {
 
 		Stream<Servicio> servicios;
 
-		if (_nombreServicio == null) {
-			servicios = _totalidadDeservicios.stream();
+		if (nombreServicio == null) {
+			servicios = totalidadDeservicios.stream();
 
 		} else {
-			servicios = this.tieneServicio(_totalidadDeservicios, _nombreServicio);
+			servicios = this.tieneServicio(totalidadDeservicios, nombreServicio);
 		}
 
-		return servicios.anyMatch((servicio) -> servicio.estaDisponible(_horarioConsultado));
+		return servicios.anyMatch((servicio) -> servicio.estaDisponible(horarioConsultado));
 
 	}
 
 	public Stream<Servicio> tieneServicio(List<Servicio> servicios, String nombreServicio) {
-		return servicios.stream().filter((servicio) -> servicio.nombre().equals(nombreServicio));
+		return servicios.stream().filter((servicio) -> servicio.getNombre().equals(nombreServicio));
 
 	}
 

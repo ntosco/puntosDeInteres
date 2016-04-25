@@ -8,7 +8,7 @@ import ar.utn.dds.estrategias.implementacion.DisponibilidadxRangoHorario;
 import ar.utn.dds.utils.Jornada;
 
 public class Servicio {
-	String nombre;
+	private String nombre;
 	private List<Jornada> jornadaDisponible = new ArrayList<Jornada>();
 	private DisponibilidadxRangoHorario estrategiaDisponibilidad = new DisponibilidadxRangoHorario();
 
@@ -26,9 +26,8 @@ public class Servicio {
 	
 	}
 
-	public Boolean estaDisponible(LocalDateTime _horarioConsultado) {
-		 return estrategiaDisponibilidad.estaDisponible(this,_horarioConsultado);
-		
+	public Boolean estaDisponible(LocalDateTime horarioConsultado) {
+		 return estrategiaDisponibilidad.estaDisponible(this,horarioConsultado);
 	}
 
 	public List<Jornada> getJornadaDisponible() {
@@ -36,19 +35,13 @@ public class Servicio {
 	}
 
 
-	public void setJornadaDisponible(List<Jornada> _jornadaDisponible) {
-		jornadaDisponible = _jornadaDisponible;
+	public void setJornadaDisponible(List<Jornada> jornadaDisponible) {
+		this.jornadaDisponible = jornadaDisponible;
 	}
 	
-	public String nombre(){
-		return nombre;
-	}
-
-
 	public String getNombre() {
 		return nombre;
 	}
-
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;

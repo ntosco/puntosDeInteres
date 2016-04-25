@@ -11,15 +11,14 @@ import ar.utn.dds.utils.Jornada;
 
 public abstract class POI {
 
-	String direccionNombre;
-	int direccionNumero;
-	Point ubicacionActual;
-	static double DISTANCIA_MINIMA_DE_CERCANIA = 0.5;
+	private String direccionNombre;
+	private int direccionNumero;
+	private Point ubicacionActual;
+	private final double DISTANCIA_MINIMA_DE_CERCANIA = 0.5;
 	private List<Jornada> JornadaDisponible = new ArrayList<Jornada>();
 	private List<EstrategiaDisponibilidad> EstrategiasDisponibilidad = new ArrayList<EstrategiaDisponibilidad>();
-	boolean a;
 	
-	private List<String> listaPalabrasClave = new ArrayList <String>(); //Creo lista de palabras clave
+	private List<String> listaPalabrasClave = new ArrayList <String>();
 	
 	public String getDireccionNombre() {
 		return direccionNombre;
@@ -56,7 +55,6 @@ public abstract class POI {
 	public Boolean estaCercaDe(Point ubicacionTerminal){
 		double d = ubicacionActual.distance(ubicacionTerminal);	
 		return d < DISTANCIA_MINIMA_DE_CERCANIA;
-
 	}
 	
 	
@@ -71,11 +69,10 @@ public abstract class POI {
 	
 	abstract public boolean cumpleCondicionBusqueda(String textoAbuscar);
 	
-	public Boolean estaDisponible(String _nombreServicio, LocalDateTime _horarioConsultado) {
+	public Boolean estaDisponible(String nombreServicio, LocalDateTime horarioConsultado) {
 		return this.getEstrategiasDisponibilidad().stream()
 				.allMatch((estrategiaDisponibilidad) -> estrategiaDisponibilidad.estaDisponible(this, null,
-						_nombreServicio, _horarioConsultado));
-
+						nombreServicio, horarioConsultado));
 	}
 
 	public List<Jornada> getJornadaDisponible() {
@@ -93,7 +90,5 @@ public abstract class POI {
 	public void setEstrategiasDisponibilidad(List<EstrategiaDisponibilidad> estrategiasDisponibilidad) {
 		EstrategiasDisponibilidad = estrategiasDisponibilidad;
 	}
-
-
 
 }

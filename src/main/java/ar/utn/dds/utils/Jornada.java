@@ -5,18 +5,17 @@ import java.time.LocalTime;
 
 public class Jornada {
 	
-	
 	private DayOfWeek diaSemanal;
 	private RangoHorario horarioDeAtencion;
 	
 	/**
 	 * @param diaSemanal
 	 * @param horarioDeAtencion
-	 */
-	public Jornada(DayOfWeek _diaSemanal, RangoHorario _horarioDeAtencion) {
+	*/
+	public Jornada(DayOfWeek diaSemanal, RangoHorario horarioDeAtencion) {
 		super();
-		this.diaSemanal = _diaSemanal;
-		this.horarioDeAtencion = _horarioDeAtencion;
+		this.diaSemanal = diaSemanal;
+		this.horarioDeAtencion = horarioDeAtencion;
 		
 	}
 
@@ -37,9 +36,8 @@ public class Jornada {
 		this.horarioDeAtencion = horarioDeAtencion;
 	}
 	
-	public Boolean DentroHorarioDeRango(DayOfWeek _diaSemana, LocalTime _horarioConsultado) {
-
-		return (this.getHorarioDeAtencion().DentroRangoHorario(_horarioConsultado) && this.getDiaSemanal().equals(_diaSemana));
+	public Boolean DentroHorarioDeRango(DayOfWeek diaSemana, LocalTime horarioConsultado) {
+		return (this.getHorarioDeAtencion().DentroRangoHorario(horarioConsultado) && this.getDiaSemanal().equals(diaSemana));
 	}
 
 	

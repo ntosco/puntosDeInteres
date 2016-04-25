@@ -11,8 +11,8 @@ import ar.utn.dds.estrategias.implementacion.DisponibilidadxRangoHorario;
 
 public class LocalComercial extends POI {
 
-	double cercania = 0;
-	List<Rubro> listaRubros = new ArrayList<Rubro>();
+	private double cercania = 0;
+	private List<Rubro> listaRubros = new ArrayList<Rubro>();
 	
 	public List<Rubro> getListaRubros() {
 		return listaRubros;
@@ -30,17 +30,13 @@ public class LocalComercial extends POI {
 		this.listaRubros = listaRubros;
 	}
 
-//	public void setRadioDeCercania(double d) {
-//		cercania = d;
-//	}
-
 	public Boolean estaCercaDe(Point ubicacionTerminal) {
 		//me fijo en la lista de rubros cual es la distancia. tomo la más amplia
-		listaRubros.forEach(rubro -> {	if( cercania < rubro.radioCercania)
-											cercania = rubro.radioCercania;
+		listaRubros.forEach(rubro -> {	if( cercania < rubro.getRadioCercania())
+											cercania = rubro.getRadioCercania();
 									 }
 							);
-		return ubicacionActual.distance(ubicacionTerminal) < cercania;
+		return this.getUbicacionActual().distance(ubicacionTerminal) < cercania;
 	}
 
 	public boolean perteneceAlRubro(String textoLibre) {

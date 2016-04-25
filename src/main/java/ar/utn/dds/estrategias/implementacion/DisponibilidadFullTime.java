@@ -8,8 +8,8 @@ import ar.utn.dds.servicios.Servicio;
 
 public class DisponibilidadFullTime implements EstrategiaDisponibilidad {
 
-	public Boolean estaDisponible(POI poi, List<Servicio> servicios, String _nombreServicio,
-			LocalDateTime _horarioConsultado) {
+	public Boolean estaDisponible(POI poi, List<Servicio> servicios, String nombreServicio,
+			LocalDateTime horarioConsultado) {
 		return true;
 	}
 }

@@ -8,18 +8,17 @@ import ar.utn.dds.servicios.Servicio;
 
 public class DisponibilidadxRangoHorario implements EstrategiaDisponibilidad {
 
-	public Boolean estaDisponible(POI poi, List<Servicio> servicios, String _nombreServicio,
-			LocalDateTime _horarioConsultado) {
-
+	public Boolean estaDisponible(POI poi, List<Servicio> servicios, String nombreServicio,
+			LocalDateTime horarioConsultado) {
 		return poi.getJornadaDisponible().stream().anyMatch((jornada) -> jornada
-				.DentroHorarioDeRango(_horarioConsultado.getDayOfWeek(), _horarioConsultado.toLocalTime()));
+				.DentroHorarioDeRango(horarioConsultado.getDayOfWeek(), horarioConsultado.toLocalTime()));
 
 	}
 
-	public Boolean estaDisponible(Servicio servicio, LocalDateTime _horarioConsultado) {
+	public Boolean estaDisponible(Servicio servicio, LocalDateTime horarioConsultado) {
 
 		return servicio.getJornadaDisponible().stream().anyMatch((jornada) -> jornada
-				.DentroHorarioDeRango(_horarioConsultado.getDayOfWeek(), _horarioConsultado.toLocalTime()));
+				.DentroHorarioDeRango(horarioConsultado.getDayOfWeek(), horarioConsultado.toLocalTime()));
 
 	}
 

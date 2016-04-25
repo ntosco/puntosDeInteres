@@ -10,8 +10,8 @@ import ar.utn.dds.estrategias.implementacion.DisponibilidadFullTime;
 
 public class ParadaDeColectivo extends POI{
 	
-	static double DISTANCIA_MINIMA_DE_CERCANIA = 0.1;
-	String linea; //Agrego linea tipo String para cada parada. "linea" es String porque puede incluir el ramal.
+	final double DISTANCIA_MINIMA_DE_CERCANIA = 0.1;
+	private String linea; //Agrego linea tipo String para cada parada. "linea" es String porque puede incluir el ramal.
 	
 	
 	public String getLinea() {
@@ -24,7 +24,7 @@ public class ParadaDeColectivo extends POI{
 
 
 	public Boolean estaCercaDe(Point ubicacionTerminal){
-		double d = ubicacionActual.distance(ubicacionTerminal);	
+		double d = this.getUbicacionActual().distance(ubicacionTerminal);	
 		return d < DISTANCIA_MINIMA_DE_CERCANIA;
 	}
 	
@@ -39,9 +39,6 @@ public class ParadaDeColectivo extends POI{
 	}
 
 
-	/**
-	 * 
-	 */
 	public ParadaDeColectivo() {
 		super();
 		List<EstrategiaDisponibilidad> estrategias = new ArrayList<EstrategiaDisponibilidad>();

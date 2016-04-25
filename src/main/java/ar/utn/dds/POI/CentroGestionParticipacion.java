@@ -11,8 +11,8 @@ import ar.utn.dds.servicios.Servicio;
 
 public class CentroGestionParticipacion extends POI{
 
-	List<Servicio> listaServicios = new ArrayList <Servicio>();
-	Comuna comuna;	
+	private List<Servicio> listaServicios = new ArrayList <Servicio>();
+	private Comuna comuna;	
 			
 	public boolean contieneServicio(String textoLibre){
 		for (Servicio servicio : listaServicios){
@@ -47,15 +47,12 @@ public class CentroGestionParticipacion extends POI{
 		comuna = comunaNueva;
 	}
 	
-	public Boolean estaDisponible(String _nombreServicio,
-			LocalDateTime _horarioConsultado) {
-		 return this.getEstrategiasDisponibilidad().stream().anyMatch((estrategiaDisponibilidad)->estrategiaDisponibilidad.estaDisponible(this,this.listaServicios, _nombreServicio, _horarioConsultado));
+	public Boolean estaDisponible(String nombreServicio,
+			LocalDateTime horarioConsultado) {
+		 return this.getEstrategiasDisponibilidad().stream().anyMatch((estrategiaDisponibilidad)->estrategiaDisponibilidad.estaDisponible(this,this.listaServicios, nombreServicio, horarioConsultado));
 		
 	}
 
-	/**
-	 * 
-	 */
 	public CentroGestionParticipacion() {
 		super();
 		List<EstrategiaDisponibilidad> estrategias = new ArrayList<EstrategiaDisponibilidad>();

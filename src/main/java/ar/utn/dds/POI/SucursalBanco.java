@@ -17,25 +17,20 @@ import ar.utn.dds.utils.RangoHorario;
 public class SucursalBanco extends POI{
 	
 	private List<Servicio> listaServicios = new ArrayList<Servicio>();
-	private static List<DayOfWeek> DIAS_LABORABLES = new ArrayList<DayOfWeek>(Arrays.asList(DayOfWeek.MONDAY,DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY));	
+	private final List<DayOfWeek> DIAS_LABORABLES = new ArrayList<DayOfWeek>(Arrays.asList(DayOfWeek.MONDAY,DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY));	
 
 	public boolean cumpleCondicionBusqueda(String textoLibre){
 		return false;		
 		
 	}
 	
-
-	public Boolean estaDisponible(String _nombreServicio, LocalDateTime _horarioConsultado) {
+	public Boolean estaDisponible(String nombreServicio, LocalDateTime horarioConsultado) {
 		return this.getEstrategiasDisponibilidad().stream()
 				.anyMatch((estrategiaDisponibilidad) -> estrategiaDisponibilidad.estaDisponible(this,
-						this.listaServicios, _nombreServicio, _horarioConsultado));
+						this.listaServicios, nombreServicio, horarioConsultado));
 
 	}
 
-
-	/**
-	 * 
-	 */
 	public SucursalBanco() {
 		super();
 		

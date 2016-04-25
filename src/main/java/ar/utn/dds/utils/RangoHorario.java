@@ -5,8 +5,8 @@ import java.time.LocalTime;
 public class RangoHorario {
 	
 
-	LocalTime horarioInicial;
-	LocalTime horarioFinal;
+	private LocalTime horarioInicial;
+	private LocalTime horarioFinal;
 	
 	public RangoHorario(LocalTime horarioInicial, LocalTime horarioFinal) {
 		super();
@@ -16,9 +16,9 @@ public class RangoHorario {
 		
 	}
 
-	public Boolean DentroRangoHorario(LocalTime _horarioConsultado){
+	public Boolean DentroRangoHorario(LocalTime horarioConsultado){
 		
-		return (_horarioConsultado.isAfter(this.getHorarioInicial()) && _horarioConsultado.isBefore(this.getHorarioFinal()));
+		return (horarioConsultado.isAfter(this.getHorarioInicial()) && horarioConsultado.isBefore(this.getHorarioFinal()));
 		
 	}
 

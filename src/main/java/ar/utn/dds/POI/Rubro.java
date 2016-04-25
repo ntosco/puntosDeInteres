@@ -1,7 +1,9 @@
 package ar.utn.dds.POI;
 
 public class Rubro {
-	String nombre;
+	private String nombre;
+	private double radioCercania;
+
 	public double getRadioCercania() {
 		return radioCercania;
 	}
@@ -9,9 +11,7 @@ public class Rubro {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	double radioCercania;
-
+	
 	public String getNombre() {
 		return nombre;
 	}
@@ -25,8 +25,8 @@ public class Rubro {
 	}
 
 	public Rubro(String nombre,double cercania) {
-	this.nombre = nombre;
-	this.radioCercania = cercania;
-}
+		this.nombre = nombre;
+		this.radioCercania = cercania;
+	}
 	
 }
