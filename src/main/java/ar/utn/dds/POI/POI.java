@@ -12,6 +12,7 @@ import ar.utn.dds.utils.Jornada;
 public abstract class POI {
 
 	private String direccionNombre;
+	private String barrio;
 	private int direccionNumero;
 	private Point ubicacionActual;
 	private final double DISTANCIA_MINIMA_DE_CERCANIA = 0.5;
@@ -23,6 +24,14 @@ public abstract class POI {
 	public String getDireccionNombre() {
 		return direccionNombre;
 	}
+	
+	public String getBarrio(){
+		return barrio;
+	}
+	
+	public void setBarrio(String barrio){
+		this.barrio = barrio;
+	}	
 
 	public void setDireccionNombre(String direccionNombre) {
 		this.direccionNombre = direccionNombre;
