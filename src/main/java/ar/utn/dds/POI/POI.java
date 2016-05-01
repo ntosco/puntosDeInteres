@@ -53,17 +53,16 @@ public abstract class POI extends Entity {
 		return d < DISTANCIA_MINIMA_DE_CERCANIA;
 	}
 	
-	
-	public boolean buscarPOI(String textoAbuscar){
-		return(contieneKeyword(textoAbuscar)||cumpleCondicionBusqueda(textoAbuscar));
-	}
-	
 	// ********************************************************
 	// ** Busqueda
 	// ********************************************************
 	
 	public boolean contieneKeyword(String palabraClave){
 		return listaPalabrasClave.contains(palabraClave);
+	}
+
+	public boolean buscarPOI(String textoAbuscar){
+		return(contieneKeyword(textoAbuscar)||cumpleCondicionBusqueda(textoAbuscar));
 	}
 	
 	abstract public boolean cumpleCondicionBusqueda(String textoAbuscar);
