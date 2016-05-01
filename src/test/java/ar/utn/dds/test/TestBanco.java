@@ -3,9 +3,7 @@ package ar.utn.dds.test;
 import static org.junit.Assert.*;
 
 import org.junit.*;
-import org.uqbar.geodds.Point;
 
-import ar.utn.dds.POI.*;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 
 

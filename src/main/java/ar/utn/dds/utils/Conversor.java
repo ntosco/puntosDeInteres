@@ -1,10 +1,8 @@
 package ar.utn.dds.utils;
 
-import java.util.List;
 
 import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.ServicioExterno.CentroDTO;
-import ar.utn.dds.ServicioExterno.RangoServicioDTO;
 import ar.utn.dds.comunas.Comuna;
 
 public class Conversor {
@@ -20,7 +18,7 @@ public class Conversor {
 	private static int getDireccionNumero(String domicilio) {
 		int numero = 0;
 		numero = Integer.parseInt(domicilio);
-		return domicilio;
+		return numero;
 	}
 
 	// Hacer que solo devuelva el nombre de la calle

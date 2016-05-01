@@ -2,7 +2,6 @@ package ar.utn.dds.ServicioExterno;
 
 import java.util.List;
 
-import ar.utn.dds.comunas.Comuna;
 
 public class CentroDTO {
 	
