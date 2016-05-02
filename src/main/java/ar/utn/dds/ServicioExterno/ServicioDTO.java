@@ -10,5 +10,9 @@ public class ServicioDTO {
 	public List<RangoServicioDTO> getRangosHorarios(){
 		return rangosHorarios;
 	}
+	
+	public String getNombreServicio(){
+		return nombreServicio;
+	}
 
 }

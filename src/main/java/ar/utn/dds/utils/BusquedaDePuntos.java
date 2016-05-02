@@ -8,9 +8,12 @@ import ar.utn.dds.buscador.BuscadorDeCGP;
 
 public class BusquedaDePuntos {
 
-	public void buscarCGPEnRepoExterno(String nombre){
+	public List<CentroGestionParticipacion> buscarCGPEnRepoExterno(String nombre){
 		List<CentroDTO> listaDeCentroDTO = BuscadorDeCGP.buscarCGP(nombre);
-		listaDeCentroDTO.forEach(dto -> Conversor.convertirDTOACGP(dto));
+		List<CentroGestionParticipacion> listaCGP = null;
+		listaDeCentroDTO.forEach(dto -> listaCGP.add(Conversor.convertirDTOACGP(dto)));
+		return listaCGP;
+		
 	}
 	
 }
