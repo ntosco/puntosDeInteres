@@ -19,7 +19,7 @@ import ar.utn.dds.utils.Jornada;
 import ar.utn.dds.utils.RangoHorario;
 
 abstract public class JuegoDeDatos {
-
+	
 	protected Point puntoTerminal;
 	protected Point puntoTerminal2;
 
@@ -224,8 +224,8 @@ abstract public class JuegoDeDatos {
 		setUpRubro();
 		setUpPuntos();
 		setUpPalabrasClave();
-	}
-
+	}	
+	
 	public void setUpBanco() {
 		// galicia y frances comparten ubicacion
 		bancoFrances = new SucursalBanco();

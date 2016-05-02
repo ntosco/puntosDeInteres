@@ -13,11 +13,20 @@ import ar.utn.dds.ServicioExterno.CentroDTO;
 import ar.utn.dds.ServicioExterno.RangoServicioDTO;
 import ar.utn.dds.ServicioExterno.ServicioDTO;
 import ar.utn.dds.comunas.Comuna;
+import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.servicios.Servicio;
 
-public class Conversor {
+public class Conversor extends JuegoDeDatos {
 	
-	public static CentroGestionParticipacion convertirDTOACGP(CentroDTO dto){
+	public static Conversor instance;
+	
+	public static Conversor getInstance(){
+		if(instance == null){
+			instance = new Conversor();
+		} return instance;
+	}	
+	
+	public CentroGestionParticipacion convertirDTOACGP(CentroDTO dto){
 		CentroGestionParticipacion nuevoCGP = new CentroGestionParticipacion();
 		nuevoCGP.setComuna(convertirAComuna(dto.getComuna()));
 		nuevoCGP.setBarrio(dto.getZonasIncluidas());
@@ -27,24 +36,24 @@ public class Conversor {
 		return nuevoCGP;
 	}
 	
-	private static List<Servicio> getListaServiciosCGP(List<ServicioDTO> servicios) {
-		List<Servicio> lista = null; 
+	private List<Servicio> getListaServiciosCGP(List<ServicioDTO> servicios) {
+		List<Servicio> lista = new ArrayList<Servicio>();
 		servicios.forEach(servicio -> lista.add(crearSerivicioEnBaseAlString(servicio)));
 		return lista;
 	}
 
-	private static Servicio crearSerivicioEnBaseAlString(ServicioDTO servicioDTO) {
+	private Servicio crearSerivicioEnBaseAlString(ServicioDTO servicioDTO) {
 		Servicio servicio = new Servicio(servicioDTO.getNombreServicio(), crearJornadasParaElServicioDTO(servicioDTO));
 		return servicio;
 	}
 
-	private static List<Jornada> crearJornadasParaElServicioDTO(ServicioDTO servicioDTO) {
-		List<Jornada> jornadas = null;
+	private List<Jornada> crearJornadasParaElServicioDTO(ServicioDTO servicioDTO) {
+		List<Jornada> jornadas = new ArrayList<Jornada>();
 		servicioDTO.getRangosHorarios().forEach(rango -> jornadas.add(crearJornadaParaElRangoDTO(rango)));
 		return jornadas;
 	}
 
-	private static Jornada crearJornadaParaElRangoDTO(RangoServicioDTO rango) {
+	private Jornada crearJornadaParaElRangoDTO(RangoServicioDTO rango) {
 		RangoHorario rangoHorario = new RangoHorario(
 				LocalTime.of(rango.getHorarioDesde(), rango.getMinutosDesde(), 0),
 				LocalTime.of(rango.getHorarioHasta(), rango.getMinutosHasta(), 0));
@@ -52,7 +61,7 @@ public class Conversor {
 		return jornada;
 	}
 
-	private static DayOfWeek getDiaDeLaSemana(int numeroDia) {
+	private DayOfWeek getDiaDeLaSemana(int numeroDia) {
 		Map<Integer, DayOfWeek> diasDeLaSemana = new HashMap<Integer, DayOfWeek>();
 		diasDeLaSemana.put(1, DayOfWeek.MONDAY);
 		diasDeLaSemana.put(2, DayOfWeek.TUESDAY);
@@ -65,22 +74,41 @@ public class Conversor {
 		
 	}
 
-	private static int getDireccionNumero(String domicilio) {
+	private int getDireccionNumero(String domicilio) {
 		int numero = 0;
-		numero = Integer.parseInt(domicilio);
+		numero = Integer.parseInt(domicilio.substring(this.primerNumero(domicilio), domicilio.length()));		
 		return numero;
 	}
 
-	//FIXME:  Hacer que solo devuelva el nombre de la calle
-	private static String getDireccionNombre(String domicilio) {
-		return domicilio;
+	private String getDireccionNombre(String domicilio) {
+		return domicilio.substring(0, this.primerNumero(domicilio));
+		
+	}
+	
+	private int primerNumero(String domicilio) {
+		int i = 0;
+		String numeros = "01234567890";
+		while(!numeros.contains(domicilio.substring(i, i))){
+			i++;
+		 }
+		return i;
+		
+	} 
+
+	private Comuna convertirAComuna(int numero) {
+		return getComunaAsociadaAlNumero(numero);
+		
 	}
 
-
-	//FIXME: Hacer que devuelva la comuna asociada a ese numero
-	private static Comuna convertirAComuna(int comuna) {
-		return new Comuna();
-		
+	private Comuna getComunaAsociadaAlNumero(int numero) {
+		Map<Integer,Comuna> comunas = new HashMap<Integer, Comuna>();
+		comunas.put(1, comuna1);
+		comunas.put(2, comuna2);
+		comunas.put(3, comuna3);
+		comunas.put(4, comuna4);
+		comunas.put(5, comuna5);
+		comunas.put(6, comuna6);
+		return comunas.get(numero);
 	}
 	
 	

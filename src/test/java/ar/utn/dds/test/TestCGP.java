@@ -2,8 +2,14 @@ package ar.utn.dds.test;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.*;
+
+import ar.utn.dds.POI.CentroGestionParticipacion;
+import ar.utn.dds.buscador.StubBuscadorCGP;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
+import ar.utn.dds.utils.BusquedaDePuntos;
 
 public class TestCGP extends JuegoDeDatos {
 
@@ -76,5 +82,14 @@ public class TestCGP extends JuegoDeDatos {
 	public void estoyDisponibleSinServicioHorarioOUT(){
 		assertFalse(cgpAlmagro.estaDisponible("almagro",sabado23hs));
 	}
+	
+	/*
+	@Test
+	public void testConverionDTOaCGP(){
+		BusquedaDePuntos.setBuscadorDeCGP(new StubBuscadorCGP());
+		List<CentroGestionParticipacion> listaCGP = BusquedaDePuntos.buscarCGPEnRepoExterno("nombre");
+		assertEquals(listaCGP.size(), 1); 
+		}
+		*/	
 	
 }
