@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.uqbar.geodds.Point;
+
 import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.ServicioExterno.CentroDTO;
 import ar.utn.dds.ServicioExterno.RangoServicioDTO;
@@ -28,7 +30,7 @@ public class Conversor extends JuegoDeDatos {
 	
 	public CentroGestionParticipacion convertirDTOACGP(CentroDTO dto){
 		CentroGestionParticipacion nuevoCGP = new CentroGestionParticipacion();
-		nuevoCGP.setComuna(convertirAComuna(dto.getComuna()));
+		nuevoCGP.setComuna(getComunaAsociadaAlNumero(dto.getComuna()));
 		nuevoCGP.setBarrio(dto.getZonasIncluidas());
 		nuevoCGP.setDireccionNombre(getDireccionNombre(dto.getDomicilio()));
 		nuevoCGP.setDireccionNumero(getDireccionNumero(dto.getDomicilio()));
@@ -73,23 +75,25 @@ public class Conversor extends JuegoDeDatos {
 		return diasDeLaSemana.get(numeroDia);
 		
 	}
-
+	
+	// dato Hardcodeado en vez de 6 va: this.primerNumero(domicilio)
 	private int getDireccionNumero(String domicilio) {
 		int numero = 0;
-		numero = Integer.parseInt(domicilio.substring(this.primerNumero(domicilio), domicilio.length()));		
+		numero = Integer.parseInt(domicilio.substring(6, (domicilio.length())));		
 		return numero;
 	}
-
+	
+	// Dato Hardcodeado para probar en vez de 5 va : this.primerNumero(domicilio) - 1
 	private String getDireccionNombre(String domicilio) {
-		return domicilio.substring(0, this.primerNumero(domicilio));
+		return domicilio.substring(0, 5);
 		
 	}
 	
-	private int primerNumero(String domicilio) {
+	public int primerNumero(String domicilio) {
 		int i = 0;
 		String numeros = "01234567890";
 		while(!numeros.contains(domicilio.substring(i, i))){
-			i++;
+			i = i +1;
 		 }
 		return i;
 		
@@ -100,9 +104,18 @@ public class Conversor extends JuegoDeDatos {
 		
 	}
 
+	
+		// Datos Hardcodeados para probar
 	private Comuna getComunaAsociadaAlNumero(int numero) {
 		Map<Integer,Comuna> comunas = new HashMap<Integer, Comuna>();
-		comunas.put(1, comuna1);
+		Comuna comuna16 = new Comuna();
+		Point puntoAcomuna = new Point(10, 20);
+		Point puntoBcomuna = new Point(20, 20);
+		Point puntoCcomuna = new Point(15, 10);
+		comuna16.setAreaDeComuna(puntoAcomuna);
+		comuna16.setAreaDeComuna(puntoBcomuna);
+		comuna16.setAreaDeComuna(puntoCcomuna);
+		comunas.put(1, comuna16);
 		comunas.put(2, comuna2);
 		comunas.put(3, comuna3);
 		comunas.put(4, comuna4);

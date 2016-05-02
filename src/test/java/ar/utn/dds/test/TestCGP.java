@@ -2,23 +2,28 @@ package ar.utn.dds.test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.*;
+import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.buscador.StubBuscadorCGP;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.utils.BusquedaDePuntos;
+import ar.utn.dds.utils.Conversor;
 
 public class TestCGP extends JuegoDeDatos {
 
-	
+	public List<CentroGestionParticipacion> listaCGP;
 	
 	@Before
 	public void SetUp(){
 		setUpGeneral();
 		setUpCGP();
+		BusquedaDePuntos.setBuscadorDeCGP(new StubBuscadorCGP());
+		listaCGP = BusquedaDePuntos.buscarCGPEnRepoExterno("nombre");
 		
 	}
 	
@@ -83,13 +88,40 @@ public class TestCGP extends JuegoDeDatos {
 		assertFalse(cgpAlmagro.estaDisponible("almagro",sabado23hs));
 	}
 	
-	/*
+	
+	// Entrega 2 
+	
+	
+	// Hay un elemento de la lista de CGP y antes no habia ninguno
 	@Test
 	public void testConverionDTOaCGP(){
 		BusquedaDePuntos.setBuscadorDeCGP(new StubBuscadorCGP());
-		List<CentroGestionParticipacion> listaCGP = BusquedaDePuntos.buscarCGPEnRepoExterno("nombre");
+		listaCGP = new ArrayList<CentroGestionParticipacion>();
+		assertEquals(listaCGP.size(), 0);
+		listaCGP = BusquedaDePuntos.buscarCGPEnRepoExterno("nombre");
 		assertEquals(listaCGP.size(), 1); 
 		}
-		*/	
+	
+	// Conversion de Zonas Incluidas a Barrio CGP
+	@Test
+	public void testConversionDeZonas(){
+		CentroGestionParticipacion cgp = listaCGP.get(0);
+		assertEquals(cgp.getBarrio(),"Recoleta");
+	}
+	
+	@Test
+	public void testConversionDeComuna(){
+		CentroGestionParticipacion cgp = listaCGP.get(0);
+		Point unPunto = new Point(11,20);
+		assertTrue(cgp.getComuna().estaCercaDe(unPunto));
+	}
+	
+	@Test
+	public void testJornadaDisponible(){
+		CentroGestionParticipacion cgp = listaCGP.get(0);
+		assertTrue(cgp.estaDisponible("rentas", lunes12hs));
+		assertFalse(cgp.estaDisponible("ServicioQueNoContiene", lunes12hs));
+		assertFalse(cgp.estaDisponible("rentas", lunes23hs));
+	}
 	
 }
