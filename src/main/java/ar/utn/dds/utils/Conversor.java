@@ -8,9 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
 import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.CentroGestionParticipacion;
+import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.ServicioExterno.CentroDTO;
 import ar.utn.dds.ServicioExterno.RangoServicioDTO;
 import ar.utn.dds.ServicioExterno.ServicioDTO;
@@ -27,6 +29,26 @@ public class Conversor extends JuegoDeDatos {
 			instance = new Conversor();
 		} return instance;
 	}	
+	
+	public SucursalBanco jsonAbanco(JSONObject obj) {
+		SucursalBanco banco = new SucursalBanco();
+		
+		banco.setBarrio(obj.get("sucursal").toString()); 
+		banco.setDireccionNombre(obj.get("banco").toString());
+		
+		Point ubcicacionActual = new Point(Integer.parseInt(obj.get("x").toString()), Integer.parseInt(obj.get("y").toString()));
+		banco.setUbicacionActual(ubcicacionActual);
+		
+		String serviciosJson = obj.get("servicios").toString();
+		String[] arrayServicios = serviciosJson.split(",");
+		List<Servicio> listaServicios = new ArrayList<Servicio>();
+		for(int i=0; i<arrayServicios.length; i++){
+			Servicio servicioBanco = new Servicio(arrayServicios[i], null);
+			listaServicios.add(servicioBanco);
+        }
+		banco.setListaServicios(listaServicios);
+		return banco;
+	}
 	
 	public CentroGestionParticipacion convertirDTOACGP(CentroDTO dto){
 		CentroGestionParticipacion nuevoCGP = new CentroGestionParticipacion();

@@ -2,20 +2,29 @@ package ar.utn.dds.test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.junit.*;
 
+import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
+import ar.utn.dds.servicios.Servicio;
+import ar.utn.dds.utils.BusquedaDePuntos;
 import ar.utn.dds.utils.conversorBanco;
+import ar.utn.dds.buscador.StubBuscadorBanco;
+import ar.utn.dds.buscador.StubBuscadorCGP;
 import ar.utn.dds.buscador.buscadorDeBancos;
 
 
 public class TestBanco extends JuegoDeDatos {
-
+	public List<SucursalBanco> listaBancos;
 	
 	@Before
+
 	public void SetUp(){
 		setUpGeneral();
 		setUpBanco();
@@ -86,18 +95,14 @@ public class TestBanco extends JuegoDeDatos {
 	}
 	
 	@Test
-	public void buscadorDeBancos(){
-		buscadorBancos = new buscadorDeBancos();
-		JSONArray bancosJson = buscadorBancos.buscarBancos("lalala");
-		assertTrue(bancosJson.size() == 2);
+	public void conversionBancos(){
+		BusquedaDePuntos.setBuscadorDeBancos(new StubBuscadorBanco());
+		List<SucursalBanco> listaBancos = BusquedaDePuntos.buscarBancoEnRepoExterno("lalala");
+		assertTrue(listaBancos.size() == 2);
 	}
-/*
-	@Test
-	public void conversorJsonBancoConJsonArray(){
-		buscadorBancos = new buscadorDeBancos();
-		JSONArray bancosJson = buscadorBancos.buscarBancos("lalala");
-		bancosJson.forEach(action);
-		assertTrue(bancosJson.size() == 2);
-	}*/
+	
+	
+
+	
 	
 } 

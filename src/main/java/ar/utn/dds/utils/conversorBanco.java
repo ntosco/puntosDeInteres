@@ -6,10 +6,11 @@ import java.util.List;
 import org.json.simple.JSONObject;
 import org.uqbar.geodds.Point;
 
+import ar.utn.dds.POI.POI;
 import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.servicios.Servicio;
 
-public class conversorBanco {
+public class conversorBanco extends Conversor{
 
 	public SucursalBanco jsonAbanco(JSONObject obj) {
 		SucursalBanco banco = new SucursalBanco();
