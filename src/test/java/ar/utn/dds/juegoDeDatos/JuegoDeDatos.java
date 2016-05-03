@@ -13,6 +13,9 @@ import ar.utn.dds.POI.LocalComercial;
 import ar.utn.dds.POI.ParadaDeColectivo;
 import ar.utn.dds.POI.Rubro;
 import ar.utn.dds.POI.SucursalBanco;
+import ar.utn.dds.ServicioExterno.CentroDTO;
+import ar.utn.dds.ServicioExterno.RangoServicioDTO;
+import ar.utn.dds.ServicioExterno.ServicioDTO;
 import ar.utn.dds.buscador.buscadorDeBancos;
 import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.servicios.Servicio;
@@ -22,8 +25,10 @@ import ar.utn.dds.utils.conversorBanco;
 
 abstract public class JuegoDeDatos {
 	//conversor json a banco 
+	
 	protected conversorBanco conversorBanco;
 	//Buscador de bancos
+	
 	protected buscadorDeBancos buscadorBancos;
 	
 	protected Point puntoTerminal;
@@ -220,6 +225,27 @@ abstract public class JuegoDeDatos {
 	protected LocalDateTime lunes12hs;
 	protected LocalDateTime jueves11hs;
 	protected LocalDateTime sabado23hs;
+	
+	// Rangos Horarios
+	
+	protected RangoHorario rangolaboral_10a20;
+	protected RangoHorario rango24hs;
+	protected RangoHorario rangomanana;
+	protected RangoHorario rangoTarde;
+	protected RangoHorario rangoNoche;
+	protected RangoHorario rangoBancario;
+	
+	// Entrega 2
+	
+	// Dto
+	
+	protected List<CentroDTO> centrosDTO;
+	protected List<ServicioDTO> serviciosDTO;
+	protected List<RangoServicioDTO> rangosDTO;
+	
+	protected RangoServicioDTO rangoDe9a18;
+	protected ServicioDTO servicioRentasDTO;
+	protected CentroDTO centroRecoleta;
 
 	public void setUpGeneral() {
 		setUpLocalDateTime();
@@ -284,7 +310,7 @@ abstract public class JuegoDeDatos {
 
 	public void setUpJornadas() {
 
-		RangoHorario rangolaboral_10a20 = new RangoHorario(LocalTime.of(10, 0,
+		rangolaboral_10a20 = new RangoHorario(LocalTime.of(10, 0,
 				0), LocalTime.of(20, 0, 0));
 		RangoHorario rangolaboral_9a13 = new RangoHorario(
 				LocalTime.of(9, 0, 0), LocalTime.of(13, 0, 0));
@@ -308,7 +334,7 @@ abstract public class JuegoDeDatos {
 		jornadaNormalLunesAViernes.add(jornadaLaboral_Viernes_10a20);
 		jornadaNormalLunesAViernes.add(jornadaLaboral_Sabado_10a13);
 
-		RangoHorario rango24hs = new RangoHorario(LocalTime.of(0, 0, 0),
+		rango24hs = new RangoHorario(LocalTime.of(0, 0, 0),
 				LocalTime.of(23, 59, 59));
 		Jornada jornadaLunes24hs = new Jornada(DayOfWeek.MONDAY, rango24hs);
 		Jornada jornadaMartes24hs = new Jornada(DayOfWeek.TUESDAY, rango24hs);
@@ -327,7 +353,7 @@ abstract public class JuegoDeDatos {
 		jornada24x7.add(jornadaSabado24hs);
 		jornada24x7.add(jornadaDomingo24hs);
 
-		RangoHorario rangomanana = new RangoHorario(LocalTime.of(8, 0, 0),
+		rangomanana = new RangoHorario(LocalTime.of(8, 0, 0),
 				LocalTime.of(12, 0, 0));
 		Jornada jornadaLunesM = new Jornada(DayOfWeek.MONDAY, rangomanana);
 		Jornada jornadaMartesM = new Jornada(DayOfWeek.TUESDAY, rangomanana);
@@ -346,7 +372,7 @@ abstract public class JuegoDeDatos {
 		manana.add(jornadaSabadoM);
 		manana.add(jornadaDomingoM);
 
-		RangoHorario rangoTarde = new RangoHorario(LocalTime.of(12, 0, 0),
+		rangoTarde = new RangoHorario(LocalTime.of(12, 0, 0),
 				LocalTime.of(18, 0, 0));
 		Jornada jornadaLunesT = new Jornada(DayOfWeek.MONDAY, rangoTarde);
 		Jornada jornadaMartesT = new Jornada(DayOfWeek.TUESDAY, rangoTarde);
@@ -364,7 +390,7 @@ abstract public class JuegoDeDatos {
 		manana.add(jornadaSabadoT);
 		manana.add(jornadaDomingoT);
 
-		RangoHorario rangoNoche = new RangoHorario(LocalTime.of(18, 0, 0),
+		rangoNoche = new RangoHorario(LocalTime.of(18, 0, 0),
 				LocalTime.of(23, 0, 0));
 		Jornada jornadaLunesN = new Jornada(DayOfWeek.MONDAY, rangoNoche);
 		Jornada jornadaMartesN = new Jornada(DayOfWeek.TUESDAY, rangoNoche);
@@ -382,7 +408,7 @@ abstract public class JuegoDeDatos {
 		manana.add(jornadaSabadoN);
 		manana.add(jornadaDomingoN);
 
-		RangoHorario rangoBancario = new RangoHorario(LocalTime.of(10, 0, 0),
+		rangoBancario = new RangoHorario(LocalTime.of(10, 0, 0),
 				LocalTime.of(15, 0, 0));
 		Jornada jornadaBancariaDe10a15LUNES = new Jornada(DayOfWeek.MONDAY,
 				rangoBancario);
@@ -838,5 +864,20 @@ abstract public class JuegoDeDatos {
 		jueves11hs = LocalDateTime.of(2016, 4, 7, 11, 00, 00);
 		sabado1210hs = LocalDateTime.of(2016, 4, 2, 12, 10, 00);
 		sabado23hs = LocalDateTime.of(2016, 4, 2, 23, 00, 00);
+	}
+	
+	// Entrega 2
+	
+	public void setUpDTO(){
+		
+		rangoDe9a18 = new RangoServicioDTO(1,9,0,18,0);
+		rangosDTO = new ArrayList<RangoServicioDTO>();
+		rangosDTO.add(rangoDe9a18);
+		servicioRentasDTO = new ServicioDTO("rentas", rangosDTO);
+		serviciosDTO = new ArrayList<ServicioDTO>();
+		serviciosDTO.add(servicioRentasDTO);
+		centroRecoleta = new CentroDTO(1, "Recoleta", "Juan Perez", "Jujuy 998", "45647898", serviciosDTO);
+		centrosDTO = new ArrayList<CentroDTO>();
+		centrosDTO.add(centroRecoleta);
 	}
 }

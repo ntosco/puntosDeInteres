@@ -98,36 +98,29 @@ public class Conversor extends JuegoDeDatos {
 		
 	}
 	
-	// dato Hardcodeado en vez de 6 va: this.primerNumero(domicilio)
+	// dato Hardcodeado en vez de 6 va: this.primerNumero(domicilio) + 1
 	private int getDireccionNumero(String domicilio) {
 		int numero = 0;
-		numero = Integer.parseInt(domicilio.substring(6, (domicilio.length())));		
+		numero = Integer.parseInt(domicilio.substring(this.primerNumero(domicilio)+1, (domicilio.length())));		
 		return numero;
 	}
 	
-	// Dato Hardcodeado para probar en vez de 5 va : this.primerNumero(domicilio) - 1
+	// Dato Hardcodeado para probar en vez de 5 va : this.primerNumero(domicilio)
 	private String getDireccionNombre(String domicilio) {
-		return domicilio.substring(0, 5);
+		return domicilio.substring(0, this.primerNumero(domicilio));
 		
 	}
 	
 	public int primerNumero(String domicilio) {
 		int i = 0;
 		String numeros = "01234567890";
-		while(!numeros.contains(domicilio.substring(i, i))){
+		while(!numeros.contains(domicilio.substring(i, i+1))){
 			i = i +1;
 		 }
 		return i;
 		
 	} 
-
-	private Comuna convertirAComuna(int numero) {
-		return getComunaAsociadaAlNumero(numero);
-		
-	}
-
 	
-		// Datos Hardcodeados para probar
 	private Comuna getComunaAsociadaAlNumero(int numero) {
 		Map<Integer,Comuna> comunas = new HashMap<Integer, Comuna>();
 		Comuna comuna16 = new Comuna();
@@ -137,12 +130,12 @@ public class Conversor extends JuegoDeDatos {
 		comuna16.setAreaDeComuna(puntoAcomuna);
 		comuna16.setAreaDeComuna(puntoBcomuna);
 		comuna16.setAreaDeComuna(puntoCcomuna);
-		comunas.put(1, comuna16);
-		comunas.put(2, comuna2);
-		comunas.put(3, comuna3);
-		comunas.put(4, comuna4);
-		comunas.put(5, comuna5);
-		comunas.put(6, comuna6);
+		comunas.put(1, new Comuna());
+		comunas.put(2, new Comuna());
+		comunas.put(3, new Comuna());
+		comunas.put(4, new Comuna());
+		comunas.put(5, new Comuna());
+		comunas.put(6, new Comuna());
 		return comunas.get(numero);
 	}
 	

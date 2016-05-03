@@ -4,11 +4,14 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import static org.mockito.Mockito.*;
 
 import org.junit.*;
 import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.CentroGestionParticipacion;
+import ar.utn.dds.ServicioExterno.CentroDTO;
+import ar.utn.dds.buscador.BuscadorDeCGP;
 import ar.utn.dds.buscador.StubBuscadorCGP;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.utils.BusquedaDePuntos;
@@ -22,6 +25,7 @@ public class TestCGP extends JuegoDeDatos {
 	public void SetUp(){
 		setUpGeneral();
 		setUpCGP();
+		setUpDTO();
 		BusquedaDePuntos.setBuscadorDeCGP(new StubBuscadorCGP());
 		listaCGP = BusquedaDePuntos.buscarCGPEnRepoExterno("nombre");
 		
@@ -99,7 +103,7 @@ public class TestCGP extends JuegoDeDatos {
 		listaCGP = new ArrayList<CentroGestionParticipacion>();
 		assertEquals(listaCGP.size(), 0);
 		listaCGP = BusquedaDePuntos.buscarCGPEnRepoExterno("nombre");
-		assertEquals(listaCGP.size(), 1); 
+		assertEquals(listaCGP.size(), 2); 
 		}
 	
 	// Conversion de Zonas Incluidas a Barrio CGP
@@ -113,7 +117,10 @@ public class TestCGP extends JuegoDeDatos {
 	public void testConversionDeComuna(){
 		CentroGestionParticipacion cgp = listaCGP.get(0);
 		Point unPunto = new Point(11,20);
-		assertTrue(cgp.getComuna().estaCercaDe(unPunto));
+		cgp.getComuna().setAreaDeComuna(new Point(10,20));
+		cgp.getComuna().setAreaDeComuna(new Point(10,50));
+		cgp.getComuna().setAreaDeComuna(new Point(2,20));
+		assertFalse(cgp.getComuna().estaCercaDe(unPunto));
 	}
 	
 	@Test
@@ -124,4 +131,31 @@ public class TestCGP extends JuegoDeDatos {
 		assertFalse(cgp.estaDisponible("rentas", lunes23hs));
 	}
 	
+	@Test
+	public void testDTOJuegoDeDatos(){
+		centrosDTO.forEach(centro -> listaCGP.add(Conversor.getInstance().convertirDTOACGP(centro)));
+		assertEquals(centrosDTO.size(), 1);	
+		
+	}
+	
+	@Test
+	public void testTodosDisponiblesEnHorario(){
+		assertTrue(listaCGP.get(0).estaDisponible("rentas", lunes12hs));
+		assertFalse(listaCGP.get(1).estaDisponible("rentas", lunes12hs));
+	}
+	
+	@Test
+	public void testConMocks(){
+		BuscadorDeCGP buscador = mock(BuscadorDeCGP.class);
+		
+		BusquedaDePuntos.setBuscadorDeCGP(buscador);
+		
+		BusquedaDePuntos.setBuscadorDeCGP(buscador);
+		BusquedaDePuntos.buscarCGPEnRepoExterno("nombre");
+		
+		verify(buscador).buscarCGP("nombre");
+		
+		
+		
+	}
 }
