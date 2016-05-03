@@ -13,12 +13,18 @@ import ar.utn.dds.POI.LocalComercial;
 import ar.utn.dds.POI.ParadaDeColectivo;
 import ar.utn.dds.POI.Rubro;
 import ar.utn.dds.POI.SucursalBanco;
+import ar.utn.dds.buscador.buscadorDeBancos;
 import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.servicios.Servicio;
 import ar.utn.dds.utils.Jornada;
 import ar.utn.dds.utils.RangoHorario;
+import ar.utn.dds.utils.conversorBanco;
 
 abstract public class JuegoDeDatos {
+	//conversor json a banco 
+	protected conversorBanco conversorBanco;
+	//Buscador de bancos
+	protected buscadorDeBancos buscadorBancos;
 	
 	protected Point puntoTerminal;
 	protected Point puntoTerminal2;
