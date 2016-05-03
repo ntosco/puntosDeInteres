@@ -3,19 +3,20 @@ package ar.utn.dds.POI;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.util.List;
-
-import javax.management.RuntimeErrorException;
-
 import org.uqbar.commons.model.Entity;
 import org.uqbar.geodds.*;
-
 import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
 import ar.utn.dds.utils.Jornada;
 import org.apache.commons.lang.StringUtils;
-import ar.utn.dds.exceptions.POIException;
+import ar.utn.dds.exceptions.BusinessException;
 
 public abstract class POI extends Entity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private String nombre;
 	private String direccionNombre;
 	private String barrio;
@@ -37,12 +38,21 @@ public abstract class POI extends Entity {
 		return (StringUtils.isNotEmpty(this.nombre) && this.ubicacionActual !=null);
 	}
 	
+//TODO	Debe lanzar una exception
+	@Override
+	public void validateCreate(){
+		if(!this.esValido())
+			throw new BusinessException("El POI no posee los datos necesarios : Nombre y ubicación");
+	}
+
+	
 	public Boolean esIgualA(POI otroPoi){
 		 return (this.nombre.equals(otroPoi.getNombre()) && 
 				 this.ubicacionActual.equals(otroPoi.getUbicacionActual())
 				);
 		
 	}
+	
 	
 	// ********************************************************
 	// ** Geolocalizacion
@@ -143,6 +153,10 @@ public abstract class POI extends Entity {
 
 	public void setUbicacionActual(Point unPunto){
 		ubicacionActual = unPunto;
+	}
+	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 }

@@ -742,6 +742,7 @@ abstract public class JuegoDeDatos {
 		List<String> paradaDel15 = new ArrayList<String>();
 		paradaDel15.add("15");
 		parada15.setListaPalabrasClave(paradaDel15);
+		parada15.setNombre("parada15");
 
 		parada114 = new ParadaDeColectivo();
 		ubicacionParada114 = new Point(11, 13);

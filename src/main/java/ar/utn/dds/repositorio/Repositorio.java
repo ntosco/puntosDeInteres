@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import ar.utn.dds.POI.POI;
+import ar.utn.dds.exceptions.BusinessException;
 
 
 public class Repositorio extends CollectionBasedRepo<POI>{
@@ -32,19 +33,19 @@ public class Repositorio extends CollectionBasedRepo<POI>{
 	// ** ABMC Repositorio
 	// ********************************************************
 	
-	public void create(POI poi){
-		if(poi.esValido()){
-			if(!this.validateExistence(poi)){
-				poi.setId(this.generateID());
-				super.effectiveCreate(poi);
-			}
-			//TODO Analizar uso de update
-		}
-	}
+//	public void create(POI poi){
+//		if(poi.esValido()){
+//			if(!this.validateExistence(poi)){
+//				poi.setId(this.generateID());
+//				super.effectiveCreate(poi);
+//			}
+//			//TODO Analizar uso de update
+//		}
+//	}
 	
 	public void delete(POI poiAEliminar){
-		if(this.validateExistence(poiAEliminar))
-			super.effectiveDelete(poiAEliminar);
+		this.validateExistence(poiAEliminar);
+		super.effectiveDelete(poiAEliminar);
 	}
 	
 	
@@ -74,9 +75,15 @@ public class Repositorio extends CollectionBasedRepo<POI>{
 	// ** Validaciones Repositorio
 	// ********************************************************
 
+//TODO	Debe lanzar una exception
+	private void validateExistence(POI nuevoPoi){
+		if(this.allInstances().stream().anyMatch((poi)-> poi.esIgualA(nuevoPoi)))throw new BusinessException("El POI ya existe");
+	}
 	
-	private boolean validateExistence(POI nuevoPoi) {
-		return this.getObjects().stream().anyMatch((poi)-> poi.esIgualA(nuevoPoi));
+	@Override
+	protected void validateCreate(POI nuevoPoi){
+		nuevoPoi.validateCreate();
+		this.validateExistence(nuevoPoi);
 	}
 
 	// ********************************************************
@@ -103,9 +110,10 @@ public class Repositorio extends CollectionBasedRepo<POI>{
 		return null;
 	}
 
+//	Redefinir para la utilizacion en searchByExample
 	@Override
 	protected Predicate getCriterio(POI example) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub : 
 		return null;
 	}
 
