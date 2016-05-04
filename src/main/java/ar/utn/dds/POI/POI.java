@@ -38,19 +38,25 @@ public abstract class POI extends Entity {
 		return (StringUtils.isNotEmpty(this.nombre) && this.ubicacionActual !=null);
 	}
 	
-//TODO	Debe lanzar una exception
 	@Override
 	public void validateCreate(){
 		if(!this.esValido())
 			throw new BusinessException("El POI no posee los datos necesarios : Nombre y ubicación");
 	}
 
+	public void validateUpdate(){
+		this.validateCreate();
+		if(this.isNew()){
+			throw new BusinessException("El POI no posee un ID asociado al repositorio");
+		}
+	}
 	
+	
+	//FIXME Analizar si es necesario 
 	public Boolean esIgualA(POI otroPoi){
 		 return (this.nombre.equals(otroPoi.getNombre()) && 
 				 this.ubicacionActual.equals(otroPoi.getUbicacionActual())
 				);
-		
 	}
 	
 	

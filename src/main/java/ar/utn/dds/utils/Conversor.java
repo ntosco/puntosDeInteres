@@ -52,6 +52,8 @@ public class Conversor extends JuegoDeDatos {
 	
 	public CentroGestionParticipacion convertirDTOACGP(CentroDTO dto){
 		CentroGestionParticipacion nuevoCGP = new CentroGestionParticipacion();
+		nuevoCGP.setNombre("comuna" + String.valueOf(dto.getComuna()));
+		nuevoCGP.setUbicacionActual(ubicacionDeCGP(dto.getComuna()));
 		nuevoCGP.setComuna(getComunaAsociadaAlNumero(dto.getComuna()));
 		nuevoCGP.setBarrio(dto.getZonasIncluidas());
 		nuevoCGP.setDireccionNombre(getDireccionNombre(dto.getDomicilio()));
@@ -59,7 +61,7 @@ public class Conversor extends JuegoDeDatos {
 		nuevoCGP.setListaServicios(getListaServiciosCGP(dto.getServicios()));
 		return nuevoCGP;
 	}
-	
+
 	private List<Servicio> getListaServiciosCGP(List<ServicioDTO> servicios) {
 		List<Servicio> lista = new ArrayList<Servicio>();
 		servicios.forEach(servicio -> lista.add(crearSerivicioEnBaseAlString(servicio)));
@@ -84,6 +86,17 @@ public class Conversor extends JuegoDeDatos {
 		Jornada jornada = new Jornada(getDiaDeLaSemana(rango.getNumeroDia()), rangoHorario);
 		return jornada;
 	}
+	
+	private Point ubicacionDeCGP(int numeroComuna) {
+		Map<Integer, Point> puntos = new HashMap<Integer, Point>();
+		puntos.put(1, new Point(10,20));
+		puntos.put(2, new Point(1,2));
+		puntos.put(3, new Point(15,13));
+		puntos.put(4, new Point(21,14));
+		puntos.put(5, new Point(10,7));
+		puntos.put(6, new Point(10,27));
+		return puntos.get(numeroComuna);
+	}
 
 	private DayOfWeek getDiaDeLaSemana(int numeroDia) {
 		Map<Integer, DayOfWeek> diasDeLaSemana = new HashMap<Integer, DayOfWeek>();
@@ -98,14 +111,12 @@ public class Conversor extends JuegoDeDatos {
 		
 	}
 	
-	// dato Hardcodeado en vez de 6 va: this.primerNumero(domicilio) + 1
 	private int getDireccionNumero(String domicilio) {
 		int numero = 0;
 		numero = Integer.parseInt(domicilio.substring(this.primerNumero(domicilio)+1, (domicilio.length())));		
 		return numero;
 	}
 	
-	// Dato Hardcodeado para probar en vez de 5 va : this.primerNumero(domicilio)
 	private String getDireccionNombre(String domicilio) {
 		return domicilio.substring(0, this.primerNumero(domicilio));
 		
@@ -123,19 +134,18 @@ public class Conversor extends JuegoDeDatos {
 	
 	private Comuna getComunaAsociadaAlNumero(int numero) {
 		Map<Integer,Comuna> comunas = new HashMap<Integer, Comuna>();
-		Comuna comuna16 = new Comuna();
-		Point puntoAcomuna = new Point(10, 20);
-		Point puntoBcomuna = new Point(20, 20);
-		Point puntoCcomuna = new Point(15, 10);
-		comuna16.setAreaDeComuna(puntoAcomuna);
-		comuna16.setAreaDeComuna(puntoBcomuna);
-		comuna16.setAreaDeComuna(puntoCcomuna);
-		comunas.put(1, new Comuna());
-		comunas.put(2, new Comuna());
-		comunas.put(3, new Comuna());
-		comunas.put(4, new Comuna());
-		comunas.put(5, new Comuna());
-		comunas.put(6, new Comuna());
+		Comuna comuna1 = new Comuna();
+		Comuna comuna2 = new Comuna();
+		Comuna comuna3 = new Comuna();
+		Comuna comuna4 = new Comuna();
+		Comuna comuna5 = new Comuna();
+		Comuna comuna6 = new Comuna();
+		comunas.put(1, comuna1);
+		comunas.put(2, comuna2);
+		comunas.put(3, comuna3);
+		comunas.put(4, comuna4);
+		comunas.put(5, comuna5);
+		comunas.put(6, comuna6);
 		return comunas.get(numero);
 	}
 	

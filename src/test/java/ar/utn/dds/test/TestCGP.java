@@ -1,16 +1,19 @@
 package ar.utn.dds.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 import java.util.List;
-import static org.mockito.Mockito.*;
 
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.CentroGestionParticipacion;
-import ar.utn.dds.ServicioExterno.CentroDTO;
 import ar.utn.dds.buscador.BuscadorDeCGP;
 import ar.utn.dds.buscador.StubBuscadorCGP;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
@@ -121,6 +124,12 @@ public class TestCGP extends JuegoDeDatos {
 		cgp.getComuna().setAreaDeComuna(new Point(10,50));
 		cgp.getComuna().setAreaDeComuna(new Point(2,20));
 		assertFalse(cgp.getComuna().estaCercaDe(unPunto));
+	}
+	
+	@Test
+	public void conversionDeNombre(){
+		CentroGestionParticipacion cgp = listaCGP.get(0);
+		assertEquals(cgp.getNombre(), "comuna1");
 	}
 	
 	@Test
