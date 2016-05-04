@@ -80,7 +80,7 @@ public class TestBanco extends JuegoDeDatos {
 	}
 	
 	@Test
-	public void conversorJsonBanco(){
+	public void conversorJsonBancoServicios(){
 		JSONObject obj = new JSONObject();
 		obj.put("banco", "Banco de la plaza");
 		obj.put("x", "35");
@@ -96,10 +96,57 @@ public class TestBanco extends JuegoDeDatos {
 	}
 	
 	@Test
+	public void conversorJsonBancoUbicacion(){
+		JSONObject obj = new JSONObject();
+		obj.put("banco", "Banco de la plaza");
+		obj.put("x", "35");
+		obj.put("y", "72");
+		obj.put("sucursal", "Avellaneda");
+		obj.put("gerente", "Pablo Perez");
+		obj.put("servicios", "[cobrocheques,dep�sitos,extracciones]");
+		SucursalBanco banco = Conversor.getInstance().jsonAbanco(obj);
+		assertTrue(banco.getUbicacionActual().latitude() == 35);
+		
+	}
+	
+	@Test
+	public void conversorJsonBancoDireccionNombre(){
+		JSONObject obj = new JSONObject();
+		obj.put("banco", "Banco de la plaza");
+		obj.put("x", "35");
+		obj.put("y", "72");
+		obj.put("sucursal", "Avellaneda");
+		obj.put("gerente", "Pablo Perez");
+		obj.put("servicios", "[cobrocheques,dep�sitos,extracciones]");
+		SucursalBanco banco = Conversor.getInstance().jsonAbanco(obj);
+		assertTrue(banco.getDireccionNombre()== "Banco de la plaza");
+	}
+	
+	@Test
+	public void conversorJsonBancoBarrio(){
+		JSONObject obj = new JSONObject();
+		obj.put("banco", "Banco de la plaza");
+		obj.put("x", "35");
+		obj.put("y", "72");
+		obj.put("sucursal", "Avellaneda");
+		obj.put("gerente", "Pablo Perez");
+		obj.put("servicios", "[cobrocheques,dep�sitos,extracciones]");
+		SucursalBanco banco = Conversor.getInstance().jsonAbanco(obj);
+		assertTrue(banco.getBarrio()=="Avellaneda");
+	}
+	
+	@Test
 	public void conversionBancos(){
 		BusquedaDePuntos.setBuscadorDeBancos(new StubBuscadorBanco());
 		List<SucursalBanco> listaBancos = BusquedaDePuntos.buscarBancoEnRepoExterno("lalala");
 		assertTrue(listaBancos.size() == 2);
+	}
+	
+	@Test
+	public void conversionBancosServicios(){
+		BusquedaDePuntos.setBuscadorDeBancos(new StubBuscadorBanco());
+		List<SucursalBanco> listaBancos = BusquedaDePuntos.buscarBancoEnRepoExterno("lalala");
+		assertTrue(listaBancos.get(0).getListaServicios().size() == 3);
 	}
 	
 	
