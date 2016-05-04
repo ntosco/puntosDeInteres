@@ -2,10 +2,12 @@ package ar.utn.dds.test;
 
 import static org.junit.Assert.*;
 
+import java.nio.channels.ShutdownChannelGroupException;
 
 import org.junit.*;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.repositorio.Repositorio;
+import ar.utn.dds.POI.POI;
 import ar.utn.dds.exceptions.BusinessException;
 
 public class TestRepositorioPois extends JuegoDeDatos {
@@ -19,19 +21,26 @@ public class TestRepositorioPois extends JuegoDeDatos {
 		setUpCGP();
 		setUpLocalComercial();
 		setUpColectivos();
-		
-//		repositorio.setObjects(Arrays.asList(this.addidas,this.bancoFrances,this.cgpAlmagro,this.parada114,this.cafeMartinez));
+	}
+
+	@After
+	public void TearDown(){
+		repositorio.clean();
 	}
 	
+	// ********************************************************
+	// ** Tests: Cración de POIs dentro del repositorio
+	// ********************************************************
+	
 	@Test
-	public void createPoiValido(){
+	public void creaPoiCuandoEsteEsValido(){
 		int size = repositorio.allInstances().size();
 		repositorio.create(this.parada15);
 		assertEquals(repositorio.allInstances().size(),++size);
 	}
 
 	@Test(expected = BusinessException.class)
-	public void createPoiInvalido(){
+	public void noCreaPOICuandoEsteEsInvalido(){
 		int size = repositorio.allInstances().size();
 		repositorio.create(this.cafeMartinez);
 		assertEquals(repositorio.allInstances().size(),++size);
@@ -40,40 +49,28 @@ public class TestRepositorioPois extends JuegoDeDatos {
 	
 	@Test(expected = BusinessException.class)
 	public void createPoiExistenteEnListaTest(){
-		int size = repositorio.allInstances().size();
 		repositorio.create(this.parada15);
 		repositorio.create(this.parada15);
-		assertEquals(++size,repositorio.allInstances().size());
-
 	}
-//	
-//	@Test
-//	public void deletePoiValido(){
-//		repositorio.create(this.parada15);
-//		int size = repositorio.allInstances().size();
-//		repositorio.delete(this.parada15);
-//		assertEquals(++size,repositorio.allInstances().size());
-//	}
-//	
-//	@Test
-//	public void deletePoiInvalido(){
-//		int size = repositorio.allInstances().size();
-//		repositorio.create(this.parada15);
-//		//Da false ya que no debe dejar añadir otra vez a parada15 -> Se arreglará cuando se implementen exception
-//		repositorio.create(this.parada15);
-//		assertEquals(++size,repositorio.allInstances().size());
-//
-//	}
-//	@Test
-//	public void deletePoiInexistente(){
-//		int size = repositorio.allInstances().size();
-//		repositorio.create(this.parada15);
-//		//Da false ya que no debe dejar añadir otra vez a parada15 -> Se arreglará cuando se implementen exception
-//		repositorio.create(this.parada15);
-//		assertEquals(++size,repositorio.allInstances().size());
-//
-//	}
+
+	@Test
+	public void creoUnPoiYVerificoQueAndeElID(){
+		repositorio.create(this.parada15);
+		int id = parada15.getId();
+		int idPoiAgregado = repositorio.allInstances().get(0).getId();
+		assertEquals(id,idPoiAgregado);
+	}
+
 	
-	
+	// ********************************************************
+	// ** Tests: Busqueda de POIs dentro del repositorio
+	// ********************************************************
+		
+	@Test
+	public void buscoUnPOIPorID(){
+		repositorio.create(this.parada114);
+		repositorio.create(this.parada15);
+		assertTrue(parada15.esIgualA(repositorio.searchById(2)));
+	}
 
 }

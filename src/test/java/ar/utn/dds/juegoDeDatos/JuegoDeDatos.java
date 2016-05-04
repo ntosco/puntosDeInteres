@@ -777,6 +777,7 @@ abstract public class JuegoDeDatos {
 		parada15.setNombre("parada15");
 
 		parada114 = new ParadaDeColectivo();
+		parada114.setNombre("parada114");
 		ubicacionParada114 = new Point(11, 13);
 		parada114.setLinea("114");
 		parada114.setUbicacionActual(ubicacionParada114);
