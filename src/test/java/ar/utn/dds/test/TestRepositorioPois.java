@@ -50,7 +50,7 @@ public class TestRepositorioPois extends JuegoDeDatos {
 	}
 
 	@Test
-	public void creoUnPoiYVerificoQueAndeElID(){
+	public void creoUnPoiYVerificoQueFuncioneCorrectamenteElID(){
 		repositorio.create(this.parada15);
 		int id = parada15.getId();
 		int idPoiAgregado = repositorio.allInstances().get(0).getId();
@@ -62,7 +62,7 @@ public class TestRepositorioPois extends JuegoDeDatos {
 	// ********************************************************
 	
 	@Test
-	public void deletePoiValido(){
+	public void eliminoPoiValido(){
 		repositorio.create(this.parada15);
 		int size = repositorio.allInstances().size();
 		repositorio.delete(this.parada15);
@@ -70,12 +70,11 @@ public class TestRepositorioPois extends JuegoDeDatos {
 	}
 	
 	@Test(expected = BusinessException.class)
-	public void deletePoiInexistente(){
-		int size = repositorio.allInstances().size();
+	public void noEliminoCuandoPoiEsInexistente(){
 		repositorio.delete(this.parada15);
-		assertEquals(size,repositorio.allInstances().size());
-
 	}
+	
+	
 	
 	
 	// ********************************************************

@@ -26,12 +26,6 @@ public class Repositorio extends CollectionBasedRepo<POI>{
 	// ** ABMC Repositorio
 	// ********************************************************
 	
-	
-	public void delete(POI poiAEliminar){
-		if (!this.validateExistence(poiAEliminar))throw new BusinessException("El POI no existe");
-		super.effectiveDelete(poiAEliminar);
-	}
-
 	/*
 	* void update(PuntoInteres): modifica el punto de interés dentro de la colección. En
 	* caso de que el punto de interés tenga errores de validación no debe actualizar la
@@ -67,6 +61,12 @@ public class Repositorio extends CollectionBasedRepo<POI>{
 			throw new BusinessException("El POI ya existe");
 	}
 
+	@Override
+	protected void validateDelete(POI nuevoPoi) {
+		if (!this.validateExistence(nuevoPoi))
+			throw new BusinessException("El POI no existe en el repositorio");
+	}
+	
 	// ********************************************************
 	// ** Metodos complementarios del Repositorio
 	// ********************************************************
