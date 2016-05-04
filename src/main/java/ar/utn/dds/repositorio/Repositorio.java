@@ -41,7 +41,7 @@ public class Repositorio extends CollectionBasedRepo<POI>{
 	}
 
 	public List<POI> search(String nombre){
-		return (List<POI>) CollectionUtils.select(this.getObjects(),(poi)-> poi.buscarPOI(nombre));
+		return (List<POI>) CollectionUtils.select(this.allInstances(),(poi)-> poi.buscarPOI(nombre));
 	}
 	
 	// ********************************************************

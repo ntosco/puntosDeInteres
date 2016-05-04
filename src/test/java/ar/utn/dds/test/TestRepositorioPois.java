@@ -87,5 +87,18 @@ public class TestRepositorioPois extends JuegoDeDatos {
 		repositorio.create(this.parada15);
 		assertTrue(parada15.esIgualA(repositorio.searchById(2)));
 	}
+	@Test
+	public void buscoUnPOIExistente(){
+		repositorio.create(this.parada114);
+		repositorio.create(this.parada15);
+		assertNotEquals(null, repositorio.search("114"));
+	}	
+	@Test
+	public void buscoUnPOIInexistente(){
+		repositorio.create(this.parada114);
+		repositorio.create(this.parada15);
+		assertNotEquals(null, repositorio.search("martinez"));
+	}	
+	
 
 }
