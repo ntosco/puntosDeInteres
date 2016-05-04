@@ -39,11 +39,9 @@ public class Repositorio extends CollectionBasedRepo<POI>{
 	*/
 	
 	public void update(POI poi){
-		if(poi.esValido()){
-			super.update(poi);			
-		}
-		//TODO: no está finalizado, no hace lo que pide el enunciado
-		
+		poi.validateUpdate();
+		this.validateExistenceByID(poi);
+		super.update(poi);
 	}
 
 	public List<POI> search(String nombre){
@@ -54,11 +52,13 @@ public class Repositorio extends CollectionBasedRepo<POI>{
 	// ** Validaciones Repositorio
 	// ********************************************************
 
-
 	private Boolean validateExistence(POI nuevoPoi){
 		return (!this.searchByExample(nuevoPoi).isEmpty());
-
 	}
+	
+	private void validateExistenceByID(POI nuevoPoi){
+			this.searchById(nuevoPoi.getId());
+	}	
 	
 	@Override
 	protected void validateCreate(POI nuevoPoi) {

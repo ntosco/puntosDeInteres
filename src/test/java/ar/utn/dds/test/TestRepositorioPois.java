@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 import org.junit.*;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.repositorio.Repositorio;
+import ar.utn.dds.POI.POI;
+import ar.utn.dds.POI.ParadaDeColectivo;
 import ar.utn.dds.exceptions.BusinessException;
 
 public class TestRepositorioPois extends JuegoDeDatos {
@@ -88,5 +90,41 @@ public class TestRepositorioPois extends JuegoDeDatos {
 		repositorio.create(this.parada15);
 		assertTrue(parada15.esIgualA(repositorio.searchById(2)));
 	}
+	
+	@Test(expected = RuntimeException.class)
+	public void buscoUnPOIPorUnIDQueNoExiste(){
+		repositorio.searchById(20);
+	}
 
+	// ********************************************************
+	// ** Tests: Actualizacion de POIs dentro del repositorio
+	// ********************************************************
+
+	@Test(expected = BusinessException.class)
+	public void quieroActualizarUnPOIInvalidoYLanzaExcepcion(){
+		repositorio.create(this.parada114);
+		parada114.setId(null);
+		repositorio.update(parada114);
+	}
+	
+	@Test(expected = RuntimeException.class)
+	public void quieroActualizarUnPOIQueYaFueBorradoYLanzaExcepcion(){
+		repositorio.create(this.parada114);
+		repositorio.delete(parada114);
+		repositorio.update(parada114);
+	}
+	
+	@Test
+	public void actualizoUnPOI(){
+		repositorio.create(this.parada114);
+		parada114.setLinea("1144");
+		repositorio.update(parada114);
+		
+		ParadaDeColectivo poiActualizado = (ParadaDeColectivo) repositorio.searchById(parada114.getId());
+		assertEquals("1144",poiActualizado.getLinea());
+	}	
+	
+	
+	
+	
 }
