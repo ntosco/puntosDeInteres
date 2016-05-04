@@ -72,10 +72,16 @@ public class ServiceLocator {
 		buscador.setBuscadorDeBancos(servicioBanco);
 		buscador.setBuscadorDeCGP(servicioCGP);
 		
+		//Busqueda de POIS por servicios externos.
+		
 		listaPorExterno.addAll(buscador.buscarBancoEnRepoExterno(nombre));
-		//listaPorExterno.addAll(buscador.buscarCGPEnRepoExterno(nombre));
+		listaPorExterno.addAll(buscador.buscarCGPEnRepoExterno(nombre));
+		
+		if (!(listaPorExterno.isEmpty())){
+			
+			listaPorExterno.forEach(poi -> actualizarContraElRepo(poi));
 				
-		listaPorExterno.forEach(poi -> actualizarContraElRepo(poi));
+		}
 		
 		return repositorioPois.search(nombre);      
 		

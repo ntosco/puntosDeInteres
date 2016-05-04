@@ -21,23 +21,36 @@ public class BusquedaDePuntos {
 		
 		List<CentroDTO> listaDeCentroDTO = buscador.buscarPOI(nombre);
 		
-		List<CentroGestionParticipacion> listaCGP = new ArrayList<CentroGestionParticipacion>();
-		
-		listaDeCentroDTO.forEach(dto -> listaCGP.add(Conversor.getInstance().convertirDTOACGP(dto)));
-		
-		return listaCGP;
+		if (listaDeCentroDTO.isEmpty()){
+			return new ArrayList<CentroGestionParticipacion>();
+			
+			
+		}else{
+			List<CentroGestionParticipacion> listaCGP = new ArrayList<CentroGestionParticipacion>();
+			listaDeCentroDTO.forEach(dto -> listaCGP.add(Conversor.getInstance().convertirDTOACGP(dto)));			
+			return listaCGP;
+		}
 		
 	}
 	
 	public static List<SucursalBanco> buscarBancoEnRepoExterno(String nombre){
 		
 		JSONArray bancosJson = buscadorBanco.buscarPOI(nombre);
-		List<SucursalBanco> listaBancos = new ArrayList<SucursalBanco>();
-		 for(int x=0; x<bancosJson.size(); x++) 
-		  {      
-			 listaBancos.add(Conversor.getInstance().jsonAbanco((JSONObject) bancosJson.get(x)));
-		  }   
-		 return listaBancos;
+		
+		if(bancosJson.isEmpty()){
+			return new ArrayList<SucursalBanco>();
+			
+		}else{
+			List<SucursalBanco> listaBancos = new ArrayList<SucursalBanco>();
+			
+			 for(int x=0; x<bancosJson.size(); x++) 
+			  {      
+				 listaBancos.add(Conversor.getInstance().jsonAbanco((JSONObject) bancosJson.get(x)));
+			  }   
+			 return listaBancos;
+		}
+		
+		
 	}
 	
 	public static void setBuscadorDeCGP(BuscadorDeCGP buscadorDeCGP){

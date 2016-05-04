@@ -34,7 +34,7 @@ public class Conversor extends JuegoDeDatos {
 		SucursalBanco banco = new SucursalBanco();
 		
 		banco.setBarrio(obj.get("sucursal").toString()); 
-		banco.setDireccionNombre(obj.get("banco").toString());
+		banco.setNombre(obj.get("banco").toString());
 		
 		Point ubcicacionActual = new Point(Integer.parseInt(obj.get("x").toString()), Integer.parseInt(obj.get("y").toString()));
 		banco.setUbicacionActual(ubcicacionActual);

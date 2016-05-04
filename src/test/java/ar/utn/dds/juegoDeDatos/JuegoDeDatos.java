@@ -206,6 +206,11 @@ abstract public class JuegoDeDatos {
 	protected List<String> palabrasClaveBancoGalicia;
 	protected List<String> palabrasClaveBancoRio;
 
+	protected JSONObject bancoFrances2;
+	protected JSONObject bancoGalicia2;
+	
+	
+	
 	// Jornadas
 
 	protected List<Jornada> jornadaBancaria;

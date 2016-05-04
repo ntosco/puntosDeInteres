@@ -114,7 +114,7 @@ public class TestBanco extends JuegoDeDatos {
 		obj.put("gerente", "Pablo Perez");
 		obj.put("servicios", "[cobrocheques,dep�sitos,extracciones]");
 		SucursalBanco banco = Conversor.getInstance().jsonAbanco(obj);
-		assertTrue(banco.getDireccionNombre()== "Banco de la plaza");
+		assertTrue(banco.getNombre()== "Banco de la plaza");
 	}
 	
 	@Test

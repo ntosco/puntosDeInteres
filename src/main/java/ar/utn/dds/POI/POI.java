@@ -52,7 +52,28 @@ public abstract class POI extends Entity {
 	}
 	
 	
-	//FIXME Analizar si es necesario 
+	//BORRAR O NO
+	
+	@Override
+	public boolean equals(Object obj){
+		try{
+			if (obj == null){
+				return false;
+			}
+			
+			POI otroPOI = (POI) obj;
+			
+			if (this.getId() == null || otroPOI.getId() == null){
+				return this.esIgualA((POI) obj);
+			}
+			
+			return this.getId() == otroPOI.getId();
+		}catch (ClassCastException e){
+			return false;
+		}
+	}
+	
+	
 	public Boolean esIgualA(POI otroPoi){
 		 return (this.nombre.equals(otroPoi.getNombre()) && 
 				 this.ubicacionActual.equals(otroPoi.getUbicacionActual())

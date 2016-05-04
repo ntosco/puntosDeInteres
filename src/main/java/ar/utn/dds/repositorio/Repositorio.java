@@ -57,7 +57,7 @@ public class Repositorio extends CollectionBasedRepo<POI>{
 	@Override
 	protected void validateCreate(POI nuevoPoi) {
 		nuevoPoi.validateCreate();
-		if (this.validateExistence(nuevoPoi))
+		if (this.validateExistence(nuevoPoi)) 
 			throw new BusinessException("El POI ya existe");
 	}
 
