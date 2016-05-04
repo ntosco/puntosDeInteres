@@ -6,5 +6,5 @@ import ar.utn.dds.ServicioExterno.CentroDTO;
 
 public interface BuscadorDeCGP {
 	
-	public List<CentroDTO> buscarCGP(String nombre);
+	public List<CentroDTO> buscarPOI(String nombre);
 }

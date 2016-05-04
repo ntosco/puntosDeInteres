@@ -4,6 +4,6 @@ import org.json.simple.JSONArray;
 
 
 public interface buscadorDeBancos {
-	public JSONArray buscarBancos(String nombre);
+	public JSONArray buscarPOI(String nombre);
 
 }

@@ -21,12 +21,12 @@ import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.servicios.Servicio;
 import ar.utn.dds.utils.Jornada;
 import ar.utn.dds.utils.RangoHorario;
-import ar.utn.dds.utils.conversorBanco;
+
 
 abstract public class JuegoDeDatos {
 	//conversor json a banco 
 	
-	protected conversorBanco conversorBanco;
+
 	//Buscador de bancos
 	
 	protected buscadorDeBancos buscadorBancos;
