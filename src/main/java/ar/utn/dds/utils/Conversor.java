@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import org.json.simple.JSONObject;
 import org.uqbar.geodds.Point;
@@ -59,7 +60,20 @@ public class Conversor extends JuegoDeDatos {
 		nuevoCGP.setDireccionNombre(getDireccionNombre(dto.getDomicilio()));
 		nuevoCGP.setDireccionNumero(getDireccionNumero(dto.getDomicilio()));
 		nuevoCGP.setListaServicios(getListaServiciosCGP(dto.getServicios()));
+		nuevoCGP.setListaPalabrasClave(palabrasClaveParaCGP(dto));
 		return nuevoCGP;
+	}
+
+	public List<String> palabrasClaveParaCGP(CentroDTO dto) {
+		StringTokenizer st = new StringTokenizer(dto.getZonasIncluidas(),",",true);
+		List<String> listaPalabras = new ArrayList<String>();
+		while(st.hasMoreTokens()){
+			listaPalabras.add(st.nextToken());}
+		dto.getServicios().forEach(servicio -> listaPalabras.add(servicio.getNombreServicio()));
+		
+		return listaPalabras;
+		
+		
 	}
 
 	private List<Servicio> getListaServiciosCGP(List<ServicioDTO> servicios) {
