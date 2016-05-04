@@ -17,8 +17,6 @@ import ar.utn.dds.utils.Conversor;
 public class ServiceLocator {
 	
 	static ServiceLocator instanceServiceLocator;
-	
-	
 		
 	
 	
@@ -27,13 +25,16 @@ public class ServiceLocator {
 	private Repositorio repositorioPois;
 	
 	private buscadorDeBancos servicioBanco;
-	private BuscadorDeCGP servicioCGT;
+	private BuscadorDeCGP servicioCGP;
+	
+	private BusquedaDePuntos buscador;
 	
 	private List<POI> listaPorExterno = new  ArrayList<POI>();
 	
 
 	private ServiceLocator(){
 		this.repositorioPois = Repositorio.getInstance();
+		this.buscador = new BusquedaDePuntos();
 	}
 	
 	public static ServiceLocator getInstance() {
@@ -56,15 +57,23 @@ public class ServiceLocator {
 		this.repositorioPois = repositorioPois;
 	}
 	
+	public void setBuscadorDeCGP(BuscadorDeCGP buscadorDeCGP){
+		this.servicioCGP = buscadorDeCGP;
+	}
+	
+	
+	public void setBuscadorDeBancos(buscadorDeBancos buscadorDeBanco){
+		this.servicioBanco = buscadorDeBanco;
+	}
+	
+	
 	public List<POI> busquedaGeneral(String nombre){
 		
-		BusquedaDePuntos buscador = new BusquedaDePuntos();
-		
 		buscador.setBuscadorDeBancos(servicioBanco);
-		buscador.setBuscadorDeCGP(servicioCGT);
+		buscador.setBuscadorDeCGP(servicioCGP);
 		
 		listaPorExterno.addAll(buscador.buscarBancoEnRepoExterno(nombre));
-		listaPorExterno.addAll(buscador.buscarCGPEnRepoExterno(nombre));
+		//listaPorExterno.addAll(buscador.buscarCGPEnRepoExterno(nombre));
 				
 		listaPorExterno.forEach(poi -> actualizarContraElRepo(poi));
 		

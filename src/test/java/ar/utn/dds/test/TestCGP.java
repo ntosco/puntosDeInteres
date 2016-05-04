@@ -149,8 +149,8 @@ public class TestCGP extends JuegoDeDatos {
 		BuscadorDeCGP buscador = mock(BuscadorDeCGP.class);
 		
 		BusquedaDePuntos.setBuscadorDeCGP(buscador);
-		
 		BusquedaDePuntos.setBuscadorDeCGP(buscador);
+		
 		BusquedaDePuntos.buscarCGPEnRepoExterno("nombre");
 		
 		verify(buscador).buscarPOI("nombre");

@@ -18,6 +18,7 @@ public class BusquedaDePuntos {
 	public static buscadorDeBancos buscadorBanco;
 
 	public static List<CentroGestionParticipacion> buscarCGPEnRepoExterno(String nombre){
+		
 		List<CentroDTO> listaDeCentroDTO = buscador.buscarPOI(nombre);
 		
 		List<CentroGestionParticipacion> listaCGP = new ArrayList<CentroGestionParticipacion>();

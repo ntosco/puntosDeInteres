@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONObject;
 import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.CentroGestionParticipacion;
@@ -24,8 +25,6 @@ import ar.utn.dds.utils.RangoHorario;
 
 
 abstract public class JuegoDeDatos {
-	//conversor json a banco 
-	
 
 	//Buscador de bancos
 	
@@ -246,6 +245,8 @@ abstract public class JuegoDeDatos {
 	protected RangoServicioDTO rangoDe9a18;
 	protected ServicioDTO servicioRentasDTO;
 	protected CentroDTO centroRecoleta;
+	
+	//
 
 	public void setUpGeneral() {
 		setUpLocalDateTime();
@@ -261,6 +262,8 @@ abstract public class JuegoDeDatos {
 	public void setUpBanco() {
 		// galicia y frances comparten ubicacion
 		bancoFrances = new SucursalBanco();
+		bancoFrances.setNombre("Banco Frances");
+		
 		bancoFrances.setListaServicios(servicioCajeroAutomatico);
 		bancoFrances.setUbicacionActual(ubicacionSucursalFrances);
 		palabrasClaveBancoFrances = new ArrayList<String>();
@@ -271,6 +274,9 @@ abstract public class JuegoDeDatos {
 		bancoFrances.setListaPalabrasClave(palabrasClaveBancoFrances);
 
 		bancoGalicia = new SucursalBanco();
+		
+		bancoGalicia.setNombre("Banco Galicia");
+		
 		bancoGalicia.setListaServicios(servicioCajeroAutomatico);
 		bancoGalicia.setUbicacionActual(ubicacionSucursalFrances);
 		palabrasClaveBancoGalicia = new ArrayList<String>();
@@ -306,6 +312,28 @@ abstract public class JuegoDeDatos {
 		sucursalMartinez.setUbicacionActual(ubicacionSucursalMartinez);
 		sucursalMartinez
 				.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
+		
+		
+		//Entrega 2
+		
+		JSONObject bancoFrances2 = new JSONObject();
+		
+		bancoFrances2.put("banco", "Banco Frances");
+		bancoFrances2.put("x", "45");
+		bancoFrances2.put("y", "20");
+		bancoFrances2.put("sucursal", "Avellaneda");
+		bancoFrances2.put("gerente", "Pablo Perez");
+		bancoFrances2.put("servicios", "[cobrocheques,dep�sitos,extracciones]");
+		
+		JSONObject bancoGalicia2 = new JSONObject();
+		
+		bancoGalicia2.put("banco", "Banco Galicia");
+		bancoGalicia2.put("x", "45");
+		bancoGalicia2.put("y", "20");
+		bancoGalicia2.put("sucursal", "Avellaneda");
+		bancoGalicia2.put("gerente", "Pablo Perez");
+		bancoGalicia2.put("servicios", "[cobrocheques,dep�sitos,extracciones]");
+		
 	}
 
 	public void setUpJornadas() {
