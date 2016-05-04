@@ -142,12 +142,22 @@ public class TestCGP extends JuegoDeDatos {
 	@Test
 	public void testDTOJuegoDeDatos() {
 		centrosDTO.forEach(centro -> listaCGP.add(Conversor.getInstance().convertirDTOACGP(centro)));
-		assertEquals(centrosDTO.size(), 1);
+		assertEquals(centrosDTO.size(), 3);
 
+	}
+	
+	@Test
+	public void testNoEstaDisponibleEnHorarioOUTConJuegoDeDatos(){
+		listaCGP.clear();
+		centrosDTO.forEach(centro -> listaCGP.add(Conversor.getInstance().convertirDTOACGP(centro)));
+		assertTrue(listaCGP.get(0).estaDisponible("rentas", lunes1210hs));
+		assertFalse(listaCGP.get(0).estaDisponible("otracosa", lunes1210hs));
+		assertTrue(listaCGP.get(1).estaDisponible("Asesoramiento", lunes1210hs));
+		assertFalse(listaCGP.get(1).estaDisponible("Asesoramiento", martes04hs));
 	}
 
 	@Test
-	public void testTodosDisponiblesEnHorario() {
+	public void testDisponiblesEnHorario() {
 		assertTrue(listaCGP.get(0).estaDisponible("rentas", lunes12hs));
 		assertFalse(listaCGP.get(1).estaDisponible("rentas", lunes12hs));
 	}
