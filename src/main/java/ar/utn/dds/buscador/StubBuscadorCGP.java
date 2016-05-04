@@ -3,7 +3,6 @@ package ar.utn.dds.buscador;
 import java.util.ArrayList;
 import java.util.List;
 
-import ar.utn.dds.POI.POI;
 import ar.utn.dds.ServicioExterno.CentroDTO;
 import ar.utn.dds.ServicioExterno.RangoServicioDTO;
 import ar.utn.dds.ServicioExterno.ServicioDTO;
@@ -21,7 +20,10 @@ public class StubBuscadorCGP implements BuscadorDeCGP {
 	}
 	
 	public List<CentroDTO> buscarPOI(String nombre) {
-
+		
+		
+		
+		
 		List<CentroDTO> centrosDTO = new ArrayList<CentroDTO>();
 		List<ServicioDTO> serviciosDTO = new ArrayList<ServicioDTO>();
 		List<ServicioDTO> serviciosDTOPalermo = new ArrayList<ServicioDTO>();
@@ -43,9 +45,8 @@ public class StubBuscadorCGP implements BuscadorDeCGP {
 		CentroDTO centroPalermo = new CentroDTO(1, "Palermo", "Miguelito", "Santa Fe 556", "6546532", serviciosDTOPalermo);
 		centrosDTO.add(unCentro);
 		centrosDTO.add(centroPalermo);
-		return centrosDTO;
 		
+		return centrosDTO;
 	}
-
 
 }
