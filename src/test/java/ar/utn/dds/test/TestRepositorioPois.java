@@ -52,7 +52,7 @@ public class TestRepositorioPois extends JuegoDeDatos {
 	}
 
 	@Test
-	public void creoUnPoiYVerificoQueAndeElID(){
+	public void creoUnPoiYVerificoQueFuncioneCorrectamenteElID(){
 		repositorio.create(this.parada15);
 		int id = parada15.getId();
 		int idPoiAgregado = repositorio.allInstances().get(0).getId();
@@ -64,7 +64,7 @@ public class TestRepositorioPois extends JuegoDeDatos {
 	// ********************************************************
 	
 	@Test
-	public void deletePoiValido(){
+	public void eliminoPoiValido(){
 		repositorio.create(this.parada15);
 		int size = repositorio.allInstances().size();
 		repositorio.delete(this.parada15);
@@ -72,34 +72,49 @@ public class TestRepositorioPois extends JuegoDeDatos {
 	}
 	
 	@Test(expected = BusinessException.class)
-	public void deletePoiInexistente(){
-		int size = repositorio.allInstances().size();
+	public void noEliminoCuandoPoiEsInexistente(){
 		repositorio.delete(this.parada15);
-		assertEquals(size,repositorio.allInstances().size());
-
 	}
 	
-	
+		
 	// ********************************************************
 	// ** Tests: Busqueda de POIs dentro del repositorio
 	// ********************************************************
-		
+	
+	//*** Por ID
+	
 	@Test
 	public void buscoUnPOIPorID(){
 		repositorio.create(this.parada114);
 		repositorio.create(this.parada15);
 		assertTrue(parada15.esIgualA(repositorio.searchById(2)));
 	}
+
 	
 	@Test(expected = RuntimeException.class)
 	public void buscoUnPOIPorUnIDQueNoExiste(){
 		repositorio.searchById(20);
 	}
 
+	//*** Por match.
+	
+	@Test
+	public void buscoUnPOIExistente(){
+		repositorio.create(this.parada114);
+		repositorio.create(this.parada15);
+		assertNotEquals(null, repositorio.search("114"));
+	}	
+	@Test
+	public void buscoUnPOIInexistente(){
+		repositorio.create(this.parada114);
+		repositorio.create(this.parada15);
+		assertNotEquals(null, repositorio.search("martinez"));
+	}	
+	
 	// ********************************************************
 	// ** Tests: Actualizacion de POIs dentro del repositorio
 	// ********************************************************
-
+	
 	@Test(expected = BusinessException.class)
 	public void quieroActualizarUnPOIInvalidoYLanzaExcepcion(){
 		repositorio.create(this.parada114);
