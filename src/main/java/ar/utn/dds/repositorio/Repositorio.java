@@ -44,7 +44,7 @@ public class Repositorio extends CollectionBasedRepo<POI>{
 //	}
 	
 	public void delete(POI poiAEliminar){
-		this.validateExistence(poiAEliminar);
+		if (!this.validateExistence(poiAEliminar))throw new BusinessException("El POI no existe");
 		super.effectiveDelete(poiAEliminar);
 	}
 	
@@ -63,10 +63,6 @@ public class Repositorio extends CollectionBasedRepo<POI>{
 		
 	}
 
-	public POI searchById(int id){
-		return (POI) this.getObjects().stream().filter((poi) -> poi.getId() == id);
-		}
-	
 	public List<POI> search(String nombre){
 		return (List<POI>) CollectionUtils.select(this.getObjects(),(poi)-> poi.buscarPOI(nombre));
 	}
@@ -76,14 +72,15 @@ public class Repositorio extends CollectionBasedRepo<POI>{
 	// ********************************************************
 
 //TODO	Debe lanzar una exception
-	private void validateExistence(POI nuevoPoi){
-		if(this.allInstances().stream().anyMatch((poi)-> poi.esIgualA(nuevoPoi)))throw new BusinessException("El POI ya existe");
+	private Boolean validateExistence(POI nuevoPoi){
+		return (!this.searchByExample(nuevoPoi).isEmpty());
 	}
-	
+	//TODO ver cambio de qué metodo lanza la excepción
 	@Override
-	protected void validateCreate(POI nuevoPoi){
+	protected void validateCreate(POI nuevoPoi) {
 		nuevoPoi.validateCreate();
-		this.validateExistence(nuevoPoi);
+		if (this.validateExistence(nuevoPoi))
+			throw new BusinessException("El POI ya existe");
 	}
 
 	// ********************************************************
@@ -110,11 +107,18 @@ public class Repositorio extends CollectionBasedRepo<POI>{
 		return null;
 	}
 
+
 //	Redefinir para la utilizacion en searchByExample
+	@SuppressWarnings("unchecked")
 	@Override
-	protected Predicate getCriterio(POI example) {
-		// TODO Auto-generated method stub : 
-		return null;
+	protected Predicate<POI> getCriterio(POI example) {
+		// TODO Auto-generated method stub :
+		return new Predicate<POI>(){
+			public boolean evaluate(POI poi) {
+				return poi.esIgualA(example);
+					}
+			};
 	}
+
 
 }

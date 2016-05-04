@@ -2,10 +2,12 @@ package ar.utn.dds.test;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
 
 import org.junit.*;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.repositorio.Repositorio;
+import ar.utn.dds.POI.POI;
 import ar.utn.dds.exceptions.BusinessException;
 
 public class TestRepositorioPois extends JuegoDeDatos {
@@ -46,33 +48,24 @@ public class TestRepositorioPois extends JuegoDeDatos {
 		assertEquals(++size,repositorio.allInstances().size());
 
 	}
-//	
-//	@Test
-//	public void deletePoiValido(){
-//		repositorio.create(this.parada15);
-//		int size = repositorio.allInstances().size();
-//		repositorio.delete(this.parada15);
-//		assertEquals(++size,repositorio.allInstances().size());
-//	}
-//	
-//	@Test
-//	public void deletePoiInvalido(){
-//		int size = repositorio.allInstances().size();
-//		repositorio.create(this.parada15);
-//		//Da false ya que no debe dejar añadir otra vez a parada15 -> Se arreglará cuando se implementen exception
-//		repositorio.create(this.parada15);
-//		assertEquals(++size,repositorio.allInstances().size());
-//
-//	}
-//	@Test
-//	public void deletePoiInexistente(){
-//		int size = repositorio.allInstances().size();
-//		repositorio.create(this.parada15);
-//		//Da false ya que no debe dejar añadir otra vez a parada15 -> Se arreglará cuando se implementen exception
-//		repositorio.create(this.parada15);
-//		assertEquals(++size,repositorio.allInstances().size());
-//
-//	}
+	
+	@Test
+	public void deletePoiValido(){
+		repositorio.create(this.parada15);
+		int size = repositorio.allInstances().size();
+		repositorio.delete(this.parada15);
+		assertEquals(--size,repositorio.allInstances().size());
+	}
+	
+
+	
+	@Test(expected = BusinessException.class)
+	public void deletePoiInexistente(){
+		int size = repositorio.allInstances().size();
+		repositorio.delete(this.parada15);
+		assertEquals(size,repositorio.allInstances().size());
+
+	}
 	
 	
 
