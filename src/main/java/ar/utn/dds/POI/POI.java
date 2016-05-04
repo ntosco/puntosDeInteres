@@ -44,6 +44,8 @@ public abstract class POI extends Entity {
 			throw new BusinessException("El POI no posee los datos necesarios : Nombre y ubicación");
 	}
 	
+	
+	//FIXME Analizar si es necesario 
 	public Boolean esIgualA(POI otroPoi){
 		 return (this.nombre.equals(otroPoi.getNombre()) && 
 				 this.ubicacionActual.equals(otroPoi.getUbicacionActual())

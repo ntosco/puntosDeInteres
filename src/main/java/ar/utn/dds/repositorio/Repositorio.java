@@ -90,7 +90,7 @@ public class Repositorio extends CollectionBasedRepo<POI>{
 	protected Predicate<POI> getCriterio(POI example) {
 		return new Predicate<POI>(){
 			public boolean evaluate(POI poi) {
-				return poi.esIgualA(example);
+				return poi.equals((POI)example);
 					}
 			};
 	}
