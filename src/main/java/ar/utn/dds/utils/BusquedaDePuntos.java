@@ -18,21 +18,23 @@ public class BusquedaDePuntos {
 	public static buscadorDeBancos buscadorBanco;
 
 	public static List<CentroGestionParticipacion> buscarCGPEnRepoExterno(String nombre){
-		List<CentroDTO> listaDeCentroDTO = buscador.buscarCGP(nombre);
+		List<CentroDTO> listaDeCentroDTO = buscador.buscarPOI(nombre);
+		
 		List<CentroGestionParticipacion> listaCGP = new ArrayList<CentroGestionParticipacion>();
+		
 		listaDeCentroDTO.forEach(dto -> listaCGP.add(Conversor.getInstance().convertirDTOACGP(dto)));
+		
 		return listaCGP;
 		
 	}
 	
 	public static List<SucursalBanco> buscarBancoEnRepoExterno(String nombre){
 		
-		JSONArray bancosJson = buscadorBanco.buscarBancos(nombre);
+		JSONArray bancosJson = buscadorBanco.buscarPOI(nombre);
 		List<SucursalBanco> listaBancos = new ArrayList<SucursalBanco>();
-		conversorBanco conversorBanco = new conversorBanco();
 		 for(int x=0; x<bancosJson.size(); x++) 
 		  {      
-			 listaBancos.add(conversorBanco.jsonAbanco((JSONObject) bancosJson.get(x)));
+			 listaBancos.add(Conversor.getInstance().jsonAbanco((JSONObject) bancosJson.get(x)));
 		  }   
 		 return listaBancos;
 	}

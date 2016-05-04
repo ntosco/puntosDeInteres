@@ -14,10 +14,12 @@ import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.servicios.Servicio;
 import ar.utn.dds.utils.BusquedaDePuntos;
-import ar.utn.dds.utils.conversorBanco;
+
 import ar.utn.dds.buscador.StubBuscadorBanco;
 import ar.utn.dds.buscador.StubBuscadorCGP;
 import ar.utn.dds.buscador.buscadorDeBancos;
+
+import ar.utn.dds.utils.Conversor;
 
 
 public class TestBanco extends JuegoDeDatos {
@@ -79,15 +81,14 @@ public class TestBanco extends JuegoDeDatos {
 	
 	@Test
 	public void conversorJsonBanco(){
-		conversorBanco = new conversorBanco();
 		JSONObject obj = new JSONObject();
 		obj.put("banco", "Banco de la plaza");
 		obj.put("x", "35");
 		obj.put("y", "72");
 		obj.put("sucursal", "Avellaneda");
 		obj.put("gerente", "Pablo Perez");
-		obj.put("servicios", "[cobrocheques,depósitos,extracciones]");
-		SucursalBanco banco = conversorBanco.jsonAbanco(obj);
+		obj.put("servicios", "[cobrocheques,depï¿½sitos,extracciones]");
+		SucursalBanco banco = Conversor.getInstance().jsonAbanco(obj);
 		//assertTrue(banco.getBarrio()=="Avellaneda");
 		//assertTrue(banco.getDireccionNombre()== "Banco de la plaza");
 		//assertTrue(banco.getUbicacionActual().latitude() == 35);

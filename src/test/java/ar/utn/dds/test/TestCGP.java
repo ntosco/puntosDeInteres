@@ -153,7 +153,7 @@ public class TestCGP extends JuegoDeDatos {
 		BusquedaDePuntos.setBuscadorDeCGP(buscador);
 		BusquedaDePuntos.buscarCGPEnRepoExterno("nombre");
 		
-		verify(buscador).buscarCGP("nombre");
+		verify(buscador).buscarPOI("nombre");
 		
 		
 		
