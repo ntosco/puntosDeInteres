@@ -2,10 +2,7 @@ package ar.utn.dds.repositorio;
 import org.uqbar.commons.model.*;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
-
 import java.util.List;
-//import java.util.Random;
-
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.exceptions.BusinessException;
 
@@ -29,6 +26,12 @@ public class Repositorio extends CollectionBasedRepo<POI>{
 	// ** ABMC Repositorio
 	// ********************************************************
 	
+	
+	public void delete(POI poiAEliminar){
+		if (!this.validateExistence(poiAEliminar))throw new BusinessException("El POI no existe");
+		super.effectiveDelete(poiAEliminar);
+	}
+
 	/*
 	* void update(PuntoInteres): modifica el punto de interés dentro de la colección. En
 	* caso de que el punto de interés tenga errores de validación no debe actualizar la
@@ -51,15 +54,17 @@ public class Repositorio extends CollectionBasedRepo<POI>{
 	// ** Validaciones Repositorio
 	// ********************************************************
 
-	private void validateExistence(POI nuevoPoi){
-		if(this.allInstances().stream().anyMatch((poi)-> poi.esIgualA(nuevoPoi)))
-			throw new BusinessException("El POI ya existe");
+
+	private Boolean validateExistence(POI nuevoPoi){
+		return (!this.searchByExample(nuevoPoi).isEmpty());
+
 	}
 	
 	@Override
-	protected void validateCreate(POI nuevoPoi){
+	protected void validateCreate(POI nuevoPoi) {
 		nuevoPoi.validateCreate();
-		this.validateExistence(nuevoPoi);
+		if (this.validateExistence(nuevoPoi))
+			throw new BusinessException("El POI ya existe");
 	}
 
 	// ********************************************************
@@ -69,8 +74,7 @@ public class Repositorio extends CollectionBasedRepo<POI>{
 	
 	@Override
 	public Class<POI> getEntityType() {
-		// TODO Auto-generated method stub
-		return null;
+		return POI.class;
 	}
 
 	@Override
@@ -79,11 +83,16 @@ public class Repositorio extends CollectionBasedRepo<POI>{
 		return null;
 	}
 
+
 //	Redefinir para la utilizacion en searchByExample
+	@SuppressWarnings("unchecked")
 	@Override
-	protected Predicate getCriterio(POI example) {
-		// TODO Auto-generated method stub : 
-		return null;
+	protected Predicate<POI> getCriterio(POI example) {
+		return new Predicate<POI>(){
+			public boolean evaluate(POI poi) {
+				return poi.esIgualA(example);
+					}
+			};
 	}
 
 }

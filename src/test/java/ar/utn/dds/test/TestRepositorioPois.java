@@ -1,13 +1,9 @@
 package ar.utn.dds.test;
 
 import static org.junit.Assert.*;
-
-import java.nio.channels.ShutdownChannelGroupException;
-
 import org.junit.*;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.repositorio.Repositorio;
-import ar.utn.dds.POI.POI;
 import ar.utn.dds.exceptions.BusinessException;
 
 public class TestRepositorioPois extends JuegoDeDatos {
@@ -61,6 +57,26 @@ public class TestRepositorioPois extends JuegoDeDatos {
 		assertEquals(id,idPoiAgregado);
 	}
 
+	// ********************************************************
+	// ** Tests: Borrado de POIs en el repositorio
+	// ********************************************************
+	
+	@Test
+	public void deletePoiValido(){
+		repositorio.create(this.parada15);
+		int size = repositorio.allInstances().size();
+		repositorio.delete(this.parada15);
+		assertEquals(--size,repositorio.allInstances().size());
+	}
+	
+	@Test(expected = BusinessException.class)
+	public void deletePoiInexistente(){
+		int size = repositorio.allInstances().size();
+		repositorio.delete(this.parada15);
+		assertEquals(size,repositorio.allInstances().size());
+
+	}
+	
 	
 	// ********************************************************
 	// ** Tests: Busqueda de POIs dentro del repositorio
