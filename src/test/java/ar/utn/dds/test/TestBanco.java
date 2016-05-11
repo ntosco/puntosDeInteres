@@ -2,7 +2,6 @@ package ar.utn.dds.test;
 
 import static org.junit.Assert.*;
 
-
 import java.util.List;
 
 import org.json.simple.JSONObject;
@@ -10,10 +9,8 @@ import org.junit.*;
 
 import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
+import ar.utn.dds.juegoDeDatos.StubBuscadorBanco;
 import ar.utn.dds.utils.BusquedaDePuntos;
-
-import ar.utn.dds.buscador.StubBuscadorBanco;
-
 import ar.utn.dds.utils.Conversor;
 
 

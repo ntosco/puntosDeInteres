@@ -16,8 +16,8 @@ import org.uqbar.geodds.Point;
 import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.ServicioExterno.CentroDTO;
 import ar.utn.dds.buscador.BuscadorDeCGP;
-import ar.utn.dds.buscador.StubBuscadorCGP;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
+import ar.utn.dds.juegoDeDatos.StubBuscadorCGP;
 import ar.utn.dds.utils.BusquedaDePuntos;
 import ar.utn.dds.utils.Conversor;
 

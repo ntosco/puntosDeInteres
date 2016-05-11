@@ -1,4 +1,4 @@
-package ar.utn.dds.buscador;
+package ar.utn.dds.juegoDeDatos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,7 @@ import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.ServicioExterno.CentroDTO;
 import ar.utn.dds.ServicioExterno.RangoServicioDTO;
 import ar.utn.dds.ServicioExterno.ServicioDTO;
+import ar.utn.dds.buscador.buscadorDeBancos;
 
 public class StubBuscadorBanco implements buscadorDeBancos {
 
