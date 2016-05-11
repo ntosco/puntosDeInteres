@@ -34,25 +34,36 @@ public abstract class POI extends Entity {
 	// ** Validacion
 	// ********************************************************
 	
+	public void validate(){
+		if (StringUtils.isNotEmpty(this.nombre))
+			throw 
+			
+		if this.ubicacionActual !=null);
+	}
+	
 	public Boolean esValido(){
-		return (StringUtils.isNotEmpty(this.nombre) && this.ubicacionActual !=null);
+		//return (StringUtils.isNotEmpty(this.nombre) && this.ubicacionActual !=null);
+		
+		
 	}
 	
 	@Override
 	public void validateCreate(){
+		this.validate();
+		
 		if(!this.esValido())
 			throw new BusinessException("El POI no posee los datos necesarios : Nombre y ubicación");
 	}
 
 	public void validateUpdate(){
-		this.validateCreate();
+		this.validate();
+		
 		if(this.isNew()){
 			throw new BusinessException("El POI no posee un ID asociado al repositorio");
 		}
 	}
 	
 	
-	//BORRAR O NO
 	
 	@Override
 	public boolean equals(Object obj){

@@ -13,30 +13,14 @@ import ar.utn.dds.exceptions.BusinessException;
 import ar.utn.dds.repositorio.Repositorio;
 import ar.utn.dds.utils.BusquedaDePuntos;
 import ar.utn.dds.utils.Conversor;
+import ar.utn.dds.utils.OrigenDeDatos;
 
 public class ServiceLocator {
 	
 	static ServiceLocator instanceServiceLocator;
 		
-	
-	
-//	Todo servicio que se desee agregar al ServiceLocator debe ser expuesto como atributo del mismo
-//	y necesita que se genere su getter para poder ser accedido
-	private Repositorio repositorioPois;
-	
-	private buscadorDeBancos servicioBanco;
-	private BuscadorDeCGP servicioCGP;
-	
-	private BusquedaDePuntos buscador;
-	
-	private List<POI> listaPorExterno = new  ArrayList<POI>();
-	
-
-	private ServiceLocator(){
-		this.repositorioPois = Repositorio.getInstance();
-		this.buscador = new BusquedaDePuntos();
-	}
-	
+	private List<OrigenDeDatos> listaServicios = new  ArrayList<OrigenDeDatos>();
+		
 	public static ServiceLocator getInstance() {
 		if (instanceServiceLocator == null) {
 			instanceServiceLocator = new ServiceLocator();
@@ -45,55 +29,15 @@ public class ServiceLocator {
 	}
 	
 	// ********************************************************
-	// ** Getters y Setters
+	// ** Getters and Setters
 	// ********************************************************
 	
-
-	public Repositorio getRepositorioPois() {
-		return repositorioPois;
-	}
-
-	public void setRepositorioPois(Repositorio repositorioPois) {
-		this.repositorioPois = repositorioPois;
+	public List<OrigenDeDatos> getServicios() {
+		return listaServicios;
 	}
 	
-	public void setBuscadorDeCGP(BuscadorDeCGP buscadorDeCGP){
-		this.servicioCGP = buscadorDeCGP;
+	public void setServicio(OrigenDeDatos servicio) {
+		this.listaServicios.add(servicio);
 	}
 	
-	
-	public void setBuscadorDeBancos(buscadorDeBancos buscadorDeBanco){
-		this.servicioBanco = buscadorDeBanco;
-	}
-	
-	
-	public List<POI> busquedaGeneral(String nombre){
-		
-		buscador.setBuscadorDeBancos(servicioBanco);
-		buscador.setBuscadorDeCGP(servicioCGP);
-		
-		//Busqueda de POIS por servicios externos.
-		
-		listaPorExterno.addAll(buscador.buscarBancoEnRepoExterno(nombre));
-		listaPorExterno.addAll(buscador.buscarCGPEnRepoExterno(nombre));
-		
-		if (!(listaPorExterno.isEmpty())){
-			
-			listaPorExterno.forEach(poi -> actualizarContraElRepo(poi));
-				
-		}
-		
-		return repositorioPois.search(nombre);      
-		
-	}	
-	
-	private void actualizarContraElRepo(POI poiEntrante){
-		try{
-			repositorioPois.create(poiEntrante);
-		}
-		catch(BusinessException excep){
-			repositorioPois.update(poiEntrante);
-		}
-	}
-
 }

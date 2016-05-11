@@ -7,59 +7,49 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import ar.utn.dds.POI.CentroGestionParticipacion;
+import ar.utn.dds.POI.POI;
 import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.ServicioExterno.CentroDTO;
 import ar.utn.dds.buscador.BuscadorDeCGP;
 import ar.utn.dds.buscador.buscadorDeBancos;
+import ar.utn.dds.exceptions.BusinessException;
+import ar.utn.dds.serviceLocator.ServiceLocator;
 
 public class BusquedaDePuntos {
 	
-	public static BuscadorDeCGP buscador;
-	public static buscadorDeBancos buscadorBanco;
+	public static ServiceLocator serviceLocator;
+	
 
-	public static List<CentroGestionParticipacion> buscarCGPEnRepoExterno(String nombre){
+	public List<POI> busquedaGeneral(String nombre){
 		
-		List<CentroDTO> listaDeCentroDTO = buscador.buscarPOI(nombre);
+
+// Ver por regla de negocio o por enunciado si es necesario actualizar cada vez que se haga una busqueda en el repositorio.
 		
-		if (listaDeCentroDTO.isEmpty()){
-			return new ArrayList<CentroGestionParticipacion>();
-			
-			
-		}else{
-			List<CentroGestionParticipacion> listaCGP = new ArrayList<CentroGestionParticipacion>();
-			listaDeCentroDTO.forEach(dto -> listaCGP.add(Conversor.getInstance().convertirDTOACGP(dto)));			
-			return listaCGP;
-		}
+//		listaPorExterno.addAll(buscador.buscarBancoEnRepoExterno(nombre));
+//		listaPorExterno.addAll(buscador.buscarCGPEnRepoExterno(nombre));
+//		if (!(listaPorExterno.isEmpty())){
+//			listaPorExterno.forEach(poi -> actualizarContraElRepo(poi));
+//		}
+//		return repositorioPois.search(nombre);   
 		
-	}
-	
-	public static List<SucursalBanco> buscarBancoEnRepoExterno(String nombre){
+		List<POI> Auxiliar = new ArrayList<POI>();
 		
-		JSONArray bancosJson = buscadorBanco.buscarPOI(nombre);
+		serviceLocator.getInstance().getServicios().forEach(serv -> Auxiliar.addAll(serv.buscarPOI(nombre)));
 		
-		if(bancosJson.isEmpty()){
-			return new ArrayList<SucursalBanco>();
-			
-		}else{
-			List<SucursalBanco> listaBancos = new ArrayList<SucursalBanco>();
-			
-			 for(int x=0; x<bancosJson.size(); x++) 
-			  {      
-				 listaBancos.add(Conversor.getInstance().jsonAbanco((JSONObject) bancosJson.get(x)));
-			  }   
-			 return listaBancos;
-		}
-		
+		return Auxiliar;
 		
 	}
 	
-	public static void setBuscadorDeCGP(BuscadorDeCGP buscadorDeCGP){
-		buscador = buscadorDeCGP;
-	}
 	
 	
-	public static void setBuscadorDeBancos(buscadorDeBancos buscadorDeBanco){
-		buscadorBanco = buscadorDeBanco;
-	}
+//	private void actualizarContraElRepo(POI poiEntrante){
+//		try{
+//			repositorioPois.create(poiEntrante);
+//		}
+//		catch(BusinessException excep){					//No es la misma excepcion.
+//			repositorioPois.update(poiEntrante);
+//		}
+//	}
+		
 	
 }
