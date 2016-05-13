@@ -3,22 +3,28 @@ package ar.utn.dds.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
-import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.POI.POI;
-import ar.utn.dds.POI.SucursalBanco;
-import ar.utn.dds.ServicioExterno.CentroDTO;
-import ar.utn.dds.buscador.BuscadorDeCGP;
-import ar.utn.dds.buscador.buscadorDeBancos;
-import ar.utn.dds.exceptions.BusinessException;
+import ar.utn.dds.repositorio.Repositorio;
 import ar.utn.dds.serviceLocator.ServiceLocator;
 
 public class BusquedaDePuntos {
 	
+	public List<OrigenDeDatos> origenesDeDatos;
 	public static ServiceLocator serviceLocator;
+	public static BusquedaDePuntos instance;
 	
+	public static BusquedaDePuntos getInstance(){
+		if (instance == null) {
+			instance = new BusquedaDePuntos();
+		}	
+		return instance;
+	}
+	
+	public BusquedaDePuntos(){
+		origenesDeDatos.add(new AdapterCGP());
+		origenesDeDatos.add(new AdapterBancos());
+		origenesDeDatos.add(Repositorio.getInstance());
+	}
 
 	public List<POI> busquedaGeneral(String nombre){
 		
@@ -34,7 +40,7 @@ public class BusquedaDePuntos {
 		
 		List<POI> Auxiliar = new ArrayList<POI>();
 		
-		serviceLocator.getInstance().getServicios().forEach(serv -> Auxiliar.addAll(serv.buscarPOI(nombre)));
+		origenesDeDatos.forEach(serv -> Auxiliar.addAll(serv.buscarPOI(nombre)));
 		
 		return Auxiliar;
 		

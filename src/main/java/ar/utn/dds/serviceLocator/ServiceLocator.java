@@ -12,7 +12,6 @@ import ar.utn.dds.buscador.buscadorDeBancos;
 import ar.utn.dds.exceptions.BusinessException;
 import ar.utn.dds.repositorio.Repositorio;
 import ar.utn.dds.utils.BusquedaDePuntos;
-import ar.utn.dds.utils.Conversor;
 import ar.utn.dds.utils.OrigenDeDatos;
 
 public class ServiceLocator {

@@ -6,32 +6,31 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.uqbar.geodds.Point;
 
-import ar.utn.dds.POI.CentroGestionParticipacion;
+import ar.utn.dds.POI.POI;
 import ar.utn.dds.ServicioExterno.CentroDTO;
 import ar.utn.dds.buscador.BuscadorDeCGP;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.juegoDeDatos.StubBuscadorCGP;
-import ar.utn.dds.utils.BusquedaDePuntos;
-import ar.utn.dds.utils.Conversor;
+import ar.utn.dds.utils.AdapterCGP;
 
 public class TestCGP extends JuegoDeDatos {
 
-	public List<CentroGestionParticipacion> listaCGP;
+	public List<POI> listaPOI;
+	public AdapterCGP adapter;
 
 	@Before
 	public void SetUp() {
 		setUpGeneral();
 		setUpCGP();
 		setUpDTO();
-		BusquedaDePuntos.setBuscadorDeCGP(new StubBuscadorCGP());
-		listaCGP = BusquedaDePuntos.buscarCGPEnRepoExterno("nombre");
+		adapter = new AdapterCGP();
+		adapter.setServicioCGP(new StubBuscadorCGP());
+		listaPOI = adapter.buscarPOI("nombre");
 
 	}
 
@@ -101,39 +100,29 @@ public class TestCGP extends JuegoDeDatos {
 	// Hay un elemento de la lista de CGP y antes no habia ninguno
 	@Test
 	public void testConverionDTOaCGP() {
-		BusquedaDePuntos.setBuscadorDeCGP(new StubBuscadorCGP());
-		listaCGP = new ArrayList<CentroGestionParticipacion>();
-		assertEquals(listaCGP.size(), 0);
-		listaCGP = BusquedaDePuntos.buscarCGPEnRepoExterno("nombre");
-		assertEquals(listaCGP.size(), 2);
+		listaPOI.clear();
+		adapter.setServicioCGP(new StubBuscadorCGP());
+		assertEquals(listaPOI.size(), 0);
+		listaPOI = adapter.buscarPOI("nombre");
+		assertEquals(listaPOI.size(), 2);
 	}
 
 	// Conversion de Zonas Incluidas a Barrio CGP
 	@Test
 	public void testConversionDeZonas() {
-		CentroGestionParticipacion cgp = listaCGP.get(0);
+		POI cgp = listaPOI.get(0);
 		assertEquals(cgp.getBarrio(), "Recoleta");
 	}
 
 	@Test
-	public void testConversionDeComuna() {
-		CentroGestionParticipacion cgp = listaCGP.get(0);
-		Point unPunto = new Point(11, 20);
-		cgp.getComuna().setAreaDeComuna(new Point(10, 20));
-		cgp.getComuna().setAreaDeComuna(new Point(10, 50));
-		cgp.getComuna().setAreaDeComuna(new Point(2, 20));
-		assertFalse(cgp.getComuna().estaCercaDe(unPunto));
-	}
-
-	@Test
 	public void conversionDeNombre() {
-		CentroGestionParticipacion cgp = listaCGP.get(0);
+		POI cgp = listaPOI.get(0);
 		assertEquals(cgp.getNombre(), "comuna1");
 	}
 
 	@Test
 	public void testJornadaDisponible() {
-		CentroGestionParticipacion cgp = listaCGP.get(0);
+		POI cgp = listaPOI.get(0);
 		assertTrue(cgp.estaDisponible("rentas", lunes12hs));
 		assertFalse(cgp.estaDisponible("ServicioQueNoContiene", lunes12hs));
 		assertFalse(cgp.estaDisponible("rentas", lunes23hs));
@@ -141,33 +130,33 @@ public class TestCGP extends JuegoDeDatos {
 
 	@Test
 	public void testDTOJuegoDeDatos() {
-		centrosDTO.forEach(centro -> listaCGP.add(Conversor.getInstance().convertirDTOACGP(centro)));
+		centrosDTO.forEach(centro -> listaPOI.add(adapter.convertirDTOACGP(centro)));
 		assertEquals(centrosDTO.size(), 3);
 
 	}
 	
 	@Test
 	public void testNoEstaDisponibleEnHorarioOUTConJuegoDeDatos(){
-		listaCGP.clear();
-		centrosDTO.forEach(centro -> listaCGP.add(Conversor.getInstance().convertirDTOACGP(centro)));
-		assertTrue(listaCGP.get(0).estaDisponible("rentas", lunes1210hs));
-		assertFalse(listaCGP.get(0).estaDisponible("otracosa", lunes1210hs));
-		assertTrue(listaCGP.get(1).estaDisponible("Asesoramiento", lunes1210hs));
-		assertFalse(listaCGP.get(1).estaDisponible("Asesoramiento", martes04hs));
+		listaPOI.clear();
+		centrosDTO.forEach(centro -> listaPOI.add(adapter.convertirDTOACGP(centro)));
+		assertTrue(listaPOI.get(0).estaDisponible("rentas", lunes1210hs));
+		assertFalse(listaPOI.get(0).estaDisponible("otracosa", lunes1210hs));
+		assertTrue(listaPOI.get(1).estaDisponible("Asesoramiento", lunes1210hs));
+		assertFalse(listaPOI.get(1).estaDisponible("Asesoramiento", martes04hs));
 	}
 
 	@Test
 	public void testDisponiblesEnHorario() {
-		assertTrue(listaCGP.get(0).estaDisponible("rentas", lunes12hs));
-		assertFalse(listaCGP.get(1).estaDisponible("rentas", lunes12hs));
+		assertTrue(listaPOI.get(0).estaDisponible("rentas", lunes12hs));
+		assertFalse(listaPOI.get(1).estaDisponible("rentas", lunes12hs));
 	}
 
 	@Test
 	public void testConMocks() {
 		BuscadorDeCGP buscador = mock(BuscadorDeCGP.class);
-		BusquedaDePuntos.setBuscadorDeCGP(buscador);
+		adapter.setServicioCGP(buscador);
 
-		BusquedaDePuntos.buscarCGPEnRepoExterno("nombre");
+		adapter.buscarPOI("nombre");
 
 		verify(buscador).buscarPOI("nombre");
 
@@ -176,8 +165,8 @@ public class TestCGP extends JuegoDeDatos {
 	@Test
 	public void pruebaConversionDePalabrasClave(){
 		CentroDTO centro = centrosDTO.get(0);
-		assertTrue(Conversor.getInstance().palabrasClaveParaCGP(centro).contains("rentas"));
-		assertTrue(Conversor.getInstance().palabrasClaveParaCGP(centro).contains("Recoleta"));
+		assertTrue(adapter.palabrasClaveParaCGP(centro).contains("rentas"));
+		assertTrue(adapter.palabrasClaveParaCGP(centro).contains("Recoleta"));
 		
 	}
 }

@@ -2,12 +2,15 @@ package ar.utn.dds.repositorio;
 import org.uqbar.commons.model.*;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
+
 import java.util.List;
+
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.exceptions.BusinessException;
+import ar.utn.dds.utils.OrigenDeDatos;
 
 
-public class Repositorio extends CollectionBasedRepo<POI>{
+public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDatos{
 	
 	static Repositorio instance;
 
@@ -93,6 +96,11 @@ public class Repositorio extends CollectionBasedRepo<POI>{
 				return poi.equals((POI)example);
 					}
 			};
+	}
+
+	@Override
+	public List<POI> buscarPOI(String nombre) {
+		return this.search(nombre);
 	}
 
 }

@@ -5,14 +5,14 @@ import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.POI;
-
 import ar.utn.dds.POI.SucursalBanco; //SACAR
-
 import ar.utn.dds.buscador.buscadorDeBancos;
+import ar.utn.dds.servicios.Servicio;
 
-public class AdapterBancos extends OrigenDeDatos{
+public class AdapterBancos implements OrigenDeDatos{
 	
 	private buscadorDeBancos servicioBanco;
 	
@@ -29,9 +29,7 @@ public class AdapterBancos extends OrigenDeDatos{
 														  // Podria castearse para SucursalBanco
 			 for(int x=0; x<bancosJson.size(); x++) 
 			  {      
-				 listaBancos.add(Conversor.getInstance().jsonAbanco((JSONObject) bancosJson.get(x)));
-				 
-				 //Eliminar la clase 'Conversor' y pasar los metodos necesarios para la conversion aqui
+				 listaBancos.add(jsonAbanco((JSONObject) bancosJson.get(x)));
 			  }   
 			 return listaBancos;
 		}
@@ -41,6 +39,26 @@ public class AdapterBancos extends OrigenDeDatos{
 	// ** Getters and Setters
 	// ********************************************************
 	
+	public POI jsonAbanco(JSONObject obj) {
+SucursalBanco banco = new SucursalBanco();
+		
+		banco.setBarrio(obj.get("sucursal").toString()); 
+		banco.setNombre(obj.get("banco").toString());
+		
+		Point ubcicacionActual = new Point(Integer.parseInt(obj.get("x").toString()), Integer.parseInt(obj.get("y").toString()));
+		banco.setUbicacionActual(ubcicacionActual);
+		
+		String serviciosJson = obj.get("servicios").toString();
+		String[] arrayServicios = serviciosJson.split(",");
+		List<Servicio> listaServicios = new ArrayList<Servicio>();
+		for(int i=0; i<arrayServicios.length; i++){
+			Servicio servicioBanco = new Servicio(arrayServicios[i], null);
+			listaServicios.add(servicioBanco);
+        }
+		banco.setListaServicios(listaServicios);
+		return banco;
+	}
+
 	public buscadorDeBancos getServicioBanco() {
 		return servicioBanco;
 	}

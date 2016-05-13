@@ -4,10 +4,8 @@ import java.util.List;
 
 import ar.utn.dds.POI.POI;
 
-public abstract class OrigenDeDatos {
+public abstract interface OrigenDeDatos {
 	
-	public List<POI> buscarPOI(String nombre) {	//No me interesa nada en esta clase
-		return null;
-	}
+	public List<POI> buscarPOI(String nombre);
 
 }
