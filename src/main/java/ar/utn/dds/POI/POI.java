@@ -35,14 +35,17 @@ public abstract class POI extends Entity {
 	// ********************************************************
 	
 	public void validate(){
-		if (StringUtils.isNotEmpty(this.nombre))
-			throw 
-			
-		if this.ubicacionActual !=null);
+		this.esValido();
+		
+//		if (StringUtils.isNotEmpty(this.nombre))
+//			throw 
+//			
+//		if this.ubicacionActual !=null);
+		
 	}
 	
 	public Boolean esValido(){
-		//return (StringUtils.isNotEmpty(this.nombre) && this.ubicacionActual !=null);
+		return (StringUtils.isNotEmpty(this.nombre) && this.ubicacionActual !=null);
 		
 		
 	}

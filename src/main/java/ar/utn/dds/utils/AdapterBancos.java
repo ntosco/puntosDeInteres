@@ -40,7 +40,7 @@ public class AdapterBancos implements OrigenDeDatos{
 	// ********************************************************
 	
 	public POI jsonAbanco(JSONObject obj) {
-SucursalBanco banco = new SucursalBanco();
+		SucursalBanco banco = new SucursalBanco();
 		
 		banco.setBarrio(obj.get("sucursal").toString()); 
 		banco.setNombre(obj.get("banco").toString());

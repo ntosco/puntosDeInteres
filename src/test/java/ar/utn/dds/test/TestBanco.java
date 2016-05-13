@@ -84,11 +84,12 @@ public class TestBanco extends JuegoDeDatos {
 		obj.put("gerente", "Pablo Perez");
 		obj.put("servicios", "[cobrocheques,dep�sitos,extracciones]");
 		POI banco = adapter.jsonAbanco(obj);
-		assertTrue(banco.getBarrio()=="Avellaneda");
-		assertFalse(banco.getDireccionNombre()== "Banco de la plaza");
-		assertTrue(banco.getUbicacionActual().latitude() == 35);
-		//assertTrue(banco.getListaServicios().size() == 3);
+		
+		assertEquals("Avellaneda",banco.getBarrio());
+		assertEquals(35,(int)banco.getUbicacionActual().latitude());
+
 	}
+	
 	
 	@Test
 	public void conversorJsonBancoUbicacion(){
@@ -100,10 +101,10 @@ public class TestBanco extends JuegoDeDatos {
 		obj.put("gerente", "Pablo Perez");
 		obj.put("servicios", "[cobrocheques,dep�sitos,extracciones]");
 		POI banco = adapter.jsonAbanco(obj);
-		assertTrue(banco.getUbicacionActual().latitude() == 35);
 		
+		assertEquals(35,(int) banco.getUbicacionActual().latitude());
 	}
-	
+
 	@Test
 	public void conversorJsonBancoDireccionNombre(){
 		JSONObject obj = new JSONObject();
@@ -114,7 +115,9 @@ public class TestBanco extends JuegoDeDatos {
 		obj.put("gerente", "Pablo Perez");
 		obj.put("servicios", "[cobrocheques,dep�sitos,extracciones]");
 		POI banco = adapter.jsonAbanco(obj);
-		assertTrue(banco.getNombre()== "Banco de la plaza");
+		
+		assertEquals("Banco de la plaza",banco.getNombre());
+
 	}
 	
 	@Test
@@ -127,13 +130,19 @@ public class TestBanco extends JuegoDeDatos {
 		obj.put("gerente", "Pablo Perez");
 		obj.put("servicios", "[cobrocheques,dep�sitos,extracciones]");
 		POI banco = adapter.jsonAbanco(obj);
-		assertTrue(banco.getBarrio()=="Avellaneda");
+		
+		assertEquals("Avellaneda",banco.getBarrio());
+
 	}
 	
 	@Test
 	public void conversionBancos(){
+		
+		int sizeAnterior = 0;
+		
 		List<POI> listaBancos = adapter.buscarPOI("lalala");
-		assertTrue(listaBancos.size() == 2);
+		assertEquals(sizeAnterior + 2 , listaBancos.size());
+
 	}
 	
 /*	
