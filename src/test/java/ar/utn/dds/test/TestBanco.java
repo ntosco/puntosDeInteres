@@ -11,10 +11,7 @@ import ar.utn.dds.POI.POI;
 import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.juegoDeDatos.StubBuscadorBanco;
-import ar.utn.dds.juegoDeDatos.StubBuscadorCGP;
 import ar.utn.dds.utils.AdapterBancos;
-import ar.utn.dds.utils.AdapterCGP;
-import ar.utn.dds.utils.BusquedaDePuntos;
 
 
 public class TestBanco extends JuegoDeDatos {

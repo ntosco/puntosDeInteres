@@ -12,7 +12,6 @@ import org.junit.*;
 import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.POI.SucursalBanco;
-import ar.utn.dds.ServicioExterno.CentroDTO;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.juegoDeDatos.StubBuscadorBanco;
 import ar.utn.dds.juegoDeDatos.StubBuscadorCGP;
@@ -20,14 +19,12 @@ import ar.utn.dds.repositorio.Repositorio;
 import ar.utn.dds.serviceLocator.ServiceLocator;
 import ar.utn.dds.servicios.Servicio;
 import ar.utn.dds.utils.BusquedaDePuntos;
-import ar.utn.dds.buscador.BuscadorDeCGP;
 import ar.utn.dds.buscador.StubNuevoBanco;
 import ar.utn.dds.buscador.StubNuevoCGP;
-import ar.utn.dds.buscador.buscadorDeBancos;
-
-
-
 import ar.utn.dds.exceptions.BusinessException;
+import ar.utn.dds.extern.banco.buscadorDeBancos;
+import ar.utn.dds.extern.cgp.BuscadorDeCGP;
+import ar.utn.dds.extern.cgp.CentroDTO;
 import ar.utn.dds.utils.Conversor;
 
 

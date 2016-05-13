@@ -12,12 +12,12 @@ import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.POI.POI;
-import ar.utn.dds.ServicioExterno.CentroDTO;
-import ar.utn.dds.ServicioExterno.RangoServicioDTO;
-import ar.utn.dds.ServicioExterno.ServicioDTO;
-import ar.utn.dds.buscador.BuscadorDeCGP;
 //SACAR
 import ar.utn.dds.comunas.Comuna;
+import ar.utn.dds.extern.cgp.BuscadorDeCGP;
+import ar.utn.dds.extern.cgp.CentroDTO;
+import ar.utn.dds.extern.cgp.RangoServicioDTO;
+import ar.utn.dds.extern.cgp.ServicioDTO;
 import ar.utn.dds.servicios.Servicio;
 
 public class AdapterCGP implements OrigenDeDatos {

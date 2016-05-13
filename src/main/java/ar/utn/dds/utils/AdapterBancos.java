@@ -9,7 +9,7 @@ import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.POI.SucursalBanco; //SACAR
-import ar.utn.dds.buscador.buscadorDeBancos;
+import ar.utn.dds.extern.banco.buscadorDeBancos;
 import ar.utn.dds.servicios.Servicio;
 
 public class AdapterBancos implements OrigenDeDatos{

@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import org.junit.*;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.repositorio.Repositorio;
-import ar.utn.dds.POI.POI;
 import ar.utn.dds.POI.ParadaDeColectivo;
 import ar.utn.dds.exceptions.BusinessException;
 

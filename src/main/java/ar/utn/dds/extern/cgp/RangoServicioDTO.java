@@ -1,4 +1,4 @@
-package ar.utn.dds.ServicioExterno;
+package ar.utn.dds.extern.cgp;
 
 public class RangoServicioDTO {
 	

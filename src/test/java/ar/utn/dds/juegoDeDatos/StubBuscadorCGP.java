@@ -3,10 +3,10 @@ package ar.utn.dds.juegoDeDatos;
 import java.util.ArrayList;
 import java.util.List;
 
-import ar.utn.dds.ServicioExterno.CentroDTO;
-import ar.utn.dds.ServicioExterno.RangoServicioDTO;
-import ar.utn.dds.ServicioExterno.ServicioDTO;
-import ar.utn.dds.buscador.BuscadorDeCGP;
+import ar.utn.dds.extern.cgp.BuscadorDeCGP;
+import ar.utn.dds.extern.cgp.CentroDTO;
+import ar.utn.dds.extern.cgp.RangoServicioDTO;
+import ar.utn.dds.extern.cgp.ServicioDTO;
 
 public class StubBuscadorCGP implements BuscadorDeCGP {
 

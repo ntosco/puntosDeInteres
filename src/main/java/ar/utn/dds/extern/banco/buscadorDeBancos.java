@@ -1,4 +1,4 @@
-package ar.utn.dds.buscador;
+package ar.utn.dds.extern.banco;
 
 import org.json.simple.JSONArray;
 

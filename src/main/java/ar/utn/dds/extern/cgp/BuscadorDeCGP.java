@@ -1,8 +1,6 @@
-package ar.utn.dds.buscador;
+package ar.utn.dds.extern.cgp;
 
 import java.util.List;
-
-import ar.utn.dds.ServicioExterno.CentroDTO;
 
 public interface BuscadorDeCGP {
 	
