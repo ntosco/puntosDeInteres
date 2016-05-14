@@ -6,7 +6,7 @@ import org.apache.commons.collections15.Predicate;
 import java.util.List;
 
 import ar.utn.dds.POI.POI;
-import ar.utn.dds.exceptions.BusinessException;
+import ar.utn.dds.exceptions.RepositoryException;
 import ar.utn.dds.utils.OrigenDeDatos;
 
 
@@ -61,13 +61,13 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 	protected void validateCreate(POI nuevoPoi) {
 		nuevoPoi.validateCreate();
 		if (this.validateExistence(nuevoPoi)) 
-			throw new BusinessException("El POI ya existe");
+			throw new RepositoryException("El POI ya existe");
 	}
 
 	@Override
 	protected void validateDelete(POI nuevoPoi) {
 		if (!this.validateExistence(nuevoPoi))
-			throw new BusinessException("El POI no existe en el repositorio");
+			throw new RepositoryException("El POI no existe en el repositorio");
 	}
 	
 	// ********************************************************

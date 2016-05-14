@@ -5,7 +5,7 @@ import org.junit.*;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.repositorio.Repositorio;
 import ar.utn.dds.POI.ParadaDeColectivo;
-import ar.utn.dds.exceptions.BusinessException;
+import ar.utn.dds.exceptions.*;
 
 public class TestRepositorioPois extends JuegoDeDatos {
 
@@ -36,15 +36,15 @@ public class TestRepositorioPois extends JuegoDeDatos {
 		assertEquals(repositorio.allInstances().size(),++size);
 	}
 
-	@Test(expected = BusinessException.class)
+	@Test(expected = InvalidModelException.class)
 	public void noCreaPOICuandoEsteEsInvalido(){
 		int size = repositorio.allInstances().size();
-		repositorio.create(this.cafeMartinez);
+		repositorio.create(this.cafeMartinez); //cafe martinez no tiene "nombre". por eso debe fallar
 		assertEquals(repositorio.allInstances().size(),++size);
 	}
 	
 	
-	@Test(expected = BusinessException.class)
+	@Test(expected = RepositoryException.class)
 	public void createPoiExistenteEnListaTest(){
 		repositorio.create(this.parada15);
 		repositorio.create(this.parada15);
@@ -70,7 +70,7 @@ public class TestRepositorioPois extends JuegoDeDatos {
 		assertEquals(--size,repositorio.allInstances().size());
 	}
 	
-	@Test(expected = BusinessException.class)
+	@Test(expected = RepositoryException.class)
 	public void noEliminoCuandoPoiEsInexistente(){
 		repositorio.delete(this.parada15);
 	}

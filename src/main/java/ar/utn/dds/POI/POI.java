@@ -8,7 +8,7 @@ import org.uqbar.geodds.*;
 import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
 import ar.utn.dds.utils.Jornada;
 import org.apache.commons.lang.StringUtils;
-import ar.utn.dds.exceptions.BusinessException;
+import ar.utn.dds.exceptions.*;
 
 public abstract class POI extends Entity {
 
@@ -35,38 +35,23 @@ public abstract class POI extends Entity {
 	// ********************************************************
 	
 	public void validate(){
-		this.esValido();
-		
-//		if (StringUtils.isNotEmpty(this.nombre))
-//			throw 
-//			
-//		if this.ubicacionActual !=null);
-		
+		if (StringUtils.isEmpty(this.nombre))
+			throw new InvalidModelException("El POI no posee un nombre");
+		if (this.ubicacionActual == null)
+			throw new InvalidModelException("El POI no posee ubicacion");
 	}
-	
-	public Boolean esValido(){
-		return (StringUtils.isNotEmpty(this.nombre) && this.ubicacionActual !=null);
 		
-		
-	}
-	
 	@Override
 	public void validateCreate(){
 		this.validate();
-		
-		if(!this.esValido())
-			throw new BusinessException("El POI no posee los datos necesarios : Nombre y ubicación");
 	}
 
 	public void validateUpdate(){
 		this.validate();
-		
 		if(this.isNew()){
-			throw new BusinessException("El POI no posee un ID asociado al repositorio");
+			throw new InvalidModelException("El POI no posee un ID asociado al repositorio");
 		}
 	}
-	
-	
 	
 	@Override
 	public boolean equals(Object obj){
