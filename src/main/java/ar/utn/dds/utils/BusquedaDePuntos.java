@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.utn.dds.POI.POI;
-import ar.utn.dds.repositorio.Repositorio;
-import ar.utn.dds.serviceLocator.ServiceLocator;
+
 
 public class BusquedaDePuntos {
 	
-	public List<OrigenDeDatos> origenesDeDatos;
+	public List<OrigenDeDatos> origenesDeDatos = new ArrayList<OrigenDeDatos>();
+	private List<POI> Auxiliar = new ArrayList<POI>();
+	
 	public static BusquedaDePuntos instance;
 	
 	
@@ -21,33 +22,34 @@ public class BusquedaDePuntos {
 		return instance;
 	}
 	
-//	public BusquedaDePuntos(){
-//		origenesDeDatos.add(new AdapterCGP());
-//		origenesDeDatos.add(new AdapterBancos());
-//		origenesDeDatos.add(Repositorio.getInstance());
-//	}
-
 	public List<POI> busquedaGeneral(String nombre){
-		
-		List<POI> Auxiliar = new ArrayList<POI>();
-		
-		origenesDeDatos.forEach(serv -> Auxiliar.addAll(serv.buscarPOI(nombre)));
-		
+		Auxiliar.clear();
+		origenesDeDatos.forEach(serv -> agregarAAuxiliar(serv.buscarPOI(nombre)));
 		return Auxiliar;
 		
 	}
 	
-	     // ********************************************************
-		// ** Getters and Setters
-		// ********************************************************
+	private void agregarAAuxiliar(List<POI> lista){	
+		if (!lista.isEmpty()){
+			Auxiliar.addAll(lista);
+		}		
+	}
+	
+// ********************************************************
+// ** Getters and Setters
+// ********************************************************
 		
-		public List<OrigenDeDatos> getServicios() {
-			return origenesDeDatos;
-		}
+	public List<OrigenDeDatos> getServicios() {
+		return origenesDeDatos;
+	}
 		
-		public void setServicio(OrigenDeDatos servicio) {
-			this.origenesDeDatos.add(servicio);
-		}
+	public void borrarListaServicios(){
+		this.origenesDeDatos.clear();
+	}
+	
+	public void setServicio(OrigenDeDatos servicio) {
+		this.origenesDeDatos.add(servicio);
+	}
 	
 	
 }

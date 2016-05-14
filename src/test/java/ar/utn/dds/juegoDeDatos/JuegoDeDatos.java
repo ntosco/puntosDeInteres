@@ -630,6 +630,7 @@ abstract public class JuegoDeDatos {
 		cgpPaternal.setJornadaDisponible(jornada24x7);
 
 		cgpLaBoca = new CentroGestionParticipacion();
+		cgpLaBoca.setNombre("la boca");
 		cgpLaBoca.setUbicacionActual(ubicacionCGPLaBoca);
 		cgpLaBoca.setComuna(comuna4);
 		cgpLaBoca.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
