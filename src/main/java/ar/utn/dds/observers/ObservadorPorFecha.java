@@ -1,0 +1,37 @@
+package ar.utn.dds.observers;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Hashtable;
+import java.util.List;
+
+import ar.utn.dds.utils.BusquedaDePuntos;
+import ar.utn.dds.utils.Consulta;
+
+public class ObservadorPorFecha implements Observador{
+
+	//private List<Integer> BusquedasPorFecha = new ArrayList<Integer>();
+	private Hashtable<String,Integer> BusquedasPorFecha = new Hashtable<String,Integer>();
+
+	public static ObservadorPorFecha instance;
+	
+	public static ObservadorPorFecha getInstance(){
+		if (instance == null) {
+			instance = new ObservadorPorFecha();
+		}	
+		return instance;
+	}
+	
+	
+	@Override
+	public void actualizar(Consulta consulta) {
+		if(BusquedasPorFecha.containsKey(consulta.getFecha())){
+			BusquedasPorFecha.put(consulta.getFecha(), consulta.getCantidadDeResultados());
+		}else{
+			 BusquedasPorFecha.put(consulta.getFecha(), BusquedasPorFecha.get(consulta.getFecha()) + consulta.getCantidadDeResultados());
+		}
+		// TODO Auto-generated method stub
+		
+	}
+
+}
