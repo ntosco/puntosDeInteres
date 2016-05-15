@@ -4,12 +4,12 @@ import ar.utn.dds.managers.ManagerDeAcciones;
 
 public abstract class AccionDecorador implements ManagerDeAcciones {
 	
-	private ManagerDeAcciones Decorado;
+	private ManagerDeAcciones decorado;
 
 
 	public AccionDecorador(ManagerDeAcciones decorado) {
 		super();
-		Decorado = decorado;
+		this.decorado = decorado;
 	}
 	
 	
