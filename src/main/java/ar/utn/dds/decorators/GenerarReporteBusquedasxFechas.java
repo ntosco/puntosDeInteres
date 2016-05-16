@@ -18,17 +18,17 @@ public class GenerarReporteBusquedasxFechas extends AccionDecorador{
 	@Override
 	public void ejecutarse(Consulta consulta) {
 		this.getDecorado().ejecutarse(consulta);
-		this.asignarCantResultadosAFecha(consulta.getFecha(),consulta.getCantidadDeResultados());
+		this.asignarCantBusquedasAFecha(consulta.getFecha());
 	}
 
-	public void asignarCantResultadosAFecha(LocalDate fecha,int cantResultados){
-		if(this.listaCantDeBusquedasxFecha.containsKey(fecha.toString())){
-			cantResultados +=  this.listaCantDeBusquedasxFecha.get(fecha);
-		}
-		this.listaCantDeBusquedasxFecha.put(fecha.toString(), cantResultados);
+	public void asignarCantBusquedasAFecha(LocalDate fecha){
+		int cantBusquedas = 1;
+		if(this.listaCantDeBusquedasxFecha.containsKey(fecha.toString()))
+			cantBusquedas =  this.listaCantDeBusquedasxFecha.get(fecha.toString()) + 1;
+		this.listaCantDeBusquedasxFecha.put(fecha.toString(), cantBusquedas);
 	}
 	
-	public Map<String, Integer> getListaBusquedasxUsuario() {
+	public Map<String, Integer> getListaBusquedasxFecha() {
 		return listaCantDeBusquedasxFecha;
 	}
 }
