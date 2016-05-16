@@ -23,7 +23,6 @@ public class Consulta {
 	public void activarse() {
 		
 		long tiempoInicial = System.currentTimeMillis();
-
 		this.cantidadDeResultados = buscador.busquedaGeneral(this.fraseBuscada).size();
 		this.calcularTiempoDeRespuesta(tiempoInicial);
 
@@ -33,6 +32,10 @@ public class Consulta {
 		this.tiempoDeEjecución = System.currentTimeMillis() - tiempoInicial;
 	}
 
+	// ********************************************************
+	// ** Getters and Setters
+	// ********************************************************
+	
 	public String getFraseBuscada() {
 		return fraseBuscada;
 	}
