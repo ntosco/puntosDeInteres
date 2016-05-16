@@ -20,7 +20,7 @@ public class Consulta {
 		this.fecha = LocalDate.now();
 	}
 
-	public void ejecutarse() {
+	public void activarse() {
 		
 		long tiempoInicial = System.currentTimeMillis();
 

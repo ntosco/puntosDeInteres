@@ -1,10 +1,10 @@
 package ar.utn.dds.decorators;
 
-import ar.utn.dds.managers.ManagerDeAcciones;
+import ar.utn.dds.managers.ManagerDeConsultas;
 
 public class NotificarTiempoDeConsulta extends AccionDecorador{
 
-	public NotificarTiempoDeConsulta(ManagerDeAcciones decorado) {
+	public NotificarTiempoDeConsulta(ManagerDeConsultas decorado) {
 		super(decorado);
 		// TODO Auto-generated constructor stub
 	}

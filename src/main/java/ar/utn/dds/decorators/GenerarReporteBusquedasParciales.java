@@ -1,10 +1,10 @@
 package ar.utn.dds.decorators;
 
-import ar.utn.dds.managers.ManagerDeAcciones;
+import ar.utn.dds.managers.ManagerDeConsultas;
 
 public class GenerarReporteBusquedasParciales extends AccionDecorador{
 
-	public GenerarReporteBusquedasParciales(ManagerDeAcciones decorado) {
+	public GenerarReporteBusquedasParciales(ManagerDeConsultas decorado) {
 		super(decorado);
 		// TODO Auto-generated constructor stub
 	}
