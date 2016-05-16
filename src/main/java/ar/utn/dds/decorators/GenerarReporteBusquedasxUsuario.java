@@ -31,6 +31,10 @@ public class GenerarReporteBusquedasxUsuario extends AccionDecorador {
 
 	}
 
+	public Map<String, Integer> getListaBusquedasxUsuario() {
+		return listaBusquedasxUsuario;
+	}
+
 
 
 

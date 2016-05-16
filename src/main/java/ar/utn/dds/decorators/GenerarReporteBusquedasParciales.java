@@ -21,6 +21,10 @@ public class GenerarReporteBusquedasParciales extends AccionDecorador{
 		this.getDecorado().ejecutarse(consulta);
 		this.cantParciales.add(consulta.getCantidadDeResultados());
 	}
+
+	public List<Integer> getCantParciales() {
+		return cantParciales;
+	}
 	
 
 }

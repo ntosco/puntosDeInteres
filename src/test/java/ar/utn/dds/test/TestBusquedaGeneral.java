@@ -24,7 +24,7 @@ public class TestBusquedaGeneral extends JuegoDeDatos {
 	public AdapterCGP adapterCGP;
 	
 	Repositorio repositorio = Repositorio.getInstance();
-	BusquedaDePuntos buscadorPuntos = BusquedaDePuntos.getInstance();
+	protected BusquedaDePuntos buscadorPuntos = BusquedaDePuntos.getInstance();
 	
 	@Before
 	public void SetUp(){

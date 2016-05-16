@@ -1,17 +1,21 @@
 package ar.utn.dds.decorators;
 
 import ar.utn.dds.managers.ManagerDeConsultas;
+import ar.utn.dds.utils.Consulta;
 
 public class NotificarTiempoDeConsulta extends AccionDecorador{
+	
+	private Integer tiempoMaximo;
 
-	public NotificarTiempoDeConsulta(ManagerDeConsultas decorado) {
+	public NotificarTiempoDeConsulta(Integer tiempoMaximo,ManagerDeConsultas decorado) {
 		super(decorado);
-		// TODO Auto-generated constructor stub
+		this.tiempoMaximo = tiempoMaximo;
 	}
 
+
 	@Override
-	public void ejecutarse() {
-		// TODO Auto-generated method stub
+	public void ejecutarse(Consulta consulta) {
+		this.getDecorado().ejecutarse(consulta);
 		
 	}
 

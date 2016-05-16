@@ -21,12 +21,19 @@ public class AlmacenarResultados extends AccionDecorador {
 		this.getDecorado().ejecutarse(consulta);
 		this.almacenarConsulta(consulta);
 		
-		
 	}
 
 	private void almacenarConsulta(Consulta consulta) {
 		this.consultasAlmacenadas.add(consulta);
 		
+	}
+
+	public List<Consulta> getConsultasAlmacenadas() {
+		return consultasAlmacenadas;
+	}
+
+	public void setConsultasAlmacenadas(List<Consulta> consultasAlmacenadas) {
+		this.consultasAlmacenadas = consultasAlmacenadas;
 	}
 
 

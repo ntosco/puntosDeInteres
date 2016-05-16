@@ -1,6 +1,7 @@
 package ar.utn.dds.decorators;
 
 import ar.utn.dds.managers.ManagerDeConsultas;
+import ar.utn.dds.utils.Consulta;
 
 public class GenerarReporteBusquedasxFechas extends AccionDecorador{
 
@@ -10,7 +11,7 @@ public class GenerarReporteBusquedasxFechas extends AccionDecorador{
 	}
 
 	@Override
-	public void ejecutarse() {
+	public void ejecutarse(Consulta consulta) {
 		// TODO Auto-generated method stub
 		
 	}
