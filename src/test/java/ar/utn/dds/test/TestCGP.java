@@ -169,4 +169,10 @@ public class TestCGP extends JuegoDeDatos {
 		assertTrue(adapter.palabrasClaveParaCGP(centro).contains("Recoleta"));
 		
 	}
+	
+	@Test
+	public void buiderTest(){
+		assertEquals(cgpPaternal.getNombre(), "paternal");
+	}
 }
+

@@ -15,6 +15,7 @@ import ar.utn.dds.POI.ParadaDeColectivo;
 import ar.utn.dds.POI.Rubro;
 import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.comunas.Comuna;
+import ar.utn.dds.creacionales.CgpBuilder;
 import ar.utn.dds.extern.banco.buscadorDeBancos;
 import ar.utn.dds.extern.cgp.CentroDTO;
 import ar.utn.dds.extern.cgp.RangoServicioDTO;
@@ -621,13 +622,20 @@ abstract public class JuegoDeDatos {
 	}
 
 	public void setUpCGP() {
+		
+		CgpBuilder builderPaternal = new CgpBuilder();
+		builderPaternal.crearComuna();
+		builderPaternal.crearListaServicios(servicioCPyRentas);
+		builderPaternal.setearDatosComunes("paternal", "Boedo", "Boedo", 156 , punto10comuna, palabrasClaveCGPPaternal, jornadaBancaria);
+		cgpPaternal = builderPaternal.build();
+		
 
-		cgpPaternal = new CentroGestionParticipacion();
+/*		cgpPaternal = new CentroGestionParticipacion();
 		cgpPaternal.setUbicacionActual(ubicacionCGPPaternal);
 		cgpPaternal.setComuna(comuna3);
 		cgpPaternal.setListaServicios(servicioCPyRentas);
 		cgpPaternal.setListaPalabrasClave(palabrasClaveCGPPaternal);
-		cgpPaternal.setJornadaDisponible(jornada24x7);
+		cgpPaternal.setJornadaDisponible(jornada24x7); */ 
 
 		cgpLaBoca = new CentroGestionParticipacion();
 		cgpLaBoca.setNombre("la boca");
