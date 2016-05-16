@@ -14,8 +14,6 @@ public abstract class AccionDecorador implements ManagerDeConsultas {
 	}
 	
 	
-	public abstract void ejecutarse();
-
 	public abstract void ejecutarse(Consulta consulta);
 
 	public ManagerDeConsultas getDecorado() {

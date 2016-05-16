@@ -33,4 +33,44 @@ public class Consulta {
 		this.tiempoDeEjecución = System.currentTimeMillis() - tiempoInicial;
 	}
 
+	public String getFraseBuscada() {
+		return fraseBuscada;
+	}
+
+	public void setFraseBuscada(String fraseBuscada) {
+		this.fraseBuscada = fraseBuscada;
+	}
+
+	public Integer getCantidadDeResultados() {
+		return cantidadDeResultados;
+	}
+
+	public void setCantidadDeResultados(Integer cantidadDeResultados) {
+		this.cantidadDeResultados = cantidadDeResultados;
+	}
+
+	public long getTiempoDeEjecución() {
+		return tiempoDeEjecución;
+	}
+
+	public void setTiempoDeEjecución(long tiempoDeEjecución) {
+		this.tiempoDeEjecución = tiempoDeEjecución;
+	}
+
+	public LocalDate getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(LocalDate fecha) {
+		this.fecha = fecha;
+	}
+
+	public String getUsuarioEjecutor() {
+		return usuarioEjecutor;
+	}
+
+	public void setUsuarioEjecutor(String usuarioEjecutor) {
+		this.usuarioEjecutor = usuarioEjecutor;
+	}
+
 }

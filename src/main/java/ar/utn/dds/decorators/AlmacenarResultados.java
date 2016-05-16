@@ -29,18 +29,7 @@ public class AlmacenarResultados extends AccionDecorador {
 		
 	}
 
-	@Override
-	public void ejecutarse() {
-		// TODO Auto-generated method stub
-		
-	}
 
-
-	
-	
-	
-	
-	
 	
 
 }

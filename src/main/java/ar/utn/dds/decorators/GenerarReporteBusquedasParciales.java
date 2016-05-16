@@ -1,8 +1,15 @@
 package ar.utn.dds.decorators;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ar.utn.dds.managers.ManagerDeConsultas;
+import ar.utn.dds.utils.Consulta;
 
 public class GenerarReporteBusquedasParciales extends AccionDecorador{
+	
+	List<Integer> cantParciales = new ArrayList<Integer>();
+	
 
 	public GenerarReporteBusquedasParciales(ManagerDeConsultas decorado) {
 		super(decorado);
@@ -10,9 +17,10 @@ public class GenerarReporteBusquedasParciales extends AccionDecorador{
 	}
 
 	@Override
-	public void ejecutarse(){
-		// TODO Auto-generated method stub
-		
+	public void ejecutarse(Consulta consulta) {
+		this.getDecorado().ejecutarse(consulta);
+		this.cantParciales.add(consulta.getCantidadDeResultados());
 	}
+	
 
 }
