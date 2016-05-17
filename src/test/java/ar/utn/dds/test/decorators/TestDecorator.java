@@ -38,8 +38,8 @@ public class TestDecorator extends TestBusquedaGeneral {
 		managerReporteBusquedasParciales = new GenerarReporteBusquedasParciales(managerDeConsulta);
 		managerReporteBusquedaxUsuario = new GenerarReporteBusquedasxUsuario(managerDeConsulta);
 		managerReporteBusquedaxFecha = new GenerarReporteBusquedasxFechas(managerDeConsulta);
-		managerNotificarTiempoDeConsulta = new NotificarTiempoDeConsulta(10,managerDeConsulta);
-		managerMixto = new AlmacenarResultados(new GenerarReporteBusquedasParciales(new GenerarReporteBusquedasxUsuario(new NotificarTiempoDeConsulta(10,managerDeConsulta))));
+		managerNotificarTiempoDeConsulta = new NotificarTiempoDeConsulta(10,managerDeConsulta,"AdminAlberto");
+		managerMixto = new AlmacenarResultados(new GenerarReporteBusquedasParciales(new GenerarReporteBusquedasxUsuario(new NotificarTiempoDeConsulta(10,managerDeConsulta,"AdminAlberto"))));
 		
 		
 		
