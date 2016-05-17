@@ -15,7 +15,9 @@ import ar.utn.dds.POI.ParadaDeColectivo;
 import ar.utn.dds.POI.Rubro;
 import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.comunas.Comuna;
+import ar.utn.dds.creacionales.BancoBuilder;
 import ar.utn.dds.creacionales.CgpBuilder;
+import ar.utn.dds.creacionales.ColectivoBuilder;
 import ar.utn.dds.extern.banco.buscadorDeBancos;
 import ar.utn.dds.extern.cgp.CentroDTO;
 import ar.utn.dds.extern.cgp.RangoServicioDTO;
@@ -125,6 +127,8 @@ abstract public class JuegoDeDatos {
 	protected List<String> palabrasClaveCGPPaternal;
 	protected List<String> palabrasClaveCGPNunez;
 	protected List<String> palabrasClaveCGPBoedo;
+	protected List<String> palabrasClaveCGPCaballito;
+	protected List<String> palabrasClaveCGPPalermo;
 
 	// comunas
 
@@ -206,6 +210,7 @@ abstract public class JuegoDeDatos {
 	protected List<String> palabrasClaveBancoFrances;
 	protected List<String> palabrasClaveBancoGalicia;
 	protected List<String> palabrasClaveBancoRio;
+	protected List<String> palabrasClaveBancoMartinez;
 
 	protected JSONObject bancoFrances2;
 	protected JSONObject bancoGalicia2;
@@ -301,7 +306,7 @@ abstract public class JuegoDeDatos {
 	private ArrayList<RangoServicioDTO> rangoDe10a15Lunes;
 	private ArrayList<ServicioDTO> servicioAsesoramientoPalermoDTO;
 	private CentroDTO centroPalermo;
-
+	
 	
 	public void setUpGeneral() {
 		setUpLocalDateTime();
@@ -315,59 +320,31 @@ abstract public class JuegoDeDatos {
 	}	
 	
 	public void setUpBanco() {
-		// galicia y frances comparten ubicacion
-		bancoFrances = new SucursalBanco();
-		bancoFrances.setNombre("Banco Frances");
-		
-		bancoFrances.setListaServicios(servicioCajeroAutomatico);
-		bancoFrances.setUbicacionActual(ubicacionSucursalFrances);
-		palabrasClaveBancoFrances = new ArrayList<String>();
-		palabrasClaveBancoFrances.add("deposito");
-		palabrasClaveBancoFrances.add("extraccion");
-		palabrasClaveBancoFrances.add("consulta");
-		palabrasClaveBancoFrances.add("saldo");
-		bancoFrances.setListaPalabrasClave(palabrasClaveBancoFrances);
 
-		bancoGalicia = new SucursalBanco();
-		
-		bancoGalicia.setNombre("Banco Galicia");
-		
-		bancoGalicia.setListaServicios(servicioCajeroAutomatico);
-		bancoGalicia.setUbicacionActual(ubicacionSucursalFrances);
-		palabrasClaveBancoGalicia = new ArrayList<String>();
-		palabrasClaveBancoGalicia.add("deposito");
-		palabrasClaveBancoGalicia.add("extraccion");
-		palabrasClaveBancoGalicia.add("consulta");
-		palabrasClaveBancoGalicia.add("saldo");
-		bancoGalicia.setListaPalabrasClave(palabrasClaveBancoGalicia);
+		BancoBuilder builderFrances = new BancoBuilder();
+		builderFrances.crearListaServicios(servicioCajeroAutomatico);
+		builderFrances.setearDatosComunes("Frances San Cristobal", "San Cristobal", "Estados Unidos", 2206 , ubicacionSucursalFrances, palabrasClaveBancoFrances, jornadaBancaria);
+		bancoFrances = builderFrances.build();
 
-		bancoRio = new SucursalBanco();
-		bancoRio.setListaServicios(servicioCajeroAutomatico);
-		bancoRio.setUbicacionActual(ubicacionSucursalRio);
-		palabrasClaveBancoRio = new ArrayList<String>();
-		palabrasClaveBancoRio.add("deposito");
-		palabrasClaveBancoRio.add("extraccion");
-		palabrasClaveBancoRio.add("consulta");
-		palabrasClaveBancoRio.add("saldo");
-		bancoRio.setListaPalabrasClave(palabrasClaveBancoRio);
+		BancoBuilder builderGalicia = new BancoBuilder();
+		builderGalicia.crearListaServicios(servicioCajeroAutomatico);
+		builderGalicia.setearDatosComunes("Banco Galicia", "Palermo", "Arenales", 200 , ubicacionSucursalFrances, palabrasClaveBancoGalicia, jornadaBancaria);
+		bancoGalicia = builderGalicia.build();
 
-		sucursalRetiro = new SucursalBanco();
-		sucursalRetiro.setListaServicios(servicioCPyRentas);
-		sucursalRetiro.setUbicacionActual(ubicacionSucursalRetiro);
-		sucursalRetiro
-				.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
-		palabrasClaveBancoRetiro = new ArrayList<String>();
-		palabrasClaveBancoRetiro.add("Rentas");
-		palabrasClaveBancoRetiro.add("Pago de facturas");
-		sucursalRetiro.setListaPalabrasClave(palabrasClaveBancoRetiro);
-
-		sucursalMartinez = new SucursalBanco();
-		sucursalMartinez
-				.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
-		sucursalMartinez.setUbicacionActual(ubicacionSucursalMartinez);
-		sucursalMartinez
-				.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
+		BancoBuilder builderRio = new BancoBuilder();
+		builderRio.crearListaServicios(servicioCajeroAutomatico);
+		builderRio.setearDatosComunes("Banco Rio", "Palermo", "Arenales", 207 , ubicacionSucursalRio, palabrasClaveBancoRio, jornadaBancaria);
+		bancoRio = builderRio.build();
 		
+		BancoBuilder builderRetiro = new BancoBuilder();
+		builderRetiro.crearListaServicios(servicioCPyRentas);
+		builderRetiro.setearDatosComunes("Banco Retiro", "Retiro", "Paseo Colon", 2207 , ubicacionSucursalRetiro, palabrasClaveBancoRetiro, jornadaBancaria);
+		sucursalRetiro = builderRetiro.build();
+
+		BancoBuilder builderMartinez = new BancoBuilder();
+		builderMartinez.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas);
+		builderMartinez.setearDatosComunes("Banco Martinez", "Martinez", "San Martin", 591 , ubicacionSucursalMartinez, palabrasClaveBancoMartinez, jornadaBancaria);
+		sucursalMartinez = builderMartinez.build();		
 		
 		//Entrega 2
 		
@@ -560,6 +537,14 @@ abstract public class JuegoDeDatos {
 		ubicacionCGPAlmagro = new Point(10, 15.005);
 		ubicacionCGPCaballito = new Point(8, 10);
 		ubicacionCGPPalermo = new Point(15, 15);
+		
+		ubicacionParada15 = new Point(10.0008, 20);
+		ubicacionParada60 = new Point(30, 25);
+		ubicacionParada11 = new Point(12, 18);
+		ubicacionParada114 = new Point(11, 13);
+		ubicacionParada110LaBoca = new Point(39, 22);
+		ubicacionParada7Amarillo = new Point(11, 13);
+		ubicacionParada7Rojo = new Point(11, 14);
 
 	}
 
@@ -624,57 +609,47 @@ abstract public class JuegoDeDatos {
 	public void setUpCGP() {
 		
 		CgpBuilder builderPaternal = new CgpBuilder();
-		builderPaternal.crearComuna();
+		builderPaternal.crearComuna(punto7comuna, punto8comuna, punto10comuna);
 		builderPaternal.crearListaServicios(servicioCPyRentas);
 		builderPaternal.setearDatosComunes("paternal", "Boedo", "Boedo", 156 , punto10comuna, palabrasClaveCGPPaternal, jornadaBancaria);
 		cgpPaternal = builderPaternal.build();
 		
+		
+		CgpBuilder builderLaBoca = new CgpBuilder();
+		builderLaBoca.crearComuna(punto10comuna, punto8comuna, punto11comuna);
+		builderLaBoca.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas);
+		builderLaBoca.setearDatosComunes("La boca", "La boca", "Brasil", 4456 , ubicacionCGPLaBoca, palabrasClaveCGPLaBoca, jornada24x7);
+		cgpLaBoca = builderLaBoca.build();
+		
+		CgpBuilder builderNunez = new CgpBuilder();
+		builderNunez.crearComuna(punto9comuna, punto8comuna, punto10comuna);
+		builderNunez.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas);
+		builderNunez.setearDatosComunes("Nunez", "Nunez, Belgrano", "Av. Libertador", 879 , ubicacionCGPNunez, palabrasClaveCGPNunez, noche);
+		cgpNunez = builderNunez.build();
+		
+		CgpBuilder builderBoedo = new CgpBuilder();
+		builderBoedo.crearComuna(punto9comuna, punto11comuna, punto12comuna);
+		builderBoedo.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas);
+		builderBoedo.setearDatosComunes("Boedo", "Boedo", "Av. Boedo", 1565 , ubicacionCGPBoedo, palabrasClaveCGPBoedo, noche);
+		cgpBoedo = builderBoedo.build();
 
-/*		cgpPaternal = new CentroGestionParticipacion();
-		cgpPaternal.setUbicacionActual(ubicacionCGPPaternal);
-		cgpPaternal.setComuna(comuna3);
-		cgpPaternal.setListaServicios(servicioCPyRentas);
-		cgpPaternal.setListaPalabrasClave(palabrasClaveCGPPaternal);
-		cgpPaternal.setJornadaDisponible(jornada24x7); */ 
-
-		cgpLaBoca = new CentroGestionParticipacion();
-		cgpLaBoca.setNombre("la boca");
-		cgpLaBoca.setUbicacionActual(ubicacionCGPLaBoca);
-		cgpLaBoca.setComuna(comuna4);
-		cgpLaBoca.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
-		cgpLaBoca.setListaPalabrasClave(palabrasClaveCGPLaBoca);
-		cgpLaBoca.setJornadaDisponible(jornada24x7);
-
-		cgpNunez = new CentroGestionParticipacion();
-		cgpNunez.setUbicacionActual(ubicacionCGPNunez);
-		cgpNunez.setComuna(comuna5);
-		cgpNunez.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
-		cgpNunez.setListaPalabrasClave(palabrasClaveCGPNunez);
-		cgpNunez.setJornadaDisponible(noche);
-
-		cgpBoedo = new CentroGestionParticipacion();
-		cgpBoedo.setUbicacionActual(ubicacionCGPBoedo);
-		cgpBoedo.setComuna(comuna6);
-		cgpBoedo.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
-		cgpBoedo.setListaPalabrasClave(palabrasClaveCGPBoedo);
-		cgpBoedo.setJornadaDisponible(noche);
-
-		cgpCaballito = new CentroGestionParticipacion();
-		cgpCaballito.setUbicacionActual(ubicacionCGPCaballito);
-		cgpCaballito.setComuna(comuna2);
-		cgpCaballito.setListaServicios(servicioCPyRentas);
-
-		cgpAlmagro = new CentroGestionParticipacion();
-		cgpAlmagro.setUbicacionActual(ubicacionCGPAlmagro);
-		cgpAlmagro.setComuna(comuna1);
-		cgpAlmagro.setListaServicios(servicioCPyRentas);
-		cgpAlmagro.setListaPalabrasClave(palabrasClaveCGPAlmagro);
-		cgpAlmagro.setJornadaDisponible(jornadaNormalLunesAViernes);
-
-		cgpPalermo = new CentroGestionParticipacion();
-		cgpPalermo.setUbicacionActual(ubicacionCGPPalermo);
-		cgpPalermo.setComuna(comuna1);
-		cgpPalermo.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
+		CgpBuilder builderCaballito = new CgpBuilder();
+		builderCaballito.crearComuna(punto4comuna, punto5comuna, punto6comuna);
+		builderCaballito.crearListaServicios(servicioCPyRentas);
+		builderCaballito.setearDatosComunes("Caballito", "Caballito", "Rivadavia", 123 , ubicacionCGPCaballito, palabrasClaveCGPCaballito, jornada24x7);
+		cgpCaballito = builderCaballito.build();
+		
+		CgpBuilder buiderAlmagro = new CgpBuilder();
+		buiderAlmagro.crearComuna(punto1comuna, punto2comuna, punto3comuna);
+		buiderAlmagro.crearListaServicios(servicioCPyRentas);
+		buiderAlmagro.setearDatosComunes("Almagro", "Almagro, Paternal", "Tucuman", 4567 , ubicacionCGPAlmagro, palabrasClaveCGPAlmagro, jornadaNormalLunesAViernes);
+		cgpAlmagro = buiderAlmagro.build();
+		
+		CgpBuilder buiderPalermo = new CgpBuilder();
+		buiderPalermo.crearComuna(punto1comuna, punto2comuna, punto3comuna);
+		buiderPalermo.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas);
+		buiderPalermo.setearDatosComunes("Palermo", "Palermo Soho, Palermo Hollywood", "Av. Santa Fe", 7841 , ubicacionCGPPalermo, palabrasClaveCGPPalermo, jornadaNormalLunesAViernes);
+		cgpPalermo = buiderPalermo.build();
 
 	}
 
@@ -693,7 +668,6 @@ abstract public class JuegoDeDatos {
 		punto4comuna = new Point(10, 20);
 		punto5comuna = new Point(20, 20);
 		punto6comuna = new Point(15, 10);
-
 		punto7comuna = new Point(30, 30);
 		punto8comuna = new Point(40, 30);
 		punto9comuna = new Point(50, 30);
@@ -849,91 +823,117 @@ abstract public class JuegoDeDatos {
 		palabrasClaveCGPBoedo.add("avenida la plata");
 		palabrasClaveCGPBoedo.add("av boedo");
 
-	}
+		palabrasClaveCGPCaballito = new ArrayList<String>();
+		palabrasClaveCGPCaballito.add("Caballito");
+		palabrasClaveCGPCaballito.add("Rivadavia");
+		palabrasClaveCGPCaballito.add("Rentas");
+		
+		palabrasClaveCGPPalermo = new ArrayList<String>();
+		palabrasClaveCGPPalermo.add("Palermo");
+		palabrasClaveCGPPalermo.add("Santa Fe");
+		palabrasClaveCGPPalermo.add("Soho");
+		
+		palabrasClaveBancoFrances = new ArrayList<String>();
+		palabrasClaveBancoFrances.add("deposito");
+		palabrasClaveBancoFrances.add("extraccion");
+		palabrasClaveBancoFrances.add("consulta");
+		palabrasClaveBancoFrances.add("saldo");
+		
+		palabrasClaveBancoGalicia = new ArrayList<String>();
+		palabrasClaveBancoGalicia.add("deposito");
+		palabrasClaveBancoGalicia.add("extraccion");
+		palabrasClaveBancoGalicia.add("consulta");
+		palabrasClaveBancoGalicia.add("saldo");
+		
+		palabrasClaveBancoRio = new ArrayList<String>();
+		palabrasClaveBancoRio.add("deposito");
+		palabrasClaveBancoRio.add("extraccion");
+		palabrasClaveBancoRio.add("consulta");
+		palabrasClaveBancoRio.add("saldo");
 
-	public void setUpColectivos() {
-
-		parada15 = new ParadaDeColectivo();
-		ubicacionParada15 = new Point(10.0008, 20);
-		parada15.setUbicacionActual(ubicacionParada15);
-		parada15.setLinea("15");
+		palabrasClaveBancoRetiro = new ArrayList<String>();
+		palabrasClaveBancoRetiro.add("Rentas");
+		palabrasClaveBancoRetiro.add("Pago de facturas");
+		
+		palabrasClaveBancoMartinez = palabrasClaveBancoRetiro;
+		
 		paradaDel15 = new ArrayList<String>();
 		paradaDel15.add("15");
-		parada15.setListaPalabrasClave(paradaDel15);
-		parada15.setNombre("parada15");
+		
+		palabrasClave110LaBoca = new ArrayList<String>();
+		palabrasClave110LaBoca.add("110");
+		palabrasClave110LaBoca.add("la boca");
 
-		parada114 = new ParadaDeColectivo();
-		parada114.setNombre("parada114");
-		ubicacionParada114 = new Point(11, 13);
-		parada114.setLinea("114");
-		parada114.setUbicacionActual(ubicacionParada114);
-		paradaDel114 = new ArrayList<String>();
-		paradaDel114.add("114");
-		parada114.setListaPalabrasClave(paradaDel114);
-
-		parada11 = new ParadaDeColectivo();
-		ubicacionParada11 = new Point(12, 18);
-		parada11.setLinea("11");
-		parada11.setUbicacionActual(ubicacionParada11);
-		paradaDel11 = new ArrayList<String>();
-		paradaDel11.add("11");
-		parada11.setListaPalabrasClave(paradaDel11);
-
-		parada7Rojo = new ParadaDeColectivo();
-		ubicacionParada7Rojo = new Point(11, 14);
-		parada7Rojo.setLinea("7 Barrio Samore");
-		parada7Rojo.setUbicacionActual(ubicacionParada7Rojo);
-		paradaDel7Rojo = new ArrayList<String>();
-		paradaDel7Rojo.add("7");
-		paradaDel7Rojo.add("rojo");
-		parada7Rojo.setListaPalabrasClave(paradaDel7Rojo);
-
-		parada7Amarillo = new ParadaDeColectivo();
-		ubicacionParada7Amarillo = new Point(11, 13);
-		parada7Amarillo.setLinea("7 Avellaneda");
-		parada7Amarillo.setUbicacionActual(ubicacionParada7Amarillo);
+		ubicacionParada110Paternal = new Point(32, 25);
+		palabrasClave110Paternal = new ArrayList<String>();
+		palabrasClave110Paternal.add("110");
+		palabrasClave110Paternal.add("paternal");
+		
 		paradaDel7Amarillo = new ArrayList<String>();
 		paradaDel7Amarillo.add("7");
 		paradaDel7Amarillo.add("amarillo");
-		parada7Amarillo.setListaPalabrasClave(paradaDel7Amarillo);
 
-		parada60 = new ParadaDeColectivo();
-		parada60.setLinea("60");
-		ubicacionParada60 = new Point(30, 25);
-		parada60.setUbicacionActual(ubicacionParada60);
+		
+		parada7Rojo = new ParadaDeColectivo();
+		paradaDel7Rojo = new ArrayList<String>();
+		paradaDel7Rojo.add("7");
+		paradaDel7Rojo.add("rojo");
+
+		
+		paradaDel114 = new ArrayList<String>();
+		paradaDel114.add("114");
+
+		paradaDel11 = new ArrayList<String>();
+		paradaDel11.add("11");
+		
 		palabrasClave60 = new ArrayList<String>();
 		palabrasClave60.add("60");
 		palabrasClave60.add("palermo");
 		palabrasClave60.add("las canitas");
-		parada60.setListaPalabrasClave(palabrasClave60);
+	}
+	
 
-		parada12 = new ParadaDeColectivo();
-		parada12.setLinea("12");
-		parada12.setUbicacionActual(ubicacionParada60);
-		palabrasClave12 = new ArrayList<String>();
-		palabrasClave12.add("12");
-		palabrasClave12.add("palermo");
-		palabrasClave12.add("las canitas");
-		parada12.setListaPalabrasClave(palabrasClave12);
+	public void setUpColectivos() {
+		
+		ColectivoBuilder builder15 = new ColectivoBuilder();
+		builder15.crearLinea("15");
+		builder15.setearDatosComunes("Parada San Telmo", "San Telmo", "belgrano", 156 , ubicacionParada15, paradaDel15, null);
+		parada15 = builder15.build();
+		
+		ColectivoBuilder builder114 = new ColectivoBuilder();
+		builder114.crearLinea("15");
+		builder114.setearDatosComunes("Parada San Telmo", "San Telmo", "belgrano", 156 , ubicacionParada114, paradaDel114, null);
+		parada114 = builder114.build();
+		
+		ColectivoBuilder builder11 = new ColectivoBuilder();
+		builder11.crearLinea("11");
+		builder11.setearDatosComunes("Parada 11", "Retiro", "belgrano", 1256 , ubicacionParada11, paradaDel11, null);
+		parada11 = builder11.build();
+		
+		ColectivoBuilder builder7Rojo = new ColectivoBuilder();
+		builder7Rojo.crearLinea("7");
+		builder7Rojo.setearDatosComunes("Parada 7 rojo", "Paternal", "Pomelo", 897 , ubicacionParada7Rojo, paradaDel7Rojo, null);
+		parada7Rojo = builder7Rojo.build();
+		
+		ColectivoBuilder builder7Amarillo = new ColectivoBuilder();
+		builder7Amarillo.crearLinea("7");
+		builder7Amarillo.setearDatosComunes("Parada 7 Amarillo", "Paternal", "Pomelo", 897 , ubicacionParada7Amarillo, paradaDel7Amarillo, null);
+		parada7Amarillo = builder7Amarillo.build();
+		
+		ColectivoBuilder builder60 = new ColectivoBuilder();
+		builder60.crearLinea("60");
+		builder60.setearDatosComunes("Parada 60", "Palermo", "Santa Fe", 1514 , ubicacionParada60, palabrasClave60, null);
+		parada60 = builder60.build();
+		
+		ColectivoBuilder builder110Paternal = new ColectivoBuilder();
+		builder110Paternal.crearLinea("110");
+		builder110Paternal.setearDatosComunes("Parada 110", "Paternal", "Sosa", 2354 , ubicacionParada110Paternal, palabrasClave110Paternal, null);
+		parada110Paternal = builder110Paternal.build();
 
-		parada110Paternal = new ParadaDeColectivo();
-		parada110Paternal.setLinea("110");
-		ubicacionParada110Paternal = new Point(32, 25);
-		parada110Paternal.setUbicacionActual(ubicacionParada110Paternal);
-		palabrasClave110Paternal = new ArrayList<String>();
-		palabrasClave110Paternal.add("110");
-		palabrasClave110Paternal.add("paternal");
-		parada110Paternal.setListaPalabrasClave(palabrasClave110Paternal);
-
-		parada110LaBoca = new ParadaDeColectivo();
-		parada110LaBoca.setLinea("110");
-		ubicacionParada110LaBoca = new Point(39, 22);
-		parada110LaBoca.setUbicacionActual(ubicacionParada110Paternal);
-		palabrasClave110LaBoca = new ArrayList<String>();
-		palabrasClave110LaBoca.add("110");
-		palabrasClave110LaBoca.add("la boca");
-		parada110LaBoca.setListaPalabrasClave(palabrasClave110LaBoca);
-
+		ColectivoBuilder builder110LaBoca = new ColectivoBuilder();
+		builder110LaBoca.crearLinea("110");
+		builder110LaBoca.setearDatosComunes("Parada 110", "La Boca", "Pasteur", 23 , ubicacionParada110Paternal, palabrasClave110LaBoca, null);
+		parada110LaBoca = builder110LaBoca.build();
 	}
 
 	public void setUpPuntos() {

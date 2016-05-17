@@ -1,6 +1,9 @@
 package ar.utn.dds.creacionales;
 
+
 import java.util.List;
+
+import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.comunas.Comuna;
@@ -16,8 +19,11 @@ public class CgpBuilder extends PoiBuilder {
 		servicios = lista;
 	}
 
-	public void crearComuna() {
+	public void crearComuna(Point punto1, Point punto2, Point punto3) {
 		comuna = new Comuna();
+		comuna.setAreaDeComuna(punto1);
+		comuna.setAreaDeComuna(punto2);
+		comuna.setAreaDeComuna(punto3);
 	}
 	
 	public CentroGestionParticipacion build(){
@@ -39,6 +45,5 @@ public class CgpBuilder extends PoiBuilder {
 		cgp.setComuna(comuna);
 		cgp.setListaServicios(servicios);
 		return cgp;
-		
 	}
 }

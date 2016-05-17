@@ -172,7 +172,7 @@ public class TestCGP extends JuegoDeDatos {
 	
 	@Test
 	public void buiderTest(){
-		assertEquals(cgpPaternal.getNombre(), "paternal");
+		assertEquals(cgpPalermo.getNombre(), "Palermo");
 	}
 }
 

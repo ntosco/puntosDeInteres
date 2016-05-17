@@ -145,6 +145,11 @@ public class TestBanco extends JuegoDeDatos {
 
 	}
 	
+	@Test
+	public void pruebaBuilder(){
+		assertEquals(bancoGalicia.getNombre(), "Banco Galicia");
+	}
+	
 /*	
  * LOS POIS NO ENTIENDEN EL METODO getListaServicios()
  * 
