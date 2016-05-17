@@ -25,13 +25,21 @@ public class ObservadorPorFecha implements Observador{
 	
 	@Override
 	public void actualizar(Consulta consulta) {
-		if(BusquedasPorFecha.containsKey(consulta.getFecha())){
-			BusquedasPorFecha.put(consulta.getFecha(), consulta.getCantidadDeResultados());
-		}else{
+		if(getBusquedasPorFecha().containsKey(consulta.getFecha())){
 			 BusquedasPorFecha.put(consulta.getFecha(), BusquedasPorFecha.get(consulta.getFecha()) + consulta.getCantidadDeResultados());
+		}else{
+			 getBusquedasPorFecha().put(consulta.getFecha(), consulta.getCantidadDeResultados());
 		}
-		// TODO Auto-generated method stub
-		
+	}
+
+
+	public Hashtable<String,Integer> getBusquedasPorFecha() {
+		return BusquedasPorFecha;
+	}
+
+
+	public void setBusquedasPorFecha(Hashtable<String,Integer> busquedasPorFecha) {
+		BusquedasPorFecha = busquedasPorFecha;
 	}
 
 }

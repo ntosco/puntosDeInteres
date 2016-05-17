@@ -15,6 +15,7 @@ import ar.utn.dds.utils.Consulta;
 
 public class UsuarioConsulta implements Usuario {
 	private List<Observador> observadores = new ArrayList<Observador>();
+	private List<Consulta> listaConsultas = new ArrayList<Consulta>();
 	private Consulta ultimaConsulta;
 	private String nombreUsuario;
 	
@@ -40,11 +41,11 @@ public class UsuarioConsulta implements Usuario {
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 		String fechaBusqueda = formato.format(fechaActual);
 		
-		ultimaConsulta = new Consulta(this.nombreUsuario, listaResultado.size(),fechaBusqueda, pablabraBuscar , (int)duracion);
+		setUltimaConsulta(new Consulta(this.nombreUsuario, listaResultado.size(),fechaBusqueda, pablabraBuscar , (int)duracion));
+		listaConsultas.add(getUltimaConsulta());
 		
 		
-		
-		this.notificarObservadores(ultimaConsulta);
+		this.notificarObservadores(getUltimaConsulta());
 		return listaResultado;
 	}
 
@@ -63,6 +64,14 @@ public class UsuarioConsulta implements Usuario {
 		observadores.forEach(observer -> observer.actualizar(consulta));
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Consulta getUltimaConsulta() {
+		return ultimaConsulta;
+	}
+
+	public void setUltimaConsulta(Consulta ultimaConsulta) {
+		this.ultimaConsulta = ultimaConsulta;
 	}
 
 

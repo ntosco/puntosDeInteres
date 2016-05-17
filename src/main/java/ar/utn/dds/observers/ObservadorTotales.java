@@ -14,20 +14,36 @@ public class ObservadorTotales implements Observador{
 	public static ObservadorTotales getInstance(){
 		if (instance == null) {
 			instance = new ObservadorTotales();
-		}	
+		}
 		return instance;
 	}
 	
 	
 	@Override
 	public void actualizar(Consulta consulta) {
-		if(TotalesPorUsuario.containsKey(consulta.getNombreUsuario())){
-			TotalesPorUsuario.put(consulta.getNombreUsuario(), consulta.getCantidadDeResultados());
+		if(getTotalesPorUsuario().containsKey(consulta.getNombreUsuario())){
+			String nombreUsuario = consulta.getNombreUsuario();
+			int cantidadDeResultados = getTotalesPorUsuario().get(nombreUsuario);
+			int cantidadDeResultadosConsulta = consulta.getCantidadDeResultados();
+			int nuevaCantidadDeResultados = cantidadDeResultados + cantidadDeResultadosConsulta;
+			
+			getTotalesPorUsuario().put(nombreUsuario, nuevaCantidadDeResultados);
 		}else{
-			TotalesPorUsuario.put(consulta.getNombreUsuario(), TotalesPorUsuario.get(consulta.getNombreUsuario()) + consulta.getCantidadDeResultados());
+			String nombreUsuario = consulta.getNombreUsuario();
+			int cantidadDeResultadosConsulta = consulta.getCantidadDeResultados();
+			
+			getTotalesPorUsuario().put(nombreUsuario, cantidadDeResultadosConsulta);
 		}
-		// TODO Auto-generated method stub
-		
+	}
+
+
+	public Hashtable<String,Integer> getTotalesPorUsuario() {
+		return TotalesPorUsuario;
+	}
+
+
+	public void setTotalesPorUsuario(Hashtable<String,Integer> totalesPorUsuario) {
+		TotalesPorUsuario = totalesPorUsuario;
 	}
 
 

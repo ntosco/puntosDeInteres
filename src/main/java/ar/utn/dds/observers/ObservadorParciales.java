@@ -14,4 +14,12 @@ public class ObservadorParciales implements Observador {
 		
 	}
 
+	public List<Integer> getCantidadResultadosParciales() {
+		return CantidadResultadosParciales;
+	}
+
+	public void setCantidadResultadosParciales(List<Integer> cantidadResultadosParciales) {
+		CantidadResultadosParciales = cantidadResultadosParciales;
+	}
+
 }
