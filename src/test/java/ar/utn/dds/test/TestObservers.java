@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -63,15 +64,19 @@ public class TestObservers extends JuegoDeDatos{
 
 	}
 	
-	
+	@After
+	public void TearDown(){
+		repositorio.clean();
+		buscadorPuntos.borrarListaServicios();	
+	}
 	
 	@Test
 	public void ultimaConsultaUsuario() {
 		unUsuario.agregarObservador(observerXfecha);
 		unUsuario.buscarPuntos("15");
-		assertTrue(unUsuario.getUltimaConsulta().getPalabraBuscada() == "15");
-		assertTrue(unUsuario.getUltimaConsulta().getNombreUsuario() == "Samo");
-		assertTrue(unUsuario.getUltimaConsulta().getCantidadDeResultados() == 4);
+		assertEquals("Samo" ,unUsuario.getUltimaConsulta().getNombreUsuario());
+		assertEquals("15" , unUsuario.getUltimaConsulta().getPalabraBuscada());
+		assertEquals(4 , unUsuario.getUltimaConsulta().getCantidadDeResultados());
 	}
 	
 	
@@ -80,15 +85,14 @@ public class TestObservers extends JuegoDeDatos{
 	public void observadorParcialesAgregaRegistroACantidadResultadosParciales() {
 		unUsuario.agregarObservador(observerParciales);
 		unUsuario.buscarPuntos("15");
-		assertTrue(observerParciales.getCantidadResultadosParciales().size()==1);
-
+		assertEquals(1,observerParciales.getCantidadResultadosParciales().size());
 	}
+	
 	@Test
 	public void observadorPorFechaAgregaRegistroABusquedasPorFecha() {
 		unUsuario.agregarObservador(observerXfecha);
-		List<POI> listaResultado = unUsuario.buscarPuntos("15");
-		//assertTrue(observerXfecha.getBusquedasPorFecha().get(unUsuario.getUltimaConsulta().getFecha())== listaResultado.size());
-		assertTrue(observerXfecha.getBusquedasPorFecha().size()==1);
+		unUsuario.buscarPuntos("15");
+		assertEquals(1,observerXfecha.getBusquedasPorFecha().size());
 
 	}
 	
@@ -96,8 +100,8 @@ public class TestObservers extends JuegoDeDatos{
 	public void observadorTotalesAgregaRegistroATotalesPorUsuario() {
 		unUsuario.agregarObservador(observerTotales);
 		List<POI> listaResultado = unUsuario.buscarPuntos("15");
-		assertTrue(observerTotales.getTotalesPorUsuario().size()==1);
-		assertTrue(observerTotales.getTotalesPorUsuario().get(unUsuario.getNombreUsuario())== listaResultado.size());
+		assertEquals(1,observerTotales.getTotalesPorUsuario().size());
+		assertEquals(listaResultado.size(),(int)observerTotales.getTotalesPorUsuario().get(unUsuario.getNombreUsuario()));
 	}
 	
 	//Cuando se actualiza un registro no crece en tamaño el hashtable, solo cambia la info del registro
@@ -109,8 +113,8 @@ public class TestObservers extends JuegoDeDatos{
 		unUsuario.agregarObservador(observerXfecha);
 		List<POI> listaResultado = unUsuario.buscarPuntos("15");
 		unUsuario.buscarPuntos("15");
-		assertTrue(observerXfecha.getBusquedasPorFecha().size()==1);
-		assertTrue(observerXfecha.getBusquedasPorFecha().get(unUsuario.getUltimaConsulta().getFecha())== (listaResultado.size() + listaResultado.size()));		
+		assertEquals(1,observerXfecha.getBusquedasPorFecha().size());
+		assertEquals(8, (int)observerXfecha.getBusquedasPorFecha().get(unUsuario.getUltimaConsulta().getFecha()));	
 	}
 	
 	@Test
@@ -119,8 +123,8 @@ public class TestObservers extends JuegoDeDatos{
 		unUsuario.agregarObservador(observerTotales);
 		List<POI> listaResultado = unUsuario.buscarPuntos("15");
 		unUsuario.buscarPuntos("15");
-		assertTrue(observerTotales.getTotalesPorUsuario().size()==1);
-		assertTrue(observerTotales.getTotalesPorUsuario().get(unUsuario.getNombreUsuario())== (listaResultado.size() + listaResultado.size()));		
+		assertEquals(1,observerTotales.getTotalesPorUsuario().size());
+		assertEquals(8, (int)observerTotales.getTotalesPorUsuario().get(unUsuario.getNombreUsuario()));		
 	}
 	
 
