@@ -18,6 +18,7 @@ import ar.utn.dds.juegoDeDatos.StubBuscadorBanco;
 import ar.utn.dds.juegoDeDatos.StubBuscadorCGP;
 import ar.utn.dds.observers.ObservadorParciales;
 import ar.utn.dds.observers.ObservadorPorFecha;
+import ar.utn.dds.observers.ObservadorTiempoBusqueda;
 import ar.utn.dds.observers.ObservadorTotales;
 import ar.utn.dds.repositorio.Repositorio;
 import ar.utn.dds.usuarios.UsuarioConsulta;
@@ -34,8 +35,10 @@ public class TestObservers extends JuegoDeDatos{
 	BusquedaDePuntos buscadorPuntos = BusquedaDePuntos.getInstance();
 	
 	public ObservadorParciales observerParciales;
+	public ObservadorTiempoBusqueda observadorTiempoBusqueda;
 	ObservadorPorFecha observerXfecha = ObservadorPorFecha.getInstance();
 	ObservadorTotales observerTotales = ObservadorTotales.getInstance();
+	
 	@Before
 	public void SetUp(){
 		setUpGeneral();
@@ -56,6 +59,7 @@ public class TestObservers extends JuegoDeDatos{
 		buscadorPuntos.setServicio(repositorio);
 
 		observerParciales = new ObservadorParciales();
+		observadorTiempoBusqueda = new ObservadorTiempoBusqueda();
 		
 		unUsuario = new UsuarioConsulta();
 		unUsuario.setNombreUsuario("Samo");
@@ -130,11 +134,20 @@ public class TestObservers extends JuegoDeDatos{
 
 	
 	//si la busqueda tarda mas de X cantidad de tiempo se notifica al admin
+	@Test
 	public void observadorTiempoBusquedaNotificaAlAdministrador() {
-		fail("Not yet implemented");
+		observadorTiempoBusqueda.setTiempoDeBusquedaMaximo(0);
+		unUsuario.agregarObservador(observadorTiempoBusqueda);
+		unUsuario.buscarPuntos("15");
+		assertEquals(1,observadorTiempoBusqueda.getListaConsultasNotificar().size());
+		
 	}
 	
+	@Test
 	public void observadorTiempoBusquedaNooooooNotificaAlAdministrador() {
-		fail("Not yet implemented");
+		observadorTiempoBusqueda.setTiempoDeBusquedaMaximo(99999999);
+		unUsuario.agregarObservador(observadorTiempoBusqueda);
+		unUsuario.buscarPuntos("15");
+		assertEquals(0,observadorTiempoBusqueda.getListaConsultasNotificar().size());
 	}
 }

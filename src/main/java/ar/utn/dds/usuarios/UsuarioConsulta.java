@@ -35,8 +35,10 @@ public class UsuarioConsulta implements Usuario {
 		long startTime = System.nanoTime();
 		listaResultado = BusquedaDePuntos.getInstance().busquedaGeneral(pablabraBuscar);
 		long endTime = System.nanoTime();
-		long duracion = (endTime - startTime) / 1000000000;// Calculo de tiempo de busqueda
+		//long duracion = (endTime - startTime) / 1000000000;// Calculo de tiempo de busqueda
+		long duracion = (endTime - startTime) / 1;// Calculo de tiempo de busqueda
 
+		
 		Date fechaActual = new Date();
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 		String fechaBusqueda = formato.format(fechaActual);
