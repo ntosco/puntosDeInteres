@@ -2,6 +2,7 @@ package ar.utn.dds.test.decorators;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -45,13 +46,27 @@ public class TestDecorator extends TestBusquedaGeneral {
 	@Test
 	public void consultaReporteDeBusquedasParciales(){
 		managerReporteBusquedasParciales.busquedaGeneral("15");
+		int cantidadConPalabraClave15 = managerReporteBusquedasParciales.getCantParciales().get(0);
 		managerReporteBusquedasParciales.busquedaGeneral("15");
-		Integer cantidadDeBusqueda = managerReporteBusquedasParciales.getCantParciales().get(1);
-		Integer cantidadEsperada = 4;
-		//FIXME si pongo directo el 4 en el assert no me lo toma
-		assertEquals(cantidadEsperada,cantidadDeBusqueda);
+		int cantidadDeBusqueda = managerReporteBusquedasParciales.getCantParciales().get(1);
+		assertEquals(cantidadConPalabraClave15,cantidadDeBusqueda);
 	}
 	
+	@Test
+	public void consultaReporteDeBusquedasPorFechaAsignaciónDeFecha(){
+		managerReporteBusquedaxFecha.busquedaGeneral("15");
+		managerReporteBusquedaxFecha.busquedaGeneral("15");
+		assertTrue(managerReporteBusquedaxFecha.getListaBusquedasxFecha().containsKey(LocalDate.now().toString()));
+	}
+	
+	@Test
+	public void consultaReporteDeBusquedasPorFechaAsignaciónDeValorAFecha(){
+		managerReporteBusquedaxFecha.busquedaGeneral("15");
+		managerReporteBusquedaxFecha.busquedaGeneral("15");
+		Integer cantidadDeBusquedasEsperadas = 2;
+		Integer cantidadDeBusquedasDelDiaActual = managerReporteBusquedaxFecha.getListaBusquedasxFecha().get(LocalDate.now().toString());
+		assertEquals(cantidadDeBusquedasDelDiaActual,cantidadDeBusquedasEsperadas);
+	}
 
 
 
