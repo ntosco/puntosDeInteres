@@ -153,14 +153,6 @@ public class TestBanco extends JuegoDeDatos {
 		assertEquals(bancoGalicia.getNombre(), "Banco Galicia");
 	}
 
-	
-/*
-	
-@Test
-	public void conversionBancosServicios(){
-		List<POI> listaBancos = adapter.buscarPOI("lalala");
-		assertTrue(listaBancos.get(0).getListaServicios().size() == 3);
-
 	public void buscoPOIsConAdaptadorYMeDevuelvePOIS(){
 		
 		//Creo los POIS correspondientes
@@ -225,7 +217,5 @@ public class TestBanco extends JuegoDeDatos {
 
 	}
 	
-
-	*/
 
 } 
