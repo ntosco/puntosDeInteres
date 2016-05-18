@@ -23,6 +23,7 @@ public class BusquedaDePuntos {
 	}
 	
 	public List<POI> busquedaGeneral(String nombre){
+		
 		Auxiliar.clear();
 		origenesDeDatos.forEach(serv -> agregarAAuxiliar(serv.buscarPOI(nombre)));
 		return Auxiliar;
