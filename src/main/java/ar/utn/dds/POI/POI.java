@@ -74,10 +74,16 @@ public abstract class POI extends Entity {
 	
 	
 	public Boolean esIgualA(POI otroPoi){
-		 return (this.nombre.equals(otroPoi.getNombre()) && 
-				 this.ubicacionActual.equals(otroPoi.getUbicacionActual())
+		 return (nombre.equals(otroPoi.getNombre()) && 
+				 ubicacionActual.equals(otroPoi.getUbicacionActual())
 				);
 	}
+	
+//	public Boolean esIgualA(POI otroPoi){
+//		 return (this.nombre.equals(otroPoi.getNombre()) && 
+//				 this.ubicacionActual.equals(otroPoi.getUbicacionActual())
+//				);
+//	}
 	
 	
 	// ********************************************************

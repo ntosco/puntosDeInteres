@@ -2,15 +2,18 @@ package ar.utn.dds.test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONObject;
 import org.junit.*;
+import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.juegoDeDatos.StubBuscadorBanco;
+import ar.utn.dds.servicios.Servicio;
 import ar.utn.dds.utils.AdapterBancos;
 
 
@@ -149,18 +152,80 @@ public class TestBanco extends JuegoDeDatos {
 	public void pruebaBuilder(){
 		assertEquals(bancoGalicia.getNombre(), "Banco Galicia");
 	}
+
 	
-/*	
- * LOS POIS NO ENTIENDEN EL METODO getListaServicios()
- * 
- * @Test
+/*
+	
+@Test
 	public void conversionBancosServicios(){
 		List<POI> listaBancos = adapter.buscarPOI("lalala");
 		assertTrue(listaBancos.get(0).getListaServicios().size() == 3);
+
+	public void buscoPOIsConAdaptadorYMeDevuelvePOIS(){
+		
+		//Creo los POIS correspondientes
+		
+		SucursalBanco bancoDeLaPlaza = new SucursalBanco();
+		
+		bancoDeLaPlaza.setNombre("Banco de la plaza");
+		bancoDeLaPlaza.setUbicacionActual(new Point(35,72));
+		bancoDeLaPlaza.setBarrio("Avellaneda");
+		List<Servicio> listaServ = new ArrayList<Servicio>();
+		
+		Servicio servCobro = new Servicio("cobrocheques",null);
+		Servicio servDepo = new Servicio("depositos",null);
+		Servicio servExtracciones = new Servicio("extracciones",null);
+		Servicio servTransferencias = new Servicio("transferencias",null);
+		Servicio servSeguros = new Servicio("seguros",null);
+		
+		listaServ.add(servCobro);
+		listaServ.add(servDepo);
+		listaServ.add(servExtracciones);
+		
+		bancoDeLaPlaza.setListaServicios(listaServ);
+		
+		//Finalizo el primer POI
+		
+		//Creo otro POI
+		
+		SucursalBanco bancoDeLaPlaza2 = new SucursalBanco();
+		
+		bancoDeLaPlaza2.setNombre("Banco de la plaza");
+		bancoDeLaPlaza2.setUbicacionActual(new Point(35,72));
+		bancoDeLaPlaza2.setBarrio("Caballito");
+		List<Servicio> listaServ2 = new ArrayList<Servicio>();
+		
+		listaServ2.add(servCobro);
+		listaServ2.add(servDepo);
+		listaServ2.add(servExtracciones);
+		listaServ2.add(servTransferencias);
+		listaServ2.add(servSeguros);
+		
+		bancoDeLaPlaza2.setListaServicios(listaServ2);
+		
+		//Finalizo el segundo POI
+		
+		List<POI> listaResultadoEsperado = new ArrayList<POI>();
+		listaResultadoEsperado.add(bancoDeLaPlaza);
+		listaResultadoEsperado.add(bancoDeLaPlaza2);
+		
+		assertEquals(listaResultadoEsperado.get(0).getBarrio(), adapter.buscarPOI("15").get(0).getBarrio());
+		assertEquals(listaResultadoEsperado.get(0).getNombre(), adapter.buscarPOI("15").get(0).getNombre());
+		assertEquals((int)listaResultadoEsperado.get(0).getUbicacionActual().longitude(), (int)adapter.buscarPOI("15").get(0).getUbicacionActual().longitude());
+		assertEquals((int)listaResultadoEsperado.get(0).getUbicacionActual().latitude(), (int)adapter.buscarPOI("15").get(0).getUbicacionActual().latitude());
+		
+		assertEquals(listaResultadoEsperado.get(1).getBarrio(), adapter.buscarPOI("15").get(1).getBarrio());
+		assertEquals(listaResultadoEsperado.get(1).getNombre(), adapter.buscarPOI("15").get(1).getNombre());
+		assertEquals((int)listaResultadoEsperado.get(1).getUbicacionActual().longitude(), (int)adapter.buscarPOI("15").get(1).getUbicacionActual().longitude());
+		assertEquals((int)listaResultadoEsperado.get(1).getUbicacionActual().latitude(), (int)adapter.buscarPOI("15").get(1).getUbicacionActual().latitude());
+
+		assertEquals(listaResultadoEsperado.size(), adapter.buscarPOI("15").size());
+
+
+
 	}
 	
-	
-*/
-	
-	
+
+	*/
+
 } 

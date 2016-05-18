@@ -6,12 +6,16 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.uqbar.geodds.Point;
 
+import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.POI.POI;
+import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.extern.cgp.BuscadorDeCGP;
 import ar.utn.dds.extern.cgp.CentroDTO;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
@@ -153,5 +157,48 @@ public class TestCGP extends JuegoDeDatos {
 	public void builderJornada(){
 		assertTrue(cgpLaBoca.estaDisponible("Asesoramiento Legal", lunes1210hs));
 	}
+	
+	@Test
+	public void buscoPOIsConAdaptadorYMeDevuelvePOIS(){
+		
+		CentroGestionParticipacion CGPRecoleta = new CentroGestionParticipacion();
+		
+		CGPRecoleta.setNombre("comuna1");
+		CGPRecoleta.setUbicacionActual(new Point(10,20));
+		CGPRecoleta.setComuna(new Comuna());
+		CGPRecoleta.setBarrio("Recoleta");
+		CGPRecoleta.setDireccionNombre("Jujuy");
+		CGPRecoleta.setDireccionNumero(998);
+	
+		CentroGestionParticipacion CGPPalermo = new CentroGestionParticipacion();
+		
+		CGPPalermo.setNombre("comuna1");
+		CGPPalermo.setUbicacionActual(new Point(10,20));
+		CGPPalermo.setComuna(new Comuna());
+		CGPPalermo.setBarrio("Palermo");
+		CGPPalermo.setDireccionNombre("Santa Fe");
+		CGPPalermo.setDireccionNumero(556);
+				
+		
+		
+		List<POI> listaResultadoEsperado = new ArrayList<POI>();
+		listaResultadoEsperado.add(CGPRecoleta);
+		listaResultadoEsperado.add(CGPPalermo);
+		
+		assertEquals(listaResultadoEsperado.get(0).getBarrio(), adapter.buscarPOI("15").get(0).getBarrio());
+		assertEquals(listaResultadoEsperado.get(0).getNombre(), adapter.buscarPOI("15").get(0).getNombre());
+		assertEquals((int)listaResultadoEsperado.get(0).getUbicacionActual().longitude(), (int)adapter.buscarPOI("15").get(0).getUbicacionActual().longitude());
+		assertEquals((int)listaResultadoEsperado.get(0).getUbicacionActual().latitude(), (int)adapter.buscarPOI("15").get(0).getUbicacionActual().latitude());
+		
+		assertEquals(listaResultadoEsperado.get(1).getBarrio(), adapter.buscarPOI("15").get(1).getBarrio());
+		assertEquals(listaResultadoEsperado.get(1).getNombre(), adapter.buscarPOI("15").get(1).getNombre());
+		assertEquals((int)listaResultadoEsperado.get(1).getUbicacionActual().longitude(), (int)adapter.buscarPOI("15").get(1).getUbicacionActual().longitude());
+		assertEquals((int)listaResultadoEsperado.get(1).getUbicacionActual().latitude(), (int)adapter.buscarPOI("15").get(1).getUbicacionActual().latitude());
+
+		assertEquals(listaResultadoEsperado.size(), adapter.buscarPOI("15").size());
+
+		
+	}
+	
 }
 
