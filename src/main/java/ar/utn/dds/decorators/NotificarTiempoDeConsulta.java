@@ -1,8 +1,12 @@
 package ar.utn.dds.decorators;
 
-import ar.utn.dds.managers.ManagerDeConsultas;
+import java.util.ArrayList;
+import java.util.List;
+
+import ar.utn.dds.POI.POI;
+import ar.utn.dds.managers.Buscador;
+import ar.utn.dds.servicios.MailSender;
 import ar.utn.dds.servicios.ServiceLocator;
-import ar.utn.dds.utils.Consulta;
 import ar.utn.dds.utils.Mail;
 
 public class NotificarTiempoDeConsulta extends AccionDecorador{
@@ -11,7 +15,7 @@ public class NotificarTiempoDeConsulta extends AccionDecorador{
 	private String admin;
 	static ServiceLocator instance;
 
-	public NotificarTiempoDeConsulta(Integer tiempoMaximo,ManagerDeConsultas decorado, String admin) {
+	public NotificarTiempoDeConsulta(Integer tiempoMaximo,Buscador decorado, String admin) {
 		super(decorado);
 		this.tiempoMaximo = tiempoMaximo;
 		this.admin = admin;
@@ -19,19 +23,29 @@ public class NotificarTiempoDeConsulta extends AccionDecorador{
 
 
 	@Override
-	public void ejecutarse(Consulta consulta) {
-		this.getDecorado().ejecutarse(consulta);
-		this.notificarAdminSiEsNecesario(consulta);
+	public List<POI> busquedaGeneral(String fraseBuscada){
+		long tiempoInicial = System.currentTimeMillis();
+		
+		List<POI> poisEncontrados = new ArrayList<POI>();
+		
+		poisEncontrados = this.getDecorado().busquedaGeneral(fraseBuscada);
+		
+		long tiempoFinal = System.currentTimeMillis();
+
+		this.notificarAdminSiEsNecesario(tiempoFinal - tiempoInicial);
+		
+		return poisEncontrados;
 	}
 
 
-	private void notificarAdminSiEsNecesario(Consulta consulta) {
+	private void notificarAdminSiEsNecesario(long tiempoDeEjecucion) {
 		
-		if(consulta.getTiempoDeEjecución() > tiempoMaximo){
-			instance.getMailSender().enviarMail(new Mail("Consulta excede el tiempo de ejecucion","Deberia mandar 'this'",this.admin)); //FIXME: Resolver el tipado del email
+		if(tiempoDeEjecucion > tiempoMaximo){
+			MailSender.enviarMail(new Mail("Consulta excede el tiempo de ejecucion","Deberia mandar 'this'",this.admin)); //FIXME: Resolver el tipado del email
 		}
 			
 		
 	}
+
 
 }

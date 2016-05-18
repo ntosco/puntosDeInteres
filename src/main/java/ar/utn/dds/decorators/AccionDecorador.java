@@ -1,27 +1,30 @@
 package ar.utn.dds.decorators;
 
-import ar.utn.dds.managers.ManagerDeConsultas;
+import java.util.List;
+
+import ar.utn.dds.POI.POI;
+import ar.utn.dds.managers.Buscador;
 import ar.utn.dds.utils.Consulta;
 
-public abstract class AccionDecorador implements ManagerDeConsultas {
+public abstract class AccionDecorador implements Buscador {
 	
-	private ManagerDeConsultas decorado;
+	private Buscador decorado;
 
 
-	public AccionDecorador(ManagerDeConsultas decorado) {
+	public AccionDecorador(Buscador decorado) {
 		super();
 		this.decorado = decorado;
 	}
 	
 	
-	public abstract void ejecutarse(Consulta consulta);
+	public abstract List<POI> busquedaGeneral(String fraseBuscada);
 
-	public ManagerDeConsultas getDecorado() {
+	public Buscador getDecorado() {
 		return decorado;
 	}
 
 
-	public void setDecorado(ManagerDeConsultas decorado) {
+	public void setDecorado(Buscador decorado) {
 		this.decorado = decorado;
 	}
 

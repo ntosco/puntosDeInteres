@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ar.utn.dds.POI.POI;
+import ar.utn.dds.managers.Buscador;
 
 
-public class BusquedaDePuntos {
+public class BusquedaDePuntos implements Buscador {
 	
 	public List<OrigenDeDatos> origenesDeDatos = new ArrayList<OrigenDeDatos>();
 	private List<POI> Auxiliar = new ArrayList<POI>();
@@ -50,6 +51,8 @@ public class BusquedaDePuntos {
 	public void setServicio(OrigenDeDatos servicio) {
 		this.origenesDeDatos.add(servicio);
 	}
+
+
 	
 	
 }
