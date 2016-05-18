@@ -31,7 +31,6 @@ public class TestBusquedaGeneral extends JuegoDeDatos {
 		setUpGeneral();
 		setUpBanco();
 		setUpCGP();
-		setUpDTO();
 		setUpLocalComercial();
 		setUpColectivos();
 		

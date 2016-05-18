@@ -27,7 +27,6 @@ public class TestCGP extends JuegoDeDatos {
 	public void SetUp() {
 		setUpGeneral();
 		setUpCGP();
-		setUpDTO();
 		adapter = new AdapterCGP();
 		adapter.setServicioCGP(new StubBuscadorCGP());
 		listaPOI = adapter.buscarPOI("nombre");
@@ -129,23 +128,6 @@ public class TestCGP extends JuegoDeDatos {
 	}
 
 	@Test
-	public void testDTOJuegoDeDatos() {
-		centrosDTO.forEach(centro -> listaPOI.add(adapter.convertirDTOACGP(centro)));
-		assertEquals(centrosDTO.size(), 3);
-
-	}
-	
-	@Test
-	public void testNoEstaDisponibleEnHorarioOUTConJuegoDeDatos(){
-		listaPOI.clear();
-		centrosDTO.forEach(centro -> listaPOI.add(adapter.convertirDTOACGP(centro)));
-		assertTrue(listaPOI.get(0).estaDisponible("rentas", lunes1210hs));
-		assertFalse(listaPOI.get(0).estaDisponible("otracosa", lunes1210hs));
-		assertTrue(listaPOI.get(1).estaDisponible("Asesoramiento", lunes1210hs));
-		assertFalse(listaPOI.get(1).estaDisponible("Asesoramiento", martes04hs));
-	}
-
-	@Test
 	public void testDisponiblesEnHorario() {
 		assertTrue(listaPOI.get(0).estaDisponible("rentas", lunes12hs));
 		assertFalse(listaPOI.get(1).estaDisponible("rentas", lunes12hs));
@@ -160,14 +142,6 @@ public class TestCGP extends JuegoDeDatos {
 
 		verify(buscador).buscarPOI("nombre");
 
-	}
-	
-	@Test
-	public void pruebaConversionDePalabrasClave(){
-		CentroDTO centro = centrosDTO.get(0);
-		assertTrue(adapter.palabrasClaveParaCGP(centro).contains("rentas"));
-		assertTrue(adapter.palabrasClaveParaCGP(centro).contains("Recoleta"));
-		
 	}
 	
 	@Test

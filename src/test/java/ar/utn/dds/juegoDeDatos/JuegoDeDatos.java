@@ -780,33 +780,5 @@ abstract public class JuegoDeDatos {
 		sabado23hs = LocalDateTime.of(2016, 4, 2, 23, 00, 00);
 	}
 	
-	// Entrega 2
-	
-	public void setUpDTO(){
-		
-		rangoDe9a18 = new RangoServicioDTO(1,9,0,18,0);
-		rangoDe10a15 = new RangoServicioDTO(1, 10, 0, 15, 0);
-		
-		rangoDe9a18Lunes = new ArrayList<RangoServicioDTO>();
-		rangoDe9a18Lunes.add(rangoDe9a18);
-		
-		rangoDe10a15Lunes = new ArrayList<RangoServicioDTO>();
-		rangoDe10a15Lunes.add(rangoDe10a15);
-		
-		servicioRentasDTO = new ServicioDTO("rentas", rangoDe9a18Lunes);
-		servicioDeRentasRecoletaDTO = new ArrayList<ServicioDTO>();
-		servicioDeRentasRecoletaDTO.add(servicioRentasDTO);
-		
-		servicioAsesoramiento = new ServicioDTO("Asesoramiento", rangoDe10a15Lunes);
-		servicioAsesoramientoPalermoDTO = new ArrayList<ServicioDTO>();
-		servicioAsesoramientoPalermoDTO.add(servicioAsesoramiento);
-		
-		
-		centroRecoleta = new CentroDTO(1, "Recoleta", "Juan Perez", "Jujuy 998", "45647898", servicioDeRentasRecoletaDTO);
-		centroPalermo = new CentroDTO(2, "Palermo, Belgrano", "Jose", "Junin 521", "42563214", servicioAsesoramientoPalermoDTO);
-		centrosDTO = new ArrayList<CentroDTO>();
-		centrosDTO.add(centroRecoleta);
-		centrosDTO.add(centroPalermo);
-		centrosDTO.add(centroPalermo);
-	}
+
 }
