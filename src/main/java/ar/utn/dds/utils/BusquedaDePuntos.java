@@ -27,7 +27,6 @@ public class BusquedaDePuntos implements Buscador {
 		Auxiliar.clear();
 		origenesDeDatos.forEach(serv -> agregarAAuxiliar(serv.buscarPOI(nombre)));
 		return Auxiliar;
-		
 	}
 	
 	private void agregarAAuxiliar(List<POI> lista){	
