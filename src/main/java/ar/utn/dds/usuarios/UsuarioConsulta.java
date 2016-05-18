@@ -16,6 +16,14 @@ import ar.utn.dds.utils.Consulta;
 public class UsuarioConsulta implements Usuario {
 	private List<Observador> observadores = new ArrayList<Observador>();
 	private List<Consulta> listaConsultas = new ArrayList<Consulta>();
+	public List<Consulta> getListaConsultas() {
+		return listaConsultas;
+	}
+
+	public void setListaConsultas(List<Consulta> listaConsultas) {
+		this.listaConsultas = listaConsultas;
+	}
+
 	private Consulta ultimaConsulta;
 	private String nombreUsuario;
 	

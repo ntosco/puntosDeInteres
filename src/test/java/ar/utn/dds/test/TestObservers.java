@@ -83,6 +83,16 @@ public class TestObservers extends JuegoDeDatos{
 		assertEquals(4 , unUsuario.getUltimaConsulta().getCantidadDeResultados());
 	}
 	
+	@Test
+	public void lasConsultasSeAlmacenanCorrectamente() {
+		unUsuario.buscarPuntos("dipsi");
+		unUsuario.buscarPuntos("lala");
+		unUsuario.buscarPuntos("po");
+		assertEquals("Samo" ,unUsuario.getUltimaConsulta().getNombreUsuario());
+		assertEquals("15" , unUsuario.getUltimaConsulta().getPalabraBuscada());
+		assertEquals(3 , unUsuario.getListaConsultas().size());
+	}
+	
 	
 	@Test
 	//Cuando agregan un nuevo regritro el hashtable debe crecer en tamaño
@@ -150,4 +160,6 @@ public class TestObservers extends JuegoDeDatos{
 		unUsuario.buscarPuntos("15");
 		assertEquals(0,observadorTiempoBusqueda.getListaConsultasNotificar().size());
 	}
+	
+	
 }
