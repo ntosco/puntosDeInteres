@@ -31,7 +31,7 @@ public class AlmacenarResultados extends AccionDecorador {
 		consulta.setFraseBuscada(fraseBuscada);
 		
 		long tiempoFinal = System.currentTimeMillis();
-		consulta.setTiempoDeEjecución(tiempoFinal - tiempoInicial);
+		consulta.setTiempoDeEjecucion(tiempoFinal - tiempoInicial);
 		
 		this.almacenarConsulta(consulta);
 		

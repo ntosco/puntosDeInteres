@@ -5,7 +5,7 @@ public class Consulta {
 
 	private String fraseBuscada;
 	private Integer cantidadDeResultados;
-	private long tiempoDeEjecución;
+	private long tiempoDeEjecucion;
 	private String usuarioEjecutor;
 
 	public Consulta() {
@@ -33,12 +33,12 @@ public class Consulta {
 		this.cantidadDeResultados = cantidadDeResultados;
 	}
 
-	public long getTiempoDeEjecución() {
-		return tiempoDeEjecución;
+	public long getTiempoDeEjecucion() {
+		return tiempoDeEjecucion;
 	}
 
-	public void setTiempoDeEjecución(long tiempoDeEjecución) {
-		this.tiempoDeEjecución = tiempoDeEjecución;
+	public void setTiempoDeEjecucion(long tiempoDeEjecucion) {
+		this.tiempoDeEjecucion = tiempoDeEjecucion;
 	}
 
 	public String getUsuarioEjecutor() {
