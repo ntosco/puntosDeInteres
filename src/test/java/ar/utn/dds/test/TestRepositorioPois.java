@@ -1,10 +1,13 @@
 package ar.utn.dds.test;
 
 import static org.junit.Assert.*;
+
 import org.junit.*;
+
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.repositorio.Repositorio;
 import ar.utn.dds.POI.ParadaDeColectivo;
+import ar.utn.dds.creacionales.LocalComercialBuilder;
 import ar.utn.dds.exceptions.*;
 
 public class TestRepositorioPois extends JuegoDeDatos {
@@ -38,9 +41,10 @@ public class TestRepositorioPois extends JuegoDeDatos {
 
 	@Test(expected = InvalidModelException.class)
 	public void noCreaPOICuandoEsteEsInvalido(){
-		int size = repositorio.allInstances().size();
-		repositorio.create(this.cafeMartinez); //cafe martinez no tiene "nombre". por eso debe fallar
-		assertEquals(repositorio.allInstances().size(),++size);
+		LocalComercialBuilder builderCafeMartinez = new LocalComercialBuilder();
+		builderCafeMartinez.crearListaRubros(cafeteriaYComidas);
+		builderCafeMartinez.setearDatosComunes(null, "Pompeya", "Cabo", 5620 , ubicacionLocalCafeMartinez, palabrasClaveCafeMartinez, jornadaNormalLunesAViernes);
+		cafeMartinez = builderCafeMartinez.build();
 	}
 	
 	

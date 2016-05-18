@@ -30,7 +30,7 @@ public class StubBuscadorBanco implements buscadorDeBancos {
 		obj.put("y", "72");
 		obj.put("sucursal", "Avellaneda");
 		obj.put("gerente", "Pablo Perez");
-		obj.put("servicios", "[cobrocheques,dep�sitos,extracciones]");
+		obj.put("servicios", "[cobrocheques,depositos,extracciones]");
 		
 		JSONObject obj1 = new JSONObject();
 		obj1.put("banco", "Banco de la plaza");

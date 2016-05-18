@@ -15,6 +15,11 @@ import ar.utn.dds.POI.ParadaDeColectivo;
 import ar.utn.dds.POI.Rubro;
 import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.comunas.Comuna;
+import ar.utn.dds.creacionales.BancoBuilder;
+import ar.utn.dds.creacionales.CgpBuilder;
+import ar.utn.dds.creacionales.ColectivoBuilder;
+import ar.utn.dds.creacionales.JornadaBuilder;
+import ar.utn.dds.creacionales.LocalComercialBuilder;
 import ar.utn.dds.extern.banco.buscadorDeBancos;
 import ar.utn.dds.extern.cgp.CentroDTO;
 import ar.utn.dds.extern.cgp.RangoServicioDTO;
@@ -124,6 +129,8 @@ abstract public class JuegoDeDatos {
 	protected List<String> palabrasClaveCGPPaternal;
 	protected List<String> palabrasClaveCGPNunez;
 	protected List<String> palabrasClaveCGPBoedo;
+	protected List<String> palabrasClaveCGPCaballito;
+	protected List<String> palabrasClaveCGPPalermo;
 
 	// comunas
 
@@ -180,11 +187,12 @@ abstract public class JuegoDeDatos {
 	protected Point ubicacionLocalCafeMartinez;
 	protected List<String> palabrasClaveCafeMartinez;
 
-	protected LocalComercial addidas;
+	protected LocalComercial adidas;
 	protected Point ubicacionLocalAddidas;
 
 	protected LocalComercial panquequesCarlitos;
 	protected Point ubicacionLocalPanquequesCarlitos;
+	
 
 	// Bancos
 	protected SucursalBanco sucursalPalermo;
@@ -205,12 +213,11 @@ abstract public class JuegoDeDatos {
 	protected List<String> palabrasClaveBancoFrances;
 	protected List<String> palabrasClaveBancoGalicia;
 	protected List<String> palabrasClaveBancoRio;
+	protected List<String> palabrasClaveBancoMartinez;
 
 	protected JSONObject bancoFrances2;
 	protected JSONObject bancoGalicia2;
-	
-	
-	
+		
 	// Jornadas
 
 	protected List<Jornada> jornadaBancaria;
@@ -219,45 +226,7 @@ abstract public class JuegoDeDatos {
 	protected List<Jornada> manana;// los 7 dias
 	protected List<Jornada> tarde;// los 7 dias
 	protected List<Jornada> jornada24x7;// 24 hs los 7 dias
-	protected Jornada jornadaLaboral_Lunes_10a20;
-	protected Jornada jornadaLaboral_Martes_10a20;
-	protected Jornada jornadaLaboral_Miercoles_10a20;
-	protected Jornada jornadaLaboral_Jueves_13a15;
-	protected Jornada jornadaLaboral_Viernes_10a20;
-	protected Jornada jornadaLaboral_Sabado_10a13;
-	protected Jornada jornadaLunes24hs;
-	protected Jornada jornadaMartes24hs;
-	protected Jornada jornadaMiercoles24hs;
-	protected Jornada jornadaJueves24hs;
-	protected Jornada jornadaViernes24hs;
-	protected Jornada jornadaSabado24hs;
-	protected Jornada jornadaDomingo24hs;
-	protected Jornada jornadaLunesM;
-	protected Jornada jornadaMartesM;
-	protected Jornada jornadaMiercolesM;
-	protected Jornada jornadaJuevesM;
-	protected Jornada jornadaViernesM;
-	protected Jornada jornadaSabadoM;
-	protected Jornada jornadaDomingoM;
-	protected Jornada jornadaLunesT;
-	protected Jornada jornadaMartesT;
-	protected Jornada jornadaMiercolesT;
-	protected Jornada jornadaJuevesT;
-	protected Jornada jornadaViernesT;
-	protected Jornada jornadaSabadoT;
-	protected Jornada jornadaDomingoT;
-	protected Jornada jornadaLunesN;
-	protected Jornada jornadaMartesN;
-	protected Jornada jornadaMiercolesN;
-	protected Jornada jornadaJuevesN;
-	protected Jornada jornadaViernesN;
-	protected Jornada jornadaSabadoN;
-	protected Jornada jornadaDomingoN;
-	protected Jornada jornadaBancariaDe10a15LUNES;
-	protected Jornada jornadaBancariaDe10a15MARTES;
-	protected Jornada jornadaBancariaDe10a15MIERCOLES;
-	protected Jornada jornadaBancariaDe10a15JUEVES;
-	protected Jornada jornadaBancariaDe10a15VIERNES;
+
 
 	// LOCAL DATE TIME
 
@@ -268,16 +237,6 @@ abstract public class JuegoDeDatos {
 	protected LocalDateTime lunes12hs;
 	protected LocalDateTime jueves11hs;
 	protected LocalDateTime sabado23hs;
-	
-	// Rangos Horarios
-	
-	protected RangoHorario rangolaboral_10a20;
-	protected RangoHorario rango24hs;
-	protected RangoHorario rangomanana;
-	protected RangoHorario rangoTarde;
-	protected RangoHorario rangoNoche;
-	protected RangoHorario rangoBancario;
-	protected RangoHorario rangolaboral_9a13;
 	
 	// Entrega 2
 	
@@ -301,6 +260,10 @@ abstract public class JuegoDeDatos {
 	private ArrayList<ServicioDTO> servicioAsesoramientoPalermoDTO;
 	private CentroDTO centroPalermo;
 
+	protected List<DayOfWeek> lunesAViernes;
+	private List<DayOfWeek> todosLosDias;
+	
+	
 	
 	public void setUpGeneral() {
 		setUpLocalDateTime();
@@ -314,59 +277,31 @@ abstract public class JuegoDeDatos {
 	}	
 	
 	public void setUpBanco() {
-		// galicia y frances comparten ubicacion
-		bancoFrances = new SucursalBanco();
-		bancoFrances.setNombre("Banco Frances");
-		
-		bancoFrances.setListaServicios(servicioCajeroAutomatico);
-		bancoFrances.setUbicacionActual(ubicacionSucursalFrances);
-		palabrasClaveBancoFrances = new ArrayList<String>();
-		palabrasClaveBancoFrances.add("deposito");
-		palabrasClaveBancoFrances.add("extraccion");
-		palabrasClaveBancoFrances.add("consulta");
-		palabrasClaveBancoFrances.add("saldo");
-		bancoFrances.setListaPalabrasClave(palabrasClaveBancoFrances);
 
-		bancoGalicia = new SucursalBanco();
-		
-		bancoGalicia.setNombre("Banco Galicia");
-		
-		bancoGalicia.setListaServicios(servicioCajeroAutomatico);
-		bancoGalicia.setUbicacionActual(ubicacionSucursalFrances);
-		palabrasClaveBancoGalicia = new ArrayList<String>();
-		palabrasClaveBancoGalicia.add("deposito");
-		palabrasClaveBancoGalicia.add("extraccion");
-		palabrasClaveBancoGalicia.add("consulta");
-		palabrasClaveBancoGalicia.add("saldo");
-		bancoGalicia.setListaPalabrasClave(palabrasClaveBancoGalicia);
+		BancoBuilder builderFrances = new BancoBuilder();
+		builderFrances.crearListaServicios(servicioCajeroAutomatico);
+		builderFrances.setearDatosComunes("Frances San Cristobal", "San Cristobal", "Estados Unidos", 2206 , ubicacionSucursalFrances, palabrasClaveBancoFrances, jornadaBancaria);
+		bancoFrances = builderFrances.build();
 
-		bancoRio = new SucursalBanco();
-		bancoRio.setListaServicios(servicioCajeroAutomatico);
-		bancoRio.setUbicacionActual(ubicacionSucursalRio);
-		palabrasClaveBancoRio = new ArrayList<String>();
-		palabrasClaveBancoRio.add("deposito");
-		palabrasClaveBancoRio.add("extraccion");
-		palabrasClaveBancoRio.add("consulta");
-		palabrasClaveBancoRio.add("saldo");
-		bancoRio.setListaPalabrasClave(palabrasClaveBancoRio);
+		BancoBuilder builderGalicia = new BancoBuilder();
+		builderGalicia.crearListaServicios(servicioCajeroAutomatico);
+		builderGalicia.setearDatosComunes("Banco Galicia", "Palermo", "Arenales", 200 , ubicacionSucursalFrances, palabrasClaveBancoGalicia, jornadaBancaria);
+		bancoGalicia = builderGalicia.build();
 
-		sucursalRetiro = new SucursalBanco();
-		sucursalRetiro.setListaServicios(servicioCPyRentas);
-		sucursalRetiro.setUbicacionActual(ubicacionSucursalRetiro);
-		sucursalRetiro
-				.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
-		palabrasClaveBancoRetiro = new ArrayList<String>();
-		palabrasClaveBancoRetiro.add("Rentas");
-		palabrasClaveBancoRetiro.add("Pago de facturas");
-		sucursalRetiro.setListaPalabrasClave(palabrasClaveBancoRetiro);
-
-		sucursalMartinez = new SucursalBanco();
-		sucursalMartinez
-				.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
-		sucursalMartinez.setUbicacionActual(ubicacionSucursalMartinez);
-		sucursalMartinez
-				.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
+		BancoBuilder builderRio = new BancoBuilder();
+		builderRio.crearListaServicios(servicioCajeroAutomatico);
+		builderRio.setearDatosComunes("Banco Rio", "Palermo", "Arenales", 207 , ubicacionSucursalRio, palabrasClaveBancoRio, jornadaBancaria);
+		bancoRio = builderRio.build();
 		
+		BancoBuilder builderRetiro = new BancoBuilder();
+		builderRetiro.crearListaServicios(servicioCPyRentas);
+		builderRetiro.setearDatosComunes("Banco Retiro", "Retiro", "Paseo Colon", 2207 , ubicacionSucursalRetiro, palabrasClaveBancoRetiro, jornadaBancaria);
+		sucursalRetiro = builderRetiro.build();
+
+		BancoBuilder builderMartinez = new BancoBuilder();
+		builderMartinez.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas);
+		builderMartinez.setearDatosComunes("Banco Martinez", "Martinez", "San Martin", 591 , ubicacionSucursalMartinez, palabrasClaveBancoMartinez, jornadaBancaria);
+		sucursalMartinez = builderMartinez.build();		
 		
 		//Entrega 2
 		
@@ -386,134 +321,50 @@ abstract public class JuegoDeDatos {
 		bancoGalicia2.put("y", "20");
 		bancoGalicia2.put("sucursal", "Avellaneda");
 		bancoGalicia2.put("gerente", "Pablo Perez");
-		bancoGalicia2.put("servicios", "[cobrocheques,dep�sitos,extracciones]");
+		bancoGalicia2.put("servicios", "[cobrocheques,depositos,extracciones]");
 		
 	}
 
 	public void setUpJornadas() {
+		
+		lunesAViernes = new ArrayList<DayOfWeek>();
+		lunesAViernes.add(DayOfWeek.MONDAY);
+		lunesAViernes.add(DayOfWeek.TUESDAY);
+		lunesAViernes.add(DayOfWeek.WEDNESDAY);
+		lunesAViernes.add(DayOfWeek.THURSDAY);
+		lunesAViernes.add(DayOfWeek.FRIDAY);
+		
+		todosLosDias = new ArrayList<DayOfWeek>();
+		todosLosDias.addAll(lunesAViernes);
+		todosLosDias.add(DayOfWeek.SATURDAY);
+		todosLosDias.add(DayOfWeek.SUNDAY);
+		
+		
+		JornadaBuilder builderJornadaNormal = new JornadaBuilder();
+		jornadaNormalLunesAViernes = builderJornadaNormal.buildJornada(lunesAViernes, 10, 0, 20, 0);
+		
+		JornadaBuilder builderJornada24x7 = new JornadaBuilder();
+		jornada24x7 = builderJornada24x7.buildJornada(todosLosDias, 0, 0, 23, 59);
+		
+		JornadaBuilder builderJornadaManiana = new JornadaBuilder();
+		manana = builderJornadaManiana.buildJornada(todosLosDias, 8, 0, 12, 0);
+		
+		JornadaBuilder builderJornadaTarde = new JornadaBuilder();
+		tarde = builderJornadaTarde.buildJornada(todosLosDias, 12, 0, 18, 0);
 
-		rangolaboral_10a20 = new RangoHorario(LocalTime.of(10, 0,
-				0), LocalTime.of(20, 0, 0));
-		rangolaboral_9a13 = new RangoHorario(
-				LocalTime.of(9, 0, 0), LocalTime.of(13, 0, 0));
-		jornadaLaboral_Lunes_10a20 = new Jornada(DayOfWeek.MONDAY,
-				rangolaboral_10a20);
-		jornadaLaboral_Martes_10a20 = new Jornada(DayOfWeek.TUESDAY,
-				rangolaboral_10a20);
-		jornadaLaboral_Miercoles_10a20 = new Jornada(DayOfWeek.WEDNESDAY, rangolaboral_10a20);
-		jornadaLaboral_Jueves_13a15 = new Jornada(DayOfWeek.THURSDAY,rangolaboral_10a20);
-		jornadaLaboral_Viernes_10a20 = new Jornada(DayOfWeek.FRIDAY,
-				rangolaboral_10a20);
-		jornadaLaboral_Sabado_10a13 = new Jornada(DayOfWeek.SATURDAY,rangolaboral_9a13);
-		jornadaNormalLunesAViernes = new ArrayList<Jornada>();
-		jornadaNormalLunesAViernes.add(jornadaLaboral_Lunes_10a20);
-		jornadaNormalLunesAViernes.add(jornadaLaboral_Martes_10a20);
-		jornadaNormalLunesAViernes.add(jornadaLaboral_Miercoles_10a20);
-		jornadaNormalLunesAViernes.add(jornadaLaboral_Jueves_13a15);
-		jornadaNormalLunesAViernes.add(jornadaLaboral_Viernes_10a20);
-		jornadaNormalLunesAViernes.add(jornadaLaboral_Sabado_10a13);
-
-		rango24hs = new RangoHorario(LocalTime.of(0, 0, 0),
-				LocalTime.of(23, 59, 59));
-		jornadaLunes24hs = new Jornada(DayOfWeek.MONDAY, rango24hs);
-		jornadaMartes24hs = new Jornada(DayOfWeek.TUESDAY, rango24hs);
-		jornadaMiercoles24hs = new Jornada(DayOfWeek.WEDNESDAY,	rango24hs);
-		jornadaJueves24hs = new Jornada(DayOfWeek.THURSDAY, rango24hs);
-		jornadaViernes24hs = new Jornada(DayOfWeek.FRIDAY, rango24hs);
-		jornadaSabado24hs = new Jornada(DayOfWeek.SATURDAY, rango24hs);
-		jornadaDomingo24hs = new Jornada(DayOfWeek.SUNDAY, rango24hs);
-		jornada24x7 = new ArrayList<Jornada>();
-		jornada24x7.add(jornadaLunes24hs);
-		jornada24x7.add(jornadaMartes24hs);
-		jornada24x7.add(jornadaMiercoles24hs);
-		jornada24x7.add(jornadaJueves24hs);
-		jornada24x7.add(jornadaViernes24hs);
-		jornada24x7.add(jornadaSabado24hs);
-		jornada24x7.add(jornadaDomingo24hs);
-
-		rangomanana = new RangoHorario(LocalTime.of(8, 0, 0),
-				LocalTime.of(12, 0, 0));
-		jornadaLunesM = new Jornada(DayOfWeek.MONDAY, rangomanana);
-		jornadaMartesM = new Jornada(DayOfWeek.TUESDAY, rangomanana);
-		jornadaMiercolesM = new Jornada(DayOfWeek.WEDNESDAY,rangomanana);
-		jornadaJuevesM = new Jornada(DayOfWeek.THURSDAY, rangomanana);
-		jornadaViernesM = new Jornada(DayOfWeek.FRIDAY, rangomanana);
-		jornadaSabadoM = new Jornada(DayOfWeek.SATURDAY, rangomanana);
-		jornadaDomingoM = new Jornada(DayOfWeek.SUNDAY, rangomanana);
-		manana = new ArrayList<Jornada>();
-		manana.add(jornadaLunesM);
-		manana.add(jornadaMartesM);
-		manana.add(jornadaMiercolesM);
-		manana.add(jornadaJuevesM);
-		manana.add(jornadaViernesM);
-		manana.add(jornadaSabadoM);
-		manana.add(jornadaDomingoM);
-
-		rangoTarde = new RangoHorario(LocalTime.of(12, 0, 0),
-				LocalTime.of(18, 0, 0));
-		jornadaLunesT = new Jornada(DayOfWeek.MONDAY, rangoTarde);
-		jornadaMartesT = new Jornada(DayOfWeek.TUESDAY, rangoTarde);
-		jornadaMiercolesT = new Jornada(DayOfWeek.WEDNESDAY, rangoTarde);
-		jornadaJuevesT = new Jornada(DayOfWeek.THURSDAY, rangoTarde);
-		jornadaViernesT = new Jornada(DayOfWeek.FRIDAY, rangoTarde);
-		jornadaSabadoT = new Jornada(DayOfWeek.SATURDAY, rangoTarde);
-		jornadaDomingoT = new Jornada(DayOfWeek.SUNDAY, rangoTarde);
-		tarde = new ArrayList<Jornada>();
-		manana.add(jornadaLunesT);
-		manana.add(jornadaMartesT);
-		manana.add(jornadaMiercolesT);
-		manana.add(jornadaJuevesT);
-		manana.add(jornadaViernesT);
-		manana.add(jornadaSabadoT);
-		manana.add(jornadaDomingoT);
-
-		rangoNoche = new RangoHorario(LocalTime.of(18, 0, 0),
-				LocalTime.of(23, 0, 0));
-		jornadaLunesN = new Jornada(DayOfWeek.MONDAY, rangoNoche);
-		jornadaMartesN = new Jornada(DayOfWeek.TUESDAY, rangoNoche);
-		jornadaMiercolesN = new Jornada(DayOfWeek.WEDNESDAY, rangoNoche);
-		jornadaJuevesN = new Jornada(DayOfWeek.THURSDAY, rangoNoche);
-		jornadaViernesN = new Jornada(DayOfWeek.FRIDAY, rangoNoche);
-		jornadaSabadoN = new Jornada(DayOfWeek.SATURDAY, rangoNoche);
-		jornadaDomingoN = new Jornada(DayOfWeek.SUNDAY, rangoNoche);
-		noche = new ArrayList<Jornada>();
-		manana.add(jornadaLunesN);
-		manana.add(jornadaMartesN);
-		manana.add(jornadaMiercolesN);
-		manana.add(jornadaJuevesN);
-		manana.add(jornadaViernesN);
-		manana.add(jornadaSabadoN);
-		manana.add(jornadaDomingoN);
-
-		rangoBancario = new RangoHorario(LocalTime.of(10, 0, 0),
-				LocalTime.of(15, 0, 0));
-		jornadaBancariaDe10a15LUNES = new Jornada(DayOfWeek.MONDAY,
-				rangoBancario);
-		jornadaBancariaDe10a15MARTES = new Jornada(DayOfWeek.TUESDAY,
-				rangoBancario);
-		jornadaBancariaDe10a15MIERCOLES = new Jornada(
-				DayOfWeek.WEDNESDAY, rangoBancario);
-		jornadaBancariaDe10a15JUEVES = new Jornada(DayOfWeek.THURSDAY,
-				rangoBancario);
-		jornadaBancariaDe10a15VIERNES = new Jornada(DayOfWeek.FRIDAY,
-				rangoBancario);
-		jornadaBancaria = new ArrayList<Jornada>();
-		jornadaBancaria.add(jornadaBancariaDe10a15LUNES);
-		jornadaBancaria.add(jornadaBancariaDe10a15MARTES);
-		jornadaBancaria.add(jornadaBancariaDe10a15MIERCOLES);
-		jornadaBancaria.add(jornadaBancariaDe10a15JUEVES);
-		jornadaBancaria.add(jornadaBancariaDe10a15VIERNES);
-
+		JornadaBuilder builderJornadaNoche = new JornadaBuilder();
+		noche = builderJornadaNoche.buildJornada(todosLosDias, 18, 0, 23, 0);
+		
+		JornadaBuilder builderJornadaBancaria = new JornadaBuilder();
+		jornadaBancaria = builderJornadaBancaria.buildJornada(lunesAViernes, 10, 0, 15, 0);
+		
 	}
 
 	public void setUpServicios() {
 
-		pagoDeFacturas = new Servicio("Pago de facturas",
-				jornadaNormalLunesAViernes);
-		asesoramientoLegal = new Servicio("Asesoramiento Legal",
-				jornadaNormalLunesAViernes);
-		asesoramientoTecnico = new Servicio("Asesoramieno Tecnico",
-				jornadaNormalLunesAViernes);
+		pagoDeFacturas = new Servicio("Pago de facturas",jornadaNormalLunesAViernes);
+		asesoramientoLegal = new Servicio("Asesoramiento Legal",jornadaNormalLunesAViernes);
+		asesoramientoTecnico = new Servicio("Asesoramieno Tecnico",	jornadaNormalLunesAViernes);
 		rentas = new Servicio("rentas", jornadaBancaria);
 		servicioCP = new Servicio("CP", jornadaBancaria);
 		depositos = new Servicio("depositos", jornadaBancaria);
@@ -559,125 +410,130 @@ abstract public class JuegoDeDatos {
 		ubicacionCGPAlmagro = new Point(10, 15.005);
 		ubicacionCGPCaballito = new Point(8, 10);
 		ubicacionCGPPalermo = new Point(15, 15);
-
+		
+		ubicacionParada15 = new Point(10.0008, 20);
+		ubicacionParada60 = new Point(30, 25);
+		ubicacionParada11 = new Point(12, 18);
+		ubicacionParada114 = new Point(11, 13);
+		ubicacionParada110LaBoca = new Point(39, 22);
+		ubicacionParada7Amarillo = new Point(11, 13);
+		ubicacionParada7Rojo = new Point(11, 14);
+		
+		ubicacionFarmacity = new Point(11,14);
+		ubicacionMorita = new Point(20,16);
+		ubicacionZapateria = new Point(11,15);
+		ubicacionHeinsenbuger = new Point(15,12);
+		ubicacionLibreria = new Point(23,65);
+		ubicacionLocalNike = new Point(8,9);
+		ubicacionLocalFallabella = new Point(9,8);
+		ubicacionLocalCafeMartinez = new Point(4,16);
+		ubicacionLocalAddidas = new Point(12,23);
+		ubicacionLocalPanquequesCarlitos = new Point(10,10);
+		
 	}
 
 	public void setUpLocalComercial() {
 
-		farmacity = new LocalComercial();
-		farmacity.setUbicacionActual(ubicacionFarmacity);
-		farmacity.setListaRubros(farmaciaYperfumeria);
-		farmacity.setListaPalabrasClave(listaPalabrasClaveFarmacity);
-		farmacity.setJornadaDisponible(jornada24x7);
+		LocalComercialBuilder builderFarmacity = new LocalComercialBuilder();
+		builderFarmacity.crearListaRubros(rubroComidas);
+		builderFarmacity.setearDatosComunes("Farmacity", "Boedo", "Boedo", 156 , ubicacionFarmacity, listaPalabrasClaveFarmacity, jornada24x7);
+		farmacity = builderFarmacity.build();
+		
+		LocalComercialBuilder builderMorita = new LocalComercialBuilder();
+		builderMorita.crearListaRubros(rubroComidas);
+		builderMorita.setearDatosComunes("Morita", "Belgrano", "Paraguay", 556 , ubicacionMorita, listaPalabrasClaveMorita, noche);
+		morita = builderMorita.build();
+		
+		LocalComercialBuilder builderZapateria = new LocalComercialBuilder();
+		builderZapateria.crearListaRubros(rubroIndumentaria);
+		builderZapateria.setearDatosComunes("Zapateria Jorge", "Flores", "Varela", 1423 , ubicacionZapateria, listaPalabrasClaveZapateria, tarde);
+		zapateria = builderZapateria.build();
 
-		morita = new LocalComercial();
-		morita.setUbicacionActual(ubicacionMorita);
-		morita.setListaRubros(rubroComidas);
-		morita.setListaPalabrasClave(listaPalabrasClaveMorita);
-		morita.setJornadaDisponible(noche);
+		LocalComercialBuilder builderHeinsenburguer = new LocalComercialBuilder();
+		builderHeinsenburguer.crearListaRubros(rubroComidas);
+		builderHeinsenburguer.setearDatosComunes("Heinsenburguer", "Colegiales", "Chile", 147 , ubicacionHeinsenbuger, listaPalabrasClaveHeinsenburger, noche);
+		heinsenburger = builderHeinsenburguer.build();
 
-		zapateria = new LocalComercial();
-		zapateria.setUbicacionActual(ubicacionZapateria);
-		zapateria.setListaRubros(rubroIndumentaria);
-		zapateria.setListaPalabrasClave(listaPalabrasClaveZapateria);
-		zapateria.setJornadaDisponible(tarde);
+		LocalComercialBuilder builderLibreria = new LocalComercialBuilder();
+		builderLibreria.crearListaRubros(rubroLibreria);
+		builderLibreria.setearDatosComunes("Libreria", "Parque Patricios", "Colon", 2331 , ubicacionLibreria, listaPalabrasClaveLibreria, manana);
+		libreria = builderLibreria.build();
 
-		heinsenburger = new LocalComercial();
-		heinsenburger.setUbicacionActual(ubicacionHeinsenbuger);
-		heinsenburger.setListaRubros(rubroComidas);
-		heinsenburger.setListaPalabrasClave(listaPalabrasClaveHeinsenburger);
-		heinsenburger.setJornadaDisponible(noche);
+		LocalComercialBuilder builderNike = new LocalComercialBuilder();
+		builderNike.crearListaRubros(rubroIndumentaria);
+		builderNike.setearDatosComunes("Nike", "Abasto", "Corrientes", 4231 , ubicacionLocalNike, listaPalabrasClaveNike, manana);
+		nike = builderNike.build();
+		
+		LocalComercialBuilder builderFallabella = new LocalComercialBuilder();
+		builderFallabella.crearListaRubros(rubrosIndumentariaMuebleriaPerfumeria);
+		builderFallabella.setearDatosComunes("Fallabella", "Microcentro", "Florida", 120 , ubicacionLocalFallabella, listaPalabrasClaveFallabella, jornadaNormalLunesAViernes);
+		fallabella = builderFallabella.build();
 
-		libreria = new LocalComercial();
-		libreria.setUbicacionActual(ubicacionLibreria);
-		libreria.setListaRubros(rubroLibreria);
-		libreria.setListaPalabrasClave(listaPalabrasClaveLibreria);
-		libreria.setJornadaDisponible(manana);
+		LocalComercialBuilder builderCafeMartinez = new LocalComercialBuilder();
+		builderCafeMartinez.crearListaRubros(cafeteriaYComidas);
+		builderCafeMartinez.setearDatosComunes("Cafe Martinez", "Pompeya", "Cabo", 5620 , ubicacionLocalCafeMartinez, palabrasClaveCafeMartinez, jornadaNormalLunesAViernes);
+		cafeMartinez = builderCafeMartinez.build();
+		
+		LocalComercialBuilder builderAdidas = new LocalComercialBuilder();
+		builderAdidas.crearListaRubros(rubroIndumentaria);
+		builderAdidas.setearDatosComunes("Adidas", "Palermo", "Av. Santa Fe", 856 , ubicacionLocalAddidas, listaPalabrasClaveNike, jornadaNormalLunesAViernes);
+		adidas = builderAdidas.build();
 
-		nike = new LocalComercial();
-		nike.setUbicacionActual(ubicacionLocalNike);
-		nike.setListaRubros(rubroIndumentaria);
-		nike.setListaPalabrasClave(listaPalabrasClaveNike);
-
-		fallabella = new LocalComercial();
-		ubicacionLocalFallabella = new Point(10, 15);
-		fallabella.setUbicacionActual(ubicacionLocalFallabella);
-		fallabella.setJornadaDisponible(jornadaNormalLunesAViernes);
-		fallabella.setListaRubros(rubrosIndumentariaMuebleriaPerfumeria);
-		fallabella.setListaPalabrasClave(listaPalabrasClaveFallabella);
-
-		cafeMartinez = new LocalComercial();
-		cafeMartinez.setUbicacionActual(ubicacionLocalCafeMartinez);
-		cafeMartinez.setJornadaDisponible(jornadaNormalLunesAViernes);
-		cafeMartinez.setListaPalabrasClave(palabrasClaveCafeMartinez);
-		cafeMartinez.setListaRubros(cafeteriaYComidas);
-
-		addidas = new LocalComercial();
-		addidas.setUbicacionActual(ubicacionLocalAddidas);
-
-		panquequesCarlitos = new LocalComercial();
-		panquequesCarlitos.setUbicacionActual(ubicacionLocalPanquequesCarlitos);
+		LocalComercialBuilder builderCarlitos = new LocalComercialBuilder();
+		builderCarlitos.crearListaRubros(cafeteriaYComidas);
+		builderCarlitos.setearDatosComunes("Carlitos Panqueques", "Recoleta", "Rosas", 1086 , ubicacionLocalPanquequesCarlitos, palabrasClaveCafeMartinez, jornadaNormalLunesAViernes);
+		panquequesCarlitos = builderCarlitos.build();
 
 	}
 
 	public void setUpCGP() {
+		
+		CgpBuilder builderPaternal = new CgpBuilder();
+		builderPaternal.crearComuna(punto7comuna, punto8comuna, punto10comuna);
+		builderPaternal.crearListaServicios(servicioCPyRentas);
+		builderPaternal.setearDatosComunes("paternal", "Boedo", "Boedo", 156 , punto10comuna, palabrasClaveCGPPaternal, jornadaBancaria);
+		cgpPaternal = builderPaternal.build();
+		
+		
+		CgpBuilder builderLaBoca = new CgpBuilder();
+		builderLaBoca.crearComuna(punto10comuna, punto8comuna, punto11comuna);
+		builderLaBoca.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas);
+		builderLaBoca.setearDatosComunes("La boca", "La boca", "Brasil", 4456 , ubicacionCGPLaBoca, palabrasClaveCGPLaBoca, jornada24x7);
+		cgpLaBoca = builderLaBoca.build();
+		
+		CgpBuilder builderNunez = new CgpBuilder();
+		builderNunez.crearComuna(punto9comuna, punto8comuna, punto10comuna);
+		builderNunez.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas);
+		builderNunez.setearDatosComunes("Nunez", "Nunez, Belgrano", "Av. Libertador", 879 , ubicacionCGPNunez, palabrasClaveCGPNunez, noche);
+		cgpNunez = builderNunez.build();
+		
+		CgpBuilder builderBoedo = new CgpBuilder();
+		builderBoedo.crearComuna(punto9comuna, punto11comuna, punto12comuna);
+		builderBoedo.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas);
+		builderBoedo.setearDatosComunes("Boedo", "Boedo", "Av. Boedo", 1565 , ubicacionCGPBoedo, palabrasClaveCGPBoedo, noche);
+		cgpBoedo = builderBoedo.build();
 
-		cgpPaternal = new CentroGestionParticipacion();
-		cgpPaternal.setUbicacionActual(ubicacionCGPPaternal);
-		cgpPaternal.setComuna(comuna3);
-		cgpPaternal.setListaServicios(servicioCPyRentas);
-		cgpPaternal.setListaPalabrasClave(palabrasClaveCGPPaternal);
-		cgpPaternal.setJornadaDisponible(jornada24x7);
-
-		cgpLaBoca = new CentroGestionParticipacion();
-		cgpLaBoca.setNombre("la boca");
-		cgpLaBoca.setUbicacionActual(ubicacionCGPLaBoca);
-		cgpLaBoca.setComuna(comuna4);
-		cgpLaBoca.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
-		cgpLaBoca.setListaPalabrasClave(palabrasClaveCGPLaBoca);
-		cgpLaBoca.setJornadaDisponible(jornada24x7);
-
-		cgpNunez = new CentroGestionParticipacion();
-		cgpNunez.setUbicacionActual(ubicacionCGPNunez);
-		cgpNunez.setComuna(comuna5);
-		cgpNunez.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
-		cgpNunez.setListaPalabrasClave(palabrasClaveCGPNunez);
-		cgpNunez.setJornadaDisponible(noche);
-
-		cgpBoedo = new CentroGestionParticipacion();
-		cgpBoedo.setUbicacionActual(ubicacionCGPBoedo);
-		cgpBoedo.setComuna(comuna6);
-		cgpBoedo.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
-		cgpBoedo.setListaPalabrasClave(palabrasClaveCGPBoedo);
-		cgpBoedo.setJornadaDisponible(noche);
-
-		cgpCaballito = new CentroGestionParticipacion();
-		cgpCaballito.setUbicacionActual(ubicacionCGPCaballito);
-		cgpCaballito.setComuna(comuna2);
-		cgpCaballito.setListaServicios(servicioCPyRentas);
-
-		cgpAlmagro = new CentroGestionParticipacion();
-		cgpAlmagro.setUbicacionActual(ubicacionCGPAlmagro);
-		cgpAlmagro.setComuna(comuna1);
-		cgpAlmagro.setListaServicios(servicioCPyRentas);
-		cgpAlmagro.setListaPalabrasClave(palabrasClaveCGPAlmagro);
-		cgpAlmagro.setJornadaDisponible(jornadaNormalLunesAViernes);
-
-		cgpPalermo = new CentroGestionParticipacion();
-		cgpPalermo.setUbicacionActual(ubicacionCGPPalermo);
-		cgpPalermo.setComuna(comuna1);
-		cgpPalermo.setListaServicios(servicioAsesoramientoLegalyPagoFacturas);
+		CgpBuilder builderCaballito = new CgpBuilder();
+		builderCaballito.crearComuna(punto4comuna, punto5comuna, punto6comuna);
+		builderCaballito.crearListaServicios(servicioCPyRentas);
+		builderCaballito.setearDatosComunes("Caballito", "Caballito", "Rivadavia", 123 , ubicacionCGPCaballito, palabrasClaveCGPCaballito, jornadaNormalLunesAViernes);
+		cgpCaballito = builderCaballito.build();
+		
+		CgpBuilder buiderAlmagro = new CgpBuilder();
+		buiderAlmagro.crearComuna(punto1comuna, punto2comuna, punto3comuna);
+		buiderAlmagro.crearListaServicios(servicioCPyRentas);
+		buiderAlmagro.setearDatosComunes("Almagro", "Almagro, Paternal", "Tucuman", 4567 , ubicacionCGPAlmagro, palabrasClaveCGPAlmagro, jornadaNormalLunesAViernes);
+		cgpAlmagro = buiderAlmagro.build();
+		
+		CgpBuilder buiderPalermo = new CgpBuilder();
+		buiderPalermo.crearComuna(punto1comuna, punto2comuna, punto3comuna);
+		buiderPalermo.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas);
+		buiderPalermo.setearDatosComunes("Palermo", "Palermo Soho, Palermo Hollywood", "Av. Santa Fe", 7841 , ubicacionCGPPalermo, palabrasClaveCGPPalermo, jornadaNormalLunesAViernes);
+		cgpPalermo = buiderPalermo.build();
 
 	}
 
 	public void setUpComunas() {
-
-		comuna1 = new Comuna();
-		comuna2 = new Comuna();
-		comuna3 = new Comuna();
-		comuna4 = new Comuna();
-		comuna5 = new Comuna();
-		comuna6 = new Comuna();
 
 		punto1comuna = new Point(11, 20);
 		punto2comuna = new Point(10.005, 20.001);
@@ -685,57 +541,12 @@ abstract public class JuegoDeDatos {
 		punto4comuna = new Point(10, 20);
 		punto5comuna = new Point(20, 20);
 		punto6comuna = new Point(15, 10);
-
 		punto7comuna = new Point(30, 30);
 		punto8comuna = new Point(40, 30);
 		punto9comuna = new Point(50, 30);
 		punto10comuna = new Point(30, 20);
 		punto11comuna = new Point(40, 20);
 		punto12comuna = new Point(50, 20);
-
-		comuna3.setAreaDeComuna(punto7comuna);
-		comuna3.setAreaDeComuna(punto8comuna);
-		comuna3.setAreaDeComuna(punto10comuna);
-
-		comuna4.setAreaDeComuna(punto10comuna);
-		comuna4.setAreaDeComuna(punto8comuna);
-		comuna4.setAreaDeComuna(punto11comuna);
-
-		comuna5.setAreaDeComuna(punto8comuna);
-		comuna5.setAreaDeComuna(punto9comuna);
-		comuna5.setAreaDeComuna(punto10comuna);
-
-		comuna6.setAreaDeComuna(punto11comuna);
-		comuna6.setAreaDeComuna(punto9comuna);
-		comuna6.setAreaDeComuna(punto12comuna);
-
-		comuna1.setAreaDeComuna(punto1comuna);
-		comuna1.setAreaDeComuna(punto2comuna);
-		comuna1.setAreaDeComuna(punto3comuna);
-
-		comuna2.setAreaDeComuna(punto4comuna);
-		comuna2.setAreaDeComuna(punto5comuna);
-		comuna2.setAreaDeComuna(punto6comuna);
-
-		comuna2.setAreaDeComuna(punto4comuna);
-		comuna2.setAreaDeComuna(punto5comuna);
-		comuna2.setAreaDeComuna(punto6comuna);
-
-		comuna2.setAreaDeComuna(punto4comuna);
-		comuna2.setAreaDeComuna(punto5comuna);
-		comuna2.setAreaDeComuna(punto6comuna);
-
-		comuna2.setAreaDeComuna(punto4comuna);
-		comuna2.setAreaDeComuna(punto5comuna);
-		comuna2.setAreaDeComuna(punto6comuna);
-
-		comuna2.setAreaDeComuna(punto4comuna);
-		comuna2.setAreaDeComuna(punto5comuna);
-		comuna2.setAreaDeComuna(punto6comuna);
-
-		comuna2.setAreaDeComuna(punto4comuna);
-		comuna2.setAreaDeComuna(punto5comuna);
-		comuna2.setAreaDeComuna(punto6comuna);
 	}
 
 	public void setUpRubro() {
@@ -745,7 +556,6 @@ abstract public class JuegoDeDatos {
 		perfumeria = new Rubro("perfumeria", 0.1);
 		cafeteria = new Rubro("cafeteria", 0.2);
 		comidas = new Rubro("comidas", 0.1);
-
 		farmacia = new Rubro("farmacia", 0.5);
 		libreriaRubro = new Rubro("libreria", 0.4);
 
@@ -841,91 +651,116 @@ abstract public class JuegoDeDatos {
 		palabrasClaveCGPBoedo.add("avenida la plata");
 		palabrasClaveCGPBoedo.add("av boedo");
 
-	}
+		palabrasClaveCGPCaballito = new ArrayList<String>();
+		palabrasClaveCGPCaballito.add("Caballito");
+		palabrasClaveCGPCaballito.add("Rivadavia");
+		palabrasClaveCGPCaballito.add("Rentas");
+		
+		palabrasClaveCGPPalermo = new ArrayList<String>();
+		palabrasClaveCGPPalermo.add("Palermo");
+		palabrasClaveCGPPalermo.add("Santa Fe");
+		palabrasClaveCGPPalermo.add("Soho");
+		
+		palabrasClaveBancoFrances = new ArrayList<String>();
+		palabrasClaveBancoFrances.add("deposito");
+		palabrasClaveBancoFrances.add("extraccion");
+		palabrasClaveBancoFrances.add("consulta");
+		palabrasClaveBancoFrances.add("saldo");
+		
+		palabrasClaveBancoGalicia = new ArrayList<String>();
+		palabrasClaveBancoGalicia.add("deposito");
+		palabrasClaveBancoGalicia.add("extraccion");
+		palabrasClaveBancoGalicia.add("consulta");
+		palabrasClaveBancoGalicia.add("saldo");
+		
+		palabrasClaveBancoRio = new ArrayList<String>();
+		palabrasClaveBancoRio.add("deposito");
+		palabrasClaveBancoRio.add("extraccion");
+		palabrasClaveBancoRio.add("consulta");
+		palabrasClaveBancoRio.add("saldo");
 
-	public void setUpColectivos() {
-
-		parada15 = new ParadaDeColectivo();
-		ubicacionParada15 = new Point(10.0008, 20);
-		parada15.setUbicacionActual(ubicacionParada15);
-		parada15.setLinea("15");
+		palabrasClaveBancoRetiro = new ArrayList<String>();
+		palabrasClaveBancoRetiro.add("Rentas");
+		palabrasClaveBancoRetiro.add("Pago de facturas");
+		
+		palabrasClaveBancoMartinez = palabrasClaveBancoRetiro;
+		
 		paradaDel15 = new ArrayList<String>();
 		paradaDel15.add("15");
-		parada15.setListaPalabrasClave(paradaDel15);
-		parada15.setNombre("parada15");
+		
+		palabrasClave110LaBoca = new ArrayList<String>();
+		palabrasClave110LaBoca.add("110");
+		palabrasClave110LaBoca.add("la boca");
 
-		parada114 = new ParadaDeColectivo();
-		parada114.setNombre("parada114");
-		ubicacionParada114 = new Point(11, 13);
-		parada114.setLinea("114");
-		parada114.setUbicacionActual(ubicacionParada114);
-		paradaDel114 = new ArrayList<String>();
-		paradaDel114.add("114");
-		parada114.setListaPalabrasClave(paradaDel114);
-
-		parada11 = new ParadaDeColectivo();
-		ubicacionParada11 = new Point(12, 18);
-		parada11.setLinea("11");
-		parada11.setUbicacionActual(ubicacionParada11);
-		paradaDel11 = new ArrayList<String>();
-		paradaDel11.add("11");
-		parada11.setListaPalabrasClave(paradaDel11);
-
-		parada7Rojo = new ParadaDeColectivo();
-		ubicacionParada7Rojo = new Point(11, 14);
-		parada7Rojo.setLinea("7 Barrio Samore");
-		parada7Rojo.setUbicacionActual(ubicacionParada7Rojo);
-		paradaDel7Rojo = new ArrayList<String>();
-		paradaDel7Rojo.add("7");
-		paradaDel7Rojo.add("rojo");
-		parada7Rojo.setListaPalabrasClave(paradaDel7Rojo);
-
-		parada7Amarillo = new ParadaDeColectivo();
-		ubicacionParada7Amarillo = new Point(11, 13);
-		parada7Amarillo.setLinea("7 Avellaneda");
-		parada7Amarillo.setUbicacionActual(ubicacionParada7Amarillo);
+		ubicacionParada110Paternal = new Point(32, 25);
+		palabrasClave110Paternal = new ArrayList<String>();
+		palabrasClave110Paternal.add("110");
+		palabrasClave110Paternal.add("paternal");
+		
 		paradaDel7Amarillo = new ArrayList<String>();
 		paradaDel7Amarillo.add("7");
 		paradaDel7Amarillo.add("amarillo");
-		parada7Amarillo.setListaPalabrasClave(paradaDel7Amarillo);
 
-		parada60 = new ParadaDeColectivo();
-		parada60.setLinea("60");
-		ubicacionParada60 = new Point(30, 25);
-		parada60.setUbicacionActual(ubicacionParada60);
+		
+		parada7Rojo = new ParadaDeColectivo();
+		paradaDel7Rojo = new ArrayList<String>();
+		paradaDel7Rojo.add("7");
+		paradaDel7Rojo.add("rojo");
+
+		
+		paradaDel114 = new ArrayList<String>();
+		paradaDel114.add("114");
+
+		paradaDel11 = new ArrayList<String>();
+		paradaDel11.add("11");
+		
 		palabrasClave60 = new ArrayList<String>();
 		palabrasClave60.add("60");
 		palabrasClave60.add("palermo");
 		palabrasClave60.add("las canitas");
-		parada60.setListaPalabrasClave(palabrasClave60);
+	}
+	
+	public void setUpColectivos() {
+		
+		ColectivoBuilder builder15 = new ColectivoBuilder();
+		builder15.crearLinea("15");
+		builder15.setearDatosComunes("Parada San Telmo", "San Telmo", "belgrano", 156 , ubicacionParada15, paradaDel15, null);
+		parada15 = builder15.build();
+		
+		ColectivoBuilder builder114 = new ColectivoBuilder();
+		builder114.crearLinea("15");
+		builder114.setearDatosComunes("Parada San Telmo", "San Telmo", "belgrano", 156 , ubicacionParada114, paradaDel114, null);
+		parada114 = builder114.build();
+		
+		ColectivoBuilder builder11 = new ColectivoBuilder();
+		builder11.crearLinea("11");
+		builder11.setearDatosComunes("Parada 11", "Retiro", "belgrano", 1256 , ubicacionParada11, paradaDel11, null);
+		parada11 = builder11.build();
+		
+		ColectivoBuilder builder7Rojo = new ColectivoBuilder();
+		builder7Rojo.crearLinea("7");
+		builder7Rojo.setearDatosComunes("Parada 7 rojo", "Paternal", "Pomelo", 897 , ubicacionParada7Rojo, paradaDel7Rojo, null);
+		parada7Rojo = builder7Rojo.build();
+		
+		ColectivoBuilder builder7Amarillo = new ColectivoBuilder();
+		builder7Amarillo.crearLinea("7");
+		builder7Amarillo.setearDatosComunes("Parada 7 Amarillo", "Paternal", "Pomelo", 897 , ubicacionParada7Amarillo, paradaDel7Amarillo, null);
+		parada7Amarillo = builder7Amarillo.build();
+		
+		ColectivoBuilder builder60 = new ColectivoBuilder();
+		builder60.crearLinea("60");
+		builder60.setearDatosComunes("Parada 60", "Palermo", "Santa Fe", 1514 , ubicacionParada60, palabrasClave60, null);
+		parada60 = builder60.build();
+		
+		ColectivoBuilder builder110Paternal = new ColectivoBuilder();
+		builder110Paternal.crearLinea("110");
+		builder110Paternal.setearDatosComunes("Parada 110", "Paternal", "Sosa", 2354 , ubicacionParada110Paternal, palabrasClave110Paternal, null);
+		parada110Paternal = builder110Paternal.build();
 
-		parada12 = new ParadaDeColectivo();
-		parada12.setLinea("12");
-		parada12.setUbicacionActual(ubicacionParada60);
-		palabrasClave12 = new ArrayList<String>();
-		palabrasClave12.add("12");
-		palabrasClave12.add("palermo");
-		palabrasClave12.add("las canitas");
-		parada12.setListaPalabrasClave(palabrasClave12);
-
-		parada110Paternal = new ParadaDeColectivo();
-		parada110Paternal.setLinea("110");
-		ubicacionParada110Paternal = new Point(32, 25);
-		parada110Paternal.setUbicacionActual(ubicacionParada110Paternal);
-		palabrasClave110Paternal = new ArrayList<String>();
-		palabrasClave110Paternal.add("110");
-		palabrasClave110Paternal.add("paternal");
-		parada110Paternal.setListaPalabrasClave(palabrasClave110Paternal);
-
-		parada110LaBoca = new ParadaDeColectivo();
-		parada110LaBoca.setLinea("110");
-		ubicacionParada110LaBoca = new Point(39, 22);
-		parada110LaBoca.setUbicacionActual(ubicacionParada110Paternal);
-		palabrasClave110LaBoca = new ArrayList<String>();
-		palabrasClave110LaBoca.add("110");
-		palabrasClave110LaBoca.add("la boca");
-		parada110LaBoca.setListaPalabrasClave(palabrasClave110LaBoca);
-
+		ColectivoBuilder builder110LaBoca = new ColectivoBuilder();
+		builder110LaBoca.crearLinea("110");
+		builder110LaBoca.setearDatosComunes("Parada 110", "La Boca", "Pasteur", 23 , ubicacionParada110Paternal, palabrasClave110LaBoca, null);
+		parada110LaBoca = builder110LaBoca.build();
 	}
 
 	public void setUpPuntos() {
@@ -945,33 +780,5 @@ abstract public class JuegoDeDatos {
 		sabado23hs = LocalDateTime.of(2016, 4, 2, 23, 00, 00);
 	}
 	
-	// Entrega 2
-	
-	public void setUpDTO(){
-		
-		rangoDe9a18 = new RangoServicioDTO(1,9,0,18,0);
-		rangoDe10a15 = new RangoServicioDTO(1, 10, 0, 15, 0);
-		
-		rangoDe9a18Lunes = new ArrayList<RangoServicioDTO>();
-		rangoDe9a18Lunes.add(rangoDe9a18);
-		
-		rangoDe10a15Lunes = new ArrayList<RangoServicioDTO>();
-		rangoDe10a15Lunes.add(rangoDe10a15);
-		
-		servicioRentasDTO = new ServicioDTO("rentas", rangoDe9a18Lunes);
-		servicioDeRentasRecoletaDTO = new ArrayList<ServicioDTO>();
-		servicioDeRentasRecoletaDTO.add(servicioRentasDTO);
-		
-		servicioAsesoramiento = new ServicioDTO("Asesoramiento", rangoDe10a15Lunes);
-		servicioAsesoramientoPalermoDTO = new ArrayList<ServicioDTO>();
-		servicioAsesoramientoPalermoDTO.add(servicioAsesoramiento);
-		
-		
-		centroRecoleta = new CentroDTO(1, "Recoleta", "Juan Perez", "Jujuy 998", "45647898", servicioDeRentasRecoletaDTO);
-		centroPalermo = new CentroDTO(2, "Palermo, Belgrano", "Jose", "Junin 521", "42563214", servicioAsesoramientoPalermoDTO);
-		centrosDTO = new ArrayList<CentroDTO>();
-		centrosDTO.add(centroRecoleta);
-		centrosDTO.add(centroPalermo);
-		centrosDTO.add(centroPalermo);
-	}
+
 }

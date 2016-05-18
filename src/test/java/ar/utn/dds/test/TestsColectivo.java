@@ -47,6 +47,11 @@ public class TestsColectivo extends JuegoDeDatos {
 		assertTrue(parada11.estaDisponible("Rentas", LocalDateTime.now()));
 	}
 	
+	@Test
+	public void pruebaBuilder(){
+		assertEquals(parada11.getLinea(), "11");
+	}
+	
 
 }
 
