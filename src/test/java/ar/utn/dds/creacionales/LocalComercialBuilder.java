@@ -4,7 +4,6 @@ import java.util.List;
 
 import ar.utn.dds.POI.LocalComercial;
 import ar.utn.dds.POI.Rubro;
-import ar.utn.dds.exceptions.BusinessException;
 import ar.utn.dds.exceptions.InvalidModelException;
 
 public class LocalComercialBuilder extends PoiBuilder {

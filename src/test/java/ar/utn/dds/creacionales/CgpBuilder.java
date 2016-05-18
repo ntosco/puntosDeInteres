@@ -7,7 +7,6 @@ import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.comunas.Comuna;
-import ar.utn.dds.exceptions.BusinessException;
 import ar.utn.dds.exceptions.InvalidModelException;
 import ar.utn.dds.servicios.Servicio;
 

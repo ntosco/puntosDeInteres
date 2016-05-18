@@ -174,5 +174,10 @@ public class TestCGP extends JuegoDeDatos {
 	public void buiderTest(){
 		assertEquals(cgpPalermo.getNombre(), "Palermo");
 	}
+	
+	@Test
+	public void builderJornada(){
+		assertTrue(cgpLaBoca.estaDisponible("Asesoramiento Legal", lunes1210hs));
+	}
 }
 

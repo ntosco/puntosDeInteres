@@ -18,6 +18,7 @@ import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.creacionales.BancoBuilder;
 import ar.utn.dds.creacionales.CgpBuilder;
 import ar.utn.dds.creacionales.ColectivoBuilder;
+import ar.utn.dds.creacionales.JornadaBuilder;
 import ar.utn.dds.creacionales.LocalComercialBuilder;
 import ar.utn.dds.extern.banco.buscadorDeBancos;
 import ar.utn.dds.extern.cgp.CentroDTO;
@@ -216,9 +217,7 @@ abstract public class JuegoDeDatos {
 
 	protected JSONObject bancoFrances2;
 	protected JSONObject bancoGalicia2;
-	
-	
-	
+		
 	// Jornadas
 
 	protected List<Jornada> jornadaBancaria;
@@ -227,45 +226,7 @@ abstract public class JuegoDeDatos {
 	protected List<Jornada> manana;// los 7 dias
 	protected List<Jornada> tarde;// los 7 dias
 	protected List<Jornada> jornada24x7;// 24 hs los 7 dias
-	protected Jornada jornadaLaboral_Lunes_10a20;
-	protected Jornada jornadaLaboral_Martes_10a20;
-	protected Jornada jornadaLaboral_Miercoles_10a20;
-	protected Jornada jornadaLaboral_Jueves_13a15;
-	protected Jornada jornadaLaboral_Viernes_10a20;
-	protected Jornada jornadaLaboral_Sabado_10a13;
-	protected Jornada jornadaLunes24hs;
-	protected Jornada jornadaMartes24hs;
-	protected Jornada jornadaMiercoles24hs;
-	protected Jornada jornadaJueves24hs;
-	protected Jornada jornadaViernes24hs;
-	protected Jornada jornadaSabado24hs;
-	protected Jornada jornadaDomingo24hs;
-	protected Jornada jornadaLunesM;
-	protected Jornada jornadaMartesM;
-	protected Jornada jornadaMiercolesM;
-	protected Jornada jornadaJuevesM;
-	protected Jornada jornadaViernesM;
-	protected Jornada jornadaSabadoM;
-	protected Jornada jornadaDomingoM;
-	protected Jornada jornadaLunesT;
-	protected Jornada jornadaMartesT;
-	protected Jornada jornadaMiercolesT;
-	protected Jornada jornadaJuevesT;
-	protected Jornada jornadaViernesT;
-	protected Jornada jornadaSabadoT;
-	protected Jornada jornadaDomingoT;
-	protected Jornada jornadaLunesN;
-	protected Jornada jornadaMartesN;
-	protected Jornada jornadaMiercolesN;
-	protected Jornada jornadaJuevesN;
-	protected Jornada jornadaViernesN;
-	protected Jornada jornadaSabadoN;
-	protected Jornada jornadaDomingoN;
-	protected Jornada jornadaBancariaDe10a15LUNES;
-	protected Jornada jornadaBancariaDe10a15MARTES;
-	protected Jornada jornadaBancariaDe10a15MIERCOLES;
-	protected Jornada jornadaBancariaDe10a15JUEVES;
-	protected Jornada jornadaBancariaDe10a15VIERNES;
+
 
 	// LOCAL DATE TIME
 
@@ -276,16 +237,6 @@ abstract public class JuegoDeDatos {
 	protected LocalDateTime lunes12hs;
 	protected LocalDateTime jueves11hs;
 	protected LocalDateTime sabado23hs;
-	
-	// Rangos Horarios
-	
-	protected RangoHorario rangolaboral_10a20;
-	protected RangoHorario rango24hs;
-	protected RangoHorario rangomanana;
-	protected RangoHorario rangoTarde;
-	protected RangoHorario rangoNoche;
-	protected RangoHorario rangoBancario;
-	protected RangoHorario rangolaboral_9a13;
 	
 	// Entrega 2
 	
@@ -309,7 +260,9 @@ abstract public class JuegoDeDatos {
 	private ArrayList<ServicioDTO> servicioAsesoramientoPalermoDTO;
 	private CentroDTO centroPalermo;
 
-
+	protected List<DayOfWeek> lunesAViernes;
+	private List<DayOfWeek> todosLosDias;
+	
 	
 	
 	public void setUpGeneral() {
@@ -373,119 +326,38 @@ abstract public class JuegoDeDatos {
 	}
 
 	public void setUpJornadas() {
+		
+		lunesAViernes = new ArrayList<DayOfWeek>();
+		lunesAViernes.add(DayOfWeek.MONDAY);
+		lunesAViernes.add(DayOfWeek.TUESDAY);
+		lunesAViernes.add(DayOfWeek.WEDNESDAY);
+		lunesAViernes.add(DayOfWeek.THURSDAY);
+		lunesAViernes.add(DayOfWeek.FRIDAY);
+		
+		todosLosDias = new ArrayList<DayOfWeek>();
+		todosLosDias.addAll(lunesAViernes);
+		todosLosDias.add(DayOfWeek.SATURDAY);
+		todosLosDias.add(DayOfWeek.SUNDAY);
+		
+		
+		JornadaBuilder builderJornadaNormal = new JornadaBuilder();
+		jornadaNormalLunesAViernes = builderJornadaNormal.buildJornada(lunesAViernes, 10, 0, 20, 0);
+		
+		JornadaBuilder builderJornada24x7 = new JornadaBuilder();
+		jornada24x7 = builderJornada24x7.buildJornada(todosLosDias, 0, 0, 23, 59);
+		
+		JornadaBuilder builderJornadaManiana = new JornadaBuilder();
+		manana = builderJornadaManiana.buildJornada(todosLosDias, 8, 0, 12, 0);
+		
+		JornadaBuilder builderJornadaTarde = new JornadaBuilder();
+		tarde = builderJornadaTarde.buildJornada(todosLosDias, 12, 0, 18, 0);
 
-		rangolaboral_10a20 = new RangoHorario(LocalTime.of(10, 0,
-				0), LocalTime.of(20, 0, 0));
-		rangolaboral_9a13 = new RangoHorario(
-				LocalTime.of(9, 0, 0), LocalTime.of(13, 0, 0));
-		jornadaLaboral_Lunes_10a20 = new Jornada(DayOfWeek.MONDAY,
-				rangolaboral_10a20);
-		jornadaLaboral_Martes_10a20 = new Jornada(DayOfWeek.TUESDAY,
-				rangolaboral_10a20);
-		jornadaLaboral_Miercoles_10a20 = new Jornada(DayOfWeek.WEDNESDAY, rangolaboral_10a20);
-		jornadaLaboral_Jueves_13a15 = new Jornada(DayOfWeek.THURSDAY,rangolaboral_10a20);
-		jornadaLaboral_Viernes_10a20 = new Jornada(DayOfWeek.FRIDAY,
-				rangolaboral_10a20);
-		jornadaLaboral_Sabado_10a13 = new Jornada(DayOfWeek.SATURDAY,rangolaboral_9a13);
-		jornadaNormalLunesAViernes = new ArrayList<Jornada>();
-		jornadaNormalLunesAViernes.add(jornadaLaboral_Lunes_10a20);
-		jornadaNormalLunesAViernes.add(jornadaLaboral_Martes_10a20);
-		jornadaNormalLunesAViernes.add(jornadaLaboral_Miercoles_10a20);
-		jornadaNormalLunesAViernes.add(jornadaLaboral_Jueves_13a15);
-		jornadaNormalLunesAViernes.add(jornadaLaboral_Viernes_10a20);
-		jornadaNormalLunesAViernes.add(jornadaLaboral_Sabado_10a13);
-
-		rango24hs = new RangoHorario(LocalTime.of(0, 0, 0),
-				LocalTime.of(23, 59, 59));
-		jornadaLunes24hs = new Jornada(DayOfWeek.MONDAY, rango24hs);
-		jornadaMartes24hs = new Jornada(DayOfWeek.TUESDAY, rango24hs);
-		jornadaMiercoles24hs = new Jornada(DayOfWeek.WEDNESDAY,	rango24hs);
-		jornadaJueves24hs = new Jornada(DayOfWeek.THURSDAY, rango24hs);
-		jornadaViernes24hs = new Jornada(DayOfWeek.FRIDAY, rango24hs);
-		jornadaSabado24hs = new Jornada(DayOfWeek.SATURDAY, rango24hs);
-		jornadaDomingo24hs = new Jornada(DayOfWeek.SUNDAY, rango24hs);
-		jornada24x7 = new ArrayList<Jornada>();
-		jornada24x7.add(jornadaLunes24hs);
-		jornada24x7.add(jornadaMartes24hs);
-		jornada24x7.add(jornadaMiercoles24hs);
-		jornada24x7.add(jornadaJueves24hs);
-		jornada24x7.add(jornadaViernes24hs);
-		jornada24x7.add(jornadaSabado24hs);
-		jornada24x7.add(jornadaDomingo24hs);
-
-		rangomanana = new RangoHorario(LocalTime.of(8, 0, 0),
-				LocalTime.of(12, 0, 0));
-		jornadaLunesM = new Jornada(DayOfWeek.MONDAY, rangomanana);
-		jornadaMartesM = new Jornada(DayOfWeek.TUESDAY, rangomanana);
-		jornadaMiercolesM = new Jornada(DayOfWeek.WEDNESDAY,rangomanana);
-		jornadaJuevesM = new Jornada(DayOfWeek.THURSDAY, rangomanana);
-		jornadaViernesM = new Jornada(DayOfWeek.FRIDAY, rangomanana);
-		jornadaSabadoM = new Jornada(DayOfWeek.SATURDAY, rangomanana);
-		jornadaDomingoM = new Jornada(DayOfWeek.SUNDAY, rangomanana);
-		manana = new ArrayList<Jornada>();
-		manana.add(jornadaLunesM);
-		manana.add(jornadaMartesM);
-		manana.add(jornadaMiercolesM);
-		manana.add(jornadaJuevesM);
-		manana.add(jornadaViernesM);
-		manana.add(jornadaSabadoM);
-		manana.add(jornadaDomingoM);
-
-		rangoTarde = new RangoHorario(LocalTime.of(12, 0, 0),
-				LocalTime.of(18, 0, 0));
-		jornadaLunesT = new Jornada(DayOfWeek.MONDAY, rangoTarde);
-		jornadaMartesT = new Jornada(DayOfWeek.TUESDAY, rangoTarde);
-		jornadaMiercolesT = new Jornada(DayOfWeek.WEDNESDAY, rangoTarde);
-		jornadaJuevesT = new Jornada(DayOfWeek.THURSDAY, rangoTarde);
-		jornadaViernesT = new Jornada(DayOfWeek.FRIDAY, rangoTarde);
-		jornadaSabadoT = new Jornada(DayOfWeek.SATURDAY, rangoTarde);
-		jornadaDomingoT = new Jornada(DayOfWeek.SUNDAY, rangoTarde);
-		tarde = new ArrayList<Jornada>();
-		manana.add(jornadaLunesT);
-		manana.add(jornadaMartesT);
-		manana.add(jornadaMiercolesT);
-		manana.add(jornadaJuevesT);
-		manana.add(jornadaViernesT);
-		manana.add(jornadaSabadoT);
-		manana.add(jornadaDomingoT);
-
-		rangoNoche = new RangoHorario(LocalTime.of(18, 0, 0),
-				LocalTime.of(23, 0, 0));
-		jornadaLunesN = new Jornada(DayOfWeek.MONDAY, rangoNoche);
-		jornadaMartesN = new Jornada(DayOfWeek.TUESDAY, rangoNoche);
-		jornadaMiercolesN = new Jornada(DayOfWeek.WEDNESDAY, rangoNoche);
-		jornadaJuevesN = new Jornada(DayOfWeek.THURSDAY, rangoNoche);
-		jornadaViernesN = new Jornada(DayOfWeek.FRIDAY, rangoNoche);
-		jornadaSabadoN = new Jornada(DayOfWeek.SATURDAY, rangoNoche);
-		jornadaDomingoN = new Jornada(DayOfWeek.SUNDAY, rangoNoche);
-		noche = new ArrayList<Jornada>();
-		manana.add(jornadaLunesN);
-		manana.add(jornadaMartesN);
-		manana.add(jornadaMiercolesN);
-		manana.add(jornadaJuevesN);
-		manana.add(jornadaViernesN);
-		manana.add(jornadaSabadoN);
-		manana.add(jornadaDomingoN);
-
-		rangoBancario = new RangoHorario(LocalTime.of(10, 0, 0),
-				LocalTime.of(15, 0, 0));
-		jornadaBancariaDe10a15LUNES = new Jornada(DayOfWeek.MONDAY,
-				rangoBancario);
-		jornadaBancariaDe10a15MARTES = new Jornada(DayOfWeek.TUESDAY,
-				rangoBancario);
-		jornadaBancariaDe10a15MIERCOLES = new Jornada(
-				DayOfWeek.WEDNESDAY, rangoBancario);
-		jornadaBancariaDe10a15JUEVES = new Jornada(DayOfWeek.THURSDAY,
-				rangoBancario);
-		jornadaBancariaDe10a15VIERNES = new Jornada(DayOfWeek.FRIDAY,
-				rangoBancario);
-		jornadaBancaria = new ArrayList<Jornada>();
-		jornadaBancaria.add(jornadaBancariaDe10a15LUNES);
-		jornadaBancaria.add(jornadaBancariaDe10a15MARTES);
-		jornadaBancaria.add(jornadaBancariaDe10a15MIERCOLES);
-		jornadaBancaria.add(jornadaBancariaDe10a15JUEVES);
-		jornadaBancaria.add(jornadaBancariaDe10a15VIERNES);
-
+		JornadaBuilder builderJornadaNoche = new JornadaBuilder();
+		noche = builderJornadaNoche.buildJornada(todosLosDias, 18, 0, 23, 0);
+		
+		JornadaBuilder builderJornadaBancaria = new JornadaBuilder();
+		jornadaBancaria = builderJornadaBancaria.buildJornada(lunesAViernes, 10, 0, 15, 0);
+		
 	}
 
 	public void setUpServicios() {
@@ -644,7 +516,7 @@ abstract public class JuegoDeDatos {
 		CgpBuilder builderCaballito = new CgpBuilder();
 		builderCaballito.crearComuna(punto4comuna, punto5comuna, punto6comuna);
 		builderCaballito.crearListaServicios(servicioCPyRentas);
-		builderCaballito.setearDatosComunes("Caballito", "Caballito", "Rivadavia", 123 , ubicacionCGPCaballito, palabrasClaveCGPCaballito, jornada24x7);
+		builderCaballito.setearDatosComunes("Caballito", "Caballito", "Rivadavia", 123 , ubicacionCGPCaballito, palabrasClaveCGPCaballito, jornadaNormalLunesAViernes);
 		cgpCaballito = builderCaballito.build();
 		
 		CgpBuilder buiderAlmagro = new CgpBuilder();
@@ -848,7 +720,6 @@ abstract public class JuegoDeDatos {
 		palabrasClave60.add("las canitas");
 	}
 	
-
 	public void setUpColectivos() {
 		
 		ColectivoBuilder builder15 = new ColectivoBuilder();
