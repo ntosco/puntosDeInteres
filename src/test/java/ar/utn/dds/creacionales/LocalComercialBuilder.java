@@ -5,6 +5,7 @@ import java.util.List;
 import ar.utn.dds.POI.LocalComercial;
 import ar.utn.dds.POI.Rubro;
 import ar.utn.dds.exceptions.BusinessException;
+import ar.utn.dds.exceptions.InvalidModelException;
 
 public class LocalComercialBuilder extends PoiBuilder {
 
@@ -13,10 +14,10 @@ public class LocalComercialBuilder extends PoiBuilder {
 	
 	public LocalComercial build(){
 		if(nombre == null){
-			throw new BusinessException("Falta ingresar nombre");
+			throw new InvalidModelException("Falta ingresar nombre");
 		}
 		if(ubicacionActual == null){
-			throw new BusinessException("Falta cagar ubicacion");
+			throw new InvalidModelException("Falta cagar ubicacion");
 		}
 		
 		LocalComercial local = new LocalComercial();

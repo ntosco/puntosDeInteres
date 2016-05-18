@@ -1,8 +1,10 @@
 package ar.utn.dds.creacionales;
 
 import java.util.List;
+
 import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.exceptions.BusinessException;
+import ar.utn.dds.exceptions.InvalidModelException;
 import ar.utn.dds.servicios.Servicio;
 
 public class BancoBuilder extends PoiBuilder {
@@ -15,10 +17,10 @@ public class BancoBuilder extends PoiBuilder {
 	
 	public SucursalBanco build(){
 		if(nombre == null){
-			throw new BusinessException("Falta ingresar nombre");
+			throw new InvalidModelException("Falta ingresar nombre");
 		}
 		if(ubicacionActual == null){
-			throw new BusinessException("Falta cagar ubicacion");
+			throw new InvalidModelException("Falta cagar ubicacion");
 		}
 		
 		SucursalBanco banco = new SucursalBanco();

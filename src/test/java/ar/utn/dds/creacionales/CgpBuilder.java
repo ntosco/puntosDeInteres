@@ -8,6 +8,7 @@ import org.uqbar.geodds.Point;
 import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.exceptions.BusinessException;
+import ar.utn.dds.exceptions.InvalidModelException;
 import ar.utn.dds.servicios.Servicio;
 
 public class CgpBuilder extends PoiBuilder {
@@ -28,10 +29,10 @@ public class CgpBuilder extends PoiBuilder {
 	
 	public CentroGestionParticipacion build(){
 		if(nombre == null){
-			throw new BusinessException("Falta ingresar nombre");
+			throw new InvalidModelException("Falta ingresar nombre");
 		}
 		if(ubicacionActual == null){
-			throw new BusinessException("Falta cagar ubicacion");
+			throw new InvalidModelException("Falta cagar ubicacion");
 		}
 		
 		CentroGestionParticipacion cgp = new CentroGestionParticipacion();

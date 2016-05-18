@@ -3,6 +3,7 @@ package ar.utn.dds.creacionales;
 import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.POI.ParadaDeColectivo;
 import ar.utn.dds.exceptions.BusinessException;
+import ar.utn.dds.exceptions.InvalidModelException;
 
 public class ColectivoBuilder extends PoiBuilder {
 	
@@ -11,10 +12,10 @@ public class ColectivoBuilder extends PoiBuilder {
 	
 	public ParadaDeColectivo build(){
 		if(nombre == null){
-			throw new BusinessException("Falta ingresar nombre");
+			throw new InvalidModelException("Falta ingresar nombre");
 		}
 		if(ubicacionActual == null){
-			throw new BusinessException("Falta cagar ubicacion");
+			throw new InvalidModelException("Falta cagar ubicacion");
 		}
 		
 		ParadaDeColectivo colectivo = new ParadaDeColectivo();

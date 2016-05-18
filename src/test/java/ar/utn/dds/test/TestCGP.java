@@ -62,7 +62,7 @@ public class TestCGP extends JuegoDeDatos {
 
 	@Test
 	public void testNoContieneServicioDelTextoLibre() {
-		assertFalse(cgpCaballito.buscarPOI("Rentas"));
+		assertFalse(cgpCaballito.buscarPOI("pagos"));
 	}
 
 	// el horario ingresado se encuentra en el servicio seleccionado

@@ -18,8 +18,8 @@ public class PoiBuilder {
 	protected List<Jornada> jornada = new ArrayList<Jornada>();
 	
 
-	public void setearDatosComunes(String nombre, String direccion,
-			String barrio, int numero, Point ubicacion, List<String> palabrasClave, List<Jornada> jornada) {
+	public void setearDatosComunes(String nombre, String barrio,
+			String direccion, int numero, Point ubicacion, List<String> palabrasClave, List<Jornada> jornada) {
 
 		this.nombre = nombre;
 		this.direccion = direccion;
