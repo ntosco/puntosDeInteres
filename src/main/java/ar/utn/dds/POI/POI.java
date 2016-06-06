@@ -78,21 +78,13 @@ public abstract class POI extends Entity {
 				 ubicacionActual.equals(otroPoi.getUbicacionActual())
 				);
 	}
-	
-//	public Boolean esIgualA(POI otroPoi){
-//		 return (this.nombre.equals(otroPoi.getNombre()) && 
-//				 this.ubicacionActual.equals(otroPoi.getUbicacionActual())
-//				);
-//	}
-	
-	
+
 	// ********************************************************
 	// ** Geolocalizacion
 	// ********************************************************
 	
-	public Boolean estaCercaDe(Point ubicacionTerminal){
-		double d = ubicacionActual.distance(ubicacionTerminal);	
-		return d < DISTANCIA_MINIMA_DE_CERCANIA;
+	public Boolean estaCercaDe(Point unPunto){
+		return ubicacionActual.distance(unPunto) < DISTANCIA_MINIMA_DE_CERCANIA;
 	}
 	
 	// ********************************************************
@@ -119,8 +111,6 @@ public abstract class POI extends Entity {
 				.allMatch((estrategiaDisponibilidad) -> estrategiaDisponibilidad.estaDisponible(this, null,
 						nombreServicio, horarioConsultado));
 	}
-
-	
 	
 	// ********************************************************
 	// ** Getters and Setters
