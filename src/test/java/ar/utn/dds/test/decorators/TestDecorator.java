@@ -53,14 +53,14 @@ public class TestDecorator extends TestBusquedaGeneral {
 	}
 	
 	@Test
-	public void consultaReporteDeBusquedasPorFechaAsignaciónDeFecha(){
+	public void consultaReporteDeBusquedasPorFechaAsignacinDeFecha(){
 		managerReporteBusquedaxFecha.busquedaGeneral("15");
 		managerReporteBusquedaxFecha.busquedaGeneral("15");
 		assertTrue(managerReporteBusquedaxFecha.getListaBusquedasxFecha().containsKey(LocalDate.now().toString()));
 	}
 	
 	@Test
-	public void consultaReporteDeBusquedasPorFechaAsignaciónDeValorAFecha(){
+	public void consultaReporteDeBusquedasPorFechaAsignacinDeValorAFechaa(){ //FIXME: Cambiar nombre test
 		managerReporteBusquedaxFecha.busquedaGeneral("15");
 		managerReporteBusquedaxFecha.busquedaGeneral("15");
 		Integer cantidadDeBusquedasEsperadas = 2;
