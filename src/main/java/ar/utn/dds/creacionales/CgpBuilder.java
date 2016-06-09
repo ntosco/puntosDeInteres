@@ -27,12 +27,6 @@ public class CgpBuilder extends PoiBuilder {
 	}
 	
 	public CentroGestionParticipacion build(){
-		if(nombre == null){
-			throw new InvalidModelException("Falta ingresar nombre");
-		}
-		if(ubicacionActual == null){
-			throw new InvalidModelException("Falta cagar ubicacion");
-		}
 		
 		CentroGestionParticipacion cgp = new CentroGestionParticipacion();
 		cgp.setNombre(nombre);
@@ -44,6 +38,7 @@ public class CgpBuilder extends PoiBuilder {
 		cgp.setJornadaDisponible(jornada);
 		cgp.setComuna(comuna);
 		cgp.setListaServicios(servicios);
+		cgp.validate();
 		return cgp;
 	}
 }

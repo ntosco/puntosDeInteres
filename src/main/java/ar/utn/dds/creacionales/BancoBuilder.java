@@ -15,12 +15,6 @@ public class BancoBuilder extends PoiBuilder {
 	}
 	
 	public SucursalBanco build(){
-		if(nombre == null){
-			throw new InvalidModelException("Falta ingresar nombre");
-		}
-		if(ubicacionActual == null){
-			throw new InvalidModelException("Falta cagar ubicacion");
-		}
 		
 		SucursalBanco banco = new SucursalBanco();
 		banco.setNombre(nombre);
@@ -31,6 +25,7 @@ public class BancoBuilder extends PoiBuilder {
 		banco.setListaPalabrasClave(palabrasClave);
 		banco.setJornadaDisponible(jornada);
 		banco.setListaServicios(servicios);
+		banco.validate();
 		return banco;
 	}
 

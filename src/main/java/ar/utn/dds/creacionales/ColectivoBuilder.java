@@ -9,13 +9,7 @@ public class ColectivoBuilder extends PoiBuilder {
 	private double distancia = 0.1;
 	
 	public ParadaDeColectivo build(){
-		if(nombre == null){
-			throw new InvalidModelException("Falta ingresar nombre");
-		}
-		if(ubicacionActual == null){
-			throw new InvalidModelException("Falta cagar ubicacion");
-		}
-		
+				
 		ParadaDeColectivo colectivo = new ParadaDeColectivo();
 		colectivo.setNombre(nombre);
 		colectivo.setBarrio(barrio);
@@ -25,6 +19,7 @@ public class ColectivoBuilder extends PoiBuilder {
 		colectivo.setListaPalabrasClave(palabrasClave);
 		colectivo.setJornadaDisponible(jornada);
 		colectivo.setLinea(linea);
+		colectivo.validate();
 		return colectivo;
 	}
 	

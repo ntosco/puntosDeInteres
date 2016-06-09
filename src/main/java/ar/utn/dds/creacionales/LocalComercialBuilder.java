@@ -12,12 +12,6 @@ public class LocalComercialBuilder extends PoiBuilder {
 	public List<Rubro> rubros;
 	
 	public LocalComercial build(){
-		if(nombre == null){
-			throw new InvalidModelException("Falta ingresar nombre");
-		}
-		if(ubicacionActual == null){
-			throw new InvalidModelException("Falta cagar ubicacion");
-		}
 		
 		LocalComercial local = new LocalComercial();
 		local.setNombre(nombre);
@@ -28,6 +22,7 @@ public class LocalComercialBuilder extends PoiBuilder {
 		local.setListaPalabrasClave(palabrasClave);
 		local.setJornadaDisponible(jornada);
 		local.setListaRubros(rubros);
+		local.validate();
 		return local;
 	}
 	
