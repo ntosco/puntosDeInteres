@@ -1,36 +1,39 @@
 package ar.utn.dds.utils;
 
-import java.time.DayOfWeek;
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import ar.utn.dds.POI.POI;
+import ar.utn.dds.usuarios.Usuario;
 
 public class Consulta {
-	// atributos predeterminados. Esperar respuesta de macarena.
 	
-	private String nombreUsuario;
-	
+	private Usuario usuarioEjecutor;
 	private int cantidadDeResultados;
-	
-	private String fecha;
-	
+	private LocalDate fecha;
 	private String palabraBuscada;
+	private long	tiempoTranscurrido; //En segundos
 	
-	private int	tiempoTranscurrido; //En segundos
 	
-	
-	public Consulta (String nombreUser, int cantidadResultados, String fechaConsulta, String palabraBusqueda , int tiempo){
-		this.nombreUsuario = nombreUser;
-		this.cantidadDeResultados = cantidadResultados;
-		this.fecha = fechaConsulta;
+	public Consulta (Usuario usuario, String palabraBusqueda){
+		this.usuarioEjecutor = usuario;
 		this.palabraBuscada = palabraBusqueda;
-		this.tiempoTranscurrido = tiempo;
 	}
 	
-	public String getNombreUsuario() {
-		return nombreUsuario;
-	}
-
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+	public List<POI> evaluarse(){
+		
+		List<POI> listaResultado = new ArrayList<POI>();	
+		
+		long startTime = System.nanoTime();
+		listaResultado = BusquedaDePuntos.getInstance().busquedaGeneral(this.palabraBuscada);
+		long endTime = System.nanoTime();
+		this.tiempoTranscurrido = (endTime - startTime);
+		
+		this.fecha = LocalDate.now();
+		this.cantidadDeResultados = listaResultado.size();
+		
+		return listaResultado;
 	}
 
 	public int getCantidadDeResultados() {
@@ -41,11 +44,11 @@ public class Consulta {
 		this.cantidadDeResultados = cantidadDeResultados;
 	}
 
-	public String getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(String fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 
@@ -57,12 +60,20 @@ public class Consulta {
 		this.palabraBuscada = palabraBuscada;
 	}
 
-	public int getTiempoTranscurrido() {
+	public long getTiempoTranscurrido() {
 		return tiempoTranscurrido;
 	}
 
-	public void setTiempoTranscurrido(int tiempoTranscurrido) {
+	public void setTiempoTranscurrido(long tiempoTranscurrido) {
 		this.tiempoTranscurrido = tiempoTranscurrido;
+	}
+
+	public Usuario getUsuarioEjecutor() {
+		return usuarioEjecutor;
+	}
+
+	public void setUsuarioEjecutor(Usuario usuarioEjecutor) {
+		this.usuarioEjecutor = usuarioEjecutor;
 	}
 	
 	

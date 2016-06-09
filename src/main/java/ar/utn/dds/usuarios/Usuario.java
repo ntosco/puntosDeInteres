@@ -16,4 +16,6 @@ public interface Usuario {
 	public void quitarObservador(Observador observerador);
 	
 	public void notificarObservadores(Consulta consulta);
+	
+	public String getNombreUsuario();
 }

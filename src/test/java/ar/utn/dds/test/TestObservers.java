@@ -21,7 +21,7 @@ import ar.utn.dds.observers.ObservadorPorFecha;
 import ar.utn.dds.observers.ObservadorTiempoBusqueda;
 import ar.utn.dds.observers.ObservadorTotales;
 import ar.utn.dds.repositorio.Repositorio;
-import ar.utn.dds.usuarios.UsuarioConsulta;
+import ar.utn.dds.usuarios.UsuarioConcreto;
 import ar.utn.dds.utils.AdapterBancos;
 import ar.utn.dds.utils.AdapterCGP;
 import ar.utn.dds.utils.BusquedaDePuntos;
@@ -30,7 +30,7 @@ public class TestObservers extends JuegoDeDatos{
 
 	public AdapterBancos adapterBanco;
 	public AdapterCGP adapterCGP;
-	public UsuarioConsulta unUsuario;
+	public UsuarioConcreto unUsuario;
 	Repositorio repositorio = Repositorio.getInstance();
 	BusquedaDePuntos buscadorPuntos = BusquedaDePuntos.getInstance();
 	
@@ -61,7 +61,7 @@ public class TestObservers extends JuegoDeDatos{
 		observerParciales = new ObservadorParciales();
 		observadorTiempoBusqueda = new ObservadorTiempoBusqueda();
 		
-		unUsuario = new UsuarioConsulta();
+		unUsuario = new UsuarioConcreto();
 		unUsuario.setNombreUsuario("Samo");
 		
 		
@@ -73,29 +73,31 @@ public class TestObservers extends JuegoDeDatos{
 		repositorio.clean();
 		buscadorPuntos.borrarListaServicios();	
 	}
+
+// TODO Se deben hacer los test de almacenamiento sobre una ACCION  almacenar-> Observer nuevo	
+	
+//	@Test
+//	public void ultimaConsultaUsuario() {
+//		unUsuario.agregarObservador(observerXfecha);
+//		unUsuario.buscarPuntos("15");
+//		assertEquals("Samo" ,unUsuario.getUltimaConsulta().getNombreUsuario());
+//		assertEquals("15" , unUsuario.getUltimaConsulta().getPalabraBuscada());
+//		assertEquals(4 , unUsuario.getUltimaConsulta().getCantidadDeResultados());
+//	}
+//	
+//	@Test
+//	public void lasConsultasSeAlmacenanCorrectamente() {
+//		unUsuario.buscarPuntos("dipsi");
+//		unUsuario.buscarPuntos("lala");
+//		unUsuario.buscarPuntos("po");
+//		assertEquals("Samo" ,unUsuario.getUltimaConsulta().getNombreUsuario());
+//		assertEquals("15" , unUsuario.getUltimaConsulta().getPalabraBuscada());
+//		assertEquals(3 , unUsuario.getListaConsultas().size());
+//	}
+	
 	
 	@Test
-	public void ultimaConsultaUsuario() {
-		unUsuario.agregarObservador(observerXfecha);
-		unUsuario.buscarPuntos("15");
-		assertEquals("Samo" ,unUsuario.getUltimaConsulta().getNombreUsuario());
-		assertEquals("15" , unUsuario.getUltimaConsulta().getPalabraBuscada());
-		assertEquals(4 , unUsuario.getUltimaConsulta().getCantidadDeResultados());
-	}
-	
-	@Test
-	public void lasConsultasSeAlmacenanCorrectamente() {
-		unUsuario.buscarPuntos("dipsi");
-		unUsuario.buscarPuntos("lala");
-		unUsuario.buscarPuntos("po");
-		assertEquals("Samo" ,unUsuario.getUltimaConsulta().getNombreUsuario());
-		assertEquals("15" , unUsuario.getUltimaConsulta().getPalabraBuscada());
-		assertEquals(3 , unUsuario.getListaConsultas().size());
-	}
-	
-	
-	@Test
-	//Cuando agregan un nuevo regritro el hashtable debe crecer en tamaño
+	//Cuando agregan un nuevo regritro el hashtable debe crecer en tamaï¿½o
 	public void observadorParcialesAgregaRegistroACantidadResultadosParciales() {
 		unUsuario.agregarObservador(observerParciales);
 		unUsuario.buscarPuntos("15");
@@ -118,7 +120,7 @@ public class TestObservers extends JuegoDeDatos{
 		assertEquals(listaResultado.size(),(int)observerTotales.getTotalesPorUsuario().get(unUsuario.getNombreUsuario()));
 	}
 	
-	//Cuando se actualiza un registro no crece en tamaño el hashtable, solo cambia la info del registro
+	//Cuando se actualiza un registro no crece en tamaï¿½o el hashtable, solo cambia la info del registro
 	
 	
 	@Test
@@ -128,7 +130,6 @@ public class TestObservers extends JuegoDeDatos{
 		List<POI> listaResultado = unUsuario.buscarPuntos("15");
 		unUsuario.buscarPuntos("15");
 		assertEquals(1,observerXfecha.getBusquedasPorFecha().size());
-		assertEquals(8, (int)observerXfecha.getBusquedasPorFecha().get(unUsuario.getUltimaConsulta().getFecha()));	
 	}
 	
 	@Test

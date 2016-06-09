@@ -26,9 +26,9 @@ public class ObservadorPorFecha implements Observador{
 	@Override
 	public void actualizar(Consulta consulta) {
 		if(getBusquedasPorFecha().containsKey(consulta.getFecha())){
-			 BusquedasPorFecha.put(consulta.getFecha(), BusquedasPorFecha.get(consulta.getFecha()) + consulta.getCantidadDeResultados());
+			 BusquedasPorFecha.put(consulta.getFecha().toString(), BusquedasPorFecha.get(consulta.getFecha()) + consulta.getCantidadDeResultados());
 		}else{
-			 getBusquedasPorFecha().put(consulta.getFecha(), consulta.getCantidadDeResultados());
+			 getBusquedasPorFecha().put(consulta.getFecha().toString(), consulta.getCantidadDeResultados());
 		}
 	}
 

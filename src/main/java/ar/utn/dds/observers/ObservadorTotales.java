@@ -21,15 +21,15 @@ public class ObservadorTotales implements Observador{
 	
 	@Override
 	public void actualizar(Consulta consulta) {
-		if(getTotalesPorUsuario().containsKey(consulta.getNombreUsuario())){
-			String nombreUsuario = consulta.getNombreUsuario();
+		if(getTotalesPorUsuario().containsKey(consulta.getUsuarioEjecutor().getNombreUsuario())){
+			String nombreUsuario = consulta.getUsuarioEjecutor().getNombreUsuario();
 			int cantidadDeResultados = getTotalesPorUsuario().get(nombreUsuario);
 			int cantidadDeResultadosConsulta = consulta.getCantidadDeResultados();
 			int nuevaCantidadDeResultados = cantidadDeResultados + cantidadDeResultadosConsulta;
 			
 			getTotalesPorUsuario().put(nombreUsuario, nuevaCantidadDeResultados);
 		}else{
-			String nombreUsuario = consulta.getNombreUsuario();
+			String nombreUsuario = consulta.getUsuarioEjecutor().getNombreUsuario();
 			int cantidadDeResultadosConsulta = consulta.getCantidadDeResultados();
 			
 			getTotalesPorUsuario().put(nombreUsuario, cantidadDeResultadosConsulta);
