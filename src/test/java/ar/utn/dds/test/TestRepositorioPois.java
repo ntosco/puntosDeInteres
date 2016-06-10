@@ -43,7 +43,10 @@ public class TestRepositorioPois extends JuegoDeDatos {
 	public void noCreaPOICuandoEsteEsInvalido(){
 		LocalComercialBuilder builderCafeMartinez = new LocalComercialBuilder();
 		builderCafeMartinez.crearListaRubros(cafeteriaYComidas);
-		builderCafeMartinez.setearDatosComunes(null, "Pompeya", "Cabo", 5620 , ubicacionLocalCafeMartinez, palabrasClaveCafeMartinez, jornadaNormalLunesAViernes);
+		builderCafeMartinez.setBarrio("Pompeya").
+							setDireccion("Cobo")
+							.setNumero(5620)
+							.setPalabrasClave(palabrasClaveCafeMartinez);
 		cafeMartinez = builderCafeMartinez.build();
 	}
 	

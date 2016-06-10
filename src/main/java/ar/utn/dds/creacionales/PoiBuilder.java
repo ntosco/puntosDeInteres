@@ -17,19 +17,6 @@ public class PoiBuilder {
 	protected List<String> palabrasClave;
 	protected List<Jornada> jornada = new ArrayList<Jornada>();
 	
-
-	public void setearDatosComunes(String nombre, String barrio,
-			String direccion, int numero, Point ubicacion, List<String> palabrasClave, List<Jornada> jornada) {
-
-		this.nombre = nombre;
-		this.direccion = direccion;
-		this.barrio = barrio;
-		this.numero = numero;
-		this.ubicacionActual = ubicacion;
-		this.palabrasClave = palabrasClave;
-		this.jornada = jornada;
-		
-	}
 	
 	public PoiBuilder setNombre(String nombre){
 		this.nombre = nombre;
