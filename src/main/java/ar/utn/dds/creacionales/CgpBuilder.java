@@ -1,13 +1,12 @@
 package ar.utn.dds.creacionales;
 
 
+
 import java.util.List;
 
 import org.uqbar.geodds.Point;
-
 import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.comunas.Comuna;
-import ar.utn.dds.exceptions.InvalidModelException;
 import ar.utn.dds.servicios.Servicio;
 
 public class CgpBuilder extends PoiBuilder {
@@ -19,11 +18,9 @@ public class CgpBuilder extends PoiBuilder {
 		servicios = lista;
 	}
 
-	public void crearComuna(Point punto1, Point punto2, Point punto3) {
+	public void crearComuna(List<Point> puntos) {
 		comuna = new Comuna();
-		comuna.setAreaDeComuna(punto1);
-		comuna.setAreaDeComuna(punto2);
-		comuna.setAreaDeComuna(punto3);
+		puntos.forEach(punto -> comuna.setAreaDeComuna(punto));
 	}
 	
 	public CentroGestionParticipacion build(){

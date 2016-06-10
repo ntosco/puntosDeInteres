@@ -262,6 +262,16 @@ abstract public class JuegoDeDatos {
 
 	protected List<DayOfWeek> lunesAViernes;
 	private List<DayOfWeek> todosLosDias;
+
+	protected List<Point> puntosComunaPaternal;
+	protected List<Point> puntosComunaLaBoca;
+	protected List<Point> puntosComunaNunez;
+	protected List<Point> puntosComunaBoedo;
+	protected List<Point> puntosComunaCaballito;
+	protected List<Point> puntosComunaAlmagro;
+	protected List<Point> puntosComunaPalermo;
+	
+	
 	
 	
 	
@@ -489,44 +499,43 @@ abstract public class JuegoDeDatos {
 	public void setUpCGP() {
 		
 		CgpBuilder builderPaternal = new CgpBuilder();
-		builderPaternal.crearComuna(punto7comuna, punto8comuna, punto10comuna);
+		builderPaternal.crearComuna(puntosComunaPaternal);
 		builderPaternal.crearListaServicios(servicioCPyRentas);
 		builderPaternal.setearDatosComunes("paternal", "Boedo", "Boedo", 156 , punto10comuna, palabrasClaveCGPPaternal, jornadaBancaria);
 		cgpPaternal = builderPaternal.build();
 		
-		
 		CgpBuilder builderLaBoca = new CgpBuilder();
-		builderLaBoca.crearComuna(punto10comuna, punto8comuna, punto11comuna);
+		builderLaBoca.crearComuna(puntosComunaLaBoca);
 		builderLaBoca.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas);
 		builderLaBoca.setearDatosComunes("La boca", "La boca", "Brasil", 4456 , ubicacionCGPLaBoca, palabrasClaveCGPLaBoca, jornada24x7);
 		cgpLaBoca = builderLaBoca.build();
 		
 		CgpBuilder builderNunez = new CgpBuilder();
-		builderNunez.crearComuna(punto9comuna, punto8comuna, punto10comuna);
+		builderNunez.crearComuna(puntosComunaNunez);
 		builderNunez.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas);
 		builderNunez.setearDatosComunes("Nunez", "Nunez, Belgrano", "Av. Libertador", 879 , ubicacionCGPNunez, palabrasClaveCGPNunez, noche);
 		cgpNunez = builderNunez.build();
 		
 		CgpBuilder builderBoedo = new CgpBuilder();
-		builderBoedo.crearComuna(punto9comuna, punto11comuna, punto12comuna);
+		builderBoedo.crearComuna(puntosComunaBoedo);
 		builderBoedo.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas);
 		builderBoedo.setearDatosComunes("Boedo", "Boedo", "Av. Boedo", 1565 , ubicacionCGPBoedo, palabrasClaveCGPBoedo, noche);
 		cgpBoedo = builderBoedo.build();
 
 		CgpBuilder builderCaballito = new CgpBuilder();
-		builderCaballito.crearComuna(punto4comuna, punto5comuna, punto6comuna);
+		builderCaballito.crearComuna(puntosComunaCaballito);
 		builderCaballito.crearListaServicios(servicioCPyRentas);
 		builderCaballito.setearDatosComunes("Caballito", "Caballito", "Rivadavia", 123 , ubicacionCGPCaballito, palabrasClaveCGPCaballito, jornadaNormalLunesAViernes);
 		cgpCaballito = builderCaballito.build();
 		
 		CgpBuilder buiderAlmagro = new CgpBuilder();
-		buiderAlmagro.crearComuna(punto1comuna, punto2comuna, punto3comuna);
+		buiderAlmagro.crearComuna(puntosComunaAlmagro);
 		buiderAlmagro.crearListaServicios(servicioCPyRentas);
 		buiderAlmagro.setearDatosComunes("Almagro", "Almagro, Paternal", "Tucuman", 4567 , ubicacionCGPAlmagro, palabrasClaveCGPAlmagro, jornadaNormalLunesAViernes);
 		cgpAlmagro = buiderAlmagro.build();
 		
 		CgpBuilder buiderPalermo = new CgpBuilder();
-		buiderPalermo.crearComuna(punto1comuna, punto2comuna, punto3comuna);
+		buiderPalermo.crearComuna(puntosComunaPalermo);
 		buiderPalermo.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas);
 		buiderPalermo.setearDatosComunes("Palermo", "Palermo Soho, Palermo Hollywood", "Av. Santa Fe", 7841 , ubicacionCGPPalermo, palabrasClaveCGPPalermo, jornadaNormalLunesAViernes);
 		cgpPalermo = buiderPalermo.build();
@@ -547,6 +556,50 @@ abstract public class JuegoDeDatos {
 		punto10comuna = new Point(30, 20);
 		punto11comuna = new Point(40, 20);
 		punto12comuna = new Point(50, 20);
+		
+		puntosComunaPaternal = new ArrayList<Point>();
+		puntosComunaPaternal.add(punto1comuna);
+		puntosComunaPaternal.add(punto2comuna);
+		puntosComunaPaternal.add(punto4comuna);
+		puntosComunaPaternal.add(punto10comuna);
+		
+		puntosComunaLaBoca = new ArrayList<Point>();
+		puntosComunaLaBoca.add(punto8comuna);
+		puntosComunaLaBoca.add(punto5comuna);
+		puntosComunaLaBoca.add(punto6comuna);
+		
+		puntosComunaNunez = new ArrayList<Point>();
+		puntosComunaNunez.add(punto8comuna);
+		puntosComunaNunez.add(punto6comuna);
+		puntosComunaNunez.add(punto7comuna);
+		puntosComunaNunez.add(punto9comuna);
+		puntosComunaNunez.add(punto1comuna);
+		
+		puntosComunaBoedo = new ArrayList<Point>();
+		puntosComunaBoedo.add(punto10comuna);
+		puntosComunaBoedo.add(punto11comuna);
+		puntosComunaBoedo.add(punto12comuna);
+		
+		puntosComunaCaballito = new ArrayList<Point>();
+		puntosComunaCaballito.add(punto10comuna);
+		puntosComunaCaballito.add(punto11comuna);
+		puntosComunaCaballito.add(punto1comuna);
+		
+		puntosComunaAlmagro = new ArrayList<Point>();
+		puntosComunaAlmagro.add(punto1comuna);
+		puntosComunaAlmagro.add(punto4comuna);
+		puntosComunaAlmagro.add(punto10comuna);
+		puntosComunaAlmagro.add(punto7comuna);
+		
+		puntosComunaPalermo = new ArrayList<Point>();
+		puntosComunaPalermo.add(punto1comuna);
+		puntosComunaPalermo.add(punto5comuna);
+		puntosComunaPalermo.add(punto8comuna);
+		puntosComunaPalermo.add(punto7comuna);
+		puntosComunaPalermo.add(punto9comuna);
+		puntosComunaPalermo.add(punto10comuna);
+		
+		
 	}
 
 	public void setUpRubro() {
