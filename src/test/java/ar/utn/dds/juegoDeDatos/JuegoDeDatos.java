@@ -19,6 +19,7 @@ import ar.utn.dds.creacionales.BancoBuilder;
 import ar.utn.dds.creacionales.CgpBuilder;
 import ar.utn.dds.creacionales.ColectivoBuilder;
 import ar.utn.dds.creacionales.JornadaBuilder;
+import ar.utn.dds.creacionales.ListaJornadasBuilder;
 import ar.utn.dds.creacionales.LocalComercialBuilder;
 import ar.utn.dds.extern.banco.buscadorDeBancos;
 import ar.utn.dds.extern.cgp.CentroDTO;
@@ -226,6 +227,7 @@ abstract public class JuegoDeDatos {
 	protected List<Jornada> manana;// los 7 dias
 	protected List<Jornada> tarde;// los 7 dias
 	protected List<Jornada> jornada24x7;// 24 hs los 7 dias
+	private ArrayList<Jornada> jornadaNocturna;
 
 
 	// LOCAL DATE TIME
@@ -270,10 +272,16 @@ abstract public class JuegoDeDatos {
 	protected List<Point> puntosComunaCaballito;
 	protected List<Point> puntosComunaAlmagro;
 	protected List<Point> puntosComunaPalermo;
-	
-	
-	
-	
+
+	protected RangoHorario rangoDe10a20;
+	protected RangoHorario rangoNoche;
+	protected RangoHorario rangoBancario;
+	protected RangoHorario rango24x7;
+	protected RangoHorario rangoManiana;
+	protected RangoHorario rangoTarde;
+	private RangoHorario rangoNocturno;
+
+
 	
 	public void setUpGeneral() {
 		setUpLocalDateTime();
@@ -350,24 +358,37 @@ abstract public class JuegoDeDatos {
 		todosLosDias.add(DayOfWeek.SUNDAY);
 		
 		
-		JornadaBuilder builderJornadaNormal = new JornadaBuilder();
-		jornadaNormalLunesAViernes = builderJornadaNormal.buildJornada(lunesAViernes, 10, 0, 20, 0);
+		ListaJornadasBuilder builderJornadaNormal = new ListaJornadasBuilder();
+		rangoDe10a20 = new RangoHorario(LocalTime.of(10,0,0), LocalTime.of(20,0,0));
+		jornadaNormalLunesAViernes = builderJornadaNormal.buildJornadas(lunesAViernes, rangoDe10a20);
 		
-		JornadaBuilder builderJornada24x7 = new JornadaBuilder();
-		jornada24x7 = builderJornada24x7.buildJornada(todosLosDias, 0, 0, 23, 59);
+		ListaJornadasBuilder builderJornada24x7 = new ListaJornadasBuilder();
+		rango24x7 = new RangoHorario(LocalTime.of(0,0,0), LocalTime.of(23,59,59));
+		jornada24x7 = builderJornada24x7.buildJornadas(todosLosDias, rango24x7);
 		
-		JornadaBuilder builderJornadaManiana = new JornadaBuilder();
-		manana = builderJornadaManiana.buildJornada(todosLosDias, 8, 0, 12, 0);
+		ListaJornadasBuilder builderJornadaManiana = new ListaJornadasBuilder();
+		rangoManiana = new RangoHorario(LocalTime.of(8,0,0), LocalTime.of(12,0,0));
+ 		manana = builderJornadaManiana.buildJornadas(todosLosDias, rangoManiana);
 		
-		JornadaBuilder builderJornadaTarde = new JornadaBuilder();
-		tarde = builderJornadaTarde.buildJornada(todosLosDias, 12, 0, 18, 0);
+		ListaJornadasBuilder builderJornadaTarde = new ListaJornadasBuilder();
+		rangoTarde = new RangoHorario(LocalTime.of(12,0,0), LocalTime.of(18,0,0));
+		tarde = builderJornadaTarde.buildJornadas(todosLosDias, rangoTarde);
 
-		JornadaBuilder builderJornadaNoche = new JornadaBuilder();
-		noche = builderJornadaNoche.buildJornada(todosLosDias, 18, 0, 23, 0);
+		ListaJornadasBuilder builderJornadaNoche = new ListaJornadasBuilder();
+		rangoNoche = new RangoHorario(LocalTime.of(18,0,0), LocalTime.of(23,0,0));
+		noche = builderJornadaNoche.buildJornadas(todosLosDias, rangoNoche);
 		
-		JornadaBuilder builderJornadaBancaria = new JornadaBuilder();
-		jornadaBancaria = builderJornadaBancaria.buildJornada(lunesAViernes, 10, 0, 15, 0);
+		ListaJornadasBuilder builderJornadaBancaria = new ListaJornadasBuilder();
+		rangoBancario = new RangoHorario(LocalTime.of(10,0,0), LocalTime.of(15,0,0));
+		jornadaBancaria = builderJornadaBancaria.buildJornadas(lunesAViernes, rangoBancario);
 		
+		JornadaBuilder builderJornadaNocturna = new JornadaBuilder();
+		rangoNocturno = new RangoHorario(LocalTime.of(23,0,0), LocalTime.of(6,0,0));
+		jornadaNocturna = new ArrayList<Jornada>();
+		jornadaNocturna.add(builderJornadaNocturna.build(DayOfWeek.MONDAY, rangoNocturno));
+		jornadaNocturna.add(builderJornadaNocturna.build(DayOfWeek.WEDNESDAY, rangoNocturno));
+		jornadaNocturna.add(builderJornadaNocturna.build(DayOfWeek.FRIDAY, rangoNocturno));
+			
 	}
 
 	public void setUpServicios() {

@@ -1,7 +1,6 @@
 package ar.utn.dds.creacionales;
 
 import ar.utn.dds.POI.ParadaDeColectivo;
-import ar.utn.dds.exceptions.InvalidModelException;
 
 public class ColectivoBuilder extends PoiBuilder {
 	
