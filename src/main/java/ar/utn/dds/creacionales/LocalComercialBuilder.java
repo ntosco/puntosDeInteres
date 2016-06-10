@@ -4,7 +4,6 @@ import java.util.List;
 
 import ar.utn.dds.POI.LocalComercial;
 import ar.utn.dds.POI.Rubro;
-import ar.utn.dds.exceptions.InvalidModelException;
 
 public class LocalComercialBuilder extends PoiBuilder {
 
@@ -26,7 +25,8 @@ public class LocalComercialBuilder extends PoiBuilder {
 		return local;
 	}
 	
-	public void crearListaRubros(List<Rubro> lista) {
+	public LocalComercialBuilder crearListaRubros(List<Rubro> lista) {
 		rubros = lista;
+		return this;
 	}
 }

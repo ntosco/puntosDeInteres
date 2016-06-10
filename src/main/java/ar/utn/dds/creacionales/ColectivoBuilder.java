@@ -22,8 +22,9 @@ public class ColectivoBuilder extends PoiBuilder {
 		return colectivo;
 	}
 	
-	public void crearLinea(String linea){
+	public ColectivoBuilder crearLinea(String linea){
 		this.linea = linea;
+		return this;
 	}
 
 }

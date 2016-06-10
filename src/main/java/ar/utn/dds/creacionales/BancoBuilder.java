@@ -10,8 +10,9 @@ public class BancoBuilder extends PoiBuilder {
 	
 	private List<Servicio> servicios;
 	
-	public void crearListaServicios(List<Servicio> lista) {
+	public BancoBuilder crearListaServicios(List<Servicio> lista) {
 		servicios = lista;
+		return this;
 	}
 	
 	public SucursalBanco build(){

@@ -251,16 +251,6 @@ abstract public class JuegoDeDatos {
 	protected RangoServicioDTO rangoDe9a18;
 	protected ServicioDTO servicioRentasDTO;
 	protected CentroDTO centroRecoleta;
-	
-	//
-
-	private RangoServicioDTO rangoDe10a15;
-	private ServicioDTO servicioAsesoramiento;
-	private ArrayList<ServicioDTO> servicioDeRentasRecoletaDTO;
-	private ArrayList<RangoServicioDTO> rangoDe9a18Lunes;
-	private ArrayList<RangoServicioDTO> rangoDe10a15Lunes;
-	private ArrayList<ServicioDTO> servicioAsesoramientoPalermoDTO;
-	private CentroDTO centroPalermo;
 
 	protected List<DayOfWeek> lunesAViernes;
 	private List<DayOfWeek> todosLosDias;
@@ -288,38 +278,68 @@ abstract public class JuegoDeDatos {
 		setUpJornadas();
 		setUpServicios();
 		setUpUbicaciones();
+		setUpPuntos();
 		setUpComunas();
 		setUpRubro();
-		setUpPuntos();
 		setUpPalabrasClave();
 	}	
 	
 	public void setUpBanco() {
 
 		BancoBuilder builderFrances = new BancoBuilder();
-		builderFrances.crearListaServicios(servicioCajeroAutomatico);
-		builderFrances.setearDatosComunes("Frances San Cristobal", "San Cristobal", "Estados Unidos", 2206 , ubicacionSucursalFrances, palabrasClaveBancoFrances, jornadaBancaria);
-		bancoFrances = builderFrances.build();
+		builderFrances.crearListaServicios(servicioCajeroAutomatico)
+					.setNombre("Frances San Cristobal")
+					.setBarrio("San Cristobal")
+					.setDireccion("Estados Unidos")
+					.setNumero(2206)
+					.setUbicacion(ubicacionSucursalFrances)
+					.setPalabrasClave(palabrasClaveBancoFrances)
+					.setJornada(jornadaBancaria);
+					bancoFrances = builderFrances.build();
 
 		BancoBuilder builderGalicia = new BancoBuilder();
-		builderGalicia.crearListaServicios(servicioCajeroAutomatico);
-		builderGalicia.setearDatosComunes("Banco Galicia", "Palermo", "Arenales", 200 , ubicacionSucursalFrances, palabrasClaveBancoGalicia, jornadaBancaria);
-		bancoGalicia = builderGalicia.build();
+		builderGalicia.crearListaServicios(servicioCajeroAutomatico)
+					.setNombre("Banco Galicia")
+					.setBarrio("Palermo")
+					.setDireccion("Arenales")
+					.setNumero(200)
+					.setUbicacion(ubicacionSucursalFrances)
+					.setPalabrasClave(palabrasClaveBancoGalicia)
+					.setJornada(jornadaBancaria);
+					bancoGalicia = builderGalicia.build();
 
 		BancoBuilder builderRio = new BancoBuilder();
-		builderRio.crearListaServicios(servicioCajeroAutomatico);
-		builderRio.setearDatosComunes("Banco Rio", "Palermo", "Arenales", 207 , ubicacionSucursalRio, palabrasClaveBancoRio, jornadaBancaria);
-		bancoRio = builderRio.build();
+		builderRio.crearListaServicios(servicioCajeroAutomatico)
+					.setNombre("Banco Galicia")
+					.setBarrio("Palermo")
+					.setDireccion("Arenales")
+					.setNumero(200)
+					.setUbicacion(ubicacionSucursalFrances)
+					.setPalabrasClave(palabrasClaveBancoGalicia)
+					.setJornada(jornadaBancaria);
+					bancoRio = builderRio.build();
 		
 		BancoBuilder builderRetiro = new BancoBuilder();
-		builderRetiro.crearListaServicios(servicioCPyRentas);
-		builderRetiro.setearDatosComunes("Banco Retiro", "Retiro", "Paseo Colon", 2207 , ubicacionSucursalRetiro, palabrasClaveBancoRetiro, jornadaBancaria);
-		sucursalRetiro = builderRetiro.build();
+		builderRetiro.crearListaServicios(servicioCPyRentas)
+					.setNombre("Banco Retiro")
+					.setBarrio("Retiro")
+					.setDireccion("Paseo Colon")
+					.setNumero(2207)
+					.setUbicacion(ubicacionSucursalRetiro)
+					.setPalabrasClave(palabrasClaveBancoRetiro)
+					.setJornada(jornadaBancaria);
+					sucursalRetiro = builderRetiro.build();
 
 		BancoBuilder builderMartinez = new BancoBuilder();
-		builderMartinez.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas);
-		builderMartinez.setearDatosComunes("Banco Martinez", "Martinez", "San Martin", 591 , ubicacionSucursalMartinez, palabrasClaveBancoMartinez, jornadaBancaria);
-		sucursalMartinez = builderMartinez.build();		
+		builderMartinez.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas)
+					.setNombre("Banco Martinez")
+					.setBarrio("Martinez")
+					.setDireccion("San Martin")
+					.setNumero(591)
+					.setUbicacion(ubicacionSucursalMartinez)
+					.setPalabrasClave(palabrasClaveBancoMartinez)
+					.setJornada(jornadaBancaria);
+					sucursalMartinez = builderMartinez.build();
 		
 		//Entrega 2
 		
@@ -466,100 +486,203 @@ abstract public class JuegoDeDatos {
 	public void setUpLocalComercial() {
 
 		LocalComercialBuilder builderFarmacity = new LocalComercialBuilder();
-		builderFarmacity.crearListaRubros(rubroComidas);
-		builderFarmacity.setearDatosComunes("Farmacity", "Boedo", "Boedo", 156 , ubicacionFarmacity, listaPalabrasClaveFarmacity, jornada24x7);
-		farmacity = builderFarmacity.build();
+		builderFarmacity.crearListaRubros(rubroComidas)
+						.setNombre("Farmacity")
+						.setBarrio("Boedo")
+						.setDireccion("Boedo")
+						.setNumero(156)
+						.setUbicacion(ubicacionFarmacity)
+						.setPalabrasClave(listaPalabrasClaveFarmacity)
+						.setJornada(jornada24x7);
+						farmacity = builderFarmacity.build();
 		
 		LocalComercialBuilder builderMorita = new LocalComercialBuilder();
-		builderMorita.crearListaRubros(rubroComidas);
-		builderMorita.setearDatosComunes("Morita", "Belgrano", "Paraguay", 556 , ubicacionMorita, listaPalabrasClaveMorita, noche);
-		morita = builderMorita.build();
+		builderMorita.crearListaRubros(rubroComidas)
+						.setNombre("Morita")
+						.setBarrio("Belgrano")
+						.setDireccion("Paraguay")
+						.setNumero(556)
+						.setUbicacion(ubicacionMorita)
+						.setPalabrasClave(listaPalabrasClaveMorita)
+						.setJornada(noche);
+						morita = builderMorita.build();
 		
 		LocalComercialBuilder builderZapateria = new LocalComercialBuilder();
-		builderZapateria.crearListaRubros(rubroIndumentaria);
-		builderZapateria.setearDatosComunes("Zapateria Jorge", "Flores", "Varela", 1423 , ubicacionZapateria, listaPalabrasClaveZapateria, tarde);
-		zapateria = builderZapateria.build();
-
+		builderZapateria.crearListaRubros(rubroIndumentaria)
+						.setNombre("Zapateria Jorge")
+						.setBarrio("Flores")
+						.setDireccion("Varela")
+						.setNumero(1423)
+						.setUbicacion(ubicacionZapateria)
+						.setPalabrasClave(listaPalabrasClaveZapateria)
+						.setJornada(tarde);
+						zapateria = builderZapateria.build();
+	
 		LocalComercialBuilder builderHeinsenburguer = new LocalComercialBuilder();
-		builderHeinsenburguer.crearListaRubros(rubroComidas);
-		builderHeinsenburguer.setearDatosComunes("Heinsenburguer", "Colegiales", "Chile", 147 , ubicacionHeinsenbuger, listaPalabrasClaveHeinsenburger, noche);
-		heinsenburger = builderHeinsenburguer.build();
+		builderHeinsenburguer.crearListaRubros(rubroComidas)
+						.setNombre("Heinsenburguer")
+						.setBarrio("Colegiales")
+						.setDireccion("Chile")
+						.setNumero(147)
+						.setUbicacion(ubicacionHeinsenbuger)
+						.setPalabrasClave(listaPalabrasClaveHeinsenburger)
+						.setJornada(noche);
+						heinsenburger = builderHeinsenburguer.build();
 
 		LocalComercialBuilder builderLibreria = new LocalComercialBuilder();
-		builderLibreria.crearListaRubros(rubroLibreria);
-		builderLibreria.setearDatosComunes("Libreria", "Parque Patricios", "Colon", 2331 , ubicacionLibreria, listaPalabrasClaveLibreria, manana);
-		libreria = builderLibreria.build();
+		builderLibreria.crearListaRubros(rubroLibreria)
+						.setNombre("Libreria")
+						.setBarrio("Parque Patricios")
+						.setDireccion("Colon")
+						.setNumero(2331)
+						.setUbicacion(ubicacionLibreria)
+						.setPalabrasClave(listaPalabrasClaveLibreria)
+						.setJornada(manana);
+						libreria = builderLibreria.build();
 
 		LocalComercialBuilder builderNike = new LocalComercialBuilder();
-		builderNike.crearListaRubros(rubroIndumentaria);
-		builderNike.setearDatosComunes("Nike", "Abasto", "Corrientes", 4231 , ubicacionLocalNike, listaPalabrasClaveNike, manana);
-		nike = builderNike.build();
+		builderNike.crearListaRubros(rubroIndumentaria)
+						.setNombre("Nike")
+						.setBarrio("Abasto")
+						.setDireccion("Corrientes")
+						.setNumero(4231)
+						.setUbicacion(ubicacionLocalNike)
+						.setPalabrasClave(listaPalabrasClaveNike)
+						.setJornada(manana);
+						nike = builderNike.build();
 		
 		LocalComercialBuilder builderFallabella = new LocalComercialBuilder();
-		builderFallabella.crearListaRubros(rubrosIndumentariaMuebleriaPerfumeria);
-		builderFallabella.setearDatosComunes("Fallabella", "Microcentro", "Florida", 120 , ubicacionLocalFallabella, listaPalabrasClaveFallabella, jornadaNormalLunesAViernes);
-		fallabella = builderFallabella.build();
-
+		builderFallabella.crearListaRubros(rubrosIndumentariaMuebleriaPerfumeria)
+						.setNombre("Fallabella")
+						.setBarrio("Microcentro")
+						.setDireccion("Florida")
+						.setNumero(120)
+						.setUbicacion(ubicacionLocalFallabella)
+						.setPalabrasClave(listaPalabrasClaveFallabella)
+						.setJornada(jornadaNormalLunesAViernes);
+						fallabella = builderFallabella.build();
+						
 		LocalComercialBuilder builderCafeMartinez = new LocalComercialBuilder();
-		builderCafeMartinez.crearListaRubros(cafeteriaYComidas);
-		builderCafeMartinez.setearDatosComunes("Cafe Martinez", "Pompeya", "Cabo", 5620 , ubicacionLocalCafeMartinez, palabrasClaveCafeMartinez, jornadaNormalLunesAViernes);
-		cafeMartinez = builderCafeMartinez.build();
+		builderCafeMartinez.crearListaRubros(cafeteriaYComidas)
+						.setNombre("Fallabella")
+						.setBarrio("Microcentro")
+						.setDireccion("Florida")
+						.setNumero(120)
+						.setUbicacion(ubicacionLocalFallabella)
+						.setPalabrasClave(listaPalabrasClaveFallabella)
+						.setJornada(jornadaNormalLunesAViernes);
+						cafeMartinez = builderCafeMartinez.build();
 		
 		LocalComercialBuilder builderAdidas = new LocalComercialBuilder();
-		builderAdidas.crearListaRubros(rubroIndumentaria);
-		builderAdidas.setearDatosComunes("Adidas", "Palermo", "Av. Santa Fe", 856 , ubicacionLocalAddidas, listaPalabrasClaveNike, jornadaNormalLunesAViernes);
-		adidas = builderAdidas.build();
+		builderAdidas.crearListaRubros(rubroIndumentaria)
+						.setNombre("Adidas")
+						.setBarrio("Palermo")
+						.setDireccion("Av. Santa Fe")
+						.setNumero(856)
+						.setUbicacion(ubicacionLocalAddidas)
+						.setPalabrasClave(listaPalabrasClaveNike)
+						.setJornada(jornadaNormalLunesAViernes);
+						adidas = builderAdidas.build();
 
 		LocalComercialBuilder builderCarlitos = new LocalComercialBuilder();
-		builderCarlitos.crearListaRubros(cafeteriaYComidas);
-		builderCarlitos.setearDatosComunes("Carlitos Panqueques", "Recoleta", "Rosas", 1086 , ubicacionLocalPanquequesCarlitos, palabrasClaveCafeMartinez, jornadaNormalLunesAViernes);
-		panquequesCarlitos = builderCarlitos.build();
-
+		builderCarlitos.crearListaRubros(cafeteriaYComidas)
+						.setNombre("Carlitos Panqueques")
+						.setBarrio("Recoleta")
+						.setDireccion("Rosas")
+						.setNumero(1086)
+						.setUbicacion(ubicacionLocalPanquequesCarlitos)
+						.setPalabrasClave(palabrasClaveCafeMartinez)
+						.setJornada(jornadaNormalLunesAViernes);
+						panquequesCarlitos = builderCarlitos.build();
+						
 	}
 
 	public void setUpCGP() {
 		
 		CgpBuilder builderPaternal = new CgpBuilder();
-		builderPaternal.crearComuna(puntosComunaPaternal);
-		builderPaternal.crearListaServicios(servicioCPyRentas);
-		builderPaternal.setearDatosComunes("paternal", "Boedo", "Boedo", 156 , punto10comuna, palabrasClaveCGPPaternal, jornadaBancaria);
-		cgpPaternal = builderPaternal.build();
+		builderPaternal.crearComuna(puntosComunaPaternal)
+						.crearListaServicios(servicioCPyRentas)
+						.setNombre("Paternal")
+						.setBarrio("Paternal")
+						.setDireccion("Boedo")
+						.setNumero(156)
+						.setUbicacion(punto10comuna)
+						.setPalabrasClave(palabrasClaveCGPPaternal)
+						.setJornada(jornadaBancaria);
+						cgpPaternal = builderPaternal.build();
 		
 		CgpBuilder builderLaBoca = new CgpBuilder();
-		builderLaBoca.crearComuna(puntosComunaLaBoca);
-		builderLaBoca.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas);
-		builderLaBoca.setearDatosComunes("La boca", "La boca", "Brasil", 4456 , ubicacionCGPLaBoca, palabrasClaveCGPLaBoca, jornada24x7);
-		cgpLaBoca = builderLaBoca.build();
+		builderLaBoca.crearComuna(puntosComunaLaBoca)
+						.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas)
+						.setNombre("La boca")
+						.setBarrio("La boca")
+						.setDireccion("Brasil")
+						.setNumero(4456)
+						.setUbicacion(ubicacionCGPLaBoca)
+						.setPalabrasClave(palabrasClaveCGPLaBoca)
+						.setJornada(jornada24x7);
+						cgpLaBoca = builderLaBoca.build();
+		
 		
 		CgpBuilder builderNunez = new CgpBuilder();
-		builderNunez.crearComuna(puntosComunaNunez);
-		builderNunez.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas);
-		builderNunez.setearDatosComunes("Nunez", "Nunez, Belgrano", "Av. Libertador", 879 , ubicacionCGPNunez, palabrasClaveCGPNunez, noche);
-		cgpNunez = builderNunez.build();
+		builderNunez.crearComuna(puntosComunaNunez)
+						.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas)
+						.setNombre("Nunez")
+						.setBarrio("Nunez, Belgrano")
+						.setDireccion("Av. Libertador")
+						.setNumero(879)
+						.setUbicacion(ubicacionCGPNunez)
+						.setPalabrasClave(palabrasClaveCGPNunez)
+						.setJornada(noche);
+						cgpNunez = builderNunez.build();
 		
 		CgpBuilder builderBoedo = new CgpBuilder();
-		builderBoedo.crearComuna(puntosComunaBoedo);
-		builderBoedo.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas);
-		builderBoedo.setearDatosComunes("Boedo", "Boedo", "Av. Boedo", 1565 , ubicacionCGPBoedo, palabrasClaveCGPBoedo, noche);
-		cgpBoedo = builderBoedo.build();
+		builderBoedo.crearComuna(puntosComunaBoedo)
+						.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas)
+						.setNombre("Boedo")
+						.setBarrio("Boedo")
+						.setDireccion("Av. Boedo")
+						.setNumero(1565)
+						.setUbicacion(ubicacionCGPBoedo)
+						.setPalabrasClave(palabrasClaveCGPBoedo)
+						.setJornada(noche);
+						cgpBoedo = builderBoedo.build();
 
 		CgpBuilder builderCaballito = new CgpBuilder();
-		builderCaballito.crearComuna(puntosComunaCaballito);
-		builderCaballito.crearListaServicios(servicioCPyRentas);
-		builderCaballito.setearDatosComunes("Caballito", "Caballito", "Rivadavia", 123 , ubicacionCGPCaballito, palabrasClaveCGPCaballito, jornadaNormalLunesAViernes);
-		cgpCaballito = builderCaballito.build();
+		builderCaballito.crearComuna(puntosComunaCaballito)
+						.crearListaServicios(servicioCPyRentas)
+						.setNombre("Caballito")
+						.setBarrio("Caballito")
+						.setDireccion("Rivadavia")
+						.setNumero(123)
+						.setUbicacion(ubicacionCGPCaballito)
+						.setPalabrasClave(palabrasClaveCGPCaballito)
+						.setJornada(jornadaNormalLunesAViernes);
+						cgpCaballito = builderCaballito.build();
 		
 		CgpBuilder buiderAlmagro = new CgpBuilder();
-		buiderAlmagro.crearComuna(puntosComunaAlmagro);
-		buiderAlmagro.crearListaServicios(servicioCPyRentas);
-		buiderAlmagro.setearDatosComunes("Almagro", "Almagro, Paternal", "Tucuman", 4567 , ubicacionCGPAlmagro, palabrasClaveCGPAlmagro, jornadaNormalLunesAViernes);
-		cgpAlmagro = buiderAlmagro.build();
+		buiderAlmagro.crearComuna(puntosComunaAlmagro)
+						.crearListaServicios(servicioCPyRentas)
+						.setNombre("Almagro")
+						.setBarrio("Almagro, Paternal")
+						.setDireccion("Tucuman")
+						.setNumero(4567)
+						.setUbicacion(ubicacionCGPAlmagro)
+						.setPalabrasClave(palabrasClaveCGPAlmagro)
+						.setJornada(jornadaNormalLunesAViernes);
+						cgpAlmagro = buiderAlmagro.build();
 		
 		CgpBuilder buiderPalermo = new CgpBuilder();
-		buiderPalermo.crearComuna(puntosComunaPalermo);
-		buiderPalermo.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas);
-		buiderPalermo.setearDatosComunes("Palermo", "Palermo Soho, Palermo Hollywood", "Av. Santa Fe", 7841 , ubicacionCGPPalermo, palabrasClaveCGPPalermo, jornadaNormalLunesAViernes);
-		cgpPalermo = buiderPalermo.build();
+		buiderPalermo.crearComuna(puntosComunaPalermo)
+						.crearListaServicios(servicioAsesoramientoLegalyPagoFacturas)
+						.setNombre("Palermo")
+						.setBarrio("Palermo Soho, Palermo Hollywood")
+						.setDireccion("Av. Santa Fe")
+						.setNumero(7841)
+						.setUbicacion(ubicacionCGPPalermo)
+						.setPalabrasClave(palabrasClaveCGPPalermo)
+						.setJornada(jornadaNormalLunesAViernes);
+						cgpPalermo = buiderPalermo.build();
 
 	}
 
@@ -797,44 +920,85 @@ abstract public class JuegoDeDatos {
 	public void setUpColectivos() {
 		
 		ColectivoBuilder builder15 = new ColectivoBuilder();
-		builder15.crearLinea("15");
-		builder15.setearDatosComunes("Parada San Telmo", "San Telmo", "belgrano", 156 , ubicacionParada15, paradaDel15, null);
-		parada15 = builder15.build();
+		builder15.crearLinea("15")
+						.setNombre("Parada San Telmo")
+						.setBarrio("San Telmo")
+						.setDireccion("Belgrano")
+						.setNumero(156)
+						.setUbicacion(ubicacionParada15)
+						.setPalabrasClave(palabrasClaveCGPPaternal);
+						parada15 = builder15.build();
 		
 		ColectivoBuilder builder114 = new ColectivoBuilder();
-		builder114.crearLinea("15");
-		builder114.setearDatosComunes("Parada San Telmo", "San Telmo", "belgrano", 156 , ubicacionParada114, paradaDel114, null);
-		parada114 = builder114.build();
+		builder114.crearLinea("15")
+						.setNombre("Parada San Telmo")
+						.setBarrio("San Telmo")
+						.setDireccion("Belgrano")
+						.setNumero(156)
+						.setUbicacion(ubicacionParada114)
+						.setPalabrasClave(paradaDel114);
+						parada114 = builder114.build();
 		
 		ColectivoBuilder builder11 = new ColectivoBuilder();
-		builder11.crearLinea("11");
-		builder11.setearDatosComunes("Parada 11", "Retiro", "belgrano", 1256 , ubicacionParada11, paradaDel11, null);
-		parada11 = builder11.build();
+		builder11.crearLinea("11")
+						.setNombre("Parada 11")
+						.setBarrio("Retiro")
+						.setDireccion("belgrano")
+						.setNumero(1256)
+						.setUbicacion(ubicacionParada11)
+						.setPalabrasClave(paradaDel11);
+						parada11 = builder11.build();
 		
 		ColectivoBuilder builder7Rojo = new ColectivoBuilder();
-		builder7Rojo.crearLinea("7");
-		builder7Rojo.setearDatosComunes("Parada 7 rojo", "Paternal", "Pomelo", 897 , ubicacionParada7Rojo, paradaDel7Rojo, null);
-		parada7Rojo = builder7Rojo.build();
+		builder7Rojo.crearLinea("7")
+						.setNombre("Parada 7 Rojo")
+						.setBarrio("Paternal")
+						.setDireccion("Pomelo")
+						.setNumero(897)
+						.setUbicacion(ubicacionParada7Rojo)
+						.setPalabrasClave(paradaDel7Rojo);
+						parada7Rojo = builder7Rojo.build();
 		
 		ColectivoBuilder builder7Amarillo = new ColectivoBuilder();
-		builder7Amarillo.crearLinea("7");
-		builder7Amarillo.setearDatosComunes("Parada 7 Amarillo", "Paternal", "Pomelo", 897 , ubicacionParada7Amarillo, paradaDel7Amarillo, null);
-		parada7Amarillo = builder7Amarillo.build();
+		builder7Amarillo.crearLinea("7")
+						.setNombre("Parada 7 Amarillo")
+						.setBarrio("Paternal")
+						.setDireccion("Pomelo")
+						.setNumero(897)
+						.setUbicacion(ubicacionParada7Amarillo)
+						.setPalabrasClave(paradaDel7Amarillo);
+						parada7Amarillo = builder7Amarillo.build();
 		
 		ColectivoBuilder builder60 = new ColectivoBuilder();
-		builder60.crearLinea("60");
-		builder60.setearDatosComunes("Parada 60", "Palermo", "Santa Fe", 1514 , ubicacionParada60, palabrasClave60, null);
-		parada60 = builder60.build();
+		builder60.crearLinea("60")
+						.setNombre("Parada 60")
+						.setBarrio("Palermo")
+						.setDireccion("Santa Fe")
+						.setNumero(1514)
+						.setUbicacion(ubicacionParada60)
+						.setPalabrasClave(palabrasClave60);
+						parada60 = builder60.build();
 		
 		ColectivoBuilder builder110Paternal = new ColectivoBuilder();
-		builder110Paternal.crearLinea("110");
-		builder110Paternal.setearDatosComunes("Parada 110", "Paternal", "Sosa", 2354 , ubicacionParada110Paternal, palabrasClave110Paternal, null);
-		parada110Paternal = builder110Paternal.build();
+		builder110Paternal.crearLinea("110")
+						.setNombre("Parada 110")
+						.setBarrio("Paternal")
+						.setDireccion("Sosa")
+						.setNumero(2354)
+						.setUbicacion(ubicacionParada110Paternal)
+						.setPalabrasClave(palabrasClave110Paternal);
+						parada110Paternal = builder110Paternal.build();
 
 		ColectivoBuilder builder110LaBoca = new ColectivoBuilder();
-		builder110LaBoca.crearLinea("110");
-		builder110LaBoca.setearDatosComunes("Parada 110", "La Boca", "Pasteur", 23 , ubicacionParada110Paternal, palabrasClave110LaBoca, null);
-		parada110LaBoca = builder110LaBoca.build();
+		builder110LaBoca.crearLinea("110")
+						.setNombre("Parada 110")
+						.setBarrio("La Boca")
+						.setDireccion("Pasteur")
+						.setNumero(23)
+						.setUbicacion(ubicacionParada110Paternal)
+						.setPalabrasClave(palabrasClave110LaBoca);
+						parada110LaBoca = builder110LaBoca.build();
+						
 	}
 
 	public void setUpPuntos() {

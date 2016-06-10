@@ -14,13 +14,15 @@ public class CgpBuilder extends PoiBuilder {
 	private List<Servicio> servicios;
 	private Comuna comuna;
 
-	public void crearListaServicios(List<Servicio> lista) {
+	public CgpBuilder crearListaServicios(List<Servicio> lista) {
 		servicios = lista;
+		return this;
 	}
 
-	public void crearComuna(List<Point> puntos) {
+	public CgpBuilder crearComuna(List<Point> puntos) {
 		comuna = new Comuna();
 		puntos.forEach(punto -> comuna.setAreaDeComuna(punto));
+		return this;
 	}
 	
 	public CentroGestionParticipacion build(){
