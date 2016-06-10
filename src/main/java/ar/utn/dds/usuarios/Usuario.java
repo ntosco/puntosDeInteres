@@ -18,4 +18,8 @@ public interface Usuario {
 	public void notificarObservadores(Consulta consulta);
 	
 	public String getNombreUsuario();
+
+	public Boolean tieneRolAdministrador();
+	
+	public String getEmail();
 }

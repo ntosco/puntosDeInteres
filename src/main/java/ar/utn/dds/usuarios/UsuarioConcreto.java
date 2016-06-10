@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.observers.Observador;
+import ar.utn.dds.roles.Rol;
 import ar.utn.dds.utils.Consulta;
 
 public class UsuarioConcreto implements Usuario {
 	
 	private List<Observador> accionesObservers = new ArrayList<Observador>();
 	private String nombreUsuario;
+	private List<Rol> roles;
+	private String email;
 	
 
 	@Override
@@ -38,7 +41,6 @@ public class UsuarioConcreto implements Usuario {
 	@Override
 	public void notificarObservadores(Consulta consulta) {
 		accionesObservers.forEach(observer -> observer.actualizar(consulta));
-		// TODO Auto-generated method stub
 		
 	}
 	
@@ -48,6 +50,35 @@ public class UsuarioConcreto implements Usuario {
 
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
+	}
+
+	@Override
+	public Boolean tieneRolAdministrador() {
+		return null;
+	}
+
+	public List<Observador> getAccionesObservers() {
+		return accionesObservers;
+	}
+
+	public void setAccionesObservers(List<Observador> accionesObservers) {
+		this.accionesObservers = accionesObservers;
+	}
+
+	public List<Rol> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Rol> roles) {
+		this.roles = roles;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 
