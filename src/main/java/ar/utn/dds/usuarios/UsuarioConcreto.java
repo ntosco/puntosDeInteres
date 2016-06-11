@@ -6,6 +6,7 @@ import ar.utn.dds.POI.POI;
 import ar.utn.dds.observers.Observador;
 import ar.utn.dds.procesos.Proceso;
 import ar.utn.dds.roles.Rol;
+import ar.utn.dds.roles.RolAdministrador;
 import ar.utn.dds.utils.Consulta;
 
 public class UsuarioConcreto implements Usuario {
@@ -63,7 +64,7 @@ public class UsuarioConcreto implements Usuario {
 
 	@Override
 	public Boolean tieneRolAdministrador() {
-		return null;
+		return (this.rol instanceof RolAdministrador);
 	}
 
 	public List<Observador> getAccionesObservers() {
