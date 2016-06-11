@@ -73,6 +73,11 @@ public class TestObservers extends JuegoDeDatos{
 		observadorTiempoBusqueda = new ObservadorTiempoBusqueda();
 		observadorAlmacenamiento = new ObservadorAlmacenamientoDeConsultas();
 		
+		observerParciales.setReporte(reporteParciales);
+		observadorAlmacenamiento.setReporte(reporteAlmacenamiento);
+		observerXfecha.setReporte(reporteFecha);
+		observerTotales.setReporte(reporteTotales);
+		
 		unUsuario = new UsuarioConcreto();
 		unUsuario.setNombreUsuario("Samo");
 		
@@ -160,7 +165,7 @@ public class TestObservers extends JuegoDeDatos{
 		unUsuario.buscarPuntos("15");
 		
 		assertEquals(1,reporteTotales.getTotalesPorUsuario().size());
-		assertEquals(8, (int)reporteTotales.getTotalesPorUsuario().get(unUsuario.getNombreUsuario()));		
+		assertEquals(12, (int)reporteTotales.getTotalesPorUsuario().get(unUsuario.getNombreUsuario()));		
 	}
 	
 

@@ -18,7 +18,7 @@ public class ReportePorFecha implements Reporte {
 	}
 	
 	@Override
-	public void validarConsulta(Consulta consulta) {
+	public void procesarConsulta(Consulta consulta) {
 	
 		if(getBusquedasPorFecha().containsKey(consulta.getFecha())){
 			 BusquedasPorFecha.put(consulta.getFecha().toString(), BusquedasPorFecha.get(consulta.getFecha()) + consulta.getCantidadDeResultados());

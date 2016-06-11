@@ -27,7 +27,7 @@ public class ReporteAlmacenamientoConsultas implements Reporte{
 	}
 
 	@Override
-	public void validarConsulta(Consulta consulta) {
+	public void procesarConsulta(Consulta consulta) {
 				
 		this.consultasAlmacenadas.add(consulta);
 		

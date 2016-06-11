@@ -26,7 +26,7 @@ public class ReporteTotales implements Reporte{
 	}
 
 	@Override
-	public void validarConsulta(Consulta consulta) {
+	public void procesarConsulta(Consulta consulta) {
 		
 		if(getTotalesPorUsuario().containsKey(consulta.getUsuarioEjecutor().getNombreUsuario())){
 			String nombreUsuario = consulta.getUsuarioEjecutor().getNombreUsuario();

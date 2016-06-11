@@ -31,11 +31,21 @@ public class ObservadorPorFecha implements Observador{
 	@Override
 	public void actualizar(Consulta consulta) {
 		
-		reporte.validarConsulta(consulta);
+		reporte.procesarConsulta(consulta);
 		
-		// El observer lo unico que realiza es avisar a la abstracciòn reporte asignada.
+		
 	}
 
 
+	public ReportePorFecha getReporte() {
+		return reporte;
+	}
+
+
+	public void setReporte(ReportePorFecha reporte) {
+		this.reporte = reporte;
+	}
+
+	
 
 }

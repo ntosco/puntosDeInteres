@@ -5,6 +5,6 @@ import ar.utn.dds.utils.Consulta;
 public interface Reporte {
 	
 	public void emitirse();
-	public void validarConsulta(Consulta consulta);
+	public void procesarConsulta(Consulta consulta);
 
 }

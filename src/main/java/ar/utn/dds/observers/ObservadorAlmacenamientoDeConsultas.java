@@ -13,9 +13,17 @@ public class ObservadorAlmacenamientoDeConsultas implements Observador{
 	@Override
 	public void actualizar(Consulta consulta) {
 		
-		reporte.validarConsulta(consulta);
+		reporte.procesarConsulta(consulta);
 		
 	}
-	
 
+	public ReporteAlmacenamientoConsultas getReporte() {
+		return reporte;
+	}
+
+	public void setReporte(ReporteAlmacenamientoConsultas reporte) {
+		this.reporte = reporte;
+	}
+	
+	
 }

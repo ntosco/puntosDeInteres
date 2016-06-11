@@ -14,9 +14,18 @@ public class ObservadorParciales implements Observador {
 	@Override
 	public void actualizar(Consulta consulta) {
 		
-		reporte.validarConsulta(consulta);
+		reporte.procesarConsulta(consulta);
 				
 	}
 
+	public ReporteParciales getReporte() {
+		return reporte;
+	}
+
+	public void setReporte(ReporteParciales reporte) {
+		this.reporte = reporte;
+	}
+
+	
 
 }

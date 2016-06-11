@@ -28,7 +28,7 @@ public class ReporteParciales implements Reporte{
 	}
 
 	@Override
-	public void validarConsulta(Consulta consulta) {
+	public void procesarConsulta(Consulta consulta) {
 		
 		ResultadosParciales.put(consulta.getUsuarioEjecutor().toString(),consulta.getCantidadDeResultados());
 		

@@ -24,8 +24,19 @@ public class ObservadorTotales implements Observador{
 	@Override
 	public void actualizar(Consulta consulta) {
 		
-		reporte.validarConsulta(consulta);
+		reporte.procesarConsulta(consulta);
 		
 	}
 
+
+	public ReporteTotales getReporte() {
+		return reporte;
+	}
+
+
+	public void setReporte(ReporteTotales reporte) {
+		this.reporte = reporte;
+	}
+
+	
 }
