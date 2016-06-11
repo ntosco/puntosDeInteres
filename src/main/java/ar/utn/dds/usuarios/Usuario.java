@@ -6,6 +6,7 @@ import org.json.simple.JSONArray;
 
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.observers.Observador;
+import ar.utn.dds.procesos.Proceso;
 import ar.utn.dds.utils.Consulta;
 
 public interface Usuario {
@@ -16,6 +17,8 @@ public interface Usuario {
 	public void quitarObservador(Observador observerador);
 	
 	public void notificarObservadores(Consulta consulta);
+	
+	public void ejecutarProceso(Proceso proceso);
 	
 	public String getNombreUsuario();
 

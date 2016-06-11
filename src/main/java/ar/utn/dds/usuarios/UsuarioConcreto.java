@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.observers.Observador;
+import ar.utn.dds.procesos.Proceso;
 import ar.utn.dds.roles.Rol;
 import ar.utn.dds.utils.Consulta;
 
@@ -11,7 +12,7 @@ public class UsuarioConcreto implements Usuario {
 	
 	private List<Observador> accionesObservers = new ArrayList<Observador>();
 	private String nombreUsuario;
-	private List<Rol> roles;
+	private Rol rol;
 	private String email;
 	
 
@@ -28,6 +29,14 @@ public class UsuarioConcreto implements Usuario {
 		return poisResultantes;
 	}
 
+//	El método ejecutar proceso no va a quedar de esta forma parametrizado,
+//	Ver si pongo closure , un command o expresiones lambda para que se 
+//	ejecute luego de la ejecución del proceso
+	@Override
+	public void ejecutarProceso(Proceso proceso) {
+		this.rol.ejecutarProceso(proceso);
+	}
+	
 	@Override
 	public void agregarObservador(Observador observerador) {
 		accionesObservers.add(observerador);
@@ -65,12 +74,12 @@ public class UsuarioConcreto implements Usuario {
 		this.accionesObservers = accionesObservers;
 	}
 
-	public List<Rol> getRoles() {
-		return roles;
+	public Rol getRol() {
+		return rol;
 	}
 
-	public void setRoles(List<Rol> roles) {
-		this.roles = roles;
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}
 
 	public String getEmail() {
@@ -80,6 +89,8 @@ public class UsuarioConcreto implements Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
 
 
 
