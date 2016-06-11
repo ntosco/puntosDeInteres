@@ -5,15 +5,20 @@ import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 
+import ar.utn.dds.reportes.ReportePorFecha;
 import ar.utn.dds.utils.BusquedaDePuntos;
 import ar.utn.dds.utils.Consulta;
 
 public class ObservadorPorFecha implements Observador{
 
 	//private List<Integer> BusquedasPorFecha = new ArrayList<Integer>();
-	private Hashtable<String,Integer> BusquedasPorFecha = new Hashtable<String,Integer>();
+	//	private Hashtable<String,Integer> BusquedasPorFecha = new Hashtable<String,Integer>();
 
+	// Mantengo al Observer como Singleton.
+	
 	public static ObservadorPorFecha instance;
+	private ReportePorFecha reporte = new ReportePorFecha();
+	
 	
 	public static ObservadorPorFecha getInstance(){
 		if (instance == null) {
@@ -25,21 +30,12 @@ public class ObservadorPorFecha implements Observador{
 	
 	@Override
 	public void actualizar(Consulta consulta) {
-		if(getBusquedasPorFecha().containsKey(consulta.getFecha())){
-			 BusquedasPorFecha.put(consulta.getFecha().toString(), BusquedasPorFecha.get(consulta.getFecha()) + consulta.getCantidadDeResultados());
-		}else{
-			 getBusquedasPorFecha().put(consulta.getFecha().toString(), consulta.getCantidadDeResultados());
-		}
+		
+		reporte.validarConsulta(consulta);
+		
+		// El observer lo unico que realiza es avisar a la abstracciòn reporte asignada.
 	}
 
 
-	public Hashtable<String,Integer> getBusquedasPorFecha() {
-		return BusquedasPorFecha;
-	}
-
-
-	public void setBusquedasPorFecha(Hashtable<String,Integer> busquedasPorFecha) {
-		BusquedasPorFecha = busquedasPorFecha;
-	}
 
 }

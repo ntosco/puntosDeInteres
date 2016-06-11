@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
+import ar.utn.dds.reportes.ReporteTotales;
 import ar.utn.dds.utils.Consulta;
 
 public class ObservadorTotales implements Observador{
-	private Hashtable<String,Integer> TotalesPorUsuario = new Hashtable<String,Integer>();
+	
+	private ReporteTotales reporte = new ReporteTotales();
 	
 	public static ObservadorTotales instance;
 	
@@ -21,30 +23,9 @@ public class ObservadorTotales implements Observador{
 	
 	@Override
 	public void actualizar(Consulta consulta) {
-		if(getTotalesPorUsuario().containsKey(consulta.getUsuarioEjecutor().getNombreUsuario())){
-			String nombreUsuario = consulta.getUsuarioEjecutor().getNombreUsuario();
-			int cantidadDeResultados = getTotalesPorUsuario().get(nombreUsuario);
-			int cantidadDeResultadosConsulta = consulta.getCantidadDeResultados();
-			int nuevaCantidadDeResultados = cantidadDeResultados + cantidadDeResultadosConsulta;
-			
-			getTotalesPorUsuario().put(nombreUsuario, nuevaCantidadDeResultados);
-		}else{
-			String nombreUsuario = consulta.getUsuarioEjecutor().getNombreUsuario();
-			int cantidadDeResultadosConsulta = consulta.getCantidadDeResultados();
-			
-			getTotalesPorUsuario().put(nombreUsuario, cantidadDeResultadosConsulta);
-		}
+		
+		reporte.validarConsulta(consulta);
+		
 	}
-
-
-	public Hashtable<String,Integer> getTotalesPorUsuario() {
-		return TotalesPorUsuario;
-	}
-
-
-	public void setTotalesPorUsuario(Hashtable<String,Integer> totalesPorUsuario) {
-		TotalesPorUsuario = totalesPorUsuario;
-	}
-
 
 }

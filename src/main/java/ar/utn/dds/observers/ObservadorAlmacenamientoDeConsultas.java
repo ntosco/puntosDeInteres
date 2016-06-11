@@ -3,15 +3,18 @@ package ar.utn.dds.observers;
 import java.util.ArrayList;
 import java.util.List;
 
+import ar.utn.dds.reportes.ReporteAlmacenamientoConsultas;
 import ar.utn.dds.utils.Consulta;
 
 public class ObservadorAlmacenamientoDeConsultas implements Observador{
 
-	private List<Consulta> consultasAlmacenadas = new ArrayList<Consulta>();
+	private ReporteAlmacenamientoConsultas reporte = new ReporteAlmacenamientoConsultas();
 	
 	@Override
 	public void actualizar(Consulta consulta) {
-		this.consultasAlmacenadas.add(consulta);
+		
+		reporte.validarConsulta(consulta);
+		
 	}
 	
 
