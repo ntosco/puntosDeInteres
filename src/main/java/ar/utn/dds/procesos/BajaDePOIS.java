@@ -19,6 +19,7 @@ public class BajaDePOIS implements Proceso {
 
 	private ServicioREST servicioREST;
 	Repositorio repositorioLocal = Repositorio.getInstance();
+	private String nombre; 
 	
 	// Se modela el objeto JSON con los siguientes campos:
 	// valorDebusqueda, "palabra "
@@ -42,7 +43,7 @@ public class BajaDePOIS implements Proceso {
 				//No action.
 			}else{
 				i = listaAux.size();
-				estrategia.ejecutarse();
+				estrategia.ejecutarse(this);
 				return ;
 				
 				// Debo cambiar el estado??? - Consultar
@@ -70,6 +71,11 @@ public class BajaDePOIS implements Proceso {
 
 	public void setServicioREST(ServicioREST servicioREST) {
 		this.servicioREST = servicioREST;
+	}
+
+	@Override
+	public String getNombre() {
+		return this.nombre;
 	}
 	
 

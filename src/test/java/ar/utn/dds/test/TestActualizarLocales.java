@@ -91,7 +91,7 @@ public class TestActualizarLocales extends JuegoDeDatos {
 			EstrategiaPorFallo fallo = mock(EstrategiaPorFallo.class);
 			ActualizarLocalesComerciales procesoActualizacion = new ActualizarLocalesComerciales();
 			procesoActualizacion.ejecutarse(fallo);
-			verify(fallo, atLeast(1)).ejecutarse();
+			verify(fallo, atLeast(1)).ejecutarse(procesoActualizacion);
 			
 		}
 		

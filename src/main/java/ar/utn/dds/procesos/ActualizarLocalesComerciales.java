@@ -12,6 +12,7 @@ import ar.utn.dds.servicios.Servicio;
 public class ActualizarLocalesComerciales  implements Proceso{
 	private Repositorio repo = Repositorio.getInstance();
 	private EstrategiaPorFallo fallo;
+	private String nombre;
 	@Override
 	public void ejecutarse(EstrategiaPorFallo estrategiaPorFallo) {
 		// TODO Auto-generated method stub
@@ -45,11 +46,11 @@ public class ActualizarLocalesComerciales  implements Proceso{
 				}
 			}
 			if(encontroPoi == false){
-				fallo.ejecutarse();					
+				fallo.ejecutarse(this);					
 			}
 			}else{
 				if(encontroPoi == false){
-					fallo.ejecutarse();					
+					fallo.ejecutarse(this);					
 				}
 			}
 			
@@ -80,6 +81,11 @@ public class ActualizarLocalesComerciales  implements Proceso{
 		
 		listaLocales.add(localArchivoDeTexto);
 		return listaLocales;
+	}
+
+	@Override
+	public String getNombre() {
+		return this.nombre;
 	}
 
 

@@ -3,6 +3,7 @@ package ar.utn.dds.usuarios;
 import java.util.ArrayList;
 import java.util.List;
 import ar.utn.dds.POI.POI;
+import ar.utn.dds.exceptions.InvalidPermissionsException;
 import ar.utn.dds.observers.Observador;
 import ar.utn.dds.procesos.Proceso;
 import ar.utn.dds.procesos.estrategiaFallo.EstrategiaPorFallo;
@@ -36,7 +37,12 @@ public class UsuarioConcreto implements Usuario {
 //	ejecute luego de la ejecución del proceso
 	@Override
 	public void ejecutarProceso(Proceso proceso) {
-		this.rol.ejecutarProceso(proceso,this.estrategiaPorFallo);
+		try{
+		this.rol.ejecutarProceso(proceso,this.estrategiaPorFallo,this);
+		}
+		catch(InvalidPermissionsException exception){
+			//TODO Ver que hago con exception
+		}
 	}
 	
 	@Override

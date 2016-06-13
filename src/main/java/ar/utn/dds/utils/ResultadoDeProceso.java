@@ -14,5 +14,18 @@ public class ResultadoDeProceso {
 	private Proceso procesoEjecutado;
 	private Usuario usuarioEjecutor;
 	private Estado estado;
+	
+	public Proceso getProcesoEjecutado() {
+		return procesoEjecutado;
+	}
+	public void setProcesoEjecutado(Proceso procesoEjecutado) {
+		this.procesoEjecutado = procesoEjecutado;
+	}
+	public Usuario getUsuarioEjecutor() {
+		return usuarioEjecutor;
+	}
+	public void setUsuarioEjecutor(Usuario usuarioEjecutor) {
+		this.usuarioEjecutor = usuarioEjecutor;
+	}
 
 }

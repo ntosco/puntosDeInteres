@@ -70,7 +70,7 @@ public class TestBajaDePOIS extends JuegoDeDatos {
 		procesoBajas.ejecutarse(estrategia);
 		procesoBajas.ejecutarse(estrategia);
 		
-		verify(estrategia).ejecutarse();
+		verify(estrategia).ejecutarse(procesoBajas);
 		
 		
 	}
