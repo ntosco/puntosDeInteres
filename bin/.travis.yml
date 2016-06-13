@@ -1,0 +1,15 @@
+language: java
+
+jdk:
+  - oraclejdk8
+  
+#before_install
+#  cd carpetaDondeEstaElPOM #solo si no tienen el pom en el raíz del repositorio
+
+#notifications:
+#  email:
+#    recipients:
+#      - one@example.com
+#      - other@example.com
+#    on_success: [always|never|change] # default: change
+#    on_failure: [always|never|change] # default: always

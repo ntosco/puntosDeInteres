@@ -1,0 +1,6 @@
+\target
+\debug
+\.settings
+.classpath
+.project
+/target/

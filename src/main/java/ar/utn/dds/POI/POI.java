@@ -1,6 +1,7 @@
 package ar.utn.dds.POI;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.uqbar.commons.model.Entity;
@@ -29,11 +30,17 @@ public abstract class POI extends Entity {
 	private List<EstrategiaDisponibilidad> EstrategiasDisponibilidad = new ArrayList<EstrategiaDisponibilidad>();
 	private List<String> listaPalabrasClave = new ArrayList <String>();
 	
+	// Baja logica
+	
+	private String fechaBaja;
+	
 	
 	// ********************************************************
 	// ** Validacion
 	// ********************************************************
 	
+
+
 	public void validate(){
 		if (StringUtils.isEmpty(this.nombre))
 			throw new InvalidModelException("El POI no posee un nombre");
@@ -189,6 +196,14 @@ public abstract class POI extends Entity {
 	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public String getFechaBaja() {
+		return fechaBaja;
+	}
+
+	public void setFechaBaja(String fechaBaja) {
+		this.fechaBaja = fechaBaja;
 	}
 
 }
