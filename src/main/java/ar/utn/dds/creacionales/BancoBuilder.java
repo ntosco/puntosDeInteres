@@ -3,7 +3,6 @@ package ar.utn.dds.creacionales;
 import java.util.List;
 
 import ar.utn.dds.POI.SucursalBanco;
-import ar.utn.dds.exceptions.InvalidModelException;
 import ar.utn.dds.servicios.Servicio;
 
 public class BancoBuilder extends PoiBuilder {

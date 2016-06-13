@@ -2,10 +2,6 @@ package ar.utn.dds.test;
 
 import static org.junit.Assert.*;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Hashtable;
 import java.util.List;
 
 import org.junit.After;

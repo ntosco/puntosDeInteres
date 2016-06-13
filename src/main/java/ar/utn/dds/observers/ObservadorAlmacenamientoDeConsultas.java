@@ -1,8 +1,5 @@
 package ar.utn.dds.observers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ar.utn.dds.reportes.ReporteAlmacenamientoConsultas;
 import ar.utn.dds.utils.Consulta;
 

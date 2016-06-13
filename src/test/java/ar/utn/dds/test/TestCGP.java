@@ -17,7 +17,6 @@ import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.extern.cgp.BuscadorDeCGP;
-import ar.utn.dds.extern.cgp.CentroDTO;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.juegoDeDatos.StubBuscadorCGP;
 import ar.utn.dds.utils.AdapterCGP;

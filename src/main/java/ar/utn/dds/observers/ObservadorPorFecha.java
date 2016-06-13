@@ -1,12 +1,6 @@
 package ar.utn.dds.observers;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Hashtable;
-import java.util.List;
-
 import ar.utn.dds.reportes.ReportePorFecha;
-import ar.utn.dds.utils.BusquedaDePuntos;
 import ar.utn.dds.utils.Consulta;
 
 public class ObservadorPorFecha implements Observador{

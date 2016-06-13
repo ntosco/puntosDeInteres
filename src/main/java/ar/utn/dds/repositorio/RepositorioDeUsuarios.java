@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.collections15.CollectionUtils;
-import org.uqbar.commons.model.CollectionBasedRepo;
 
 import ar.utn.dds.usuarios.Usuario;
 

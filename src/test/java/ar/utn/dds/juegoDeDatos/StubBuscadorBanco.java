@@ -1,7 +1,5 @@
 package ar.utn.dds.juegoDeDatos;
 
-
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

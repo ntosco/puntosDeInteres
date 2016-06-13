@@ -2,9 +2,7 @@ package ar.utn.dds.observers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import ar.utn.dds.repositorio.RepositorioDeUsuarios;
 import ar.utn.dds.servicios.MailSender;
