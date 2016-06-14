@@ -24,6 +24,15 @@ public class ActualizarLocalesComerciales  implements Proceso{
 	private EstrategiaPorFallo fallo;
 	private String nombre;
 	private int idProcesoActualizacion;
+	private String archivo;
+	
+	public String getArchivo() {
+		return archivo;
+	}
+
+	public void setArchivo(String archivo) {
+		this.archivo = archivo;
+	}
 
 	public int getIdProcesoActualizacion() {
 		return idProcesoActualizacion;
@@ -37,11 +46,12 @@ public class ActualizarLocalesComerciales  implements Proceso{
 	public void ejecutarse(EstrategiaPorFallo estrategiaPorFallo) {
 		// TODO Auto-generated method stub
 		fallo = estrategiaPorFallo;
-		actualizarLocales();
+		
+		actualizarLocales(archivo);
 	}
 	
-	public void actualizarLocales(){
-		List<LocalComercial> listaLocalesActualizados = leerArchivo();	
+	public void actualizarLocales(String archivo){
+		List<LocalComercial> listaLocalesActualizados = leerArchivoTXT(archivo);	
 		for (int i = 0; i < listaLocalesActualizados.size(); i++) { 
 			actualizarLocal(listaLocalesActualizados.get(i));
 		}
@@ -103,25 +113,34 @@ public class ActualizarLocalesComerciales  implements Proceso{
 	}
 	
 
-	public List<LocalComercial> leerArchivoTXT(String archivo) throws FileNotFoundException, IOException {
+	public List<LocalComercial> leerArchivoTXT(String archivo) {
 		List<LocalComercial> listaLocales = new ArrayList<LocalComercial>();	
 		  String cadena;
-	      FileReader f = new FileReader(archivo);
-	      BufferedReader b = new BufferedReader(f);
-	      while((cadena = b.readLine())!=null) {
-	    	  String[] parts = cadena.split(";");
-	    	  String nombre = parts[0];
-	    	  String palabrasClave = parts[1]; 
-	    	  String[] arrayPalabrasClave = palabrasClave.split(" ");
-	    	  
-	  		  LocalComercial localArchivoDeTexto = new LocalComercial();
-			  List<String> listaPalabrasClave = new ArrayList<String>();
-	    	  listaPalabrasClave = Arrays.asList(arrayPalabrasClave);
-	    	  localArchivoDeTexto.setNombre(nombre);
-	    	  localArchivoDeTexto.setListaPalabrasClave(listaPalabrasClave);
-	    	  listaLocales.add(localArchivoDeTexto);
-	      }
-	      b.close();
+		  String current;
+		try {
+			current = new java.io.File( "." ).getCanonicalPath();
+		      FileReader f = new FileReader(current.replaceAll("\\\\","/") + "/src/main/java/ar/utn/dds/procesos/" + archivo);
+		      BufferedReader b = new BufferedReader(f);
+		      while((cadena = b.readLine())!=null) {
+		    	  String[] parts = cadena.split(";");
+		    	  String nombre = parts[0];
+		    	  String palabrasClave = parts[1]; 
+		    	  String[] arrayPalabrasClave = palabrasClave.split(" ");
+		    	  
+		  		  LocalComercial localArchivoDeTexto = new LocalComercial();
+				  List<String> listaPalabrasClave = new ArrayList<String>();
+		    	  listaPalabrasClave = Arrays.asList(arrayPalabrasClave);
+		    	  localArchivoDeTexto.setNombre(nombre);
+		    	  localArchivoDeTexto.setListaPalabrasClave(listaPalabrasClave);
+		    	  listaLocales.add(localArchivoDeTexto);
+		      }
+		      b.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fallo.ejecutarse(this);			
+		}		  
+
 		return listaLocales;
 	}
 	

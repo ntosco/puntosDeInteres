@@ -11,6 +11,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class TestActualizarLocales extends JuegoDeDatos {
 	public void actualizoUnLocalYsusPalabrasClaveCambian() {
 		repositorio.create(libreria);
 		ActualizarLocalesComerciales procesoActualizacion = new ActualizarLocalesComerciales();
+		procesoActualizacion.setArchivo("Locales.txt"); 
 		procesoActualizacion.setNombre("ProcesoActualizarVariosLocales");
 		procesoActualizacion.ejecutarse(estrategiaPorFallo);
 		
@@ -61,9 +63,7 @@ public class TestActualizarLocales extends JuegoDeDatos {
 		assertTrue(listaBusqueda.get(0).getListaPalabrasClave().contains("lapiz"));
 		assertTrue(listaBusqueda.get(0).getListaPalabrasClave().contains("escolar"));
 		assertTrue(listaBusqueda.get(0).getListaPalabrasClave().contains("uniformes"));
-		assertTrue(listaBusqueda.get(0).getListaPalabrasClave().contains("modas"));
-		//assertTrue(listaBusqueda.get(0).getListaPalabrasClave().contains("cartuchera"));
-		
+		assertTrue(listaBusqueda.get(0).getListaPalabrasClave().contains("modas"));	
 	}
 	
 		@Test
@@ -94,22 +94,38 @@ public class TestActualizarLocales extends JuegoDeDatos {
 		 			//el repo esta vacio asi que no va a encontrar nada
 		 			EstrategiaPorFallo fallo = mock(EstrategiaPorFallo.class);
 		 			ActualizarLocalesComerciales procesoActualizacion = new ActualizarLocalesComerciales();
+		 			procesoActualizacion.setArchivo("Locales.txt"); 
 		 			procesoActualizacion.setNombre("PActualizacionFalla");
 		 			procesoActualizacion.ejecutarse(fallo);
 		 			verify(fallo, atLeast(1)).ejecutarse(procesoActualizacion);
 		 			
 		 		}
+				
+				
+				@Test 
+		 		
+		 		public void falloAlLeerArchivoAlActualizarLocales() {
+		 			
+		 			//el ARCHIVO NO EXISTE Y NO LO VA A PODER LEER
+		 			EstrategiaPorFallo fallo = mock(EstrategiaPorFallo.class);
+		 			ActualizarLocalesComerciales procesoActualizacion = new ActualizarLocalesComerciales();
+		 			procesoActualizacion.setArchivo("NoExisto.txt"); 
+		 			procesoActualizacion.setNombre("PActualizacionFallaAlLeerArchivo");
+		 			procesoActualizacion.ejecutarse(fallo);
+		 			verify(fallo, atLeast(1)).ejecutarse(procesoActualizacion);
+		 			
+		 		}
 
-/*
-		@Test //lee al archivo de texto y arma una lista de localesComerciales
+
+		@Test 
 		public void leerArhivoTXT() throws FileNotFoundException, IOException {
-		
 			ActualizarLocalesComerciales procesoActualizacion = new ActualizarLocalesComerciales();
-			List<LocalComercial> resultado = procesoActualizacion.leerArchivoTXT("/Users/Samo/git/2016-mn-group-09/src/main/java/ar/utn/dds/procesos/Locales.txt");
+			List<LocalComercial> resultado = procesoActualizacion.leerArchivoTXT("Locales.txt");
+			
 			assertTrue(resultado.size() == 1);
 			assertTrue(resultado.get(0).getNombre().equals("Libreria"));
 			assertTrue(resultado.get(0).getListaPalabrasClave().size() == 5);
 		}
-		*/
+		
 		
 }
