@@ -1,5 +1,10 @@
 package ar.utn.dds.procesos;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import ar.utn.dds.POI.LocalComercial;
@@ -10,9 +15,24 @@ import ar.utn.dds.repositorio.Repositorio;
 import ar.utn.dds.servicios.Servicio;
 
 public class ActualizarLocalesComerciales  implements Proceso{
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	
 	private Repositorio repo = Repositorio.getInstance();
 	private EstrategiaPorFallo fallo;
 	private String nombre;
+	private int idProcesoActualizacion;
+
+	public int getIdProcesoActualizacion() {
+		return idProcesoActualizacion;
+	}
+
+	public void setIdProcesoActualizacion(int idProcesoActualizacion) {
+		this.idProcesoActualizacion = idProcesoActualizacion;
+	}
+
 	@Override
 	public void ejecutarse(EstrategiaPorFallo estrategiaPorFallo) {
 		// TODO Auto-generated method stub
@@ -21,8 +41,7 @@ public class ActualizarLocalesComerciales  implements Proceso{
 	}
 	
 	public void actualizarLocales(){
-		List<LocalComercial> listaLocalesActualizados = leerArchivo();
-		
+		List<LocalComercial> listaLocalesActualizados = leerArchivo();	
 		for (int i = 0; i < listaLocalesActualizados.size(); i++) { 
 			actualizarLocal(listaLocalesActualizados.get(i));
 		}
@@ -82,7 +101,30 @@ public class ActualizarLocalesComerciales  implements Proceso{
 		listaLocales.add(localArchivoDeTexto);
 		return listaLocales;
 	}
+	
 
+	public List<LocalComercial> leerArchivoTXT(String archivo) throws FileNotFoundException, IOException {
+		List<LocalComercial> listaLocales = new ArrayList<LocalComercial>();	
+		  String cadena;
+	      FileReader f = new FileReader(archivo);
+	      BufferedReader b = new BufferedReader(f);
+	      while((cadena = b.readLine())!=null) {
+	    	  String[] parts = cadena.split(";");
+	    	  String nombre = parts[0];
+	    	  String palabrasClave = parts[1]; 
+	    	  String[] arrayPalabrasClave = palabrasClave.split(" ");
+	    	  
+	  		  LocalComercial localArchivoDeTexto = new LocalComercial();
+			  List<String> listaPalabrasClave = new ArrayList<String>();
+	    	  listaPalabrasClave = Arrays.asList(arrayPalabrasClave);
+	    	  localArchivoDeTexto.setNombre(nombre);
+	    	  localArchivoDeTexto.setListaPalabrasClave(listaPalabrasClave);
+	    	  listaLocales.add(localArchivoDeTexto);
+	      }
+	      b.close();
+		return listaLocales;
+	}
+	
 	@Override
 	public String getNombre() {
 		return this.nombre;
