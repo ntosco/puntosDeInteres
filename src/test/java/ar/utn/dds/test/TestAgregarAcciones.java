@@ -26,7 +26,6 @@ public class TestAgregarAcciones extends JuegoDeDatos {
 	private Observador tiempoDeBusqueda = new ObservadorTiempoBusqueda();
 	private Observador porFecha = new ObservadorPorFecha();
 	private Observador almacenamientoDeConsultas = new ObservadorAlmacenamientoDeConsultas();
-	private RepositorioDeUsuarios usuarios;
 	private EstrategiaPorFallo fallo;
 	private Usuario juan = new UsuarioConcreto();
 	

@@ -103,6 +103,12 @@ public class UsuarioConcreto implements Usuario {
 		accionesObservers = acciones;
 	}
 
+	@Override
+	public void notificarFalla() {
+		this.setEmail(email);
+		
+	}
+
 
 
 }

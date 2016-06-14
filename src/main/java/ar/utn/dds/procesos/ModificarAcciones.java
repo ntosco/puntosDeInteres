@@ -5,20 +5,45 @@ import java.util.List;
 
 import ar.utn.dds.observers.Observador;
 import ar.utn.dds.procesos.estrategiaFallo.EstrategiaPorFallo;
+import ar.utn.dds.procesos.estrategiaFallo.NoHayAccionesParaRealizarFalla;
+import ar.utn.dds.procesos.estrategiaFallo.NoRealizarAccionPorFalla;
 import ar.utn.dds.repositorio.RepositorioDeUsuarios;
 import ar.utn.dds.usuarios.Usuario;
 
 public class ModificarAcciones implements Proceso {
 
-	private String nombre;
-	private EstrategiaPorFallo fallo;
-	private List<Observador> acciones = new ArrayList<Observador>();
-	private RepositorioDeUsuarios usuarios = RepositorioDeUsuarios.getInstance();
+	String nombre;
+	EstrategiaPorFallo fallo;
+	List<Observador> acciones = new ArrayList<Observador>();
+	RepositorioDeUsuarios usuarios = RepositorioDeUsuarios.getInstance();
+	int idProcesoMultiple;
+	String estado;
 	
-
+	
+	public ModificarAcciones(){
+		setEstado("Ok");
+		fallo = new NoRealizarAccionPorFalla();		
+	}
+	
 	@Override
 	public void ejecutarse(EstrategiaPorFallo fallo) {
-		usuarios().forEach(usuario -> usuario.actualizarAcciones(acciones));
+		if(puedeEjecutarse()){
+			usuarios().forEach(usuario -> usuario.actualizarAcciones(acciones));
+		}
+		else{
+			fallo.ejecutarse(this);
+		}
+	}
+
+	private boolean puedeEjecutarse() {
+		if(acciones.size() == 0){
+			this.fallo = new NoHayAccionesParaRealizarFalla();
+			this.setEstado("Error");
+			return false;
+		}
+		else{
+			return true;
+		}
 	}
 
 	@Override
@@ -44,6 +69,14 @@ public class ModificarAcciones implements Proceso {
 
 	public void setFallo(EstrategiaPorFallo fallo) {
 		this.fallo = fallo;
+	}
+	
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 	
 	public void activar(List<Observador> lista){
