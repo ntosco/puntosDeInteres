@@ -97,8 +97,11 @@ public class UsuarioConcreto implements Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-
+	
+	@Override
+	public void actualizarAcciones(List<Observador> acciones){
+		accionesObservers = acciones;
+	}
 
 
 

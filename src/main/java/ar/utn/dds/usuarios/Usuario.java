@@ -22,4 +22,8 @@ public interface Usuario {
 	public Boolean tieneRolAdministrador();
 	
 	public String getEmail();
+	
+	public void actualizarAcciones(List<Observador> acciones);
+
+	public List<Observador> getAccionesObservers();
 }
