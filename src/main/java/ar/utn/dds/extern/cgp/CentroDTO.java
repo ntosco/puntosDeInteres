@@ -51,9 +51,7 @@ public class CentroDTO {
 		return servicios;
 	}
 
-	public CentroDTO(int numeroDeComuna, String zonasIncluidas,
-			String nombreDirector, String domicilio, String telefono,
-			List<ServicioDTO> servicios) {
+	public CentroDTO(int numeroDeComuna, String zonasIncluidas,String nombreDirector, String domicilio, String telefono, List<ServicioDTO> servicios) {
 		setNumeroComuna(numeroDeComuna);
 		setZonasIncluidas(zonasIncluidas);
 		setNombreDirector(nombreDirector);

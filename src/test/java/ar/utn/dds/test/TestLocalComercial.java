@@ -1,10 +1,10 @@
 package ar.utn.dds.test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.uqbar.geodds.Point;
 
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 
@@ -19,7 +19,7 @@ public class TestLocalComercial extends JuegoDeDatos {
 
 	@Test
 	public void estoyCercaDeUnLocalComercial() {
-		assertTrue(fallabella.estaCercaDe(puntoTerminal));
+		assertTrue(fallabella.estaCercaDe(new Point(9,8)));
 	}
 
 	@Test
@@ -80,6 +80,11 @@ public class TestLocalComercial extends JuegoDeDatos {
 	@Test
 	public void estoyDisponibleConServicioHorarioIn() {
 		assertTrue(cafeMartinez.estaDisponible("Rentas", lunes1210hs));
+	}
+	
+	@Test
+	public void builderTest(){
+		assertTrue(panquequesCarlitos.getListaPalabrasClave().contains("cafe"));
 	}
 
 }

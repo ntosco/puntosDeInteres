@@ -31,7 +31,6 @@ public class TestBusquedaGeneral extends JuegoDeDatos {
 		setUpGeneral();
 		setUpBanco();
 		setUpCGP();
-		setUpDTO();
 		setUpLocalComercial();
 		setUpColectivos();
 		
@@ -53,31 +52,32 @@ public class TestBusquedaGeneral extends JuegoDeDatos {
 		buscadorPuntos.borrarListaServicios();	
 	}
 	
-		
+
 	@Test
-	public void agregoPOIsDeCadaOrigenDeDatosSinRepo(){
+	public void verificoQueLaBusquedaFuncioneAlAgregarUnPOIAlRepositorio(){
 		
-		List<POI> listaAuxiliar = new ArrayList<POI>();
-		int sizeAnterior = 0;
-		
-		listaAuxiliar = buscadorPuntos.busquedaGeneral("15");
-		
-		assertEquals(sizeAnterior + 4, listaAuxiliar.size());
-		
-	}
-	
-	@Test
-	public void agregoPOIsDeCadaOrigenJuntoConUnPOIDelRepo(){
+		//Realizo la busqueda en los servicios externos
 
 		List<POI> listaAuxiliar = new ArrayList<POI>();
-		int sizeAnterior = 0;
+		listaAuxiliar = buscadorPuntos.busquedaGeneral("15");
+		
+		int cant = listaAuxiliar.size();
+		
+		assertEquals(4,cant);
+		
+		//Agrego un POI al repositorio
 		
 		repositorio.create(parada15);
 		
-		listaAuxiliar = buscadorPuntos.busquedaGeneral("15");
+		//Realizo la busqueda nuevamente 
 		
-		assertEquals(sizeAnterior + 5, listaAuxiliar.size());
-	
+		
+		List<POI> listaPOIS = new ArrayList<POI>();
+		listaPOIS = buscadorPuntos.busquedaGeneral("15");
+		
+				
+		assertEquals(cant + 1, listaPOIS.size());
+		
 	}
 	
 	@Test
