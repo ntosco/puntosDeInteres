@@ -60,8 +60,10 @@ public class TestAgregarAcciones extends JuegoDeDatos {
 		pedro.setAccionesObservers(acciones2);
 		estadoOK = new Estado();
 		estadoOK.setDescripcion("Ok");
+		estadoOK.setEstadoComoOK();
 		estadoError = new Estado();
-		estadoError.setDescripcion("Error");
+		estadoError.setDescripcion("No hay acciones para ejecutar");
+		estadoError.setEstadoComoErroneo();
 		fallo = new NoHayAccionesParaRealizarFalla();
 		
 	}
@@ -137,10 +139,11 @@ public class TestAgregarAcciones extends JuegoDeDatos {
 		procesoModificarAcciones.setEstado(estadoOK);
 		procesoModificarAcciones.setAcciones(new ArrayList<Observador>());
 		procesoModificarAcciones.ejecutarse(new NoHayAccionesParaRealizarFalla());
-		assertEquals(procesoModificarAcciones.estado.getDescripcion(), "Error");
+		assertEquals(procesoModificarAcciones.estado.getValor(), 2);
+		assertEquals(procesoModificarAcciones.estado.getDescripcion(), "No hay acciones para ejecutar");
 		
 		procesoModificarAcciones.undoEstado();
-		assertEquals(procesoModificarAcciones.estado.getDescripcion(), "Ok");
+		assertEquals(procesoModificarAcciones.estado.getValor(), 1);
 	}
 	
 	@Test
@@ -167,17 +170,17 @@ public class TestAgregarAcciones extends JuegoDeDatos {
 		juan.setAccionesObservers(acciones2);
 		procesoModificarAcciones.setEstado(estadoError);
 		assertEquals(juan.getAccionesObservers().size(),1);
-		assertEquals(procesoModificarAcciones.estado.getDescripcion(), "Error");
+		assertEquals(procesoModificarAcciones.estado.getValor(), 2);
 		
 		procesoModificarAcciones.setAcciones(acciones);
 		procesoModificarAcciones.ejecutarse(new NoHayAccionesParaRealizarFalla());
-		assertEquals(procesoModificarAcciones.estado.getDescripcion(), "Ok");
+		assertEquals(procesoModificarAcciones.estado.getValor(), 1);
 		assertEquals(juan.getAccionesObservers().size(),3);
 		
 		
 		procesoModificarAcciones.undo();
 		assertEquals(juan.getAccionesObservers().size(),1);
-		assertEquals(procesoModificarAcciones.estado.getDescripcion(), "Error");
+		assertEquals(procesoModificarAcciones.estado.getValor(), 2);
 	}
 	
 	@Test
@@ -185,6 +188,6 @@ public class TestAgregarAcciones extends JuegoDeDatos {
 		
 		procesoModificarAcciones.setAcciones(new ArrayList<Observador>());
 		procesoModificarAcciones.ejecutarse(fallo);
-		assertEquals(procesoModificarAcciones.getEstado().getDescripcion(), "Error");
+		assertEquals(procesoModificarAcciones.getEstado().getValor(),2);
 	}
 }

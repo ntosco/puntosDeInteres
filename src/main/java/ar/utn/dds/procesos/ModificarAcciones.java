@@ -47,19 +47,21 @@ public class ModificarAcciones extends Proceso {
 	}
 	
 	public void copiarEstado(){
-		String estadoAnterior = estado.getDescripcion();
+		int estadoAnterior = estado.getValor();
 		this.undoEstado = new Estado();
-		undoEstado.setDescripcion(estadoAnterior);
+		undoEstado.setValor(estadoAnterior);
 		
 	}
 
 	public boolean puedeEjecutarse() {
 		if(acciones.size() == 0){
-			this.estado.setDescripcion("Error");
+			this.estado.setDescripcion("No hay acciones para ejecutar");
+			this.estado.setEstadoComoErroneo();
 			return false;
 		}
 		else{
 			this.estado.setDescripcion("Ok");
+			this.estado.setEstadoComoOK();
 			return true;
 		}
 	}
@@ -70,9 +72,11 @@ public class ModificarAcciones extends Proceso {
 	}
 	
 	public void undoEstado(){
-		String estadoAnterior = undoEstado.getDescripcion();
+		int estadoAnterior = undoEstado.getValor();
+		String descripcion = undoEstado.getDescripcion();
 		this.estado = new Estado();
-		estado.setDescripcion(estadoAnterior);
+		estado.setValor(estadoAnterior);
+		estado.setDescripcion(descripcion);
 	}
 	
 	public void undoListaDeAcciones(){
