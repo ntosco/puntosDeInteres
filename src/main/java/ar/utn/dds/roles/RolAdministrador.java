@@ -15,7 +15,10 @@ public class RolAdministrador implements Rol {
 	}
 
 	private void almacenarResultadoProceso(Proceso proceso) {
-		ServiceLocatorReportes.getInstance().getHistorialProcesosEjecutados().almacenarResultado(proceso);
+		ResultadoDeProceso resultadoProcesoEjecutado = new ResultadoDeProceso(proceso);
+		ServiceLocatorReportes.getInstance().getHistorialProcesosEjecutados().almacenarResultado(resultadoProcesoEjecutado);
 	}
+	
+	
 
 }
