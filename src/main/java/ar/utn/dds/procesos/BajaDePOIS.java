@@ -46,7 +46,7 @@ public class BajaDePOIS extends Proceso {
 				//Cambio el Estado.
 				
 				Estado estado = new Estado();
-				estado.setEstadoComoErroneo();
+				estado.setValor(1);
 				estado.setDescripcion("El proceso fallo ya que el POI ya fue dado de baja");
 				this.setEstado(estado);
 				
@@ -61,7 +61,7 @@ public class BajaDePOIS extends Proceso {
 		listaAux.forEach(poi -> repositorioLocal.update(poi));
 		
 		Estado estado = new Estado();
-		estado.setEstadoComoOK();
+		estado.setValor(2);
 		estado.setDescripcion("El proceso se completo exitosamente");
 		this.setEstado(estado);
 		
