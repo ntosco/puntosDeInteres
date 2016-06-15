@@ -1,6 +1,5 @@
 package ar.utn.dds.procesos;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,21 +8,15 @@ import java.util.List;
 
 import ar.utn.dds.POI.LocalComercial;
 import ar.utn.dds.POI.POI;
-import ar.utn.dds.POI.Rubro;
 import ar.utn.dds.procesos.estrategiaFallo.EstrategiaPorFallo;
 import ar.utn.dds.repositorio.Repositorio;
-import ar.utn.dds.servicios.Servicio;
 
-public class ActualizarLocalesComerciales  implements Proceso{
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+public class ActualizarLocalesComerciales  extends Proceso{
+
 
 	
 	private Repositorio repo = Repositorio.getInstance();
 	private EstrategiaPorFallo fallo;
-	private String nombre;
-	private int idProcesoActualizacion;
 	private String archivo;
 	
 	public String getArchivo() {
@@ -32,14 +25,6 @@ public class ActualizarLocalesComerciales  implements Proceso{
 
 	public void setArchivo(String archivo) {
 		this.archivo = archivo;
-	}
-
-	public int getIdProcesoActualizacion() {
-		return idProcesoActualizacion;
-	}
-
-	public void setIdProcesoActualizacion(int idProcesoActualizacion) {
-		this.idProcesoActualizacion = idProcesoActualizacion;
 	}
 
 	@Override
@@ -144,10 +129,7 @@ public class ActualizarLocalesComerciales  implements Proceso{
 		return listaLocales;
 	}
 	
-	@Override
-	public String getNombre() {
-		return this.nombre;
-	}
+
 
 
 }
