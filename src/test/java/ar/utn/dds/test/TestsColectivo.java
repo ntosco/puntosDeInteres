@@ -5,9 +5,6 @@ import static org.junit.Assert.*;
 import java.time.LocalDateTime;
 
 import org.junit.*;
-import org.uqbar.geodds.Point;
-
-import ar.utn.dds.POI.*;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 
 public class TestsColectivo extends JuegoDeDatos {
