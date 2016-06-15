@@ -16,6 +16,8 @@ public class ProcesoMultiple extends Proceso{
 		procesosAEjecutar.forEach(proceso -> proceso.ejecutarse(estrategiaDeFallo));
 	}
 
-		
+	public void setProcesos(List<Proceso> procesos) {
+		procesosAEjecutar = procesos;
+	}
 	
 }

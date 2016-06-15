@@ -35,18 +35,18 @@ public class TestActualizarLocales extends JuegoDeDatos {
 	Repositorio repositorio = Repositorio.getInstance();
 	
 /*	EnvioMensajePorFalla estrategiaPorFallo = new EnvioMensajePorFalla();*/
-	
+
 	@Before
 	public void SetUp(){
-		setUpGeneral();
-		setUpBanco();
-		setUpCGP();
+			setUpGeneral();
+			setUpBanco();
+			setUpCGP();
 		setUpLocalComercial();
 		setUpColectivos();
-		setUpEstrategias();
+//		setUpEstrategias();
+		setUpEstrategiasXFallo();
 		setUpProcesos();
-		
-		
+
 	}
 
 	@After
@@ -58,13 +58,14 @@ public class TestActualizarLocales extends JuegoDeDatos {
 	public void actualizoUnLocalYsusPalabrasClaveCambian() {
 		
 		repositorio.create(libreria);
+
+		procesoActualizarLocalesComerciales.setArchivo("Locales.txt"); 
+		procesoActualizarLocalesComerciales.setNombre("ProcesoActualizarVariosLocales");
 		
-/*		ActualizarLocalesComerciales procesoActualizacion = new ActualizarLocalesComerciales();
-		*/
-				
-		procesoActualizacion.ejecutarse(estrategiaMail);
+		procesoActualizarLocalesComerciales.ejecutarse(estrategiaEnvioMensaje);
+
 		
-		List<POI> listaBusqueda = repositorio.search("lapiz");
+		List<POI> listaBusqueda = repositorio.search("lapiz"); 
 		
 		assertTrue(listaBusqueda.size()==1);
 		assertTrue(listaBusqueda.get(0).getListaPalabrasClave().contains("lapiz"));
@@ -82,7 +83,7 @@ public class TestActualizarLocales extends JuegoDeDatos {
 			*/
 			
 					
-			procesoActualizacion2.actualizarLocal(procesoActualizacion2.leerArchivo().get(0));
+			procesoActualizarLocalesComerciales2.actualizarLocal(procesoActualizarLocalesComerciales2.leerArchivo().get(0));
 			
 			
 			List<POI> listaBusqueda = repositorio.search("lapiz");
@@ -93,7 +94,7 @@ public class TestActualizarLocales extends JuegoDeDatos {
 			assertTrue(listaBusqueda.get(0).getListaPalabrasClave().contains("uniformes"));
 			assertTrue(listaBusqueda.get(0).getListaPalabrasClave().contains("modas"));
 		
-		}
+		} 
 		
 				@Test //el local que se quiere actualizar no esta en el repositorio
 		 		public void falloAlActualizarLocales() {
@@ -110,9 +111,9 @@ public class TestActualizarLocales extends JuegoDeDatos {
 		 			procesoActualizacion.setNombre("PActualizacionFalla");*/
 		 			
 					
-		 			procesoActualizacion2.ejecutarse(estrategiaFalloMock);
+					procesoActualizarLocalesComerciales2.ejecutarse(estrategiaFalloMock);
 		 			
-		 			verify(estrategiaFalloMock, atLeast(1)).ejecutarse(procesoActualizacion2);
+		 			verify(estrategiaFalloMock, atLeast(1)).ejecutarse(procesoActualizarLocalesComerciales2);
 		 			
 		 		}
 				
@@ -127,8 +128,8 @@ public class TestActualizarLocales extends JuegoDeDatos {
 		 			ActualizarLocalesComerciales procesoActualizacion = new ActualizarLocalesComerciales();
 		 			*/
 		 			
-		 			procesoActualizacion3.ejecutarse(estrategiaFalloMock);
-		 			verify(estrategiaFalloMock, atLeast(1)).ejecutarse(procesoActualizacion3);
+					procesoActualizarLocalesComercialesSinTXT.ejecutarse(estrategiaFalloMock);
+		 			verify(estrategiaFalloMock, atLeast(1)).ejecutarse(procesoActualizarLocalesComercialesSinTXT);
 		 			
 		 		}
 
@@ -139,7 +140,7 @@ public class TestActualizarLocales extends JuegoDeDatos {
 /*			ActualizarLocalesComerciales procesoActualizacion = new ActualizarLocalesComerciales();
 			*/
 			
-			List<LocalComercial> resultado = procesoActualizacion.leerArchivoTXT("Locales.txt");
+			List<LocalComercial> resultado = procesoActualizarLocalesComerciales.leerArchivoTXT("Locales.txt");
 			
 			assertTrue(resultado.size() == 1);
 			assertTrue(resultado.get(0).getNombre().equals("Libreria"));

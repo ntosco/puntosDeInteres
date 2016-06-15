@@ -7,13 +7,15 @@ import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.procesos.Proceso;
 import ar.utn.dds.procesos.estrategiaFallo.EstrategiaPorFallo;
 import ar.utn.dds.procesos.estrategiaFallo.ReplicaPorFallo;
+import ar.utn.dds.repositorio.Repositorio;
 
 public class TestEstrategiasPorFallo extends JuegoDeDatos {
 	
 	EstrategiaPorFallo estrategiaReplica3veces = new ReplicaPorFallo(3);
 	Proceso procesoErroneoMock = mock(Proceso.class);
 	Proceso procesoOKMock = mock(Proceso.class);
-	
+	Repositorio repositorio = Repositorio.getInstance();
+
 	
 	@Before
 	public void SetUp(){
@@ -24,7 +26,8 @@ public class TestEstrategiasPorFallo extends JuegoDeDatos {
 
 	public void replica3VecesElProceso(){
 		estrategiaReplica3veces.ejecutarse(procesoErroneoMock);
-		//Ver que proceso
+		repositorio.create(parada15);
+		
 		
 	}
 }

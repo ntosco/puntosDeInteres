@@ -2,18 +2,12 @@ package ar.utn.dds.utils;
 
 public class Estado {
 	
-	private int valor;
-	private String descripcion;
+	public int valor;
+	public String descripcion;
 	
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
+	public Estado(){
 		this.descripcion = descripcion;
 	}
-	
-	// Agrego 
 	
 	public int getValor() {
 		return valor;
@@ -21,6 +15,11 @@ public class Estado {
 	public void setValor(int valor) {
 		this.valor = valor;
 	}
-	
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 
 }

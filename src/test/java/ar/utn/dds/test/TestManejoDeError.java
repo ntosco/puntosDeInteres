@@ -22,8 +22,7 @@ public class TestManejoDeError extends JuegoDeDatos{
 		setUpLocalComercial();
 		setUpColectivos();
 		
-		EstrategiaPorFallo estrategiaEnviarMail = new EnvioMensajePorFalla();
-		EstrategiaPorFallo estrategiaNoRealizaAcción = new NoRealizarAccionPorFalla();
+		EstrategiaPorFallo estrategiaNoRealizaAccion = new NoRealizarAccionPorFalla();
 		EstrategiaPorFallo estrategiaReplica3VecesPorFallo = new ReplicaPorFallo(3);
 		
 		
