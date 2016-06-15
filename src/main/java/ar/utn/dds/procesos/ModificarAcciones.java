@@ -29,7 +29,7 @@ public class ModificarAcciones extends Proceso {
 	@Override
 	public void ejecutarse(EstrategiaPorFallo fallo) {
 		Usuario usuario = usuarios().get(0);
-		usuarios().add(usuario);
+		RepositorioDeUsuarios.getInstance().agregarUsuario(usuario);
 		copiarLista(usuario.getAccionesObservers());
 		copiarEstado();		
 		if(puedeEjecutarse()){
@@ -65,9 +65,17 @@ public class ModificarAcciones extends Proceso {
 	}
 	
 	public void undo(){
+		undoEstado();
+		undoListaDeAcciones();
+	}
+	
+	public void undoEstado(){
 		String estadoAnterior = undoEstado.getDescripcion();
 		this.estado = new Estado();
 		estado.setDescripcion(estadoAnterior);
+	}
+	
+	public void undoListaDeAcciones(){
 		usuarios().forEach(usuario -> usuario.actualizarAcciones(undoList));
 	}
 
@@ -129,6 +137,10 @@ public class ModificarAcciones extends Proceso {
 
 	public void setIdProcesoMultiple(int idProcesoMultiple) {
 		this.idProcesoMultiple = idProcesoMultiple;
+	}
+
+	public List<Observador> getAcciones() {
+		return acciones;
 	}
 
 }

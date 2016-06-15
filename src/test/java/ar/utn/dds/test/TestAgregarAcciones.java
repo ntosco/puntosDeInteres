@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 
+
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.observers.Observador;
 import ar.utn.dds.observers.ObservadorAlmacenamientoDeConsultas;
@@ -22,6 +23,7 @@ import ar.utn.dds.procesos.estrategiaFallo.NoHayAccionesParaRealizarFalla;
 import ar.utn.dds.repositorio.RepositorioDeUsuarios;
 import ar.utn.dds.usuarios.Usuario;
 import ar.utn.dds.usuarios.UsuarioConcreto;
+import ar.utn.dds.utils.Estado;
 
 public class TestAgregarAcciones extends JuegoDeDatos {
 	
@@ -35,6 +37,8 @@ public class TestAgregarAcciones extends JuegoDeDatos {
 	private UsuarioConcreto pedro;
 	private UsuarioConcreto martin;
 	private EstrategiaPorFallo fallo;
+	private Estado estadoOK;
+	private Estado estadoError;
 	
 	@Before
 	public void SetUp(){
@@ -54,6 +58,12 @@ public class TestAgregarAcciones extends JuegoDeDatos {
 		acciones.add(tiempoDeBusqueda);
 		acciones2.add(tiempoDeBusqueda);
 		pedro.setAccionesObservers(acciones2);
+		estadoOK = new Estado();
+		estadoOK.setDescripcion("Ok");
+		estadoError = new Estado();
+		estadoError.setDescripcion("Error");
+		fallo = new NoHayAccionesParaRealizarFalla();
+		
 	}
 	
 	@Test
@@ -122,28 +132,59 @@ public class TestAgregarAcciones extends JuegoDeDatos {
 	}
 	
 	@Test
-	public void testUndo(){
-		
-		//acciones -> 3 observers
-		// acciones 2 -> 1 observer
-		
-		juan.setAccionesObservers(acciones2);
-		assertEquals(juan.getAccionesObservers().size(),1);
-		assertEquals(procesoModificarAcciones.estado.getDescripcion(), null);
-		
+	public void testundoEstado(){
+
+		procesoModificarAcciones.setEstado(estadoOK);
 		procesoModificarAcciones.setAcciones(new ArrayList<Observador>());
 		procesoModificarAcciones.ejecutarse(new NoHayAccionesParaRealizarFalla());
 		assertEquals(procesoModificarAcciones.estado.getDescripcion(), "Error");
+		
+		procesoModificarAcciones.undoEstado();
+		assertEquals(procesoModificarAcciones.estado.getDescripcion(), "Ok");
+	}
+	
+	@Test
+	public void testUndoAcciones(){
+		
+		juan.setAccionesObservers(acciones2);
+		assertEquals(1, juan.getAccionesObservers().size());
+		
+		procesoModificarAcciones.setAcciones(acciones);
+		procesoModificarAcciones.ejecutarse(new NoHayAccionesParaRealizarFalla());
+		assertEquals(3, juan.getAccionesObservers().size());
+		
+		procesoModificarAcciones.undoListaDeAcciones();
+		assertEquals(1, juan.getAccionesObservers().size());
+		
+	}
+	
+	@Test
+	public void testUndo(){
+		
+		// acciones -> 3 observers
+		// acciones 2 -> 1 observer
+		
+		juan.setAccionesObservers(acciones2);
+		procesoModificarAcciones.setEstado(estadoError);
 		assertEquals(juan.getAccionesObservers().size(),1);
+		assertEquals(procesoModificarAcciones.estado.getDescripcion(), "Error");
+		
+		procesoModificarAcciones.setAcciones(acciones);
+		procesoModificarAcciones.ejecutarse(new NoHayAccionesParaRealizarFalla());
+		assertEquals(procesoModificarAcciones.estado.getDescripcion(), "Ok");
+		assertEquals(juan.getAccionesObservers().size(),3);
 		
 		
 		procesoModificarAcciones.undo();
 		assertEquals(juan.getAccionesObservers().size(),1);
-		assertEquals(procesoModificarAcciones.estado.getDescripcion(), null);
+		assertEquals(procesoModificarAcciones.estado.getDescripcion(), "Error");
+	}
+	
+	@Test
+	public void testEsErrorYSeteaComoErrorElEstado(){
 		
-	/*	procesoModificarAcciones.setAcciones(acciones);
-		procesoModificarAcciones.ejecutarse(new NoHayAccionesParaRealizarFalla());
-		assertEquals(juan.getAccionesObservers().size(),3); */
-		
+		procesoModificarAcciones.setAcciones(new ArrayList<Observador>());
+		procesoModificarAcciones.ejecutarse(fallo);
+		assertEquals(procesoModificarAcciones.getEstado().getDescripcion(), "Error");
 	}
 }
