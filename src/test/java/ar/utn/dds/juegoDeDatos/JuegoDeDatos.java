@@ -329,6 +329,8 @@ abstract public class JuegoDeDatos {
 	protected Proceso procesoErroneoMock = mock(Proceso.class);
 	protected Proceso procesoOKMock = mock(Proceso.class);
 
+	//Estrategias mockeadas
+	protected EstrategiaPorFallo estrategiaPorFalloMock = mock(EstrategiaPorFallo.class);
 	
 	// Entrega 4
 	

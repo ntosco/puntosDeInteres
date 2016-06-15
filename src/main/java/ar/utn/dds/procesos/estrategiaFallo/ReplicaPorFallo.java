@@ -23,6 +23,22 @@ public class ReplicaPorFallo implements EstrategiaPorFallo{
 		if(!proceso.enEstadoErroneo())break;
 		}
 	}
+
+	public Integer getToleranciaDeFallo() {
+		return toleranciaDeFallo;
+	}
+
+	public void setToleranciaDeFallo(Integer toleranciaDeFallo) {
+		this.toleranciaDeFallo = toleranciaDeFallo;
+	}
+
+	public EstrategiaPorFallo getNoRealizarAccionPorFalla() {
+		return noRealizarAccionPorFalla;
+	}
+
+	public void setNoRealizarAccionPorFalla(EstrategiaPorFallo noRealizarAccionPorFalla) {
+		this.noRealizarAccionPorFalla = noRealizarAccionPorFalla;
+	}
 	
 	
 

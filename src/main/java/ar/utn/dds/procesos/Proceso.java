@@ -86,8 +86,7 @@ public abstract class Proceso {
 	}
 
 	public Boolean enEstadoErroneo() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.estado.esUnEstadoError();
 	}
 
 }

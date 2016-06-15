@@ -163,11 +163,7 @@ public class ActualizarLocalesComerciales  extends Proceso{
 	}
 	
 
-	@Override
-	public Boolean enEstadoErroneo() {
 
-		return flag;
-	}
 
 
 }

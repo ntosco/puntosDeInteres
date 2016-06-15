@@ -86,11 +86,6 @@ public class BajaDePOIS extends Proceso {
 		this.servicioREST = servicioREST;
 	}
 
-	@Override
-	public Boolean enEstadoErroneo() {
-
-		return flag;
-	}
 	
 
 }
