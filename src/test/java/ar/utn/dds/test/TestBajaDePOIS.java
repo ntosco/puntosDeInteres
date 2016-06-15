@@ -23,8 +23,6 @@ import ar.utn.dds.utils.AdapterCGP;
 public class TestBajaDePOIS extends JuegoDeDatos {
 
 	Repositorio repositorio = Repositorio.getInstance();
-	public BajaDePOIS procesoBajas;
-	public EnvioMensajePorFalla estrategia ;
 	
 	@Before
 	public void SetUp(){
@@ -33,11 +31,11 @@ public class TestBajaDePOIS extends JuegoDeDatos {
 		setUpCGP();
 		setUpLocalComercial();
 		setUpColectivos();
+		setUpEstrategias();
+		setUpProcesos();
 		
-		procesoBajas = new BajaDePOIS();
 		procesoBajas.setServicioREST(new StubServicioREST());
-		
-		estrategia = new EnvioMensajePorFalla();
+
 	}
 	
 	@After
@@ -48,9 +46,10 @@ public class TestBajaDePOIS extends JuegoDeDatos {
 	@Test
 	public void seDaDeBajaUnPOIEfectivamente(){
 		
+		
 		repositorio.create(parada15);
 		
-		procesoBajas.ejecutarse(estrategia);
+		procesoBajas.ejecutarse(estrategiaMail);
 				
 		List<POI> listaAuxiliar = new ArrayList<POI>();
 		
@@ -62,16 +61,45 @@ public class TestBajaDePOIS extends JuegoDeDatos {
 	
 	@Test
 	public void elProcesoFallaPorPOIYaDadoDeBaja(){
-		
-		EnvioMensajePorFalla estrategia = mock(EnvioMensajePorFalla.class);
+			
+/*		EnvioMensajePorFalla estrategiaMail = mock(EnvioMensajePorFalla.class);
+		*/		
 		
 		repositorio.create(parada15);
 		
-		procesoBajas.ejecutarse(estrategia);
-		procesoBajas.ejecutarse(estrategia);
+		procesoBajas.ejecutarse(estrategiaFalloMock);
+		procesoBajas.ejecutarse(estrategiaFalloMock);
 		
-		verify(estrategia).ejecutarse(procesoBajas);
+		verify(estrategiaFalloMock).ejecutarse(procesoBajas);
+			
+	}
+	
+	@Test
+	public void elProcesoCambiaSuEstadoCuandoFalla(){
 		
+	
+		repositorio.create(parada15);
+		
+		procesoBajas.ejecutarse(estrategiaMail);
+		procesoBajas.ejecutarse(estrategiaMail);
+		
+		assertTrue(procesoBajas.enEstadoErroneo());
+/*		assertTrue(procesoBajas.getEstado().getDescripcion() == "El proceso fallo ya que el POI ya fue dado de baja");
+*/
+	}
+	
+	@Test
+	public void elProcesoCambiaSuEstadoCuandoEsEfectivo(){
+
+		repositorio.create(parada15);
+		
+		procesoBajas.ejecutarse(estrategiaMail);
+				
+		List<POI> listaAuxiliar = new ArrayList<POI>();
+		
+		listaAuxiliar = repositorio.search("15");
+	
+		assertTrue(procesoBajas.getEstado().getDescripcion() == "El proceso se completo exitosamente");
 		
 	}
 	

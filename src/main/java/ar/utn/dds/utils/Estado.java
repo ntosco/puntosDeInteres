@@ -13,5 +13,14 @@ public class Estado {
 		this.descripcion = descripcion;
 	}
 	
+	// Agrego 
+	
+	public int getValor() {
+		return valor;
+	}
+	public void setValor(int valor) {
+		this.valor = valor;
+	}
+	
 
 }

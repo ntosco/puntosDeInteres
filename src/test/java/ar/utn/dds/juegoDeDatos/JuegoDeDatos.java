@@ -1,5 +1,7 @@
 package ar.utn.dds.juegoDeDatos;
 
+import static org.mockito.Mockito.mock;
+
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -25,6 +27,10 @@ import ar.utn.dds.extern.banco.buscadorDeBancos;
 import ar.utn.dds.extern.cgp.CentroDTO;
 import ar.utn.dds.extern.cgp.RangoServicioDTO;
 import ar.utn.dds.extern.cgp.ServicioDTO;
+import ar.utn.dds.procesos.ActualizarLocalesComerciales;
+import ar.utn.dds.procesos.BajaDePOIS;
+import ar.utn.dds.procesos.estrategiaFallo.EnvioMensajePorFalla;
+import ar.utn.dds.procesos.estrategiaFallo.EstrategiaPorFallo;
 import ar.utn.dds.servicios.Servicio;
 import ar.utn.dds.utils.Jornada;
 import ar.utn.dds.utils.RangoHorario;
@@ -271,7 +277,20 @@ abstract public class JuegoDeDatos {
 	protected RangoHorario rangoTarde;
 	private RangoHorario rangoNocturno;
 
+	
+	// Entrega 4
+	
+	protected BajaDePOIS procesoBajas;
+	protected ActualizarLocalesComerciales procesoActualizacion;
+	protected ActualizarLocalesComerciales procesoActualizacion2;
+	protected ActualizarLocalesComerciales procesoActualizacion3;
 
+	
+	//Estrategias
+	
+	protected EstrategiaPorFallo estrategiaMail; 
+	protected EstrategiaPorFallo estrategiaFalloMock;
+	
 	
 	public void setUpGeneral() {
 		setUpLocalDateTime();
@@ -1019,4 +1038,36 @@ abstract public class JuegoDeDatos {
 	}
 	
 
+	public void setUpProcesos(){
+		
+		procesoBajas = new BajaDePOIS();
+		procesoBajas.setIdProceso(1);
+		procesoBajas.setNombre("proceso de bajas de POI");
+		procesoBajas.setServicioREST(new StubServicioREST());
+		
+				
+		
+		procesoActualizacion = new ActualizarLocalesComerciales();
+		procesoActualizacion.setArchivo("Locales.txt"); 
+		procesoActualizacion.setNombre("ProcesoActualizarVariosLocales");
+		
+		procesoActualizacion2 = new ActualizarLocalesComerciales();
+		procesoActualizacion2.setNombre("PActualizacionUnSoloLocal");
+		procesoActualizacion2.setFallo(estrategiaFalloMock);
+
+			
+/*		procesoActualizacion3.setArchivo("NoExisto.txt"); 
+		procesoActualizacion3.setNombre("PActualizacionFallaAlLeerArchivo");
+		*/
+		
+		
+		
+	}
+	
+	public void setUpEstrategias(){
+		
+		estrategiaMail =  new EnvioMensajePorFalla();
+		estrategiaFalloMock = mock(EstrategiaPorFallo.class);
+		
+	}
 }
