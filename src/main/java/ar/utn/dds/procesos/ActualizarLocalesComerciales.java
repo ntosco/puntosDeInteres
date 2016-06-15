@@ -60,7 +60,7 @@ public class ActualizarLocalesComerciales  extends Proceso{
 					repo.update(poisEncontrados.get(a));
 					
 					Estado estado = new Estado();
-					estado.setValor(2);
+					estado.setEstadoComoOK();
 					estado.setDescripcion("El proceso funciono correctamente");
 					this.setEstado(estado);
 										
@@ -73,7 +73,7 @@ public class ActualizarLocalesComerciales  extends Proceso{
 				fallo.ejecutarse(this);	
 				
 				Estado estado = new Estado();
-				estado.setValor(1);
+				estado.setEstadoComoErroneo();
 				estado.setDescripcion("El proceso fallo");
 				this.setEstado(estado);
 				
@@ -83,7 +83,7 @@ public class ActualizarLocalesComerciales  extends Proceso{
 					fallo.ejecutarse(this);	
 					
 					Estado estado = new Estado();
-					estado.setValor(1);
+					estado.setEstadoComoErroneo();
 					estado.setDescripcion("El proceso fallo");
 					this.setEstado(estado);
 					
