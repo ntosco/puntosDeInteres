@@ -1,25 +1,21 @@
 package ar.utn.dds.procesos;
 
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 
 import org.json.simple.JSONObject;
-import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.POI;
-import ar.utn.dds.POI.ParadaDeColectivo;
 import ar.utn.dds.extern.servicioREST.ServicioREST;
 import ar.utn.dds.procesos.estrategiaFallo.EstrategiaPorFallo;
 import ar.utn.dds.repositorio.Repositorio;
 
 
-public class BajaDePOIS implements Proceso {
+public class BajaDePOIS extends Proceso {
 
 	private ServicioREST servicioREST;
 	Repositorio repositorioLocal = Repositorio.getInstance();
-	private String nombre; 
 	
 	// Se modela el objeto JSON con los siguientes campos:
 	// valorDebusqueda, "palabra "
@@ -73,10 +69,6 @@ public class BajaDePOIS implements Proceso {
 		this.servicioREST = servicioREST;
 	}
 
-	@Override
-	public String getNombre() {
-		return this.nombre;
-	}
 	
 
 }
