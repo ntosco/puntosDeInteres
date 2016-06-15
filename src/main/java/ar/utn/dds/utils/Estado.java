@@ -22,6 +22,6 @@ public class Estado {
 		this.descripcion = descripcion;
 	}
 	
-	
+
 
 }

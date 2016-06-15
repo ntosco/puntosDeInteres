@@ -14,8 +14,9 @@ public abstract class Proceso {
 	private LocalDate fechaComienzo;
 	private RangoHorario horarioDeEjecucion;
 	private Usuario usuarioEjecutor;
-	public Estado estado;
-	private int idProcesoActualizacion;
+
+	public Estado estado = new Estado("Ok");
+	private int idProceso;
 	
 	public void ejecutarse(EstrategiaPorFallo estrategiaPorFallo, Usuario usuario){
 		this.fechaComienzo = LocalDate.now();
@@ -23,9 +24,10 @@ public abstract class Proceso {
 		this.horarioDeEjecucion.setHorarioInicial(LocalTime.now());	
 		this.ejecutarse(estrategiaPorFallo);
 		this.horarioDeEjecucion.setHorarioFinal(LocalTime.now());
+
 	}
 	
-	abstract void ejecutarse(EstrategiaPorFallo estrategiaPorFallo);
+	public abstract void ejecutarse(EstrategiaPorFallo estrategiaPorFallo);
 
 
 	public String getNombre() {
@@ -76,12 +78,17 @@ public abstract class Proceso {
 		this.estado = estado;
 	}
 	
-	public int getIdProcesoActualizacion() {
-		return idProcesoActualizacion;
+	public int getIdProceso() {
+		return idProceso;
 	}
 
-	public void setIdProcesoActualizacion(int idProcesoActualizacion) {
-		this.idProcesoActualizacion = idProcesoActualizacion;
+	public void setIdProceso(int idProceso) {
+		this.idProceso = idProceso;
+	}
+
+	public Boolean enEstadoErroneo() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
