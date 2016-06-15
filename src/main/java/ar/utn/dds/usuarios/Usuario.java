@@ -28,4 +28,6 @@ public interface Usuario {
 	public List<Observador> getAccionesObservers();
 
 	public void notificarFalla();
+
+	public void setAccionesObservers(List<Observador> acciones2);
 }
