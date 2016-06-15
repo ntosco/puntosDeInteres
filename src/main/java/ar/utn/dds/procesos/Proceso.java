@@ -12,17 +12,17 @@ public abstract class Proceso {
 	
 	private String Nombre;
 	private LocalDate fechaComienzo;
-	private RangoHorario horarioDeEjecución = new RangoHorario(null, null);
+	private RangoHorario horarioDeEjecucion = new RangoHorario(null, null);
 	private Usuario usuarioEjecutor;
-	private Estado estado = new Estado();
+	public Estado estado = new Estado();
 	private int idProceso;
 	
 	public void ejecutarse(EstrategiaPorFallo estrategiaPorFallo, Usuario usuario){
 		this.fechaComienzo = LocalDate.now();
 		this.usuarioEjecutor = usuario;
-		horarioDeEjecución.setHorarioInicial(LocalTime.now());	
+		this.horarioDeEjecucion.setHorarioInicial(LocalTime.now());	
 		this.ejecutarse(estrategiaPorFallo);
-		this.horarioDeEjecución.setHorarioFinal(LocalTime.now());
+		this.horarioDeEjecucion.setHorarioFinal(LocalTime.now());
 
 	}
 	
@@ -49,13 +49,13 @@ public abstract class Proceso {
 	}
 
 
-	public RangoHorario getHorarioDeEjecución() {
-		return horarioDeEjecución;
+	public RangoHorario getHorarioDeEjecucion() {
+		return horarioDeEjecucion;
 	}
 
 
-	public void setHorarioDeEjecución(RangoHorario horarioDeEjecución) {
-		this.horarioDeEjecución = horarioDeEjecución;
+	public void setHorarioDeEjecucion(RangoHorario horarioDeEjecucion) {
+		this.horarioDeEjecucion = horarioDeEjecucion;
 	}
 
 
@@ -72,7 +72,6 @@ public abstract class Proceso {
 	public Estado getEstado() {
 		return estado;
 	}
-
 
 	public void setEstado(Estado estado) {
 		this.estado = estado;

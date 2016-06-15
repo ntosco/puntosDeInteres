@@ -35,6 +35,10 @@ public class RepositorioDeUsuarios{
 		this.usuarios.add(usuario);
 	}
 	
+	public List<Usuario> getUsuarios(){
+		return usuarios;
+	}
+	
 
 	
 }

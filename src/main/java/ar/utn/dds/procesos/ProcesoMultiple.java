@@ -7,15 +7,15 @@ import ar.utn.dds.procesos.estrategiaFallo.EstrategiaPorFallo;
 
 public class ProcesoMultiple extends Proceso{
 
-	List<Proceso> procesosAEjectutar = new ArrayList<Proceso>();
+	List<Proceso> procesosAEjecutar = new ArrayList<Proceso>();
+	String nombre;
+	int idProcesoMultiple;
 	
 	@Override
-	public void ejecutarse(EstrategiaPorFallo estrategiaPorFallo) {
-		// TODO Auto-generated method stub
-		
+	public void ejecutarse(EstrategiaPorFallo estrategiaDeFallo) {
+		procesosAEjecutar.forEach(proceso -> proceso.ejecutarse(estrategiaDeFallo));
 	}
 
-
-	
+		
 	
 }

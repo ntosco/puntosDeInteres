@@ -97,6 +97,11 @@ public class UsuarioConcreto implements Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	@Override
+	public void actualizarAcciones(List<Observador> acciones){
+		accionesObservers = acciones;
+	}
 
 	public EstrategiaPorFallo getEstrategiaPorFallo() {
 		return estrategiaPorFallo;
@@ -107,6 +112,11 @@ public class UsuarioConcreto implements Usuario {
 	}
 
 
+	@Override
+	public void notificarFalla() {
+		this.setEmail(email);
+		
+	}
 
 
 
