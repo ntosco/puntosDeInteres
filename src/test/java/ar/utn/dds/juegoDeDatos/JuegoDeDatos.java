@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import static org.mockito.Mockito.mock;
 
 import org.json.simple.JSONObject;
 import org.uqbar.geodds.Point;
@@ -45,6 +46,7 @@ import ar.utn.dds.procesos.estrategiaFallo.ReplicaPorFallo;
 import ar.utn.dds.roles.RolAdministrador;
 import ar.utn.dds.roles.RolConsulta;
 
+import ar.utn.dds.servicios.MailSender;
 
 import ar.utn.dds.servicios.Servicio;
 import ar.utn.dds.usuarios.Usuario;
@@ -64,12 +66,15 @@ abstract public class JuegoDeDatos {
 	protected RolAdministrador rolAdmin = new RolAdministrador();
 	protected RolConsulta rolConsulta = new RolConsulta();
 	
+	//MailSender
+	protected MailSender mockMailSender ;
+	
 	
 	//Estrategias por falla
 	
 	protected EnvioMensajePorFalla estrategiaEnvioMensaje ;
-	protected EstrategiaPorFallo estrategiaReplica3veces = new ReplicaPorFallo(3);
-	protected EstrategiaPorFallo estrategiaNoHaceNada = new NoRealizarAccionPorFalla();
+	protected ReplicaPorFallo estrategiaReplica3veces = new ReplicaPorFallo(3);
+	protected NoRealizarAccionPorFalla estrategiaNoHaceNada = new NoRealizarAccionPorFalla();
 
 	//Buscador de bancos
 	
@@ -319,6 +324,10 @@ abstract public class JuegoDeDatos {
 	protected List<Proceso> procesosAEjecutarNoTieneTXT;
 	protected ProcesoMultiple procesoMultiplePruebaOK;
 	protected ProcesoMultiple procesoMultiplePruebaERROR;
+	
+	//Procesos genericos mockeados
+	protected Proceso procesoErroneoMock = mock(Proceso.class);
+	protected Proceso procesoOKMock = mock(Proceso.class);
 
 	
 	// Entrega 4
@@ -1158,6 +1167,8 @@ abstract public class JuegoDeDatos {
 	public void setUpUsuario(){
 		usuarioAdmin.setRol(rolAdmin);
 		usuarioConsulta.setRol(rolConsulta);
+		usuarioAdmin.setEmail("usuarioadmin@gmail");
+		usuarioConsulta.setEmail("usuarioaConsulta@gmail");
 		listaUsuarios.add(usuarioAdmin);
 		listaUsuarios.add(usuarioConsulta);
 	}
