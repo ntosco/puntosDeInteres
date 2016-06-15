@@ -19,7 +19,6 @@ public class BajaDePOIS extends Proceso {
 	Repositorio repositorioLocal = Repositorio.getInstance();
 	String nombre;
 	int idProcesoBajas;
-	private Boolean flag;
 	
 	// Se modela el objeto JSON con los siguientes campos:
 	// valorDebusqueda, "palabra "
@@ -51,7 +50,6 @@ public class BajaDePOIS extends Proceso {
 				estado.setDescripcion("El proceso fallo ya que el POI ya fue dado de baja");
 				this.setEstado(estado);
 				
-				flag = true;
 								
 				return; // Cierro el metodo ejecutarse
 				
@@ -67,7 +65,6 @@ public class BajaDePOIS extends Proceso {
 		estado.setDescripcion("El proceso se completo exitosamente");
 		this.setEstado(estado);
 		
-		flag = false;
 		
 	}
 	
