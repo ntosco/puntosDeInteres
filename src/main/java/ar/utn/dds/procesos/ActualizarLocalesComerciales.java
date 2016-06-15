@@ -86,7 +86,7 @@ public class ActualizarLocalesComerciales  extends Proceso{
 					fallo.ejecutarse(this);	
 					
 					Estado estado = new Estado();
-					estado.setValor(2);
+					estado.setValor(1);
 					estado.setDescripcion("El proceso fallo");
 					this.setEstado(estado);
 					
@@ -152,7 +152,7 @@ public class ActualizarLocalesComerciales  extends Proceso{
 			fallo.ejecutarse(this);
 			
 			Estado estado = new Estado();
-			estado.setValor(2);
+			estado.setValor(1);
 			estado.setDescripcion("El proceso fallo");
 			this.setEstado(estado);
 			
