@@ -5,7 +5,7 @@ import ar.utn.dds.utils.Estado;
 
 public interface EstrategiaPorFallo {
 	
-	void ejecutarse(Proceso procesoEnEstadoDeError);
+	public void ejecutarse(Proceso procesoEnEstadoDeError);
 	
 	
 

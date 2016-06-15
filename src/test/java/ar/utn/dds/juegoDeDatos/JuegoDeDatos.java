@@ -1,10 +1,13 @@
 package ar.utn.dds.juegoDeDatos;
 
+import static org.mockito.Mockito.mock;
+
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import static org.mockito.Mockito.mock;
 
 import org.json.simple.JSONObject;
 import org.uqbar.geodds.Point;
@@ -21,16 +24,57 @@ import ar.utn.dds.creacionales.ColectivoBuilder;
 import ar.utn.dds.creacionales.JornadaBuilder;
 import ar.utn.dds.creacionales.ListaJornadasBuilder;
 import ar.utn.dds.creacionales.LocalComercialBuilder;
+import ar.utn.dds.creacionales.ProcesoMultipleBuilder;
 import ar.utn.dds.extern.banco.buscadorDeBancos;
 import ar.utn.dds.extern.cgp.CentroDTO;
 import ar.utn.dds.extern.cgp.RangoServicioDTO;
 import ar.utn.dds.extern.cgp.ServicioDTO;
+
+
+
+
+
+import ar.utn.dds.procesos.ActualizarLocalesComerciales;
+import ar.utn.dds.procesos.BajaDePOIS;
+import ar.utn.dds.procesos.Proceso;
+import ar.utn.dds.procesos.ProcesoMultiple;
+
+import ar.utn.dds.procesos.estrategiaFallo.EnvioMensajePorFalla;
+import ar.utn.dds.procesos.estrategiaFallo.EstrategiaPorFallo;
+import ar.utn.dds.procesos.estrategiaFallo.NoRealizarAccionPorFalla;
+import ar.utn.dds.procesos.estrategiaFallo.ReplicaPorFallo;
+import ar.utn.dds.roles.RolAdministrador;
+import ar.utn.dds.roles.RolConsulta;
+
+import ar.utn.dds.servicios.MailSender;
+
 import ar.utn.dds.servicios.Servicio;
+import ar.utn.dds.usuarios.Usuario;
+import ar.utn.dds.usuarios.UsuarioConcreto;
 import ar.utn.dds.utils.Jornada;
 import ar.utn.dds.utils.RangoHorario;
 
 
 abstract public class JuegoDeDatos {
+	
+	//Usuarios
+	protected UsuarioConcreto usuarioAdmin = new UsuarioConcreto();
+	protected UsuarioConcreto usuarioConsulta = new UsuarioConcreto();
+	protected List<Usuario> listaUsuarios = new ArrayList<Usuario>();
+	
+	//Roles
+	protected RolAdministrador rolAdmin = new RolAdministrador();
+	protected RolConsulta rolConsulta = new RolConsulta();
+	
+	//MailSender
+	protected MailSender mockMailSender ;
+	
+	
+	//Estrategias por falla
+	
+	protected EnvioMensajePorFalla estrategiaEnvioMensaje ;
+	protected ReplicaPorFallo estrategiaReplica3veces = new ReplicaPorFallo(3);
+	protected NoRealizarAccionPorFalla estrategiaNoHaceNada = new NoRealizarAccionPorFalla();
 
 	//Buscador de bancos
 	
@@ -270,8 +314,37 @@ abstract public class JuegoDeDatos {
 	protected RangoHorario rangoManiana;
 	protected RangoHorario rangoTarde;
 	private RangoHorario rangoNocturno;
+	
+	protected ActualizarLocalesComerciales procesoActualizarLocalesComerciales;
+	protected ActualizarLocalesComerciales procesoActualizarLocalesComerciales2;
+	
+	protected ActualizarLocalesComerciales procesoActualizarLocalesComercialesSinTXT;
+	protected BajaDePOIS procesoBajaDePois;
+	protected List<Proceso> procesosAEjecutarOK;
+	protected List<Proceso> procesosAEjecutarNoTieneTXT;
+	protected ProcesoMultiple procesoMultiplePruebaOK;
+	protected ProcesoMultiple procesoMultiplePruebaERROR;
+	
+	//Procesos genericos mockeados
+	protected Proceso procesoErroneoMock = mock(Proceso.class);
+	protected Proceso procesoOKMock = mock(Proceso.class);
 
+	//Estrategias mockeadas
+	protected EstrategiaPorFallo estrategiaPorFalloMock = mock(EstrategiaPorFallo.class);
+	
+	// Entrega 4
+	
+	protected BajaDePOIS procesoBajas;
+	protected ActualizarLocalesComerciales procesoActualizacion;
+	protected ActualizarLocalesComerciales procesoActualizacion2;
+	protected ActualizarLocalesComerciales procesoActualizacion3;
 
+	
+	//Estrategias
+	
+
+	protected EstrategiaPorFallo estrategiaFalloMock;
+	
 	
 	public void setUpGeneral() {
 		setUpLocalDateTime();
@@ -411,6 +484,8 @@ abstract public class JuegoDeDatos {
 			
 	}
 
+
+	
 	public void setUpServicios() {
 
 		pagoDeFacturas = new Servicio("Pago de facturas",jornadaNormalLunesAViernes);
@@ -1018,5 +1093,92 @@ abstract public class JuegoDeDatos {
 		sabado23hs = LocalDateTime.of(2016, 4, 2, 23, 00, 00);
 	}
 	
+
+/*
+	public void setUpProcesos(){
+	 
+		procesoBajas = new BajaDePOIS();
+		procesoBajas.setIdProceso(1);
+		procesoBajas.setNombre("proceso de bajas de POI");
+		procesoBajas.setServicioREST(new StubServicioREST());
+		
+				
+		
+		procesoActualizacion = new ActualizarLocalesComerciales();
+		procesoActualizacion.setArchivo("Locales.txt"); 
+		procesoActualizacion.setNombre("ProcesoActualizarVariosLocales");
+		
+		procesoActualizacion2 = new ActualizarLocalesComerciales();
+		procesoActualizacion2.setNombre("PActualizacionUnSoloLocal");
+		procesoActualizacion2.setFallo(estrategiaFalloMock);
+		
+	}
+	
+		public void setUpEstrategias(){
+		
+		estrategiaMail =  new EnvioMensajePorFalla();
+		estrategiaFalloMock = mock(EstrategiaPorFallo.class);
+		
+	}
+*/
+	
+
+
+
+	// ********************************************************
+	// ** Procesos y Estrategias de Fallos
+	// ********************************************************
+
+	public void setUpProcesos(){
+		procesoActualizarLocalesComerciales = new ActualizarLocalesComerciales();
+		procesoActualizarLocalesComerciales.setArchivo("Locales.txt"); 
+		procesoActualizarLocalesComerciales.setNombre("ProcesoActualizarVariosLocales");
+		
+		procesoActualizarLocalesComerciales2 = new ActualizarLocalesComerciales();
+		procesoActualizarLocalesComerciales2.setArchivo("Locales.txt"); 
+		procesoActualizarLocalesComerciales2.setNombre("ProcesoActualizarVariosLocales");
+		procesoActualizarLocalesComerciales2.setFallo(estrategiaFalloMock);
+
+		
+		procesoActualizarLocalesComercialesSinTXT = new ActualizarLocalesComerciales();
+		procesoActualizarLocalesComercialesSinTXT.setNombre("ProcesoActualizarVariosLocalesSinTXT");
+		
+		procesoBajaDePois = new BajaDePOIS();
+		procesoBajaDePois.setServicioREST(new StubServicioREST());
+		
+		procesosAEjecutarOK = new ArrayList<Proceso>();
+		procesosAEjecutarOK.add(procesoActualizarLocalesComerciales);
+		procesosAEjecutarOK.add(procesoBajaDePois);
+	
+		procesosAEjecutarNoTieneTXT = new ArrayList<Proceso>();
+		procesosAEjecutarNoTieneTXT.add(procesoActualizarLocalesComercialesSinTXT);
+		procesosAEjecutarNoTieneTXT.add(procesoBajaDePois);
+	
+	
+		ProcesoMultipleBuilder builderProcesoMultiple = new ProcesoMultipleBuilder();
+		builderProcesoMultiple.crearListaProcesos(procesosAEjecutarOK)
+							  .setNombre("ProcesoMultiplePruebaOK");
+							  procesoMultiplePruebaOK = builderProcesoMultiple.build();
+							  
+		builderProcesoMultiple.crearListaProcesos(procesosAEjecutarNoTieneTXT)
+								  .setNombre("ProcesoMultiplePruebaERROR");
+								  procesoMultiplePruebaERROR = builderProcesoMultiple.build();
+							  
+	}
+
+	public void setUpUsuario(){
+		usuarioAdmin.setRol(rolAdmin);
+		usuarioConsulta.setRol(rolConsulta);
+		usuarioAdmin.setEmail("usuarioadmin@gmail");
+		usuarioConsulta.setEmail("usuarioaConsulta@gmail");
+		listaUsuarios.add(usuarioAdmin);
+		listaUsuarios.add(usuarioConsulta);
+	}
+	
+	public void setUpEstrategiasXFallo(){
+		setUpUsuario();
+		estrategiaEnvioMensaje = new EnvioMensajePorFalla(listaUsuarios);
+		estrategiaFalloMock = mock(EstrategiaPorFallo.class);
+	}
 
 }

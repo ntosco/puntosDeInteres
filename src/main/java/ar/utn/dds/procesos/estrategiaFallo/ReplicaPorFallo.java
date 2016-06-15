@@ -18,11 +18,26 @@ public class ReplicaPorFallo implements EstrategiaPorFallo{
 	@Override
 	public void ejecutarse(Proceso proceso) {
 
-//TODO: Definir con los chicos que todo proceso debe tener su Estado como atributo
-//		for (int i = 0; i < toleranciaDeFallo; i++) {
-//		proceso.ejecutarse(this.noRealizarAccionPorFalla);
-//		if(!proceso.enEstadoErroneo())break;
-//		}
+		for (int i = 0; i < toleranciaDeFallo; i++) {
+		proceso.ejecutarse(this.noRealizarAccionPorFalla);
+		if(!proceso.enEstadoErroneo())break;
+		}
+	}
+
+	public Integer getToleranciaDeFallo() {
+		return toleranciaDeFallo;
+	}
+
+	public void setToleranciaDeFallo(Integer toleranciaDeFallo) {
+		this.toleranciaDeFallo = toleranciaDeFallo;
+	}
+
+	public EstrategiaPorFallo getNoRealizarAccionPorFalla() {
+		return noRealizarAccionPorFalla;
+	}
+
+	public void setNoRealizarAccionPorFalla(EstrategiaPorFallo noRealizarAccionPorFalla) {
+		this.noRealizarAccionPorFalla = noRealizarAccionPorFalla;
 	}
 	
 	

@@ -10,12 +10,15 @@ import ar.utn.dds.POI.POI;
 import ar.utn.dds.extern.servicioREST.ServicioREST;
 import ar.utn.dds.procesos.estrategiaFallo.EstrategiaPorFallo;
 import ar.utn.dds.repositorio.Repositorio;
+import ar.utn.dds.utils.Estado;
 
 
 public class BajaDePOIS extends Proceso {
 
 	private ServicioREST servicioREST;
 	Repositorio repositorioLocal = Repositorio.getInstance();
+	String nombre;
+	int idProcesoBajas;
 	
 	// Se modela el objeto JSON con los siguientes campos:
 	// valorDebusqueda, "palabra "
@@ -35,22 +38,33 @@ public class BajaDePOIS extends Proceso {
 		
 		for(int i = 0 ; i < listaAux.size(); i++){
 			
-			if (listaAux.get(i).getFechaBaja() == null){
-				//No action.
-			}else{
+			if (listaAux.get(i).getFechaBaja() != null){
+			
 				i = listaAux.size();
 				estrategia.ejecutarse(this);
-				return ;
 				
-				// Debo cambiar el estado??? - Consultar
+				//Cambio el Estado.
 				
-				//Fin de proceso.
+				Estado estado = new Estado();
+				estado.setEstadoComoErroneo();
+				estado.setDescripcion("El proceso fallo ya que el POI ya fue dado de baja");
+				this.setEstado(estado);
+				
+								
+				return; // Cierro el metodo ejecutarse
+				
 			}
 			
 		}
 	
 		listaAux.forEach(poi -> this.actualizar(poi, (informacionBaja.get("fecha").toString())));
 		listaAux.forEach(poi -> repositorioLocal.update(poi));
+		
+		Estado estado = new Estado();
+		estado.setEstadoComoOK();
+		estado.setDescripcion("El proceso se completo exitosamente");
+		this.setEstado(estado);
+		
 		
 	}
 	

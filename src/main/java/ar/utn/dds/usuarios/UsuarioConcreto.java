@@ -7,6 +7,7 @@ import ar.utn.dds.exceptions.InvalidPermissionsException;
 import ar.utn.dds.observers.Observador;
 import ar.utn.dds.procesos.Proceso;
 import ar.utn.dds.procesos.estrategiaFallo.EstrategiaPorFallo;
+import ar.utn.dds.procesos.estrategiaFallo.NoRealizarAccionPorFalla;
 import ar.utn.dds.roles.Rol;
 import ar.utn.dds.roles.RolAdministrador;
 import ar.utn.dds.utils.Consulta;
@@ -17,7 +18,7 @@ public class UsuarioConcreto implements Usuario {
 	private String nombreUsuario;
 	private Rol rol;
 	private String email;
-	private EstrategiaPorFallo estrategiaPorFallo;
+	private EstrategiaPorFallo estrategiaPorFallo = new NoRealizarAccionPorFalla();
 
 	@Override
 	public List<POI> buscarPuntos(String pablabraBuscada) {
@@ -37,12 +38,9 @@ public class UsuarioConcreto implements Usuario {
 //	ejecute luego de la ejecución del proceso
 	@Override
 	public void ejecutarProceso(Proceso proceso) {
-		try{
+
 		this.rol.ejecutarProceso(proceso,this.estrategiaPorFallo,this);
-		}
-		catch(InvalidPermissionsException exception){
-			//TODO Ver que hago con exception
-		}
+
 	}
 	
 	@Override
@@ -102,6 +100,15 @@ public class UsuarioConcreto implements Usuario {
 	public void actualizarAcciones(List<Observador> acciones){
 		accionesObservers = acciones;
 	}
+
+	public EstrategiaPorFallo getEstrategiaPorFallo() {
+		return estrategiaPorFallo;
+	}
+
+	public void setEstrategiaPorFallo(EstrategiaPorFallo estrategiaPorFallo) {
+		this.estrategiaPorFallo = estrategiaPorFallo;
+	}
+
 
 	@Override
 	public void notificarFalla() {

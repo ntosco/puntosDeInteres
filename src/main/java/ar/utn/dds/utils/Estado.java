@@ -22,6 +22,18 @@ public class Estado {
 		this.descripcion = descripcion;
 	}
 	
+	public Boolean esUnEstadoOk(){
+		return(valor == 2 );
+	}
 
-
+	public Boolean esUnEstadoError(){
+		return(valor == 1 );
+	}
+	
+	public void setEstadoComoErroneo(){
+		this.valor = 2;
+	}
+	public void setEstadoComoOK(){
+		this.valor = 1;
+	}
 }

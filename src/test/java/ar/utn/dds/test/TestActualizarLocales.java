@@ -32,16 +32,21 @@ import ar.utn.dds.repositorio.Repositorio;
 
 public class TestActualizarLocales extends JuegoDeDatos {
 
-
 	Repositorio repositorio = Repositorio.getInstance();
-	EnvioMensajePorFalla estrategiaPorFallo = new EnvioMensajePorFalla();
+	
+/*	EnvioMensajePorFalla estrategiaPorFallo = new EnvioMensajePorFalla();*/
+
 	@Before
 	public void SetUp(){
-		setUpGeneral();
-		setUpBanco();
-		setUpCGP();
+			setUpGeneral();
+			setUpBanco();
+			setUpCGP();
 		setUpLocalComercial();
 		setUpColectivos();
+//		setUpEstrategias();
+		setUpEstrategiasXFallo();
+		setUpProcesos();
+
 	}
 
 	@After
@@ -51,13 +56,16 @@ public class TestActualizarLocales extends JuegoDeDatos {
 
 	@Test
 	public void actualizoUnLocalYsusPalabrasClaveCambian() {
-		repositorio.create(libreria);
-		ActualizarLocalesComerciales procesoActualizacion = new ActualizarLocalesComerciales();
-		procesoActualizacion.setArchivo("Locales.txt"); 
-		procesoActualizacion.setNombre("ProcesoActualizarVariosLocales");
-		procesoActualizacion.ejecutarse(estrategiaPorFallo);
 		
-		List<POI> listaBusqueda = repositorio.search("lapiz");
+		repositorio.create(libreria);
+
+		procesoActualizarLocalesComerciales.setArchivo("Locales.txt"); 
+		procesoActualizarLocalesComerciales.setNombre("ProcesoActualizarVariosLocales");
+		
+		procesoActualizarLocalesComerciales.ejecutarse(estrategiaEnvioMensaje);
+
+		
+		List<POI> listaBusqueda = repositorio.search("lapiz"); 
 		
 		assertTrue(listaBusqueda.size()==1);
 		assertTrue(listaBusqueda.get(0).getListaPalabrasClave().contains("lapiz"));
@@ -68,14 +76,15 @@ public class TestActualizarLocales extends JuegoDeDatos {
 	
 		@Test
 		public void actualizoUnSoloLocal() {
+			
 			repositorio.create(libreria);
+							
+/*			EstrategiaPorFallo fallo = mock(EstrategiaPorFallo.class);
+			*/
 			
-			ActualizarLocalesComerciales procesoActualizacion = new ActualizarLocalesComerciales();
-			procesoActualizacion.setNombre("PActualizacionUnSoloLocal");
-			EstrategiaPorFallo fallo = mock(EstrategiaPorFallo.class);
-			procesoActualizacion.setFallo(fallo);
+					
+			procesoActualizarLocalesComerciales2.actualizarLocal(procesoActualizarLocalesComerciales2.leerArchivo().get(0));
 			
-			procesoActualizacion.actualizarLocal(procesoActualizacion.leerArchivo().get(0));
 			
 			List<POI> listaBusqueda = repositorio.search("lapiz");
 			
@@ -85,19 +94,26 @@ public class TestActualizarLocales extends JuegoDeDatos {
 			assertTrue(listaBusqueda.get(0).getListaPalabrasClave().contains("uniformes"));
 			assertTrue(listaBusqueda.get(0).getListaPalabrasClave().contains("modas"));
 		
-		}
+		} 
 		
 				@Test //el local que se quiere actualizar no esta en el repositorio
-		 		
 		 		public void falloAlActualizarLocales() {
 		 			
 		 			//el repo esta vacio asi que no va a encontrar nada
-		 			EstrategiaPorFallo fallo = mock(EstrategiaPorFallo.class);
-		 			ActualizarLocalesComerciales procesoActualizacion = new ActualizarLocalesComerciales();
+					
+/*		 			EstrategiaPorFallo fallo = mock(EstrategiaPorFallo.class);
+		 			*/
+					
+		 			/*ActualizarLocalesComerciales procesoActualizacion = new ActualizarLocalesComerciales();
+		 			
 		 			procesoActualizacion.setArchivo("Locales.txt"); 
-		 			procesoActualizacion.setNombre("PActualizacionFalla");
-		 			procesoActualizacion.ejecutarse(fallo);
-		 			verify(fallo, atLeast(1)).ejecutarse(procesoActualizacion);
+		 			
+		 			procesoActualizacion.setNombre("PActualizacionFalla");*/
+		 			
+					
+					procesoActualizarLocalesComerciales2.ejecutarse(estrategiaFalloMock);
+		 			
+		 			verify(estrategiaFalloMock, atLeast(1)).ejecutarse(procesoActualizarLocalesComerciales2);
 		 			
 		 		}
 				
@@ -107,20 +123,24 @@ public class TestActualizarLocales extends JuegoDeDatos {
 		 		public void falloAlLeerArchivoAlActualizarLocales() {
 		 			
 		 			//el ARCHIVO NO EXISTE Y NO LO VA A PODER LEER
-		 			EstrategiaPorFallo fallo = mock(EstrategiaPorFallo.class);
+					
+/*		 			EstrategiaPorFallo fallo = mock(EstrategiaPorFallo.class);
 		 			ActualizarLocalesComerciales procesoActualizacion = new ActualizarLocalesComerciales();
-		 			procesoActualizacion.setArchivo("NoExisto.txt"); 
-		 			procesoActualizacion.setNombre("PActualizacionFallaAlLeerArchivo");
-		 			procesoActualizacion.ejecutarse(fallo);
-		 			verify(fallo, atLeast(1)).ejecutarse(procesoActualizacion);
+		 			*/
+		 			
+					procesoActualizarLocalesComercialesSinTXT.ejecutarse(estrategiaFalloMock);
+		 			verify(estrategiaFalloMock, atLeast(1)).ejecutarse(procesoActualizarLocalesComercialesSinTXT);
 		 			
 		 		}
 
 
 		@Test 
 		public void leerArhivoTXT() throws FileNotFoundException, IOException {
-			ActualizarLocalesComerciales procesoActualizacion = new ActualizarLocalesComerciales();
-			List<LocalComercial> resultado = procesoActualizacion.leerArchivoTXT("Locales.txt");
+			
+/*			ActualizarLocalesComerciales procesoActualizacion = new ActualizarLocalesComerciales();
+			*/
+			
+			List<LocalComercial> resultado = procesoActualizarLocalesComerciales.leerArchivoTXT("Locales.txt");
 			
 			assertTrue(resultado.size() == 1);
 			assertTrue(resultado.get(0).getNombre().equals("Libreria"));

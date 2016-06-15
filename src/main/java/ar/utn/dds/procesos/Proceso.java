@@ -12,9 +12,8 @@ public abstract class Proceso {
 	
 	private String Nombre;
 	private LocalDate fechaComienzo;
-	private RangoHorario horarioDeEjecucion;
+	private RangoHorario horarioDeEjecucion = new RangoHorario(null, null);
 	private Usuario usuarioEjecutor;
-
 	public Estado estado = new Estado();
 	private int idProceso;
 	
@@ -87,8 +86,7 @@ public abstract class Proceso {
 	}
 
 	public Boolean enEstadoErroneo() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.estado.esUnEstadoError();
 	}
 
 }
