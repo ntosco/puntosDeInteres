@@ -29,7 +29,7 @@ public class TestEstrategiasPorFallo extends JuegoDeDatos {
 	}
 
 	@Test
-	public void noRealizaNingunaAcción(){
+	public void noRealizaNingunaAccion(){
 		estrategiaNoHaceNada.ejecutarse(procesoErroneoMock);
 		verify(procesoErroneoMock,times(0)).ejecutarse(estrategiaNoHaceNada);
 	}
