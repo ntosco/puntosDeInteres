@@ -10,6 +10,7 @@ import ar.utn.dds.POI.LocalComercial;
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.procesos.estrategiaFallo.EstrategiaPorFallo;
 import ar.utn.dds.repositorio.Repositorio;
+import ar.utn.dds.utils.Estado;
 
 public class ActualizarLocalesComerciales  extends Proceso{
 
@@ -18,6 +19,7 @@ public class ActualizarLocalesComerciales  extends Proceso{
 	private Repositorio repo = Repositorio.getInstance();
 	private EstrategiaPorFallo fallo;
 	private String archivo;
+	private Boolean flag;
 	
 	public String getArchivo() {
 		return archivo;
@@ -44,7 +46,9 @@ public class ActualizarLocalesComerciales  extends Proceso{
 	}
 	
 	public void actualizarLocal(LocalComercial local){
+		
 		boolean encontroPoi = false;
+		
 		for (int i = 0; i < local.getListaPalabrasClave().size(); i++) { 
 			List<POI> poisEncontrados = repo.search(local.getListaPalabrasClave().get(i));
 			if(0 < poisEncontrados.size()){
@@ -55,16 +59,38 @@ public class ActualizarLocalesComerciales  extends Proceso{
 					//Actualizo sus palabras claves
 					poisEncontrados.get(a).setListaPalabrasClave(local.getListaPalabrasClave());
 					repo.update(poisEncontrados.get(a));
+					
+					Estado estado = new Estado();
+					estado.setValor(2);
+					estado.setDescripcion("El proceso funciono correctamente");
+					this.setEstado(estado);
+										
+					flag = false;
+					
 				}else{
 					//No es el local que busco
 				}
 			}
 			if(encontroPoi == false){
-				fallo.ejecutarse(this);					
+				fallo.ejecutarse(this);	
+				
+				Estado estado = new Estado();
+				estado.setValor(1);
+				estado.setDescripcion("El proceso fallo");
+				this.setEstado(estado);
+				
+				flag = true;
 			}
 			}else{
 				if(encontroPoi == false){
-					fallo.ejecutarse(this);					
+					fallo.ejecutarse(this);	
+					
+					Estado estado = new Estado();
+					estado.setValor(2);
+					estado.setDescripcion("El proceso fallo");
+					this.setEstado(estado);
+					
+					flag = true;
 				}
 			}
 			
@@ -123,13 +149,25 @@ public class ActualizarLocalesComerciales  extends Proceso{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			fallo.ejecutarse(this);			
+			fallo.ejecutarse(this);
+			
+			Estado estado = new Estado();
+			estado.setValor(2);
+			estado.setDescripcion("El proceso fallo");
+			this.setEstado(estado);
+			
+			flag = true;
 		}		  
 
 		return listaLocales;
 	}
 	
 
+	@Override
+	public Boolean enEstadoErroneo() {
+
+		return flag;
+	}
 
 
 }
