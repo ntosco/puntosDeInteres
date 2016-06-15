@@ -16,7 +16,7 @@ public class ResultadoDeProceso {
 	
 	public ResultadoDeProceso(Proceso proceso) {
 		this.fecha = proceso.getFechaComienzo();
-		this.rangoHorarioDeEjecucion = proceso.getHorarioDeEjecución();
+		this.rangoHorarioDeEjecucion = proceso.getHorarioDeEjecucion();
 		this.usuarioEjecutor = proceso.getUsuarioEjecutor();
 		this.estado = proceso.getEstado();
 		this.proceso = proceso; 

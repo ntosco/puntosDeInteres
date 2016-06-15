@@ -12,18 +12,17 @@ public class EnvioMensajePorFalla implements EstrategiaPorFallo {
 
 
 	private List<Usuario> usuariosANotificar ;
-//FIXME Se comenta hasta cambiar los test
 
-//	public EnvioMensajePorFalla(List<Usuario> usuariosANotificar) {
-//		super();
-//		this.usuariosANotificar = usuariosANotificar;
-//	}
+	public EnvioMensajePorFalla(List<Usuario> usuariosANotificar) {
+		super();
+		this.usuariosANotificar = usuariosANotificar;
+	}
 	
 	@Override
 	public void ejecutarse(Proceso procesoEnEstadoDeError) {
 		//FIXME Se comenta hasta cambiar los test
 	
-//		MailSender.enviarMail(new Mail("El proceso" + procesoEnEstadoDeError.getNombre() + "fallo en su ejecución", this.correoDeUsuariosANotificar() ));
+		MailSender.enviarMail(new Mail("El proceso" + procesoEnEstadoDeError.getNombre() + "fallo en su ejecución", this.correoDeUsuariosANotificar() ));
 	}
 	
 	private List<String> correoDeUsuariosANotificar(){

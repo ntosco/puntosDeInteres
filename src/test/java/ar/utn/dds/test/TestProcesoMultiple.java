@@ -13,6 +13,8 @@ public class TestProcesoMultiple extends JuegoDeDatos{
 	
 	public void SetUp(){
 		setUpProcesos();
+		setUpUsuario();
+		setUpEstrategiasXFallo();
 	}
 	
 	@Test

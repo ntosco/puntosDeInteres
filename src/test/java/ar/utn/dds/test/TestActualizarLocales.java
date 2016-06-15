@@ -34,7 +34,6 @@ public class TestActualizarLocales extends JuegoDeDatos {
 
 
 	Repositorio repositorio = Repositorio.getInstance();
-	EnvioMensajePorFalla estrategiaPorFallo = new EnvioMensajePorFalla();
 	@Before
 	public void SetUp(){
 		setUpGeneral();
@@ -42,6 +41,7 @@ public class TestActualizarLocales extends JuegoDeDatos {
 		setUpCGP();
 		setUpLocalComercial();
 		setUpColectivos();
+		setUpEstrategiasXFallo();
 	}
 
 	@After
@@ -55,7 +55,7 @@ public class TestActualizarLocales extends JuegoDeDatos {
 		ActualizarLocalesComerciales procesoActualizacion = new ActualizarLocalesComerciales();
 		procesoActualizacion.setArchivo("Locales.txt"); 
 		procesoActualizacion.setNombre("ProcesoActualizarVariosLocales");
-		procesoActualizacion.ejecutarse(estrategiaPorFallo);
+		procesoActualizacion.ejecutarse(estrategiaEnvioMensaje);
 		
 		List<POI> listaBusqueda = repositorio.search("lapiz");
 		
