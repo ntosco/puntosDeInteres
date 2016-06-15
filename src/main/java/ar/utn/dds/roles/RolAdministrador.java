@@ -10,17 +10,15 @@ public class RolAdministrador implements Rol {
 
 	@Override
 	public void ejecutarProceso(Proceso proceso,EstrategiaPorFallo estrategiaPorFallo, Usuario usuarioEjecutor) {
-			proceso.ejecutarse(estrategiaPorFallo);
-			this.almacenarResultadoProceso(proceso,usuarioEjecutor);
+			proceso.ejecutarse(estrategiaPorFallo,usuarioEjecutor);
+			this.almacenarResultadoProceso(proceso);
 	}
 
-	private void almacenarResultadoProceso(Proceso proceso, Usuario usuarioEjecutor) {
-		//TODO Decidir si se carga los datos de ejecución desde el proceso o por fuera;
-		ResultadoDeProceso resultadoProcesoEjecutado = new ResultadoDeProceso();
-		resultadoProcesoEjecutado.setUsuarioEjecutor(usuarioEjecutor);
-		resultadoProcesoEjecutado.setProcesoEjecutado(proceso);
-		
+	private void almacenarResultadoProceso(Proceso proceso) {
+		ResultadoDeProceso resultadoProcesoEjecutado = new ResultadoDeProceso(proceso);
 		ServiceLocatorReportes.getInstance().getHistorialProcesosEjecutados().almacenarResultado(resultadoProcesoEjecutado);
 	}
+	
+	
 
 }
