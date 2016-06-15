@@ -33,6 +33,7 @@ public class TestAgregarAcciones extends JuegoDeDatos {
 	private Observador almacenamientoDeConsultas = new ObservadorAlmacenamientoDeConsultas();
 	private Usuario juan;
 	private UsuarioConcreto pedro;
+	private UsuarioConcreto martin;
 	private EstrategiaPorFallo fallo;
 	
 	@Before
@@ -43,9 +44,11 @@ public class TestAgregarAcciones extends JuegoDeDatos {
 		setUpLocalComercial();
 		setUpColectivos();
 		juan = new UsuarioConcreto();
+		martin = new UsuarioConcreto();
 		pedro = new UsuarioConcreto();
 		RepositorioDeUsuarios.getInstance().agregarUsuario(juan);
 		RepositorioDeUsuarios.getInstance().agregarUsuario(pedro);
+		RepositorioDeUsuarios.getInstance().agregarUsuario(martin);
 		acciones.add(almacenamientoDeConsultas);
 		acciones.add(porFecha);
 		acciones.add(tiempoDeBusqueda);
@@ -121,28 +124,26 @@ public class TestAgregarAcciones extends JuegoDeDatos {
 	@Test
 	public void testUndo(){
 		
+		//acciones -> 3 observers
+		// acciones 2 -> 1 observer
+		
 		juan.setAccionesObservers(acciones2);
 		assertEquals(juan.getAccionesObservers().size(),1);
+		assertEquals(procesoModificarAcciones.estado.getDescripcion(), "Ok");
 		
-		procesoModificarAcciones.setAcciones(acciones);
-		procesoModificarAcciones.setEstado("Ok");
+		procesoModificarAcciones.setAcciones(new ArrayList<Observador>());
 		procesoModificarAcciones.ejecutarse(new NoHayAccionesParaRealizarFalla());
-		procesoModificarAcciones.setEstado("Error");
-		assertEquals(juan.getAccionesObservers().size(),3);
+		assertEquals(procesoModificarAcciones.estado.getDescripcion(), "Error");
+		assertEquals(juan.getAccionesObservers().size(),1);
+		
 		
 		procesoModificarAcciones.undo();
 		assertEquals(juan.getAccionesObservers().size(),1);
-		assertEquals(procesoModificarAcciones.getEstado(), "Error");
+		assertEquals(procesoModificarAcciones.estado.getDescripcion(), "Ok");
 		
-	}
-	
-	@Test
-	public void testProcesosConIDIncremental(){
-		assertEquals(1, procesoModificarAcciones.getIdProcesoMultiple());
-		ModificarAcciones modificarAcciones2 = new ModificarAcciones();
-		ModificarAcciones modificarAcciones3 = new ModificarAcciones();
-		assertEquals(2, modificarAcciones2.getIdProcesoMultiple());
-		assertEquals(3, modificarAcciones3.getIdProcesoMultiple());
+	/*	procesoModificarAcciones.setAcciones(acciones);
+		procesoModificarAcciones.ejecutarse(new NoHayAccionesParaRealizarFalla());
+		assertEquals(juan.getAccionesObservers().size(),3); */
 		
 	}
 }

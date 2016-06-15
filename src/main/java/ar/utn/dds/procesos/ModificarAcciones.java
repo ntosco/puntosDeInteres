@@ -7,8 +7,9 @@ import ar.utn.dds.observers.Observador;
 import ar.utn.dds.procesos.estrategiaFallo.EstrategiaPorFallo;
 import ar.utn.dds.repositorio.RepositorioDeUsuarios;
 import ar.utn.dds.usuarios.Usuario;
+import ar.utn.dds.utils.Estado;
 
-public class ModificarAcciones implements Proceso {
+public class ModificarAcciones extends Proceso {
 
 	String nombre;
 	List<Observador> acciones = new ArrayList<Observador>();
@@ -16,22 +17,23 @@ public class ModificarAcciones implements Proceso {
 	RepositorioDeUsuarios usuarios = RepositorioDeUsuarios.getInstance();
 	int idProcesoMultiple;
 	static int id = 1;
-	String estado;
-	String undoEstado;
+	Estado undoEstado;
 	
 	
 	
 	public ModificarAcciones(){
-		setEstado("Ok");
+		this.estado = new Estado("Ok");
 		idProcesoMultiple = ModificarAcciones.id++;
 	}
 	
 	@Override
 	public void ejecutarse(EstrategiaPorFallo fallo) {
+		Usuario usuario = usuarios().get(1);
+		usuarios().add(usuario);
+		copiarLista(usuario.getAccionesObservers());
+		copiarEstado();		
 		if(puedeEjecutarse()){
-			copiarLista(usuarios().get(0).getAccionesObservers());
-			copiarEstado();
-			usuarios().forEach(usuario -> usuario.actualizarAcciones(acciones));
+			usuarios().forEach(usr -> usr.actualizarAcciones(acciones));
 		}
 		else{
 			fallo.ejecutarse(this);
@@ -45,20 +47,25 @@ public class ModificarAcciones implements Proceso {
 	}
 	
 	public void copiarEstado(){
-		undoEstado = new String(estado);
+		String estadoAnterior = estado.getDescripcion();
+		this.undoEstado = new Estado(estadoAnterior);
+		
 	}
 
 	public boolean puedeEjecutarse() {
 		if(acciones.size() == 0){
-			this.setEstado("Error");
+			this.estado.setDescripcion("Error");
 			return false;
 		}
 		else{
+			
 			return true;
 		}
 	}
 	
 	public void undo(){
+		String estadoAnterior = undoEstado.getDescripcion();
+		this.estado = new Estado(estadoAnterior);
 		usuarios().forEach(usuario -> usuario.actualizarAcciones(undoList));
 	}
 
@@ -79,11 +86,11 @@ public class ModificarAcciones implements Proceso {
 		acciones.remove(accion);
 	}
 	
-	public String getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
 	
