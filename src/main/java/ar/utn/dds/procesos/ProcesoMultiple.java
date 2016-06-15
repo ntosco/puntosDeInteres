@@ -13,7 +13,8 @@ public class ProcesoMultiple extends Proceso{
 	
 	@Override
 	public void ejecutarse(EstrategiaPorFallo estrategiaDeFallo) {
-		procesosAEjecutar.forEach(proceso -> proceso.ejecutarse(estrategiaDeFallo));
+		procesosAEjecutar.forEach(
+				proceso -> proceso.ejecutarse(estrategiaDeFallo));
 	}
 
 	public void setProcesos(List<Proceso> procesos) {
