@@ -2,7 +2,6 @@ package ar.utn.dds.serviceLocator;
 
 import java.util.ArrayList;
 import java.util.List;
-import static org.mockito.Mockito.mock;
 
 import ar.utn.dds.reportes.Reporte;
 import ar.utn.dds.reportes.ReporteProcesosEjecutados;
@@ -17,7 +16,7 @@ public class ServiceLocator {
 	private List<Reporte> listaServicios = new  ArrayList<Reporte>();
 
 	private ReporteProcesosEjecutados historialProcesosEjecutados = new ReporteProcesosEjecutados();
-	private MailSender mailSender = mock(MailSender.class);
+	
 	
 	public static ServiceLocator getInstance() {
 		if (instanceServiceLocator == null) {
@@ -46,9 +45,6 @@ public class ServiceLocator {
 		this.historialProcesosEjecutados = historialProcesosEjecutados;
 	}
 	
-	public MailSender getMailSender() {
-		return mailSender;
-	}
-	
+
 	
 }
