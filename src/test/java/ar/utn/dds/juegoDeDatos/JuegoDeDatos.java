@@ -25,12 +25,36 @@ import ar.utn.dds.extern.banco.buscadorDeBancos;
 import ar.utn.dds.extern.cgp.CentroDTO;
 import ar.utn.dds.extern.cgp.RangoServicioDTO;
 import ar.utn.dds.extern.cgp.ServicioDTO;
+import ar.utn.dds.procesos.estrategiaFallo.EnvioMensajePorFalla;
+import ar.utn.dds.procesos.estrategiaFallo.EstrategiaPorFallo;
+import ar.utn.dds.procesos.estrategiaFallo.NoRealizarAccionPorFalla;
+import ar.utn.dds.procesos.estrategiaFallo.ReplicaPorFallo;
+import ar.utn.dds.roles.RolAdministrador;
+import ar.utn.dds.roles.RolConsulta;
 import ar.utn.dds.servicios.Servicio;
+import ar.utn.dds.usuarios.Usuario;
+import ar.utn.dds.usuarios.UsuarioConcreto;
 import ar.utn.dds.utils.Jornada;
 import ar.utn.dds.utils.RangoHorario;
 
 
 abstract public class JuegoDeDatos {
+	
+	//Usuarios
+	protected UsuarioConcreto usuarioAdmin = new UsuarioConcreto();
+	protected UsuarioConcreto usuarioConsulta = new UsuarioConcreto();
+	protected List<Usuario> listaUsuarios = new ArrayList<Usuario>();
+	
+	//Roles
+	protected RolAdministrador rolAdmin = new RolAdministrador();
+	protected RolConsulta rolConsulta = new RolConsulta();
+	
+	
+	//Estrategias por falla
+	
+	protected EnvioMensajePorFalla estrategiaEnvioMensaje ;
+	protected EstrategiaPorFallo estrategiaReplica3veces = new ReplicaPorFallo(3);
+	protected EstrategiaPorFallo estrategiaNoHaceNada = new NoRealizarAccionPorFalla();
 
 	//Buscador de bancos
 	
@@ -1018,5 +1042,17 @@ abstract public class JuegoDeDatos {
 		sabado23hs = LocalDateTime.of(2016, 4, 2, 23, 00, 00);
 	}
 	
-
+	public void setUpUsuario(){
+		usuarioAdmin.setRol(rolAdmin);
+		usuarioConsulta.setRol(rolConsulta);
+		listaUsuarios.add(usuarioAdmin);
+		listaUsuarios.add(usuarioConsulta);
+	}
+	
+	public void setUpEstrategiasXFallo(){
+		setUpUsuario();
+		estrategiaEnvioMensaje = new EnvioMensajePorFalla(listaUsuarios);
+	}
+		
+	
 }

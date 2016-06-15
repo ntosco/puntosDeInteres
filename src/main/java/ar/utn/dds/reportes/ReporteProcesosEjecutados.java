@@ -12,5 +12,8 @@ public class ReporteProcesosEjecutados {
 	public void almacenarResultado(ResultadoDeProceso resultadoNuevo){
 		this.historialResultados.add(resultadoNuevo);
 		}
+	public Integer cantidadProcesosEjecutados(){
+		return this.historialResultados.size();
+	}
 
 }

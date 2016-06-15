@@ -98,6 +98,14 @@ public class UsuarioConcreto implements Usuario {
 		this.email = email;
 	}
 
+	public EstrategiaPorFallo getEstrategiaPorFallo() {
+		return estrategiaPorFallo;
+	}
+
+	public void setEstrategiaPorFallo(EstrategiaPorFallo estrategiaPorFallo) {
+		this.estrategiaPorFallo = estrategiaPorFallo;
+	}
+
 
 
 

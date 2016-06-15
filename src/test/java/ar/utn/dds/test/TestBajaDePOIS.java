@@ -24,7 +24,6 @@ public class TestBajaDePOIS extends JuegoDeDatos {
 
 	Repositorio repositorio = Repositorio.getInstance();
 	public BajaDePOIS procesoBajas;
-	public EnvioMensajePorFalla estrategia ;
 	
 	@Before
 	public void SetUp(){
@@ -37,7 +36,6 @@ public class TestBajaDePOIS extends JuegoDeDatos {
 		procesoBajas = new BajaDePOIS();
 		procesoBajas.setServicioREST(new StubServicioREST());
 		
-		estrategia = new EnvioMensajePorFalla();
 	}
 	
 	@After
@@ -50,7 +48,7 @@ public class TestBajaDePOIS extends JuegoDeDatos {
 		
 		repositorio.create(parada15);
 		
-		procesoBajas.ejecutarse(estrategia);
+		procesoBajas.ejecutarse(estrategiaEnvioMensaje);
 				
 		List<POI> listaAuxiliar = new ArrayList<POI>();
 		

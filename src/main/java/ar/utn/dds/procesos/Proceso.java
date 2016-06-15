@@ -12,7 +12,7 @@ public abstract class Proceso {
 	
 	private String Nombre;
 	private LocalDate fechaComienzo;
-	private RangoHorario horarioDeEjecución;
+	private RangoHorario horarioDeEjecución = new RangoHorario(null, null);
 	private Usuario usuarioEjecutor;
 	private Estado estado = new Estado();
 	private int idProceso;
@@ -20,7 +20,7 @@ public abstract class Proceso {
 	public void ejecutarse(EstrategiaPorFallo estrategiaPorFallo, Usuario usuario){
 		this.fechaComienzo = LocalDate.now();
 		this.usuarioEjecutor = usuario;
-		this.horarioDeEjecución.setHorarioInicial(LocalTime.now());	
+		horarioDeEjecución.setHorarioInicial(LocalTime.now());	
 		this.ejecutarse(estrategiaPorFallo);
 		this.horarioDeEjecución.setHorarioFinal(LocalTime.now());
 
