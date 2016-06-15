@@ -5,7 +5,7 @@ public class Estado {
 	public int valor;
 	public String descripcion;
 	
-	public Estado(String descripcion){
+	public Estado(){
 		this.descripcion = descripcion;
 	}
 	

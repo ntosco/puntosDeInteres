@@ -15,7 +15,7 @@ public abstract class Proceso {
 	private RangoHorario horarioDeEjecucion;
 	private Usuario usuarioEjecutor;
 
-	public Estado estado = new Estado("Ok");
+	public Estado estado = new Estado();
 	private int idProceso;
 	
 	public void ejecutarse(EstrategiaPorFallo estrategiaPorFallo, Usuario usuario){

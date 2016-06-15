@@ -129,7 +129,7 @@ public class TestAgregarAcciones extends JuegoDeDatos {
 		
 		juan.setAccionesObservers(acciones2);
 		assertEquals(juan.getAccionesObservers().size(),1);
-		assertEquals(procesoModificarAcciones.estado.getDescripcion(), "Ok");
+		assertEquals(procesoModificarAcciones.estado.getDescripcion(), null);
 		
 		procesoModificarAcciones.setAcciones(new ArrayList<Observador>());
 		procesoModificarAcciones.ejecutarse(new NoHayAccionesParaRealizarFalla());
@@ -139,7 +139,7 @@ public class TestAgregarAcciones extends JuegoDeDatos {
 		
 		procesoModificarAcciones.undo();
 		assertEquals(juan.getAccionesObservers().size(),1);
-		assertEquals(procesoModificarAcciones.estado.getDescripcion(), "Ok");
+		assertEquals(procesoModificarAcciones.estado.getDescripcion(), null);
 		
 	/*	procesoModificarAcciones.setAcciones(acciones);
 		procesoModificarAcciones.ejecutarse(new NoHayAccionesParaRealizarFalla());

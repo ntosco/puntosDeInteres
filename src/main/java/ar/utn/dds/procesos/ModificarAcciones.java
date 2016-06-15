@@ -22,13 +22,13 @@ public class ModificarAcciones extends Proceso {
 	
 	
 	public ModificarAcciones(){
-		this.estado = new Estado("Ok");
+		this.estado = new Estado();
 		idProcesoMultiple = ModificarAcciones.id++;
 	}
 	
 	@Override
 	public void ejecutarse(EstrategiaPorFallo fallo) {
-		Usuario usuario = usuarios().get(1);
+		Usuario usuario = usuarios().get(0);
 		usuarios().add(usuario);
 		copiarLista(usuario.getAccionesObservers());
 		copiarEstado();		
@@ -48,7 +48,8 @@ public class ModificarAcciones extends Proceso {
 	
 	public void copiarEstado(){
 		String estadoAnterior = estado.getDescripcion();
-		this.undoEstado = new Estado(estadoAnterior);
+		this.undoEstado = new Estado();
+		undoEstado.setDescripcion(estadoAnterior);
 		
 	}
 
@@ -58,14 +59,15 @@ public class ModificarAcciones extends Proceso {
 			return false;
 		}
 		else{
-			
+			this.estado.setDescripcion("Ok");
 			return true;
 		}
 	}
 	
 	public void undo(){
 		String estadoAnterior = undoEstado.getDescripcion();
-		this.estado = new Estado(estadoAnterior);
+		this.estado = new Estado();
+		estado.setDescripcion(estadoAnterior);
 		usuarios().forEach(usuario -> usuario.actualizarAcciones(undoList));
 	}
 
