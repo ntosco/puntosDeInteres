@@ -2,7 +2,7 @@ package ar.utn.dds.roles;
 
 import ar.utn.dds.procesos.Proceso;
 import ar.utn.dds.procesos.estrategiaFallo.EstrategiaPorFallo;
-import ar.utn.dds.serviceLocator.ServiceLocatorReportes;
+import ar.utn.dds.serviceLocator.ServiceLocator;
 import ar.utn.dds.usuarios.Usuario;
 import ar.utn.dds.utils.ResultadoDeProceso;
 
@@ -16,7 +16,7 @@ public class RolAdministrador implements Rol {
 
 	private void almacenarResultadoProceso(Proceso proceso) {
 		ResultadoDeProceso resultadoProcesoEjecutado = new ResultadoDeProceso(proceso);
-		ServiceLocatorReportes.getInstance().getHistorialProcesosEjecutados().almacenarResultado(resultadoProcesoEjecutado);
+		ServiceLocator.getInstance().getHistorialProcesosEjecutados().almacenarResultado(resultadoProcesoEjecutado);
 	}
 	
 	
