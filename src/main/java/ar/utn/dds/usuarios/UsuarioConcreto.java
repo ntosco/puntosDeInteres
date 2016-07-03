@@ -24,13 +24,8 @@ public class UsuarioConcreto implements Usuario {
 	public List<POI> buscarPuntos(String pablabraBuscada) {
 		
 		Consulta consulta = new Consulta(this,pablabraBuscada);
-		List<POI> poisResultantes = new ArrayList<POI>();
-		
-		poisResultantes = consulta.evaluarse();
-		
-		this.notificarObservadores(consulta);
-		
-		return poisResultantes;
+
+		return consulta.buscaPuntosYNotificaObservadores();
 	}
 
 //	El método ejecutar proceso no va a quedar de esta forma parametrizado,
@@ -38,9 +33,7 @@ public class UsuarioConcreto implements Usuario {
 //	ejecute luego de la ejecución del proceso
 	@Override
 	public void ejecutarProceso(Proceso proceso) {
-
 		this.rol.ejecutarProceso(proceso,this.estrategiaPorFallo,this);
-
 	}
 	
 	@Override

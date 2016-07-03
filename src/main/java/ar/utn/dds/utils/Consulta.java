@@ -21,7 +21,7 @@ public class Consulta {
 		this.palabraBuscada = palabraBusqueda;
 	}
 	
-	public List<POI> evaluarse(){
+	public List<POI> buscaPuntosYNotificaObservadores(){
 		
 		List<POI> listaResultado = new ArrayList<POI>();	
 		
@@ -33,9 +33,16 @@ public class Consulta {
 		this.fecha = LocalDate.now();
 		this.cantidadDeResultados = listaResultado.size();
 		
+		usuarioEjecutor.notificarObservadores(this);
+		
 		return listaResultado;
 	}
 
+	
+	// ********************************************************
+	// ** Getters and Setters
+	// ********************************************************
+	
 	public int getCantidadDeResultados() {
 		return cantidadDeResultados;
 	}
@@ -75,12 +82,5 @@ public class Consulta {
 	public void setUsuarioEjecutor(Usuario usuarioEjecutor) {
 		this.usuarioEjecutor = usuarioEjecutor;
 	}
-	
-	
-
-	
-	
-	
-	
 
 }

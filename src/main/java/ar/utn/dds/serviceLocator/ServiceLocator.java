@@ -12,11 +12,9 @@ public class ServiceLocator {
 	
 	static ServiceLocator instanceServiceLocator;
 
-		
 	private List<Reporte> listaServicios = new  ArrayList<Reporte>();
 
 	private ReporteProcesosEjecutados historialProcesosEjecutados = new ReporteProcesosEjecutados();
-	
 	
 	public static ServiceLocator getInstance() {
 		if (instanceServiceLocator == null) {
@@ -44,7 +42,5 @@ public class ServiceLocator {
 	public void setHistorialProcesosEjecutados(ReporteProcesosEjecutados historialProcesosEjecutados) {
 		this.historialProcesosEjecutados = historialProcesosEjecutados;
 	}
-	
-
 	
 }
