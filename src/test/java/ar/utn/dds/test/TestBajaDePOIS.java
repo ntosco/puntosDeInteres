@@ -23,10 +23,6 @@ import ar.utn.dds.utils.AdapterCGP;
 public class TestBajaDePOIS extends JuegoDeDatos {
 
 	Repositorio repositorio = Repositorio.getInstance();
-//<<<<<<< HEAD
-//=======
-//	public BajaDePOIS procesoBajas;
-//>>>>>>> fbac9235f88b57bde5c553d3ff5ddc91e17b1b12
 	
 	@Before
 	public void SetUp(){

@@ -24,6 +24,7 @@ import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.LocalComercial;
 import ar.utn.dds.POI.POI;
+import ar.utn.dds.exceptions.RepositoryException;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.procesos.ActualizarLocalesComerciales;
 import ar.utn.dds.procesos.estrategiaFallo.EnvioMensajePorFalla;
@@ -118,20 +119,11 @@ public class TestActualizarLocales extends JuegoDeDatos {
 		 		}
 				
 				
-				@Test 
-		 		
-		 		public void falloAlLeerArchivoAlActualizarLocales() {
-		 			
-		 			//el ARCHIVO NO EXISTE Y NO LO VA A PODER LEER
-					
-/*		 			EstrategiaPorFallo fallo = mock(EstrategiaPorFallo.class);
-		 			ActualizarLocalesComerciales procesoActualizacion = new ActualizarLocalesComerciales();
-		 			*/
-		 			
-					procesoActualizarLocalesComercialesSinTXT.ejecutarse(estrategiaFalloMock);
-		 			verify(estrategiaFalloMock, atLeast(1)).ejecutarse(procesoActualizarLocalesComercialesSinTXT);
-		 			
-		 		}
+		@Test
+ 		public void falloAlLeerArchivoAlActualizarLocales() {
+			procesoActualizarLocalesComercialesSinTXT.ejecutarse(estrategiaFalloMock);
+ 			verify(estrategiaFalloMock, atLeast(1)).ejecutarse(procesoActualizarLocalesComercialesSinTXT);
+ 		}
 
 
 		@Test 

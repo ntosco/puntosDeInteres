@@ -13,8 +13,6 @@ import ar.utn.dds.repositorio.Repositorio;
 import ar.utn.dds.utils.Estado;
 
 public class ActualizarLocalesComerciales  extends Proceso{
-
-
 	
 	private Repositorio repo = Repositorio.getInstance();
 	private EstrategiaPorFallo fallo;
@@ -121,6 +119,7 @@ public class ActualizarLocalesComerciales  extends Proceso{
 	
 
 	public List<LocalComercial> leerArchivoTXT(String archivo) {
+		
 		List<LocalComercial> listaLocales = new ArrayList<LocalComercial>();	
 		  String cadena;
 		  String current;
@@ -144,7 +143,7 @@ public class ActualizarLocalesComerciales  extends Proceso{
 		      b.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
 			fallo.ejecutarse(this);
 			
 			Estado estado = new Estado();
