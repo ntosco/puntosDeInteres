@@ -8,6 +8,10 @@ public class ReportePorFecha implements Reporte {
 	
 	private Hashtable<String,Integer> BusquedasPorFecha = new Hashtable<String,Integer>();
 	
+	private ReportePorFecha(){
+		super();
+	}
+	
 	public static ReportePorFecha instance;
 		
 	public static ReportePorFecha getInstance(){
@@ -27,7 +31,6 @@ public class ReportePorFecha implements Reporte {
 		}	
 	}
 
-
 	
 	@Override
 	public void emitirse() {
@@ -35,21 +38,12 @@ public class ReportePorFecha implements Reporte {
 		
 	}
 		
-	
-	
 	public Hashtable<String,Integer> getBusquedasPorFecha() {
 		return BusquedasPorFecha;
 	}
 
-
 	public void setBusquedasPorFecha(Hashtable<String,Integer> busquedasPorFecha) {
 		BusquedasPorFecha = busquedasPorFecha;
 	}
-
-
-	
-
-	
-	
 
 }

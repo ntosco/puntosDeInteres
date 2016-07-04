@@ -18,7 +18,10 @@ public class ReporteAlmacenamientoConsultas implements Reporte{
 		return instance;
 	}
 	
-	
+	private ReporteAlmacenamientoConsultas() {
+		super();
+	}
+
 	
 	@Override
 	public void emitirse() {
@@ -27,10 +30,8 @@ public class ReporteAlmacenamientoConsultas implements Reporte{
 	}
 
 	@Override
-	public void procesarConsulta(Consulta consulta) {
-				
+	public void procesarConsulta(Consulta consulta) {		
 		this.consultasAlmacenadas.add(consulta);
-		
 	}
 	
 	public List<Consulta> getConsultasAlmacenadas() {

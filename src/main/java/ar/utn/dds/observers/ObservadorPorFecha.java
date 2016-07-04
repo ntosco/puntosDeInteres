@@ -5,15 +5,10 @@ import ar.utn.dds.utils.Consulta;
 
 public class ObservadorPorFecha implements Observador{
 
-	//private List<Integer> BusquedasPorFecha = new ArrayList<Integer>();
-	//	private Hashtable<String,Integer> BusquedasPorFecha = new Hashtable<String,Integer>();
-
 	// Mantengo al Observer como Singleton.
 	
 	public static ObservadorPorFecha instance;
-	private ReportePorFecha reporte = new ReportePorFecha();
-	
-	
+
 	public static ObservadorPorFecha getInstance(){
 		if (instance == null) {
 			instance = new ObservadorPorFecha();
@@ -21,25 +16,9 @@ public class ObservadorPorFecha implements Observador{
 		return instance;
 	}
 	
-	
 	@Override
 	public void actualizar(Consulta consulta) {
-		
-		reporte.procesarConsulta(consulta);
-		
-		
+		ReportePorFecha.getInstance().procesarConsulta(consulta);		
 	}
-
-
-	public ReportePorFecha getReporte() {
-		return reporte;
-	}
-
-
-	public void setReporte(ReportePorFecha reporte) {
-		this.reporte = reporte;
-	}
-
-	
 
 }

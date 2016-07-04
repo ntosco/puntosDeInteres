@@ -8,6 +8,10 @@ public class ReporteTotales implements Reporte{
 
 	private Hashtable<String,Integer> TotalesPorUsuario = new Hashtable<String,Integer>();
 	
+	private ReporteTotales (){
+		super();
+	}
+	
 	public static ReporteTotales instance;
 	
 	public static ReporteTotales getInstance(){
@@ -41,15 +45,11 @@ public class ReporteTotales implements Reporte{
 			
 			getTotalesPorUsuario().put(nombreUsuario, cantidadDeResultadosConsulta);
 		}
-				
-		
-		
 	}
 	
 	public Hashtable<String,Integer> getTotalesPorUsuario() {
 		return TotalesPorUsuario;
 	}
-
 
 	public void setTotalesPorUsuario(Hashtable<String,Integer> totalesPorUsuario) {
 		TotalesPorUsuario = totalesPorUsuario;

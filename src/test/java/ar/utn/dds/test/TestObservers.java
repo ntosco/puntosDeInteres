@@ -40,12 +40,7 @@ public class TestObservers extends JuegoDeDatos{
 	public ObservadorAlmacenamientoDeConsultas observadorAlmacenamiento;
 	ObservadorPorFecha observerXfecha = ObservadorPorFecha.getInstance();
 	ObservadorTotales observerTotales = ObservadorTotales.getInstance();
-	
-	ReporteParciales reporteParciales = ReporteParciales.getInstance();
-	ReporteTotales reporteTotales = ReporteTotales.getInstance();
-	ReportePorFecha reporteFecha = ReportePorFecha.getInstance();
-	ReporteAlmacenamientoConsultas reporteAlmacenamiento = ReporteAlmacenamientoConsultas.getInstance();
-			
+				
 	@Before
 	public void SetUp(){
 		setUpGeneral();
@@ -67,16 +62,9 @@ public class TestObservers extends JuegoDeDatos{
 		observerParciales = new ObservadorParciales();
 		observadorTiempoBusqueda = new ObservadorTiempoBusqueda();
 		observadorAlmacenamiento = new ObservadorAlmacenamientoDeConsultas();
-		
-		observerParciales.setReporte(reporteParciales);
-		observadorAlmacenamiento.setReporte(reporteAlmacenamiento);
-		observerXfecha.setReporte(reporteFecha);
-		observerTotales.setReporte(reporteTotales);
-		
+				
 		unUsuario = new UsuarioConcreto();
 		unUsuario.setNombreUsuario("Samo");
-		
-		
 
 	}
 	
@@ -96,7 +84,7 @@ public class TestObservers extends JuegoDeDatos{
 	unUsuario.buscarPuntos("lala");
 	unUsuario.buscarPuntos("po");
 	
-	assertEquals(3 , reporteAlmacenamiento.getConsultasAlmacenadas().size());
+	assertEquals(3 , ReporteAlmacenamientoConsultas.getInstance().getConsultasAlmacenadas().size());
 	}
 	
 	
@@ -107,8 +95,8 @@ public class TestObservers extends JuegoDeDatos{
 		unUsuario.agregarObservador(observerParciales);
 		
 		unUsuario.buscarPuntos("15");
-		
-		assertEquals(1,reporteParciales.getCantidadResultadosParciales().size());
+	
+		assertEquals(1,ReporteParciales.getInstance().getCantidadResultadosParciales().size());
 	}
 	
 	@Test
@@ -118,7 +106,7 @@ public class TestObservers extends JuegoDeDatos{
 		
 		unUsuario.buscarPuntos("15");
 		
-		assertEquals(1,reporteFecha.getBusquedasPorFecha().size());
+		assertEquals(1,ReportePorFecha.getInstance().getBusquedasPorFecha().size());
 
 	}
 	
@@ -126,11 +114,9 @@ public class TestObservers extends JuegoDeDatos{
 	public void observadorTotalesAgregaRegistroATotalesPorUsuario() {
 		
 		unUsuario.agregarObservador(observerTotales);
+		unUsuario.buscarPuntos("15");
 		
-		List<POI> listaResultado = unUsuario.buscarPuntos("15");
-		
-		assertEquals(1,reporteTotales.getTotalesPorUsuario().size());		
-//		assertEquals(listaResultado.size(),(int)reporteTotales.getTotalesPorUsuario().get(reporteTotales.getNombreUsuario()));
+		assertEquals(1,ReporteTotales.getInstance().getTotalesPorUsuario().size());		
 	}
 	
 	//Cuando se actualiza un registro no crece en tama�o el hashtable, solo cambia la info del registro
@@ -138,7 +124,6 @@ public class TestObservers extends JuegoDeDatos{
 	
 	@Test
 	public void observadorPorFechaActualizaBusquedasPorFecha() {
-//		observerXfecha.setBusquedasPorFecha(new Hashtable<String,Integer>());
 		
 		unUsuario.agregarObservador(observerXfecha);
 		
@@ -146,21 +131,18 @@ public class TestObservers extends JuegoDeDatos{
 		
 		unUsuario.buscarPuntos("15");
 		
-		assertEquals(1,reporteFecha.getBusquedasPorFecha().size());
+		assertEquals(1,ReportePorFecha.getInstance().getBusquedasPorFecha().size());
 	}
 	
 	@Test
-	public void observadorTotalesActualizaTotalesPorUsuario() {
-		//observerTotales.setTotalesPorUsuario(new Hashtable<String,Integer>());
-		
+	public void observadorTotalesActualizaTotalesPorUsuario() {		
 		unUsuario.agregarObservador(observerTotales);
 		
-		List<POI> listaResultado = unUsuario.buscarPuntos("15");
-		
+		unUsuario.buscarPuntos("15");
 		unUsuario.buscarPuntos("15");
 		
-		assertEquals(1,reporteTotales.getTotalesPorUsuario().size());
-		assertEquals(12, (int)reporteTotales.getTotalesPorUsuario().get(unUsuario.getNombreUsuario()));		
+		assertEquals(1,ReporteTotales.getInstance().getTotalesPorUsuario().size());
+		assertEquals(12, (int)ReporteTotales.getInstance().getTotalesPorUsuario().get(unUsuario.getNombreUsuario()));		
 	}
 	
 

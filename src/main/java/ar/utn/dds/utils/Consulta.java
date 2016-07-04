@@ -29,7 +29,6 @@ public class Consulta {
 		listaResultado = BusquedaDePuntos.getInstance().busquedaGeneral(this.palabraBuscada);
 		long endTime = System.nanoTime();
 		this.tiempoTranscurrido = (endTime - startTime);
-		
 		this.fecha = LocalDate.now();
 		this.cantidadDeResultados = listaResultado.size();
 		

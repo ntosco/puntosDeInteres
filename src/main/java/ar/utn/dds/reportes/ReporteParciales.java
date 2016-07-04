@@ -6,13 +6,13 @@ import ar.utn.dds.utils.Consulta;
 
 public class ReporteParciales implements Reporte{
 	
-	public static ReporteParciales instance;
+	private ReporteParciales(){
+		super();
+	}
 	
 	private Hashtable<String,Integer> ResultadosParciales = new Hashtable<String,Integer>();
-	
+	public static ReporteParciales instance;
 		
-	//	private List<Integer> CantidadResultadosParciales = new ArrayList<Integer>();
-	
 	public static ReporteParciales getInstance(){
 		if (instance == null) {
 			instance = new ReporteParciales();

@@ -5,7 +5,6 @@ import ar.utn.dds.utils.Consulta;
 
 public class ObservadorTotales implements Observador{
 	
-	private ReporteTotales reporte = new ReporteTotales();
 	
 	public static ObservadorTotales instance;
 	
@@ -20,19 +19,7 @@ public class ObservadorTotales implements Observador{
 	@Override
 	public void actualizar(Consulta consulta) {
 		
-		reporte.procesarConsulta(consulta);
+		ReporteTotales.getInstance().procesarConsulta(consulta);
 		
 	}
-
-
-	public ReporteTotales getReporte() {
-		return reporte;
-	}
-
-
-	public void setReporte(ReporteTotales reporte) {
-		this.reporte = reporte;
-	}
-
-	
 }
