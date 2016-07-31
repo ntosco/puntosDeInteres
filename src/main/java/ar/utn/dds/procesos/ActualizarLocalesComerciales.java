@@ -42,7 +42,7 @@ public class ActualizarLocalesComerciales  extends Proceso{
 		
 	}
 	
-	public void actualizarLocal(LocalComercial local){
+	public void actualizarLocalOriginal(LocalComercial local){
 		
 		boolean encontroPoi = false;
 		
@@ -91,6 +91,60 @@ public class ActualizarLocalesComerciales  extends Proceso{
 		}
 	}
 
+	public void actualizarLocal(LocalComercial local){
+		
+		boolean encontroPoi = false;
+		
+		for (int i = 0; i < local.getListaPalabrasClave().size(); i++) { 
+			List<POI> poisEncontrados = repo.search(local.getListaPalabrasClave().get(i));
+			if(0 < poisEncontrados.size()){
+				for (int a = 0; a < poisEncontrados.size(); a++) {
+					if( actualizarPalabrasClave(poisEncontrados.get(a), local)){
+						encontroPoi = true;
+					}
+				}
+				if(encontroPoi == false){
+					falloProceso("El proceso fallo");
+				}
+			}else{
+				if(encontroPoi == false){
+					falloProceso("El proceso fallo");
+				}
+			}
+			
+		}
+	}
+	
+
+	public void falloProceso(String descripcion) {
+		fallo.ejecutarse(this);	
+		
+		Estado estado = new Estado();
+		estado.setEstadoComoErroneo();
+		estado.setDescripcion(descripcion);
+		this.setEstado(estado);
+	}
+	
+	
+	public boolean actualizarPalabrasClave(POI poi, LocalComercial local){
+		if(poi.getNombre().equals(local.getNombre())){
+			
+			//Actualizo sus palabras claves
+			poi.setListaPalabrasClave(local.getListaPalabrasClave());
+			repo.update(poi);
+			
+			Estado estado = new Estado();
+			estado.setEstadoComoOK();
+			estado.setDescripcion("El proceso funciono correctamente");
+			this.setEstado(estado);
+			return true;					
+			
+		}else{
+			return false;
+			//No es el local que busco
+		}
+	}
+	
 	public EstrategiaPorFallo getFallo() {
 		return fallo;
 	}
