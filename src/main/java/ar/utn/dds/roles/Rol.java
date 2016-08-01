@@ -7,6 +7,6 @@ import ar.utn.dds.usuarios.Usuario;
 
 public interface Rol {
 
-	void ejecutarProceso(Proceso proceso,EstrategiaPorFallo estrategiaPorFallo,Usuario usuarioEjecutor) throws InvalidPermissionsException;
+	void ejecutarProceso(Proceso proceso,Usuario usuarioEjecutor) throws InvalidPermissionsException;
 
 }
