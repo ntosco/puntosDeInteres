@@ -5,7 +5,6 @@ import ar.utn.dds.procesos.Proceso;
 public class ReplicaPorFallo implements EstrategiaPorFallo{
 
 	private Integer toleranciaDeFallo ;
-	//FIXME Mantener hasta cambiar el command pasado por parametro por el closure "EstrategiaPorFallo.ejecutarse()"
 	private EstrategiaPorFallo noRealizarAccionPorFalla = new NoRealizarAccionPorFalla();
 	
 	private ReplicaPorFallo(){}
@@ -17,9 +16,10 @@ public class ReplicaPorFallo implements EstrategiaPorFallo{
 
 	@Override
 	public void ejecutarse(Proceso proceso) {
+		proceso.setEstrategiaPorFallo(noRealizarAccionPorFalla);
 
 		for (int i = 0; i < toleranciaDeFallo; i++) {
-		proceso.ejecutarse(this.noRealizarAccionPorFalla);
+		proceso.ejecutarse();
 		if(!proceso.enEstadoErroneo())break;
 		}
 	}

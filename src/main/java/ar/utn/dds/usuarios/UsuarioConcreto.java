@@ -28,12 +28,10 @@ public class UsuarioConcreto implements Usuario {
 		return consulta.buscaPuntosYNotificaObservadores();
 	}
 
-//	El método ejecutar proceso no va a quedar de esta forma parametrizado,
-//	Ver si pongo closure , un command o expresiones lambda para que se 
-//	ejecute luego de la ejecución del proceso
 	@Override
 	public void ejecutarProceso(Proceso proceso) {
-		this.rol.ejecutarProceso(proceso,this.estrategiaPorFallo,this);
+		proceso.setEstrategiaPorFallo(estrategiaPorFallo);
+		this.rol.ejecutarProceso(proceso,this);
 	}
 	
 	@Override

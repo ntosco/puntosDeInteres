@@ -1137,7 +1137,7 @@ abstract public class JuegoDeDatos {
 		procesoActualizarLocalesComerciales2 = new ActualizarLocalesComerciales();
 		procesoActualizarLocalesComerciales2.setArchivo("Locales.txt"); 
 		procesoActualizarLocalesComerciales2.setNombre("ProcesoActualizarVariosLocales");
-		procesoActualizarLocalesComerciales2.setFallo(estrategiaFalloMock);
+		procesoActualizarLocalesComerciales2.setEstrategiaPorFallo(estrategiaFalloMock);
 
 		
 		procesoActualizarLocalesComercialesSinTXT = new ActualizarLocalesComerciales();

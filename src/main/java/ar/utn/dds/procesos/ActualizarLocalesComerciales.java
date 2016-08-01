@@ -15,7 +15,6 @@ import ar.utn.dds.utils.Estado;
 public class ActualizarLocalesComerciales  extends Proceso{
 	
 	private Repositorio repo = Repositorio.getInstance();
-	private EstrategiaPorFallo fallo;
 	private String archivo;
 	
 	public String getArchivo() {
@@ -27,10 +26,7 @@ public class ActualizarLocalesComerciales  extends Proceso{
 	}
 
 	@Override
-	public void ejecutarse(EstrategiaPorFallo estrategiaPorFallo) {
-		// TODO Auto-generated method stub
-		fallo = estrategiaPorFallo;
-		
+	public void ejecutarse() {
 		actualizarLocales(archivo);
 	}
 	
@@ -68,7 +64,7 @@ public class ActualizarLocalesComerciales  extends Proceso{
 				}
 			}
 			if(encontroPoi == false){
-				fallo.ejecutarse(this);	
+				this.getEstrategiaPorFallo().ejecutarse(this);	
 				
 				Estado estado = new Estado();
 				estado.setEstadoComoErroneo();
@@ -78,7 +74,7 @@ public class ActualizarLocalesComerciales  extends Proceso{
 			}
 			}else{
 				if(encontroPoi == false){
-					fallo.ejecutarse(this);	
+					this.getEstrategiaPorFallo().ejecutarse(this);	
 					
 					Estado estado = new Estado();
 					estado.setEstadoComoErroneo();
@@ -117,7 +113,7 @@ public class ActualizarLocalesComerciales  extends Proceso{
 	
 
 	public void falloProceso(String descripcion) {
-		fallo.ejecutarse(this);	
+		this.getEstrategiaPorFallo().ejecutarse(this);	
 		
 		Estado estado = new Estado();
 		estado.setEstadoComoErroneo();
@@ -145,14 +141,6 @@ public class ActualizarLocalesComerciales  extends Proceso{
 		}
 	}
 	
-	public EstrategiaPorFallo getFallo() {
-		return fallo;
-	}
-
-	public void setFallo(EstrategiaPorFallo fallo) {
-		this.fallo = fallo;
-	}
-
 	public List<LocalComercial> leerArchivo(){
 		List<LocalComercial> listaLocales = new ArrayList<LocalComercial>();
 	
@@ -198,7 +186,7 @@ public class ActualizarLocalesComerciales  extends Proceso{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 //			e.printStackTrace();
-			fallo.ejecutarse(this);
+			this.getEstrategiaPorFallo().ejecutarse(this);
 			
 			Estado estado = new Estado();
 			estado.setValor(1);

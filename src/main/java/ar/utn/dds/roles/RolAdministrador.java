@@ -9,8 +9,8 @@ import ar.utn.dds.utils.ResultadoDeProceso;
 public class RolAdministrador implements Rol {
 
 	@Override
-	public void ejecutarProceso(Proceso proceso,EstrategiaPorFallo estrategiaPorFallo, Usuario usuarioEjecutor) {
-			proceso.ejecutarse(estrategiaPorFallo,usuarioEjecutor);
+	public void ejecutarProceso(Proceso proceso, Usuario usuarioEjecutor) {
+			proceso.ejecutarse(usuarioEjecutor);
 			this.almacenarResultadoProceso(proceso);
 	}
 

@@ -7,14 +7,16 @@ import ar.utn.dds.procesos.estrategiaFallo.EstrategiaPorFallo;
 
 public class ProcesoMultiple extends Proceso{
 
+
 	List<Proceso> procesosAEjecutar = new ArrayList<Proceso>();
 		
+
 	@Override
-	public void ejecutarse(EstrategiaPorFallo estrategiaDeFallo) {
+	public void ejecutarse() {
 		this.getEstado().setEstadoComoOK();
 		procesosAEjecutar.forEach( 
 			proceso -> {
-				proceso.ejecutarse(estrategiaDeFallo);
+				proceso.ejecutarse();
 				this.actualizacionDeEstado(proceso);
 			}
 		);
@@ -32,4 +34,9 @@ public class ProcesoMultiple extends Proceso{
 	public void setProcesos(List<Proceso> procesos) {
 		procesosAEjecutar = procesos;
 	}	
+	@Override
+	public void setEstrategiaPorFallo(EstrategiaPorFallo estrategiaPorFallo) {
+		super.setEstrategiaPorFallo(estrategiaPorFallo);
+		procesosAEjecutar.forEach(proceso->{proceso.setEstrategiaPorFallo(estrategiaPorFallo);});
+	}
 } 

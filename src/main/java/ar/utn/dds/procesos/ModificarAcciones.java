@@ -11,6 +11,7 @@ import ar.utn.dds.utils.Estado;
 
 public class ModificarAcciones extends Proceso {
 
+
 	String nombre;
 	List<Observador> acciones = new ArrayList<Observador>();
 	List<Observador> undoList;
@@ -19,15 +20,15 @@ public class ModificarAcciones extends Proceso {
 	static int id = 1;
 	Estado undoEstado;
 	
-	
-	
-	public ModificarAcciones(){
+	public ModificarAcciones() {
 		this.estado = new Estado();
 		idProcesoMultiple = ModificarAcciones.id++;
-	}
+	}	
+	
+
 	
 	@Override
-	public void ejecutarse(EstrategiaPorFallo fallo) {
+	public void ejecutarse() {
 		Usuario usuario = usuarios().get(0);
 		RepositorioDeUsuarios.getInstance().agregarUsuario(usuario);
 		copiarLista(usuario.getAccionesObservers());
@@ -36,7 +37,7 @@ public class ModificarAcciones extends Proceso {
 			usuarios().forEach(usr -> usr.actualizarAcciones(acciones));
 		}
 		else{
-			fallo.ejecutarse(this);
+			this.getEstrategiaPorFallo().ejecutarse(this);
 		}
 	}
 

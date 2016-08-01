@@ -26,7 +26,7 @@ public class BajaDePOIS extends Proceso {
 	
 	
 	@Override
-	public void ejecutarse(EstrategiaPorFallo estrategia) {
+	public void ejecutarse() {
 		
 
 		JSONObject informacionBaja = servicioREST.buscarPOIS();
@@ -41,7 +41,7 @@ public class BajaDePOIS extends Proceso {
 			if (listaAux.get(i).getFechaBaja() != null){
 			
 				i = listaAux.size();
-				estrategia.ejecutarse(this);
+				this.getEstrategiaPorFallo().ejecutarse(this);
 				
 				//Cambio el Estado.
 				

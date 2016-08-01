@@ -16,17 +16,18 @@ public abstract class Proceso {
 	private Usuario usuarioEjecutor;
 	public Estado estado = new Estado();
 	private int idProceso;
+	private EstrategiaPorFallo estrategiaPorFallo ;	
 	
-	public void ejecutarse(EstrategiaPorFallo estrategiaPorFallo, Usuario usuario){
+	public void ejecutarse( Usuario usuario){
 		this.fechaComienzo = LocalDate.now();
 		this.usuarioEjecutor = usuario;
 		this.horarioDeEjecucion.setHorarioInicial(LocalTime.now());	
-		this.ejecutarse(estrategiaPorFallo);
+		this.ejecutarse();
 		this.horarioDeEjecucion.setHorarioFinal(LocalTime.now());
 
 	}
 	
-	public abstract void ejecutarse(EstrategiaPorFallo estrategiaPorFallo);
+	public abstract void ejecutarse();
 
 
 	public String getNombre() {
@@ -87,6 +88,14 @@ public abstract class Proceso {
 
 	public Boolean enEstadoErroneo() {
 		return this.estado.esUnEstadoError();
+	}
+
+	public EstrategiaPorFallo getEstrategiaPorFallo() {
+		return estrategiaPorFallo;
+	}
+
+	public void setEstrategiaPorFallo(EstrategiaPorFallo estrategiaPorFallo) {
+		this.estrategiaPorFallo = estrategiaPorFallo;
 	}
 
 }

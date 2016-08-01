@@ -62,8 +62,8 @@ public class TestActualizarLocales extends JuegoDeDatos {
 
 		procesoActualizarLocalesComerciales.setArchivo("Locales.txt"); 
 		procesoActualizarLocalesComerciales.setNombre("ProcesoActualizarVariosLocales");
-		
-		procesoActualizarLocalesComerciales.ejecutarse(estrategiaEnvioMensaje);
+		procesoActualizarLocalesComerciales.setEstrategiaPorFallo(estrategiaEnvioMensaje);
+		procesoActualizarLocalesComerciales.ejecutarse();
 
 		
 		List<POI> listaBusqueda = repositorio.search("lapiz"); 
@@ -111,8 +111,8 @@ public class TestActualizarLocales extends JuegoDeDatos {
 		 			
 		 			procesoActualizacion.setNombre("PActualizacionFalla");*/
 		 			
-					
-					procesoActualizarLocalesComerciales2.ejecutarse(estrategiaFalloMock);
+					procesoActualizarLocalesComerciales2.setEstrategiaPorFallo(estrategiaFalloMock);
+					procesoActualizarLocalesComerciales2.ejecutarse();
 		 			
 		 			verify(estrategiaFalloMock, atLeast(1)).ejecutarse(procesoActualizarLocalesComerciales2);
 		 			
@@ -121,7 +121,8 @@ public class TestActualizarLocales extends JuegoDeDatos {
 				
 		@Test
  		public void falloAlLeerArchivoAlActualizarLocales() {
-			procesoActualizarLocalesComercialesSinTXT.ejecutarse(estrategiaFalloMock);
+			procesoActualizarLocalesComercialesSinTXT.setEstrategiaPorFallo(estrategiaFalloMock);
+			procesoActualizarLocalesComercialesSinTXT.ejecutarse();
  			verify(estrategiaFalloMock, atLeast(1)).ejecutarse(procesoActualizarLocalesComercialesSinTXT);
  		}
 

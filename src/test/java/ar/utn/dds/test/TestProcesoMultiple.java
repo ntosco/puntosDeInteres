@@ -19,12 +19,14 @@ public class TestProcesoMultiple extends JuegoDeDatos{
 	
 	@Test
 	public void ejecutoProcesoMultipleOK(){
-		procesoMultiplePruebaOK.ejecutarse(new NoRealizarAccionPorFalla());
+		procesoMultiplePruebaOK.setEstrategiaPorFallo(new NoRealizarAccionPorFalla());
+		procesoMultiplePruebaOK.ejecutarse();
 	}
 	
 	@Test //FIXME: Arreglar el error feo que lanza por consola
 	public void ejecutoProcesoMultiplePeroNoPuedeActualizarLocalesComercialesPorNoTenerTXT(){
-		procesoMultiplePruebaERROR.ejecutarse(new NoRealizarAccionPorFalla());
+		procesoMultiplePruebaERROR.setEstrategiaPorFallo(new NoRealizarAccionPorFalla());
+		procesoMultiplePruebaERROR.ejecutarse();
 	}
 	
 	

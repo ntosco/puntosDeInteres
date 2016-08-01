@@ -25,13 +25,13 @@ public class TestEstrategiasPorFallo extends JuegoDeDatos {
 	@Test
 	public void replica3VecesElProceso(){
 		estrategiaReplica3veces.ejecutarse(procesoErroneoMock);
-		verify(procesoErroneoMock,times(3)).ejecutarse(this.estrategiaReplica3veces.getNoRealizarAccionPorFalla());
+		verify(procesoErroneoMock,times(3)).ejecutarse();
 	}
 
 	@Test
 	public void noRealizaNingunaAccion(){
 		estrategiaNoHaceNada.ejecutarse(procesoErroneoMock);
-		verify(procesoErroneoMock,times(0)).ejecutarse(estrategiaNoHaceNada);
+		verify(procesoErroneoMock,times(0)).ejecutarse();
 	}
 	
 //	@Test

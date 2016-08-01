@@ -48,8 +48,8 @@ public class TestBajaDePOIS extends JuegoDeDatos {
 		
 		
 		repositorio.create(parada15);
-		
-		procesoBajaDePois.ejecutarse(estrategiaEnvioMensaje);
+		procesoBajaDePois.setEstrategiaPorFallo(estrategiaEnvioMensaje);
+		procesoBajaDePois.ejecutarse();
 
 				
 		List<POI> listaAuxiliar = new ArrayList<POI>();
@@ -68,8 +68,9 @@ public class TestBajaDePOIS extends JuegoDeDatos {
 		
 		repositorio.create(parada15);
 		
-		procesoBajaDePois.ejecutarse(estrategiaFalloMock);
-		procesoBajaDePois.ejecutarse(estrategiaFalloMock);
+		procesoBajaDePois.setEstrategiaPorFallo(estrategiaFalloMock);
+		procesoBajaDePois.ejecutarse();
+		procesoBajaDePois.ejecutarse();
 		
 		verify(estrategiaFalloMock).ejecutarse(procesoBajaDePois);
 			
@@ -80,9 +81,9 @@ public class TestBajaDePOIS extends JuegoDeDatos {
 		
 	
 		repositorio.create(parada15);
-		
-		procesoBajaDePois.ejecutarse(estrategiaEnvioMensaje);
-		procesoBajaDePois.ejecutarse(estrategiaEnvioMensaje);
+		procesoBajaDePois.setEstrategiaPorFallo(estrategiaEnvioMensaje);
+		procesoBajaDePois.ejecutarse();
+		procesoBajaDePois.ejecutarse();
 		
 		assertTrue(procesoBajaDePois.enEstadoErroneo());
 /*		assertTrue(procesoBajas.getEstado().getDescripcion() == "El proceso fallo ya que el POI ya fue dado de baja");
@@ -94,7 +95,8 @@ public class TestBajaDePOIS extends JuegoDeDatos {
 
 		repositorio.create(parada15);
 		
-		procesoBajaDePois.ejecutarse(estrategiaEnvioMensaje);
+		procesoBajaDePois.setEstrategiaPorFallo(estrategiaEnvioMensaje);
+		procesoBajaDePois.ejecutarse();
 				
 		List<POI> listaAuxiliar = new ArrayList<POI>();
 		
