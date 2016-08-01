@@ -10,7 +10,7 @@ public class RolConsulta implements Rol {
 
 	
 	@Override
-	public void ejecutarProceso(Proceso proceso, EstrategiaPorFallo estrategiaPorFallo, Usuario usuarioEjecutor) {
+	public void ejecutarProceso(Proceso proceso, Usuario usuarioEjecutor) {
 		throw new InvalidPermissionsException("El usuario no contiene los permisos adecuados para la ejecución del proceso");
 	}
 
