@@ -2,6 +2,10 @@ language: java
 
 jdk:
   - oraclejdk8
+
+branches:
+  except:
+  - ejercicios-binding
   
 #before_install
 #  cd carpetaDondeEstaElPOM #solo si no tienen el pom en el raíz del repositorio
