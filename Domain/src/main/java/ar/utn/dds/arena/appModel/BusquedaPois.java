@@ -5,37 +5,39 @@ import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 import ar.utn.dds.POI.POI;
+import ar.utn.dds.utils.BusquedaDePuntos;
 
 @Observable
 public class BusquedaPois {
 
-	POI pois;
-	List<String> listaPalabrasClaves = new ArrayList<String>();
-	String palabraClave;
-	POI poiSeleccionado;
+	private List<POI> pois = new ArrayList<POI>();
+	private List<String> listaPalabrasClaves = new ArrayList<String>();
+	private String palabraClave;
+	private POI poiSeleccionado;
 	
 	
 	//********************************
 	// Acciones
 	//********************************
-		
-	void buscarPOI(){
+	
+	//TODO Definir quien es el que hace la busqueda (Usuario - Busqueda de puntos)
+	public void buscarPOI(){
+		this.pois = BusquedaDePuntos.getInstance().busquedaGeneralPorPalabrasClaves(listaPalabrasClaves);
+	}
+	
+	public void agregarPalabrasClave(){
+		this.listaPalabrasClaves.add(palabraClave);
 		
 	}
 	
-	void agregarPalabrasClave(){
-		
+	public Object visualizarPOI() {
+		//TODO: Ver como abrir una nueva venta de dialogo para cada tipo de POI
+		return null;
 	}
 	//********************************
 	// Getters & Setters
 	//********************************
-	
-	public POI getPois() {
-		return pois;
-	}
-	public void setPois(POI pois) {
-		this.pois = pois;
-	}
+
 	public List<String> getListaPalabrasClaves() {
 		return listaPalabrasClaves;
 	}
@@ -56,5 +58,15 @@ public class BusquedaPois {
 	public void setPoiSeleccionado(POI poiSeleccionado) {
 		this.poiSeleccionado = poiSeleccionado;
 	}
+
+	public List<POI> getPois() {
+		return pois;
+	}
+
+	public void setPois(List<POI> pois) {
+		this.pois = pois;
+	}
+
+
 		
 }
