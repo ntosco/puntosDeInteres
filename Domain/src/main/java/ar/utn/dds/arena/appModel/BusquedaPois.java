@@ -15,7 +15,17 @@ public class BusquedaPois {
 	POI poiSeleccionado;
 	
 	
+	//********************************
+	// Acciones
+	//********************************
+		
+	void buscarPOI(){
+		
+	}
 	
+	void agregarPalabrasClave(){
+		
+	}
 	//********************************
 	// Getters & Setters
 	//********************************
@@ -37,6 +47,14 @@ public class BusquedaPois {
 	}
 	public void setPalabraClave(String palabraClave) {
 		this.palabraClave = palabraClave;
+	}
+
+	public POI getPoiSeleccionado() {
+		return poiSeleccionado;
+	}
+
+	public void setPoiSeleccionado(POI poiSeleccionado) {
+		this.poiSeleccionado = poiSeleccionado;
 	}
 		
 }

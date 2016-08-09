@@ -5,7 +5,6 @@ import java.util.List;
 
 import ar.utn.dds.POI.POI;
 
-
 public class BusquedaDePuntos {
 	
 	public List<OrigenDeDatos> origenesDeDatos = new ArrayList<OrigenDeDatos>();
@@ -22,12 +21,19 @@ public class BusquedaDePuntos {
 		return instance;
 	}
 	
+	
 	public List<POI> busquedaGeneral(String nombre){
-		
 		Auxiliar.clear();
 		origenesDeDatos.forEach(serv -> agregarAAuxiliar(serv.buscarPOI(nombre)));
 		return Auxiliar;
 		
+	}
+	
+	//Metodo para la vista
+	public List<POI> busquedaGeneralPorPalabrasClaves(List<String> palabrasClaves){
+		List<POI> listaPois = new ArrayList<POI>();
+		palabrasClaves.forEach(palabraClave ->listaPois.addAll(this.busquedaGeneral(palabraClave)));
+		return listaPois;
 	}
 	
 	private void agregarAAuxiliar(List<POI> lista){	
