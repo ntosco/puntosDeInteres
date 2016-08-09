@@ -30,9 +30,6 @@ public class BusquedaPoisWindow extends SimpleWindow<BusquedaPois> {
 	@Override
 	protected void addActions(Panel actionsPanel) {
 
-		new Button(actionsPanel) 
-				.setCaption("Agregar palabra").onClick(() -> this.getModelObject().agregarPalabrasClave());
-
 		new Button(actionsPanel).setCaption("Buscar").onClick(() -> this.getModelObject().buscarPOI());
 
 	}
@@ -54,7 +51,11 @@ public class BusquedaPoisWindow extends SimpleWindow<BusquedaPois> {
 		searchFormPanel.setLayout(new ColumnLayout(3));
 		new Label(searchFormPanel).setText("Nombre");
 		new TextBox(searchFormPanel).bindValueToProperty("palabraClave");
+		new Button(searchFormPanel) 
+		.setCaption("Agregar palabra").onClick(() -> this.getModelObject().agregarPalabrasClave());
+
 		new List<String>(searchFormPanel).bindItemsToProperty("listaPalabrasClaves");
+		
 
 	}
 
