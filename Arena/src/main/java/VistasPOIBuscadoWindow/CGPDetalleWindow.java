@@ -1,8 +1,11 @@
 package VistasPOIBuscadoWindow;
 
+import org.uqbar.commons.utils.Observable;
+
 import AppModel.ZonaServicioAppModel;
 
-public class CGPDetalleWindow extends POIDetalleWindow {
+@Observable
+public class CGPDetalleWindow extends BancoDetalleWindow {
 
 	public CGPDetalleWindow(ZonaServicioAppModel model) {
 		super(model);

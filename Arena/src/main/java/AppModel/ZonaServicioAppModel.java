@@ -2,8 +2,11 @@ package AppModel;
 
 import java.util.List;
 
+import org.uqbar.commons.utils.Observable;
+
 import ar.utn.dds.servicios.Servicio;
 
+@Observable
 public class ZonaServicioAppModel extends VistaPOIAppModel {
 
 
