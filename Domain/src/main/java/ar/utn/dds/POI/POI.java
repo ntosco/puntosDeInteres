@@ -5,12 +5,14 @@ import java.util.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.uqbar.commons.model.Entity;
+import org.uqbar.commons.utils.Observable;
 import org.uqbar.geodds.*;
 import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
 import ar.utn.dds.utils.Jornada;
 import org.apache.commons.lang.StringUtils;
 import ar.utn.dds.exceptions.*;
-
+@Observable
+//TODO Ver si es necesario realizar un objeto intermediario que sea observable
 public abstract class POI extends Entity {
 
 	/**

@@ -28,21 +28,10 @@ public class BusquedaPoisWindow extends SimpleWindow<BusquedaPois> {
 	}
 
 	@Override
-	public void createContents(Panel mainPanel) {
-
-		new Label(mainPanel).setText("Nombre");
-		new TextBox(mainPanel).bindValueToProperty("palabraClave");
-
-		// Panel panelColumna = new Panel(mainPanel);
-		// panelColumna.setLayout(new ColumnLayout(2));
-
-	}
-
-	@Override
 	protected void addActions(Panel actionsPanel) {
 
 		new Button(actionsPanel) 
-				.setCaption("Agregar").onClick(() -> this.getModelObject().agregarPalabrasClave());
+				.setCaption("Agregar palabra").onClick(() -> this.getModelObject().agregarPalabrasClave());
 
 		new Button(actionsPanel).setCaption("Buscar").onClick(() -> this.getModelObject().buscarPOI());
 
@@ -62,7 +51,7 @@ public class BusquedaPoisWindow extends SimpleWindow<BusquedaPois> {
 	protected void createFormPanel(Panel mainPanel) {
 		Panel searchFormPanel = new Panel(mainPanel);
 		// TODO Arreglar layout
-		searchFormPanel.setLayout(new HorizontalLayout());
+		searchFormPanel.setLayout(new ColumnLayout(3));
 		new Label(searchFormPanel).setText("Nombre");
 		new TextBox(searchFormPanel).bindValueToProperty("palabraClave");
 		new List<String>(searchFormPanel).bindItemsToProperty("listaPalabrasClaves");
@@ -99,7 +88,7 @@ public class BusquedaPoisWindow extends SimpleWindow<BusquedaPois> {
 				.setTitle("Nombre").setFixedSize(100).bindContentsToProperty("nombre");
 
 		new Column<POI>(table) 
-				.setTitle("Dirección").setFixedSize(100).bindContentsToProperty("dirección");
+				.setTitle("Dirección").setFixedSize(100).bindContentsToProperty("direccionNombre");
 
 	}
 	
