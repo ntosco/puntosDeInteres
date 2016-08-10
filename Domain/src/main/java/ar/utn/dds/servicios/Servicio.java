@@ -4,9 +4,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.uqbar.commons.utils.Observable;
+
 import ar.utn.dds.estrategias.implementacion.DisponibilidadxRangoHorario;
 import ar.utn.dds.utils.Jornada;
-
+@Observable
 public class Servicio {
 	private String nombre;
 	private List<Jornada> jornadaDisponible = new ArrayList<Jornada>();

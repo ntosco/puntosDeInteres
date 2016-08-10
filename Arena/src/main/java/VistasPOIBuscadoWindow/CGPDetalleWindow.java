@@ -45,7 +45,7 @@ public class CGPDetalleWindow extends POIDetalleWindow {
 
 		new Column<Servicio>(table) 
 					.setTitle("Horario de atencion")
-					.setFixedSize(100).bindContentsToProperty("horarioDeAtencion");		
+					.setFixedSize(100).bindContentsToProperty("jornadaDisponible");		
 	}
 
 }

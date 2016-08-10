@@ -26,13 +26,15 @@ public class POIDetalleWindow extends TransactionalDialog<POI> {
 		new Label(mainPanel).bindValueToProperty("nombre");
 		new Label(mainPanel).setText("Direccion");
 		new Label(mainPanel).bindValueToProperty("direccionNombre");
+		this.addFormPanel(mainPanel);
 //		new Label(mainPanel).bindValueToProperty(this.model.getDireccionNombre()
 //				.concat(" ")
 	//			.concat(Integer.toString(this.model.getDireccionNumero())));
 
 	}
 	
-	public void addFormPanel(Panel mainPanel){
+	void addFormPanel(Panel mainPanel) {
+		this.addFormPanel(mainPanel);
 	}
 	
 	

@@ -23,7 +23,7 @@ public class LocalComercialDetallelWindow extends POIDetalleWindow {
 	@Override
 	public void addFormPanel(Panel mainPanel){
 		new Label(mainPanel).setText("Rubro");
-		new Label(mainPanel).bindValueToProperty(this.listaDeRubros());
+		new Label(mainPanel).bindValueToProperty("listaRubros");
 	}
 	
 	public String listaDeRubros(){
