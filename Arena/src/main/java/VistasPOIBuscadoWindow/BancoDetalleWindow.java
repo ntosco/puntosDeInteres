@@ -14,7 +14,7 @@ import ar.utn.dds.servicios.Servicio;
 @Observable
 public class BancoDetalleWindow extends POIDetalleWindow{
 
-	public BancoDetalleWindow(WindowOwner owner, POI model) {
+	public BancoDetalleWindow(WindowOwner owner, SucursalBanco model) {
 		super(owner, model);
 	}
 	

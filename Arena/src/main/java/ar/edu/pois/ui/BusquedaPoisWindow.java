@@ -39,13 +39,12 @@ public class BusquedaPoisWindow extends SimpleWindow<BusquedaPois> {
 
 	public BusquedaPoisWindow(WindowOwner parent) {
 		super(parent, new BusquedaPois());
-		this.initMapaVentanas();
 		
 	}
 
 	private void initMapaVentanas() {
 		this.mapaVentanas = new HashMap<Class<? extends POI>,POIDetalleWindow>();
-		this.mapaVentanas.put(SucursalBanco.class,new BancoDetalleWindow(this,this.getModelObject().getPoiSeleccionado()));
+		this.mapaVentanas.put(SucursalBanco.class,new BancoDetalleWindow(this,(SucursalBanco) this.getModelObject().getPoiSeleccionado()));
 //		this.mapaVentanas.put(CentroGestionParticipacion.class,new CGPDetalleWindow(this,this.getModelObject().getPoiSeleccionado()));
 //		this.mapaVentanas.put(ParadaDeColectivo.class,new ColectivoDetalleWindow(this,this.getModelObject().getPoiSeleccionado()));
 //		this.mapaVentanas.put(LocalComercial.class,new LocalComercialDetalleWindow(this,this.getModelObject().getPoiSeleccionado()));
@@ -99,6 +98,7 @@ public class BusquedaPoisWindow extends SimpleWindow<BusquedaPois> {
 	private HashMap<Class<? extends POI>,POIDetalleWindow> mapaVentanas; 
 	
 	private void visualizarPOI() {
+		this.initMapaVentanas();
 		Dialog<?> ventana = mapaVentanas.get(this.getModelObject().getPoiSeleccionado().getClass());
 		ventana.open();
 		
