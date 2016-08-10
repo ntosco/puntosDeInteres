@@ -6,7 +6,6 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.commons.utils.Observable;
 
-import ar.utn.dds.POI.POI;
 import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.servicios.Servicio;
 
@@ -16,6 +15,7 @@ public class BancoDetalleWindow extends POIDetalleWindow{
 
 	public BancoDetalleWindow(WindowOwner owner, SucursalBanco model) {
 		super(owner, model);
+		this.setTitle("Detalle Sucursal Banco");
 	}
 	
 	@Override
@@ -37,7 +37,7 @@ public class BancoDetalleWindow extends POIDetalleWindow{
 	
 	public void describeResultsGrid(Table<Servicio> table) {
 		new Column<Servicio>(table) 
-					.setTitle("Nombre").setFixedSize(100).bindContentsToProperty("nombre");
+					.setTitle("Servicios que presta").setFixedSize(300).bindContentsToProperty("nombre");
 	}
 
 }

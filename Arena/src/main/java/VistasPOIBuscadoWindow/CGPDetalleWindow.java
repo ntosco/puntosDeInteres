@@ -1,5 +1,8 @@
 package VistasPOIBuscadoWindow;
 
+import java.awt.Color;
+
+import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
@@ -17,12 +20,14 @@ public class CGPDetalleWindow extends POIDetalleWindow {
 	
 	public CGPDetalleWindow(WindowOwner owner, CentroGestionParticipacion model) {
 		super(owner, model);
-		this.setTitle("Detalle de parada de colectivo");
+		this.setTitle("Detalle de CGP");
 		this.model = model;
 	}
 	
 	@Override
 	public void addFormPanel(Panel mainPanel){
+		new Label(mainPanel).setText("Zona donde se ubica").setBackground(Color.WHITE);
+		new Label(mainPanel).bindValueToProperty("barrio");
 		createResultsGrid(mainPanel);
 	}
 	
@@ -41,11 +46,11 @@ public class CGPDetalleWindow extends POIDetalleWindow {
 	
 	public void describeResultsGrid(Table<Servicio> table) {
 		new Column<Servicio>(table) 
-					.setTitle("Nombre").setFixedSize(100).bindContentsToProperty("nombre");
+					.setTitle("Nombre").setFixedSize(150).bindContentsToProperty("nombre");
 
 		new Column<Servicio>(table) 
 					.setTitle("Horario de atencion")
-					.setFixedSize(100).bindContentsToProperty("jornadaDisponible");		
+					.setFixedSize(150).bindContentsToProperty("nombreDeJornada");		
 	}
 
 }

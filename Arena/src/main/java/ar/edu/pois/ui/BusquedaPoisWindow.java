@@ -131,13 +131,10 @@ public class BusquedaPoisWindow extends SimpleWindow<BusquedaPois> {
 
 	private void describeResultsGrid(Table<POI> table) {
 		new Column<POI>(table) 
-				.setTitle("Nombre").setFixedSize(100).bindContentsToProperty("nombre");
+				.setTitle("Nombre").setFixedSize(150).bindContentsToProperty("nombre");
 
 		new Column<POI>(table) 
-				.setTitle("Dirección").setFixedSize(100).bindContentsToProperty("direccionNombre");
-		new Column<POI>(table) 
-			.setTitle("Número").setFixedSize(100).bindContentsToProperty("direccionNumero");
-
+				.setTitle("Dirección").setFixedSize(150).bindContentsToProperty("direccionNombre");
 	}
 	
 	

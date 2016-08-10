@@ -1,6 +1,8 @@
 package VistasPOIBuscadoWindow;
 
 
+import java.awt.Color;
+
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.WindowOwner;
@@ -23,14 +25,10 @@ public class ColectivoDetalleWindow extends POIDetalleWindow {
 	
 	@Override
 	public void createFormPanel(Panel mainPanel){
-		new Label(mainPanel).setText("Numero de Linea");
-//		new Label(mainPanel).bindValueToProperty(model.getLinea());
+		new Label(mainPanel).setText("Numero de Linea").setBackground(Color.WHITE).setWidth(300);
 		new Label(mainPanel).bindValueToProperty("linea");
-		new Label(mainPanel).setText("Direccion");
+		new Label(mainPanel).setText("Direccion").setBackground(Color.WHITE);
 		new Label(mainPanel).bindValueToProperty("direccionNombre");
-/*		new Label(mainPanel).bindValueToProperty(model.getDireccionNombre()
-				.concat(" ")
-				.concat(Integer.toString(model.getDireccionNumero()))); */
 	}
 	
 }

@@ -153,7 +153,7 @@ public abstract class POI extends Entity {
 	}
 
 	public String getDireccionNombre() {
-		return direccionNombre;
+		return (direccionNombre.concat(" ").concat(Integer.toString(direccionNumero)));
 	}
 	
 	public String getBarrio(){

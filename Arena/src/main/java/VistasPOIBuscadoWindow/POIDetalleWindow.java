@@ -1,5 +1,7 @@
 package VistasPOIBuscadoWindow;
 
+import java.awt.Color;
+
 import org.uqbar.arena.aop.windows.TransactionalDialog;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
@@ -22,9 +24,9 @@ public class POIDetalleWindow extends TransactionalDialog<POI> {
 	}
 
 	public void createFormPanel(Panel mainPanel) {
-		new Label(mainPanel).setText("Nombre");
+		new Label(mainPanel).setText("Nombre").setBackground(Color.WHITE).setWidth(300);
 		new Label(mainPanel).bindValueToProperty("nombre");
-		new Label(mainPanel).setText("Direccion");
+		new Label(mainPanel).setText("Direccion").setBackground(Color.WHITE);
 		new Label(mainPanel).bindValueToProperty("direccionNombre");
 		this.addFormPanel(mainPanel);
 //		new Label(mainPanel).bindValueToProperty(this.model.getDireccionNombre()

@@ -12,6 +12,7 @@ import ar.utn.dds.utils.Jornada;
 public class Servicio {
 	private String nombre;
 	private List<Jornada> jornadaDisponible = new ArrayList<Jornada>();
+	private String nombreDeJornada;
 	private DisponibilidadxRangoHorario estrategiaDisponibilidad = new DisponibilidadxRangoHorario();
 
 	public DisponibilidadxRangoHorario getEstrategiaDisponibilidad() {
@@ -48,6 +49,16 @@ public class Servicio {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+	public String getNombreDeJornada() {
+		return nombreDeJornada;
+	}
+
+	public void setNombreDeJornada(String nombreDeJornada) {
+		this.nombreDeJornada = nombreDeJornada;
+	}
+	
+	
 	
 	//Agregar contructor
 		

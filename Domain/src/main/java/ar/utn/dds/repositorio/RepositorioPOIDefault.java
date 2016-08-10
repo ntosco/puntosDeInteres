@@ -38,9 +38,14 @@ public class RepositorioPOIDefault extends Repositorio {
 		List<Jornada> jornadaBancaria = builderJornadaBancaria.buildJornadas(lunesAViernes, rangoBancario);
 		
 		Servicio depositos = new Servicio("depositos", jornadaBancaria);
+		depositos.setNombreDeJornada("Lun a Vie 10 a 15");
+		Servicio consultaSaldo = new Servicio("consulta de saldo", jornadaBancaria);
+		consultaSaldo.setNombreDeJornada("Lun a Vier 10 a 15");
 		
 		List<Servicio> servicioCajeroAutomatico = new ArrayList<Servicio>();
 		servicioCajeroAutomatico.add(depositos);
+		servicioCajeroAutomatico.add(consultaSaldo);
+		
 
 		Point ubicacion = new Point(45, 20);
 		

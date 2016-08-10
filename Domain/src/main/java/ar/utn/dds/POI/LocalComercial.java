@@ -18,6 +18,13 @@ public class LocalComercial extends POI {
 	public List<Rubro> getListaRubros() {
 		return listaRubros;
 	}
+	
+	public List<String> getNombresRubros(){
+		
+		List<String> lista = new ArrayList<String>();
+		listaRubros.forEach(rubro -> lista.add(rubro.getNombre()));
+		return lista;
+	}
 
 	public double getCercania() {
 		return cercania;
