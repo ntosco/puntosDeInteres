@@ -19,6 +19,7 @@ import AppModel.VistaPOIAppModel;
 import VistasPOIBuscadoWindow.BancoDetalleWindow;
 import VistasPOIBuscadoWindow.CGPDetalleWindow;
 import VistasPOIBuscadoWindow.ColectivoDetalleWindow;
+import VistasPOIBuscadoWindow.LocalComercialDetallelWindow;
 import VistasPOIBuscadoWindow.POIDetalleWindow;
 
 import org.uqbar.arena.widgets.List;
@@ -42,13 +43,7 @@ public class BusquedaPoisWindow extends SimpleWindow<BusquedaPois> {
 		
 	}
 
-	private void initMapaVentanas() {
-		this.mapaVentanas = new HashMap<Class<? extends POI>,POIDetalleWindow>();
-		this.mapaVentanas.put(SucursalBanco.class,new BancoDetalleWindow(this,(SucursalBanco) this.getModelObject().getPoiSeleccionado()));
-//		this.mapaVentanas.put(CentroGestionParticipacion.class,new CGPDetalleWindow(this,this.getModelObject().getPoiSeleccionado()));
-//		this.mapaVentanas.put(ParadaDeColectivo.class,new ColectivoDetalleWindow(this,this.getModelObject().getPoiSeleccionado()));
-//		this.mapaVentanas.put(LocalComercial.class,new LocalComercialDetalleWindow(this,this.getModelObject().getPoiSeleccionado()));
-	}
+
 
 	@Override
 	protected void addActions(Panel actionsPanel) {
@@ -98,10 +93,28 @@ public class BusquedaPoisWindow extends SimpleWindow<BusquedaPois> {
 	private HashMap<Class<? extends POI>,POIDetalleWindow> mapaVentanas; 
 	
 	private void visualizarPOI() {
-		this.initMapaVentanas();
-		Dialog<?> ventana = mapaVentanas.get(this.getModelObject().getPoiSeleccionado().getClass());
+		Dialog<?> ventana = this.getDetalleWindow();
 		ventana.open();
 		
+	}
+	private Dialog<?> getDetalleWindow(){
+		String value = this.getModelObject().getPoiSeleccionado().getClass().getSimpleName();
+		Dialog<?> ventana = null;
+		switch (value) {
+		case "SucursalBanco":
+			ventana = new BancoDetalleWindow(this,(SucursalBanco)this.getModelObject().getPoiSeleccionado());
+			break;
+		case "CentroGestionParticipacion":
+			ventana = new CGPDetalleWindow(this,(CentroGestionParticipacion)this.getModelObject().getPoiSeleccionado());
+			break;
+		case "ParadaDeColectivo":
+			ventana = new ColectivoDetalleWindow(this,(ParadaDeColectivo)this.getModelObject().getPoiSeleccionado());
+			break;
+		case "LocalComercial":
+			ventana = new LocalComercialDetallelWindow(this,(LocalComercial)this.getModelObject().getPoiSeleccionado());
+			break;
+		}
+		return ventana;
 		
 	}
 
