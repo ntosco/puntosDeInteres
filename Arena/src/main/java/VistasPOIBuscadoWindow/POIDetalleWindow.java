@@ -1,21 +1,22 @@
 package VistasPOIBuscadoWindow;
 
-import AppModel.VistaPOIAppModel;
-
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
-import org.uqbar.arena.windows.MainWindow;
+import org.uqbar.arena.windows.Dialog;
+import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.commons.utils.Observable;
+
+import AppModel.VistaPOIAppModel;
 
 @SuppressWarnings("serial")
 @Observable
-public class POIDetalleWindow extends MainWindow<VistaPOIAppModel> {
+public class POIDetalleWindow extends Dialog<VistaPOIAppModel> {
 
-	public POIDetalleWindow(VistaPOIAppModel model) {
-		super(new VistaPOIAppModel());
+	public POIDetalleWindow(WindowOwner owner, VistaPOIAppModel model) {
+		super(owner, model);
 	}
 
-	public void createMainContents(Panel mainPanel) {
+	public void createMainFormContents(Panel mainPanel) {
 		new Label(mainPanel).setText("Nombre");
 		new Label(mainPanel).setText(getModelObject().getNombre());
 		new Label(mainPanel).setText("Direccion");
@@ -24,8 +25,9 @@ public class POIDetalleWindow extends MainWindow<VistaPOIAppModel> {
 	}
 
 	@Override
-	public void createContents(Panel mainPanel) {
-		}
+	protected void createFormPanel(Panel mainPanel) {
+		this.createMainFormContents(mainPanel);
+	}
 
 	
 }
