@@ -45,7 +45,7 @@ public class BusquedaPoisWindow extends SimpleWindow<BusquedaPois> {
 
 	private void initMapaVentanas() {
 		this.mapaVentanas = new HashMap<Class<? extends POI>,POIDetalleWindow>();
-//		this.mapaVentanas.put(SucursalBanco.class,new BancoDetalleWindow(this,));
+//		this.mapaVentanas.put(SucursalBanco.class,new BancoDetalleWindow(this,this.getModelObject().getPoiSeleccionado()));
 //		this.mapaVentanas.put(CentroGestionParticipacion.class,new CGPDetalleWindow(this,this.getModelObject().getPoiSeleccionado()));
 //		this.mapaVentanas.put(ParadaDeColectivo.class,new ColectivoDetalleWindow(this,this.getModelObject().getPoiSeleccionado()));
 //		this.mapaVentanas.put(LocalComercial.class,new LocalComercialDetalleWindow(this,this.getModelObject().getPoiSeleccionado()));
@@ -71,7 +71,6 @@ public class BusquedaPoisWindow extends SimpleWindow<BusquedaPois> {
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
 		Panel searchFormPanel = new Panel(mainPanel);
-		// TODO Arreglar layout
 		searchFormPanel.setLayout(new ColumnLayout(3));
 		new Label(searchFormPanel).setText("Nombre");
 		new TextBox(searchFormPanel).bindValueToProperty("palabraClave");
