@@ -123,6 +123,8 @@ public class BusquedaPoisWindow extends SimpleWindow<BusquedaPois> {
 
 		new Column<POI>(table) 
 				.setTitle("Dirección").setFixedSize(100).bindContentsToProperty("direccionNombre");
+		new Column<POI>(table) 
+			.setTitle("Número").setFixedSize(100).bindContentsToProperty("direccionNumero");
 
 	}
 	
