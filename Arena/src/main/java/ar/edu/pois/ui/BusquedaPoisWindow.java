@@ -93,13 +93,13 @@ public class BusquedaPoisWindow extends SimpleWindow<BusquedaPois> {
 	private HashMap<Class<? extends POI>,POIDetalleWindow> mapaVentanas; 
 	
 	private void visualizarPOI() {
-		Dialog<?> ventana = this.getDetalleWindow();
+		Dialog<POI> ventana = this.getDetalleWindow();
 		ventana.open();
 		
 	}
-	private Dialog<?> getDetalleWindow(){
+	private Dialog<POI> getDetalleWindow(){
 		String value = this.getModelObject().getPoiSeleccionado().getClass().getSimpleName();
-		Dialog<?> ventana = null;
+		Dialog<POI> ventana = null;
 		switch (value) {
 		case "SucursalBanco":
 			ventana = new BancoDetalleWindow(this,(SucursalBanco)this.getModelObject().getPoiSeleccionado());

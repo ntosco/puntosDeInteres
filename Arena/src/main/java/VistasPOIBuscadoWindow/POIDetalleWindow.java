@@ -1,5 +1,6 @@
 package VistasPOIBuscadoWindow;
 
+import org.uqbar.arena.aop.windows.TransactionalDialog;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
@@ -10,7 +11,7 @@ import ar.utn.dds.POI.POI;
 
 @SuppressWarnings("serial")
 @Observable
-public class POIDetalleWindow extends Dialog<POI> {
+public class POIDetalleWindow extends TransactionalDialog<POI> {
 	
 	public POI model;
 	
