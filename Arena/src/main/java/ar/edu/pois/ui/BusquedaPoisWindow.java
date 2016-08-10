@@ -1,5 +1,7 @@
 package ar.edu.pois.ui;
 
+import java.util.HashMap;
+
 import org.uqbar.arena.bindings.NotNullObservable;
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.layout.HorizontalLayout;
@@ -9,11 +11,23 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
+import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
+
+import AppModel.VistaPOIAppModel;
+import VistasPOIBuscadoWindow.BancoDetalleWindow;
+import VistasPOIBuscadoWindow.CGPDetalleWindow;
+import VistasPOIBuscadoWindow.ColectivoDetalleWindow;
+import VistasPOIBuscadoWindow.POIDetalleWindow;
+
 import org.uqbar.arena.widgets.List;
 
+import ar.utn.dds.POI.CentroGestionParticipacion;
+import ar.utn.dds.POI.LocalComercial;
 import ar.utn.dds.POI.POI;
+import ar.utn.dds.POI.ParadaDeColectivo;
+import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.arena.appModel.BusquedaPois;
 
 public class BusquedaPoisWindow extends SimpleWindow<BusquedaPois> {
@@ -25,6 +39,16 @@ public class BusquedaPoisWindow extends SimpleWindow<BusquedaPois> {
 
 	public BusquedaPoisWindow(WindowOwner parent) {
 		super(parent, new BusquedaPois());
+		this.initMapaVentanas();
+		
+	}
+
+	private void initMapaVentanas() {
+		this.mapaVentanas = new HashMap<Class<? extends POI>,POIDetalleWindow>();
+//		this.mapaVentanas.put(SucursalBanco.class,new BancoDetalleWindow(this,));
+//		this.mapaVentanas.put(CentroGestionParticipacion.class,new CGPDetalleWindow(this,this.getModelObject().getPoiSeleccionado()));
+//		this.mapaVentanas.put(ParadaDeColectivo.class,new ColectivoDetalleWindow(this,this.getModelObject().getPoiSeleccionado()));
+//		this.mapaVentanas.put(LocalComercial.class,new LocalComercialDetalleWindow(this,this.getModelObject().getPoiSeleccionado()));
 	}
 
 	@Override
@@ -66,11 +90,20 @@ public class BusquedaPoisWindow extends SimpleWindow<BusquedaPois> {
 
 		Button view = new Button(actionsPanel);
 		view.setCaption("Ver");
-		view.onClick(() -> this.getModelObject().visualizarPOI());
+		view.onClick(() -> this.visualizarPOI());
 
 
 		NotNullObservable elementSelected = new NotNullObservable("poiSeleccionado");
 		view.bindEnabled(elementSelected);
+	}
+
+	private HashMap<Class<? extends POI>,POIDetalleWindow> mapaVentanas; 
+	
+	private void visualizarPOI() {
+		Dialog<?> ventana = mapaVentanas.get(this.getModelObject().getPoiSeleccionado().getClass());
+		ventana.open();
+		
+		
 	}
 
 	private void createResultsGrid(Panel mainPanel) {

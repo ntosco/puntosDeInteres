@@ -30,10 +30,6 @@ public class BusquedaPois {
 		
 	}
 	
-	public Object visualizarPOI() {
-		//TODO: Ver como abrir una nueva venta de dialogo para cada tipo de POI
-		return null;
-	}
 	//********************************
 	// Getters & Setters
 	//********************************
