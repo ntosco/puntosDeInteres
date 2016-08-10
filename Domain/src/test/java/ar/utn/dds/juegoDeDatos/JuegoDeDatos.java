@@ -43,6 +43,7 @@ import ar.utn.dds.procesos.estrategiaFallo.EnvioMensajePorFalla;
 import ar.utn.dds.procesos.estrategiaFallo.EstrategiaPorFallo;
 import ar.utn.dds.procesos.estrategiaFallo.NoRealizarAccionPorFalla;
 import ar.utn.dds.procesos.estrategiaFallo.ReplicaPorFallo;
+import ar.utn.dds.repositorio.Repositorio;
 import ar.utn.dds.roles.RolAdministrador;
 import ar.utn.dds.roles.RolConsulta;
 
@@ -344,6 +345,10 @@ abstract public class JuegoDeDatos {
 	
 
 	protected EstrategiaPorFallo estrategiaFalloMock;
+	
+	//Repositorio
+	protected Repositorio repositorioDefault = Repositorio.getInstance();
+	
 	
 	
 	public void setUpGeneral() {
@@ -1180,5 +1185,15 @@ abstract public class JuegoDeDatos {
 		estrategiaEnvioMensaje = new EnvioMensajePorFalla(listaUsuarios);
 		estrategiaFalloMock = mock(EstrategiaPorFallo.class);
 	}
+	
+	public void setUpRepositorio() {
+		this.setUpLocalComercial();
+		this.setUpBanco();
+		this.setUpCGP();
+		this.setUpColectivos();
+		this.repositorioDefault.create(morita);
+		this.repositorioDefault.create(libreria);
+		
+	}	
 
 }
