@@ -1,5 +1,8 @@
 package ar.utn.dds.POI;
 
+import org.uqbar.commons.utils.Observable;
+
+@Observable
 public class Rubro {
 	private String nombre;
 	private double radioCercania;

@@ -7,13 +7,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.uqbar.commons.utils.Observable;
+
 import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
 import ar.utn.dds.estrategias.implementacion.DisponibilidadxRangoHorario;
 import ar.utn.dds.estrategias.implementacion.DisponibilidadxServicio;
 import ar.utn.dds.servicios.Servicio;
 import ar.utn.dds.utils.Jornada;
 import ar.utn.dds.utils.RangoHorario;
-
+@Observable
 public class SucursalBanco extends POI{
 	
 	private List<Servicio> listaServicios = new ArrayList<Servicio>();

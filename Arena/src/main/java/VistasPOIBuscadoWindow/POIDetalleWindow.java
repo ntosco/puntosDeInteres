@@ -6,28 +6,33 @@ import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.commons.utils.Observable;
 
-import AppModel.VistaPOIAppModel;
+import ar.utn.dds.POI.POI;
 
 @SuppressWarnings("serial")
 @Observable
-public class POIDetalleWindow extends Dialog<VistaPOIAppModel> {
-
-	public POIDetalleWindow(WindowOwner owner, VistaPOIAppModel model) {
-		super(owner, model);
+public class POIDetalleWindow extends Dialog<POI> {
+	
+	public POI model;
+	
+	public POIDetalleWindow(WindowOwner owner, POI poi) {
+		super(owner, poi);
+		this.getDelegate().setErrorViewer(this);
+		this.model = poi;
 	}
 
-	public void createMainFormContents(Panel mainPanel) {
+	public void createFormPanel(Panel mainPanel) {
 		new Label(mainPanel).setText("Nombre");
-		new Label(mainPanel).setText(getModelObject().getNombre());
+		new Label(mainPanel).bindValueToProperty("nombre");
 		new Label(mainPanel).setText("Direccion");
-		new Label(mainPanel).setText(getModelObject().getDireccion());
+		new Label(mainPanel).bindValueToProperty("direccionNombre");
+//		new Label(mainPanel).bindValueToProperty(this.model.getDireccionNombre()
+//				.concat(" ")
+	//			.concat(Integer.toString(this.model.getDireccionNumero())));
 
 	}
-
-	@Override
-	protected void createFormPanel(Panel mainPanel) {
-		this.createMainFormContents(mainPanel);
+	
+	public void addFormPanel(Panel mainPanel){
 	}
-
+	
 	
 }

@@ -2,17 +2,22 @@ package ar.utn.dds.POI;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.uqbar.commons.utils.Observable;
 import org.uqbar.geodds.*;
+
 import java.time.LocalDateTime;
+
 import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
 import ar.utn.dds.estrategias.implementacion.DisponibilidadxServicio;
 import ar.utn.dds.servicios.Servicio;
-
+@Observable
 public class CentroGestionParticipacion extends POI{
 
 	private List<Servicio> listaServicios = new ArrayList <Servicio>();
 	private Comuna comuna;	
+	private List<String> listaServiciosString = new ArrayList<String>();
 			
 	public boolean contieneServicio(String textoLibre){
 		for (Servicio servicio : listaServicios){
@@ -52,6 +57,12 @@ public class CentroGestionParticipacion extends POI{
 		 return this.getEstrategiasDisponibilidad().stream().anyMatch((estrategiaDisponibilidad)->estrategiaDisponibilidad.estaDisponible(this,this.listaServicios, nombreServicio, horarioConsultado));
 		
 	}
+	
+	public void actualizarListaServicios(){
+		List<String> lista = new ArrayList<String>();
+		this.listaServicios.forEach(servicio -> lista.add(servicio.getNombre()));
+		listaServiciosString = lista;
+	}
 
 	public CentroGestionParticipacion() {
 		super();
@@ -59,5 +70,16 @@ public class CentroGestionParticipacion extends POI{
 		estrategias.add(new DisponibilidadxServicio());
 		this.setEstrategiasDisponibilidad(estrategias);
 	}
+
+	public List<String> getListaServiciosString() {
+		this.actualizarListaServicios();
+		return listaServiciosString;
+	}
+
+	public void setListaServiciosString(List<String> listaServiciosString) {
+		this.listaServiciosString = listaServiciosString;
+	}
+	
+	
 
 }

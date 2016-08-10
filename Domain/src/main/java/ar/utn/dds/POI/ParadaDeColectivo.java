@@ -3,11 +3,12 @@ package ar.utn.dds.POI;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.uqbar.commons.utils.Observable;
 import org.uqbar.geodds.Point;
 
 import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
 import ar.utn.dds.estrategias.implementacion.DisponibilidadFullTime;
-
+@Observable
 public class ParadaDeColectivo extends POI{
 	
 	final double DISTANCIA_MINIMA_DE_CERCANIA = 0.1;

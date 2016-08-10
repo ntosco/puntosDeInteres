@@ -3,12 +3,13 @@ package ar.utn.dds.POI;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.uqbar.commons.utils.Observable;
 import org.uqbar.geodds.Point;
 
 import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
 import ar.utn.dds.estrategias.implementacion.DisponibilidadxRangoHorario;
 
-
+@Observable
 public class LocalComercial extends POI {
 
 	private double cercania = 0;
