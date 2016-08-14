@@ -27,7 +27,7 @@ public class BusquedaPois {
 	
 	public void agregarPalabrasClave(){
 		this.listaPalabrasClaves.add(palabraClave);
-		
+		this.setPalabraClave("");
 	}
 	
 	//********************************
