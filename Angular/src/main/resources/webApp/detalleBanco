@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Detalle Sucursal Banco</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <h2>Detalle Sucursal Banco</h2>
+  <div>
+  	<div>
+  		<h3><i>Nombre:</i></h3>
+  		Frances San Cristóbal<br>
+  		<br>
+  		<h3><i>Dirección:</i><br></h3>
+  		Estados Unidos 2206<br>
+  		
+  		<br>
+  		 <table style="width:50%">
+		 <tr>
+			<th align="left">Servicios que presta</th>
+		 </tr>
+		 <tr>
+			<td>Depósitos</td>
+		 </tr>
+		 <tr>
+			<td>Consulta de saldo</td>
+		 </tr>
+	  </table>
+  	</div>
+  	
+  </div>	

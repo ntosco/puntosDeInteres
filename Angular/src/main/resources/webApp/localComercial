@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Detalle de Local Comercial</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <h2>Detalle de Local Comercial</h2>
+  <div>
+  	<div>
+  		<h3><i>Nombre:</i></h3>
+  		Heisenburguer<br>
+  		<br>
+  		<h3><i>Dirección:</i><br></h3>
+  		Chile 147<br>
+  		
+  		<br>
+  		 <table style="width:50%">
+		 <tr>
+			<th align="left">Rubros que contiene</th>
+		 </tr>
+		 <tr>
+			<td>Comida rápida</td>
+		 </tr>
+		 <tr>
+			<td>Venta de helados</td>
+		 </tr>
+	  </table>
+  	</div>
+  	
+  </div>	
