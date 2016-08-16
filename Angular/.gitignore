@@ -1,4 +1,7 @@
+src/main/resources/webApp/node_modules/
+
 *.class
+.metadata
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

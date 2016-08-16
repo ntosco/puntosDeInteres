@@ -1,3 +1,7 @@
+Angular/Angular.iml
+Domain/.idea/
+Domain/Dominio.iml
+
 *.class
 .metadata
 
