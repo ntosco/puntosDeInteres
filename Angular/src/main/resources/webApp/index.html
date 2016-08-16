@@ -9,16 +9,27 @@
 </head>
 
 <body>
-  <h2>Busqueda</h2>
+
   <div class="container-fluid">
-    Criterio de b&uacute;squeda
-    <div>
-      Nombre<br>
-      <input type="text" id="palabraClave">
-	  
-	  <table style="...">
+	  <h3 class="h3">Criterio de b&uacute;squeda</h3>
+
+	  <form>
+		  <div>
+			  <label>Ingrese una palabra clave como criterio de busqueda</label>
+		  </div>
+		  <div class="input-group">
+			  <div class="input-group-btn col-md-4q">
+				  <input type="text" class="form-control" id="palabraClave" placeholder="Palabra clave" >
+				  <input type="button" class="btn btn-primary" id="agregarPalabra" value="Agregar">
+			  </div>
+		  </div>
+	  </form>
+
+	<div>
+
+	  <table class="table table-striped">
 		 <tr>
-			<th align="left">Palabras clave seleccionadas</th>
+			<th align="center">Palabras clave seleccionadas</th>
 		 </tr>
 		 <tr>
 			<td>jPerez</td>
@@ -27,13 +38,14 @@
 			<td>IMPALA</td>
 		 </tr>
 	  </table>
-	    
-    </div>
-      <input type="button" id="agregarPalabra" value="Agregar">
+
+	  </div>
 	  <input type="button" id="buscarPois" value="Buscar">
-	<div>
-	Resultado<br>
-	  <table style="width:40%">
+	  <div>
+
+		<h3 class="h3">Resultado</h3><br>
+
+	  <table class="table table-striped">
 		  <tr>
 			<th>Nombre</th>
 			<th>Direccion</th> 
