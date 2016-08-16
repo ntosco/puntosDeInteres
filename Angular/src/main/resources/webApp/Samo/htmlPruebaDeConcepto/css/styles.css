@@ -1,0 +1,55 @@
+body {
+    background-color: #0275d8;
+	
+}
+html,body{
+
+margin:0px;
+
+height:100%;
+
+}
+
+h2 {
+    color: #0275d8;
+    text-align: center;
+}
+
+p {
+    font-family: "Times New Roman";
+    font-size: 20px;
+}
+
+.cardLogin {
+	width: 30%;
+	height: 70%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 50px;
+	    border: solid;
+}
+
+.centerCardImg{
+	align-content: center;
+    margin: auto;
+    width: 50%;
+}
+
+
+.divCentrado { 
+    width: 60%;
+    margin: 0 auto
+}
+
+.divBusqueda { 
+	background-color: #fff;
+	float: left;
+	height: 60%;
+    width: 29%;
+	margin:10px;
+	margin-left:3%;
+	margin-top:9%;
+    border: solid;
+}
+
+
