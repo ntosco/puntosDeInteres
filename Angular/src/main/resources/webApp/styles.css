@@ -38,3 +38,63 @@ th {
     background-color: #2E9AFE;
     color: white;
 }
+.border-btm {
+    border-bottom: 0.1em solid #2E9AFE;
+    padding-bottom: 0.4em;
+    margin-bottom: 0.8em;
+}
+span.mrgn{
+    margin-bottom:20px;
+}
+.tablecgp th{
+    border-right: 3px solid #FFF;
+}
+.tablecgp td{
+    border-right: 3px solid #FFF;
+}
+.main{
+    background: #E1EDFF;
+}
+.grad{
+    background: -webkit-linear-gradient(to bottom left, #FFF, #E1EDFF);
+    background: -o-linear-gradient(to bottom left, #FFF, #E1EDFF); 
+    background: -moz-linear-gradient(to bottom left, #FFF, #E1EDFF); 
+    background: linear-gradient(to top left, #FFF, #E1EDFF); 
+    height: 100em
+}
+
+ul.menutop {
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    background-color: #70767F;
+}
+
+ul.menutop li {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+ul.menutop li:hover:not(.active) {
+    background-color: #111;
+}
+
+ul.menutop li.active {
+    background-color: #2E9AFE;
+}
+
+ul.menutop li.right {
+    float: right;
+}
+
+@media screen and (max-width: 400px){
+    ul.menutop { padding: 0; }
+    ul.menutop li.right,
+    ul.menutop li {
+        float: none;
+    }
+}
