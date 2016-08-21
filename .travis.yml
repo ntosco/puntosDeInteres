@@ -2,9 +2,13 @@ language: java
 
 jdk:
   - oraclejdk8
+
+branches:
+  except:
+  - ejercicios-binding
   
 before_install:
-  cd Domain #solo si no tienen el pom en el raíz del repositorio
+  cd Domain
 
 #notifications:
 #  email:
