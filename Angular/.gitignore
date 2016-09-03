@@ -1,4 +1,6 @@
-src/main/resources/webApp/node_modules/
+node_modules/
+.idea
+
 
 *.class
 .metadata
