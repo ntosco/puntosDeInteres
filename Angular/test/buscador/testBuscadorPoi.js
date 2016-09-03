@@ -1,6 +1,6 @@
 var assert = require("assert");
 
-var Buscador = require("../..//js/app").Buscador;
+var Buscador = require("../../js/app").Buscador;
 
 describe('ComportamientoBuscador', function () {
     describe('Buscador', function() {

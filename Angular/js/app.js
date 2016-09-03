@@ -7,11 +7,16 @@ app.controller('controllerBusqueda', function() {
 });
 
 function Buscador() {
-    this.palabraClave;
+    var self = this
     this.listaPalabrasClave = [];
+    this.palabraClave;
 
-    this.agregarPalabraClave = function(palabraClave) {
-        this.listaPalabrasClave.push(palabraClave)
+    this.agregarPalabraClave = function() {
+        self.listaPalabrasClave.push(self.palabraClave);
+        console.log(self.listaPalabrasClave);
     };
-
 }
+
+app.exports = {
+    Buscador: Buscador
+};

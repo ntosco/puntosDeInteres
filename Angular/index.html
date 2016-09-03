@@ -4,7 +4,6 @@
 <head>
   <title>Busqueda de puntos de interes</title>
 
-    <link rel="stylesheet" href="css/styles.css"/>
 
     <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
@@ -34,25 +33,28 @@
 
                       <input type="button" class="btn btn-primary"
                              id="agregarPalabra"
-                             ng-click="busquedaCtrl.agregarPalabraClave(palabraClave)"
+                             ng-click="busquedaCtrl.agregarPalabraClave()"
                       >
                   </div>
               </div>
+
+              <div>
+                  <ul>
+                      <li>
+                          <p align="center">Palabras clave seleccionadas</p>
+                      </li>
+                      <li ng-repeat="pk in busquedaCtrl.listaPalabrasClave">
+                          <p>{{pk}}</p>
+                      </li>
+                  </ul>
+              </div>
+
+              <input type="button" id="buscarPois" value="Buscar">
+              <div>
+
           </form>
 
-        <div>
-            <ul>
-              <li>
-                <p align="center">Palabras clave seleccionadas</p>
-              </li>
-              <li ng-repeat="palabraClave in busquedaCtrl.listaPalabrasClave">
-                  <p color:#333333>{{palabraClave}}</p>
-              </li>
-            </ul>
-          </div>
 
-          <input type="button" id="buscarPois" value="Buscar">
-          <div>
 
             <h3 class="h3">Resultado</h3><br>
 
