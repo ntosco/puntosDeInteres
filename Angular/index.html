@@ -4,7 +4,6 @@
 <head>
   <title>Busqueda de puntos de interes</title>
 
-
     <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -69,15 +68,20 @@
                   <tr>
                     <th>Nombre</th>
                     <th>Direccion</th>
+                    <th>Acciones</th>
                   </tr>
                   <tr ng-repeat="poiEncontrado in busquedaCtrl.resultadoBusqueda">
                     <td>{{poiEncontrado.nombre}}</td>
                     <td>{{poiEncontrado.direccion}}</td>
+                    <td>
+
+                        <span type="button" class="glyphicon glyphicon-eye-open" aria-hidden="true"> </span>
+                        <span type="button"  class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></span>
+
+                    </td>
+
                   </tr>
               </table>
-              <div>
-                  <input type="button" id="visualizarPoi" value="Ver">
-              </div>
           </form>
       </div>
 
