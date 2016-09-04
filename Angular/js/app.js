@@ -15,22 +15,26 @@ var repositorio = [
 ];
 
 
-var app = angular.module('PuntosDeInteresApp',[])
+var app = angular.module('PuntosDeInteresApp',[]);
 
 app.controller('controllerBusqueda', function () {
-    var self = this
+    var self = this;
     this.listaPalabrasClave = [];
-    this.palabraClave;
+    this.palabraClave = "";
+    this.resultadoBusqueda = [];
 
     this.agregarPalabraClave = function() {
         self.listaPalabrasClave.push(self.palabraClave);
         this.palabraClave = "";
     };
-    /*
-     this.buscarPuntosDeInteres = function() {
-     this.repositorop
+
+     this.buscarPuntoDeInteres = function() {
+         var condicionDeBusqueda = function (value) {
+             return ( value.nombre.includes(self.listaPalabrasClave) || value.direccion.includes(self.listaPalabrasClave) )
+         };
+         this.resultadoBusqueda = repositorio.filter(condicionDeBusqueda);
      }
-     */
+
 });
 
 

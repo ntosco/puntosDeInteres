@@ -52,7 +52,12 @@
               </div>
 
               <div>
-                  <input type="button" id="buscarPois" value="Buscar">
+                  <input
+                          type="button"
+                          id="buscarPois"
+                          value="Buscar"
+                          ng-click="busquedaCtrl.buscarPuntoDeInteres()"
+                  >
               </div>
           </form>
 
@@ -60,25 +65,16 @@
 
           <h3 class="h3">Resultado</h3><br>
           <form>
-              <table class="table table-striped">
+              <table class="table table-striped" >
                   <tr>
                     <th>Nombre</th>
                     <th>Direccion</th>
                   </tr>
-                  <tr>
-                    <td>Victoria Impala</td>
-                    <td>Fco. de Beiro 4801</td>
-                  </tr>
-                  <tr>
-                    <td>jPerez Cotillon</td>
-                    <td>Av. Alvarez Jonte 5232 1º</td>
-                  </tr>
-                      <tr>
-                    <td>CGP 6</td>
-                    <td>Patricias Argentinas 277</td>
+                  <tr ng-repeat="poiEncontrado in busquedaCtrl.resultadoBusqueda">
+                    <td>{{poiEncontrado.nombre}}</td>
+                    <td>{{poiEncontrado.direccion}}</td>
                   </tr>
               </table>
-
               <div>
                   <input type="button" id="visualizarPoi" value="Ver">
               </div>
