@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" ng-app="PuntosDeInteresApp">
+<html lang="es" ng-app="LoginApp">
 
 <head>
     <title>Iniciar sesión</title>
@@ -7,13 +7,17 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/styles.css">
-
+	
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
 </head>
 
-<body>
+<body ng-controller="controllerLogin as loginCtrl">
 
     <div>
         <div class="page-header">
@@ -23,17 +27,17 @@
             <div class="form-group">
                 <i class="fa fa-user prefix"></i>
                 <label for="form2">Usuario</label>
-                <input type="text" id="form2" class="form-control">
+                <input type="text" id="form2" class="form-control" ng-model="loginCtrl.user">
             </div>
 
             <div class="form-group">
                 <i class="fa fa-lockprefix "></i>
                 <label for="form4">Password</label>
-                <input type="password" id="form4" class="form-control">
+                <input type="password" id="form4" class="form-control" ng-model="loginCtrl.pass">
             </div>
 
             <div class="md-form">
-                <a href="index.html" class="btn btn-primary btn-lg">Login</a>
+			    <input type="button" class="btn btn-primary"  value="Ingresar" id="Ingresar" ng-click="loginCtrl.loginExitoso()">
             </div>
 
             <div>
@@ -46,6 +50,8 @@
         </div>
 
     </div>
+	
+      <script src="js/loginApp.js"></script>
 
 </body>
 </html>
