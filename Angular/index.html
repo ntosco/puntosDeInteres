@@ -7,8 +7,9 @@
 
     <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
 
 </head>
 
@@ -43,44 +44,46 @@
                       <li>
                           <p align="center">Palabras clave seleccionadas</p>
                       </li>
+
                       <li ng-repeat="pk in busquedaCtrl.listaPalabrasClave">
                           <p>{{pk}}</p>
                       </li>
                   </ul>
               </div>
 
-              <input type="button" id="buscarPois" value="Buscar">
               <div>
-
+                  <input type="button" id="buscarPois" value="Buscar">
+              </div>
           </form>
 
 
 
-            <h3 class="h3">Resultado</h3><br>
-
-          <table class="table table-striped">
-              <tr>
-                <th>Nombre</th>
-                <th>Direccion</th>
-              </tr>
-              <tr>
-                <td>Victoria Impala</td>
-                <td>Fco. de Beiro 4801</td>
-              </tr>
-              <tr>
-                <td>jPerez Cotillon</td>
-                <td>Av. Alvarez Jonte 5232 1º</td>
-              </tr>
+          <h3 class="h3">Resultado</h3><br>
+          <form>
+              <table class="table table-striped">
                   <tr>
-                <td>CGP 6</td>
-                <td>Patricias Argentinas 277</td>
-              </tr>
-          </table>
-        </div>
-            <input type="button" id="visualizarPoi" value="Ver">
+                    <th>Nombre</th>
+                    <th>Direccion</th>
+                  </tr>
+                  <tr>
+                    <td>Victoria Impala</td>
+                    <td>Fco. de Beiro 4801</td>
+                  </tr>
+                  <tr>
+                    <td>jPerez Cotillon</td>
+                    <td>Av. Alvarez Jonte 5232 1º</td>
+                  </tr>
+                      <tr>
+                    <td>CGP 6</td>
+                    <td>Patricias Argentinas 277</td>
+                  </tr>
+              </table>
 
+              <div>
+                  <input type="button" id="visualizarPoi" value="Ver">
+              </div>
+          </form>
       </div>
-
 
       <!-- nuestro jscript -->
       <script src="js/app.js"></script>
