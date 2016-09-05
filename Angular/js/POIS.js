@@ -14,7 +14,7 @@ function SucursalCGP() {
 
     this.nombre = 0;
     this.direccion = 0;
-    this.zona = 0:
+    this.zona = 0;
     this.listaServicios = [];
 
     //Agregar Jornada para el horario de atencion

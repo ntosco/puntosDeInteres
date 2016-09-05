@@ -38,7 +38,7 @@ app.controller('controllerBusqueda', function (repositorio) {
 
 });
 
-appVista.controller('controllerBanco', function () {
+app.controller('controllerBanco', function () {
 
     return new SucursalBanco();
 });

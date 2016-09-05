@@ -1,17 +1,3 @@
-appVista.config(function ($stateProvider, $urlRouterProvider) {
-
- $urlRouterProvider.otherwise("/");
-
- $stateProvider
-
-   .state('sucursalBanco', {
-     url: "/",
-     templateUrl: "partials/sucursalBanco.html",
-     controller: "controllerBanco as crtlBanco"
-   })
-
-});
-
 app.config(function ($stateProvider, $urlRouterProvider){
 
     $urlRouterProvider.otherwise("/");
@@ -61,4 +47,9 @@ app.config(function ($stateProvider, $urlRouterProvider){
                 }
             }
         })
+        .state('sucursalBanco', {
+             url: "/banco",
+             templateUrl: "partials/sucursalBanco.html",
+             controller: "controllerBanco as crtlBanco"
+           })
 });
