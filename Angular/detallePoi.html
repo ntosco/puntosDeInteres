@@ -1,64 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="es" ng-app="VistaGeneral">
 <head>
-    <title>Detalle de CGP</title>
+    <title>Detalle de POI</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="css/styles.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
     <!-- Bootstrap core CSS -->
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Angular  Agregar dependencias en JSON-->
+    <script src="node_modules/angular/angular.js"></script>
+
+    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
+
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
 
 </head>
 
 <body class="grad">
-<ul class="menutop">
-    <li>Buscador</li>
-    <li class="active">Detalle</li>
-    <li class="right">Logout</li>
-</ul>
+    <ul class="menutop">
+        <li>Buscador</li>
+        <li class="active">Detalle</li>
+        <li class="right">Logout</li>
+    </ul>
+
 <div>
     <div class="container-fluid ">
+
+        <!-- Ver como hacer para que esto sea al estilo template Method -->
+
         <h1 class="border-btm">Detalle CGP</h1>
+
+        <!-- Fin comment -->
+
         <h4>Nombre:</h4>
+
         <span class="mrgn">CGP San Cristobal</span>
+
         <h4>Direccion:</h4>
-        <span class="mrgn">Estados Unidos 2206</span> <span class="glyphicon glyphicon-map-marker"></span> <br> <br>
 
+        <span class="mrgn">Estados Unidos 2206</span> <span class="glyphicon glyphicon-map-marker"></span> 
 
-        <table class="table table-hover table-striped tablecgp">
-            <thead>
-            <tr>
-                <th class="table-border">Nombre Servicio</th>
-                <th>Horario de Atencion</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>Deposito</td>
-                <td>Lun a Vie 10 a 15hs</td>
-            </tr>
-            <tr>
-                <td>Consulta de casos</td>
-                <td>Lun a Vie 10 a 15hs</td>
-            </tr>
-            <tr>
-                <td>Consulta de casos</td>
-                <td>Lun a Vie 10 a 15hs</td>
-            </tr>
-            <tr>
-                <td>Consulta de casos</td>
-                <td>Lun a Vie 10 a 15hs</td>
-            </tr>
-            </tbody>
-        </table>
-        <!-- SCRIPTS -->
-        <!-- JQuery -->
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <div ui-view></div>
+        
+     
+        <!-- JQuery --script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> >
         <!-- Bootstrap core JavaScript -->
         <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </div>
 </div>
+
+        <!-- Nuestros Scripts -->
+        <script src="js/appVista.js"></script>
+        <script src="js/POIS.js"></script>
+        <script src="js/routes.js"></script>
+
 </body>
 </html>

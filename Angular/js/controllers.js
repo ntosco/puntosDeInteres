@@ -37,3 +37,21 @@ app.controller('controllerBusqueda', function (repositorio) {
     }
 
 });
+
+appVista.controller('controllerBanco', function () {
+
+    return new SucursalBanco();
+});
+
+
+// ver de poner en un archivo aparte.
+
+function SucursalBanco() {
+
+    // Agregar que "herede" de POI los valores que se repiten.
+
+    this.nombre = "Este es un nombre";
+    this.direccion = 'Esta es la direccion';
+    this.listaServicios = [];
+
+}

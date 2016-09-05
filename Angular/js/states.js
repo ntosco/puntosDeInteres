@@ -1,3 +1,17 @@
+appVista.config(function ($stateProvider, $urlRouterProvider) {
+
+ $urlRouterProvider.otherwise("/");
+
+ $stateProvider
+
+   .state('sucursalBanco', {
+     url: "/",
+     templateUrl: "partials/sucursalBanco.html",
+     controller: "controllerBanco as crtlBanco"
+   })
+
+});
+
 app.config(function ($stateProvider, $urlRouterProvider){
 
     $urlRouterProvider.otherwise("/");
