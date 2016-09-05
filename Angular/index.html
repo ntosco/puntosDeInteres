@@ -2,92 +2,30 @@
 <html lang="es" ng-app="PuntosDeInteresApp">
 
 <head>
-  <title>Busqueda de puntos de interes</title>
+    <title>Iniciar sesión</title>
+    <meta charset="utf-8">
 
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+	
     <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/states.js"></script>
 
 </head>
 
-    <body ng-controller="controllerBusqueda as busquedaCtrl">
+<body>
 
-      <div class="container-fluid">
-          <h3 class="h3">Criterio de b&uacute;squeda</h3>
+    <ui-view></ui-view>
 
-          <form>
-              <div>
-                  <label>Ingrese una palabra clave como criterio de búqueda</label>
-              </div>
-              <div class="input-group">
-                  <div class="input-group-btn col-md-4q">
-
-                      <input type="text" class="form-control"
-                             id="palabraClave1"
-                             name="palabraClave"
-                             placeholder="Palabra clave"
-                             ng-model="busquedaCtrl.palabraClave"
-                      >
-
-                      <input type="button" class="btn btn-primary"
-                             id="agregarPalabra"
-                             ng-click="busquedaCtrl.agregarPalabraClave()"
-                      >
-                  </div>
-              </div>
-
-              <div>
-                  <ul>
-                      <li>
-                          <p align="center">Palabras clave seleccionadas</p>
-                      </li>
-
-                      <li ng-repeat="pk in busquedaCtrl.listaPalabrasClave">
-                          <p>{{pk}}</p>
-                      </li>
-                  </ul>
-              </div>
-
-              <div>
-                  <input
-                          type="button"
-                          id="buscarPois"
-                          value="Buscar"
-                          ng-click="busquedaCtrl.buscarPuntoDeInteres()"
-                  >
-              </div>
-          </form>
-
-
-
-          <h3 class="h3">Resultado</h3><br>
-          <form>
-              <table class="table table-striped" >
-                  <tr>
-                    <th>Nombre</th>
-                    <th>Direccion</th>
-                    <th>Acciones</th>
-                  </tr>
-                  <tr ng-repeat="poiEncontrado in busquedaCtrl.resultadoBusqueda">
-                    <td>{{poiEncontrado.nombre}}</td>
-                    <td>{{poiEncontrado.direccion}}</td>
-                    <td>
-
-                        <button type="button" class="glyphicon glyphicon-eye-open" aria-hidden="true"> </button>
-                        <button type="button"  class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></button>
-
-                    </td>
-
-                  </tr>
-              </table>
-          </form>
-      </div>
-
-      <!-- nuestro jscript -->
-      <script src="js/app.js"></script>
-
-    </body>
+</body>
 </html>
-  

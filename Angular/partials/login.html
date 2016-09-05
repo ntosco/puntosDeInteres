@@ -1,0 +1,37 @@
+<div>
+    <div class="page-header">
+        <h1>Iniciar sesion<small> Puntos de interes</small></h1>
+    </div>
+    <div>
+        <div class="form-group">
+            <i class="fa fa-user prefix"></i>
+            <label for="form2">Usuario</label>
+            <input type="text" id="form2" class="form-control" ng-model="loginCtrl.user">
+        </div>
+
+        <div class="form-group">
+            <i class="fa fa-lockprefix "></i>
+            <label for="form4">Password</label>
+            <input type="password" id="form4" class="form-control" ng-model="loginCtrl.pass">
+        </div>
+
+        <div class="md-form">
+            <input
+                    type="button"
+                    class="btn btn-primary"
+                    value="Ingresar"
+                    id="Ingresar"
+                    ng-click="loginCtrl.loginExitoso()"
+            >
+        </div>
+
+        <div>
+            <label for="form2">Registrarse</label>
+        </div>
+        <div>
+            <label for="form2">He olvidado mi contraseña</label>
+        </div>
+
+    </div>
+
+</div>

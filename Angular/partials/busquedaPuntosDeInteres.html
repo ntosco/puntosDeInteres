@@ -1,0 +1,70 @@
+      <div class="container-fluid">
+          <h3 class="h3">Criterio de b&uacute;squeda</h3>
+
+          <form>
+              <div>
+                  <label>Ingrese una palabra clave como criterio de búqueda</label>
+              </div>
+              <div class="input-group">
+                  <div class="input-group-btn col-md-4q">
+
+                      <input type="text" class="form-control"
+                             id="palabraClave1"
+                             name="palabraClave"
+                             placeholder="Palabra clave"
+                             ng-model="busquedaCtrl.palabraClave"
+                      >
+
+                      <input type="button" class="btn btn-primary"
+                             id="agregarPalabra"
+                             ng-click="busquedaCtrl.agregarPalabraClave()"
+                      >
+                  </div>
+              </div>
+
+              <div>
+                  <ul>
+                      <li>
+                          <p align="center">Palabras clave seleccionadas</p>
+                      </li>
+
+                      <li ng-repeat="pk in busquedaCtrl.listaPalabrasClave">
+                          <p>{{pk}}</p>
+                      </li>
+                  </ul>
+              </div>
+
+              <div>
+                  <input
+                          type="button"
+                          id="buscarPois"
+                          value="Buscar"
+                          ng-click="busquedaCtrl.buscarPuntoDeInteres()"
+                  >
+              </div>
+          </form>
+
+
+
+          <h3 class="h3">Resultado</h3><br>
+          <form>
+              <table class="table table-striped" >
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Direccion</th>
+                    <th>Acciones</th>
+                  </tr>
+                  <tr ng-repeat="poiEncontrado in busquedaCtrl.resultadoBusqueda">
+                    <td>{{poiEncontrado.nombre}}</td>
+                    <td>{{poiEncontrado.direccion}}</td>
+                    <td>
+
+                        <button type="button" class="glyphicon glyphicon-eye-open" aria-hidden="true"> </button>
+                        <button type="button"  class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></button>
+
+                    </td>
+
+                  </tr>
+              </table>
+          </form>
+      </div>
