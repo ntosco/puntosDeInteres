@@ -43,7 +43,11 @@ app.controller('controllerBanco', function () {
     return new SucursalBanco();
 });
 
+app.controller('controllerGeneral',function( $state, $stateParams){
 
+   $state.go($stateParams.POID);
+
+})
 // ver de poner en un archivo aparte.
 
 function SucursalBanco() {

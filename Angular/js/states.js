@@ -47,9 +47,14 @@ app.config(function ($stateProvider, $urlRouterProvider){
                 }
             }
         })
-        .state('sucursalBanco', {
+        .state('CGP', {
              url: "/banco",
              templateUrl: "partials/sucursalBanco.html",
              controller: "controllerBanco as crtlBanco"
+           })
+        .state('detallePOI', {
+             url: "/detalleGeneral/:POID",
+             templateUrl: "detallePoi.html",
+             controller: "controllerGeneral as crtlGeneral"
            })
 });

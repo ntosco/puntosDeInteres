@@ -59,7 +59,13 @@
                     <td>{{poiEncontrado.direccion}}</td>
                     <td>
 
-                        <button type="button" class="glyphicon glyphicon-eye-open" aria-hidden="true"> </button>
+                        <button 
+                                type="button" 
+                                class="glyphicon glyphicon-eye-open" 
+                                aria-hidden="true" 
+                                ui-sref = "detallePOI({POID: poiEncontrado.tipo})"> 
+                        </button>
+
                         <button type="button"  class="glyphicon glyphicon glyphicon-pencil" aria-hidden="true"></button>
 
                     </td>
