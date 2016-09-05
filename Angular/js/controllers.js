@@ -22,7 +22,7 @@ app.controller('controllerBusqueda', function (repositorio) {
     var self = this;
     this.listaPalabrasClave = [];
     this.palabraClave = "";
-    this.resultadoBusqueda = [];
+    this.resultadoBusqueda = repositorio;
 
     this.agregarPalabraClave = function() {
         self.listaPalabrasClave.push(self.palabraClave);
@@ -34,6 +34,11 @@ app.controller('controllerBusqueda', function (repositorio) {
             return ( value.nombre.includes(self.listaPalabrasClave) || value.direccion.includes(self.listaPalabrasClave) )
         };
         this.resultadoBusqueda = repositorio.filter(condicionDeBusqueda);
+    };
+
+    this.limpiarBusqueda = function(){
+        self.listaPalabrasClave = [];
+        self.resultadoBusqueda = repositorio;
     }
 
 });

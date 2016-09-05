@@ -23,23 +23,39 @@
               </div>
 
               <div>
-                  <ul>
-                      <li>
-                          <p align="center">Palabras clave seleccionadas</p>
-                      </li>
-
-                      <li ng-repeat="pk in busquedaCtrl.listaPalabrasClave">
-                          <p>{{pk}}</p>
-                      </li>
-                  </ul>
+                  <table class="table table-striped">
+                      <tr>
+                          <th align="center">Palabras clave seleccionadas</th>
+                          <th>Acciones</th>
+                      </tr>
+                      <tr ng-repeat="pk in busquedaCtrl.listaPalabrasClave">
+                          <td>{{pk}}</td>
+                          <td >
+                              <button
+                                  type="button"
+                                  class="glyphicon glyphicon-remove"
+                                  aria-hidden="true"
+                                  ng-model = "">
+                              </button>
+                          </td>
+                      </tr>
+                  </table>
               </div>
 
-              <div>
+              <div class="btn-group">
                   <input
                           type="button"
+                          class="btn btn-primary"
                           id="buscarPois"
                           value="Buscar"
                           ng-click="busquedaCtrl.buscarPuntoDeInteres()"
+                  >
+                  <input
+                          type="button"
+                          class="btn btn-danger"
+                          id="limpiarBusqueda"
+                          value="Limpiar"
+                          ng-click="busquedaCtrl.limpiarBusqueda()"
                   >
               </div>
           </form>
