@@ -43,24 +43,20 @@ app.controller('controllerBusqueda', function (repositorio) {
 
 });
 
-app.controller('controllerBanco', function () {
+app.controller('controllerGeneral',function( $state, $stateParams,repositorio){
 
-    return new SucursalBanco();
+    var idpoi =  _.find(repositorio, function(o) { return o.id == $stateParams.POID; });
+    var tipo = idpoi.tipo;
+
+    // Datos relevantes a los tipo de POIS
+    this.tipo = tipo;
+    this.nombre1 = idpoi.nombre;
+    this.direccion = idpoi.direccion;
+    this.rubro = idpoi.adicionales.rubro;
+    this.servicios = idpoi.adicionales.serviciosAsociados;
+    this.zona = idpoi.adicionales.zona;
+    this.numeroLinea = idpoi.adicionales.numeroDeLinea;
+
+    $state.go('detallePOI.' + tipo);
+
 });
-
-app.controller('controllerGeneral',function( $state, $stateParams){
-
-   $state.go($stateParams.POID);
-
-})
-// ver de poner en un archivo aparte.
-
-function SucursalBanco() {
-
-    // Agregar que "herede" de POI los valores que se repiten.
-
-    this.nombre = "Este es un nombre";
-    this.direccion = 'Esta es la direccion';
-    this.listaServicios = [];
-
-}
