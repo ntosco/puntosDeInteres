@@ -2,18 +2,20 @@
   "name": "elEjercitoDeMarcos",
   "version": "1.0.0",
   "description": "POIs",
-  "scripts": {
-    "test": "mocha -R spec -t 1 test/**/*.js"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/dds-utn/2016-mn-group-09"
   },
+  "main": [
+    "dist/css/sb-admin-2.css",
+    "dist/js/sb-admin-2.js"
+  ],
   "author": "elEjercitoDeMarcos",
   "devDependencies": {
     "bootstrap": "^3.3.5",
     "jquery": "^2.1.4",
     "angular": "^1.5.8",
-    "angular-ui-router": "^0.2.15"
+    "angular-ui-router": "^0.2.15",
+    "lodash": "~4.11.2"
   }
 }
