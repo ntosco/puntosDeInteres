@@ -9,6 +9,7 @@ h3 {
 }
 
 body {
+	background-color: #d4f5ff !important;
     font-family: sans-serif;
     font-size: 1.2em;
 }
@@ -19,7 +20,6 @@ input {
 }
 
 div {
-    width: 95%;
     padding: 0.5em;
 }
 
@@ -35,7 +35,7 @@ th, td {
 }
 
 th {
-    background-color: #2E9AFE;
+    background-color: #5bc0de;
     color: white;
 }
 .border-btm {
@@ -97,4 +97,41 @@ ul.menutop li.right {
     ul.menutop li {
         float: none;
     }
+}
+
+
+.cabecera {
+    background-color: #5bc0de;
+	margin-top: 0px !important;
+    margin-right: 0px !important;
+    margin-bottom: 20px !important;
+    margin-left: 0px !important;
+}
+
+
+.divDetallePoi { 
+	background-color: #fff;
+	width: 70%;
+	//height: 70%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 50px;
+	    border: solid;
+}
+
+.center {
+    margin: auto;
+    margin-right: auto;
+    margin-left: auto;
+
+}
+
+.cardLogin {
+	background-color: #5bc0de;
+	width: 30%;
+	height: 70%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 50px;
+	    border: solid;
 }
