@@ -1,16 +1,13 @@
 <div class="container-fluid">
 
-      <span> {{crtlGeneral.nombre1}}</span>
+       <h3 class="h3">Zona: {{crtlGeneral.zona}}</h3>
 
         <table class="table table-striped" >
                   <tr>
                     <th>Servicio que presta</th>
-                    <th>Horario de atencion</th>
                   </tr>
-                  <tr ng-repeat="poiEncontrado in busquedaCtrl.resultadoBusqueda">
-                    <td>{{crtlGeneral.servicios}}</td>
-                    <td>{{poiEncontrado.direccion}}</td>
-
+                  <tr ng-repeat="servicio in crtlGeneral.servicios">
+                    <td>{{servicio}}</td>
                   </tr>
 </table>
      

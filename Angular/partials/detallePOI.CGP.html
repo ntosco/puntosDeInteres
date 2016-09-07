@@ -1,8 +1,15 @@
-<div>
+<div class="container-fluid">
+	<h3 class="h3">Zona: {{crtlGeneral.zona}}</h3>
 
-<p>Esto es el detalle  - parcial </p><br>
-
-      <span> {{crtlGeneral.nombre1}}</span>
-        <p>{{crtlGeneral.nombre1}}</p>
+        <table class="table table-striped" >
+                  <tr>
+                    <th>Servicio que presta</th>
+                    <th>Horario de atencion</th>
+                  </tr>
+                  <tr ng-repeat="servicio in crtlGeneral.servicios">
+                    <td>{{servicio.servicio}}</td>
+                    <td>{{servicio.horario}}</td>
+                  </tr>
+		</table>
      
 </div>
