@@ -37,8 +37,8 @@ app.config(function ($stateProvider, $urlRouterProvider){
                     return [
                         new PuntoDeInteres("1", "Cafe Martinez", "(-34.703658, -58.393030)", "Gdor. F. Llavallol 80", "Local Comercial", { rubro: "Cafetería"} ),
                         new PuntoDeInteres("2","Planet Taco | Mexican & American Food", "(-34.702516, -58.393320)", "Gdor. Carlos Tejedor 102", "Local Comercial", { rubro: "Restaurant"} ),
-                        new PuntoDeInteres("3","Banco Itaú", "(-34.703325, -58.391981)", "Av. Hipólito Yrigoyen 4189", "Sucursal de banco", { serviciosAsociados: {"Asistencia Financiera" : "Tramite de alta"} , zona: "Lanus" } ),
-                        new PuntoDeInteres("4","Banco ICBC", "(-34.703915, -58.391966)", "Av. Hipólito Yrigoyen 4227", "Sucursal de banco", { serviciosAsociados: {"Evaluacion para un credito" : "Chequeras"} , zona: "Boedo" } ),
+                        new PuntoDeInteres("3","Banco Itaú", "(-34.703325, -58.391981)", "Av. Hipólito Yrigoyen 4189", "Sucursal de banco", { serviciosAsociados: ["Asistencia Financiera" , "Tramite de alta", "Pago de Tarjeta"] , zona: "Lanus" } ),
+                        new PuntoDeInteres("4","Banco ICBC", "(-34.703915, -58.391966)", "Av. Hipólito Yrigoyen 4227", "Sucursal de banco", { serviciosAsociados: ["Evaluacion para un credito" , "Chequeras", "Asesoramiento"] , zona: "Boedo" } ),
                         new PuntoDeInteres("5","Linea 45 - Remedios de Escalada", "(-34.704478, -58.391965)", "Avenida Hipólito Yrigoyen 4299", "Parada de colectivo", { numeroDeLinea: "45" } ),
                         new PuntoDeInteres("6","Linea 33 - Retiro", "(-34.704410, -58.391708)", "Av. Hipólito Yrigoyen 4276", "Parada de colectivo", { numeroDeLinea: "33" } ),
                         new PuntoDeInteres("7","CGP 9", "(-34.645662, -58.485099)", "Av Directorio 4360", "CGP", { zona: "Comuna 9", serviciosAsociados: [{servicio: "Tarjeta VOS", horario: "10 - 15 hs"} , {servicio: "EcoBici", horario: "10 -14 hs"}]  } ),
@@ -60,8 +60,8 @@ app.config(function ($stateProvider, $urlRouterProvider){
                     return [
                         new PuntoDeInteres("1", "Cafe Martinez", "(-34.703658, -58.393030)", "Gdor. F. Llavallol 80", "localComercial", { rubro: "Cafetería"} ),
                         new PuntoDeInteres("2","Planet Taco | Mexican & American Food", "(-34.702516, -58.393320)", "Gdor. Carlos Tejedor 102", "localComercial", { rubro: "Restaurant"} ),
-                        new PuntoDeInteres("3","Banco Itaú", "(-34.703325, -58.391981)", "Av. Hipólito Yrigoyen 4189", "sucursalBanco", { serviciosAsociados: {"Asistencia Financiera" : "Tramite de alta"} , zona: "Lanus" } ),
-                        new PuntoDeInteres("4","Banco ICBC", "(-34.703915, -58.391966)", "Av. Hipólito Yrigoyen 4227", "sucursalBanco", { serviciosAsociados: {"Evaluacion para un credito" : "Chequeras"} , zona: "Boedo" } ),
+                        new PuntoDeInteres("3","Banco Itaú", "(-34.703325, -58.391981)", "Av. Hipólito Yrigoyen 4189", "sucursalBanco", { serviciosAsociados: ["Asistencia Financiera" , "Tramite de alta", "Pago de Tarjeta"] , zona: "Lanus" } ),
+                        new PuntoDeInteres("4","Banco ICBC", "(-34.703915, -58.391966)", "Av. Hipólito Yrigoyen 4227", "sucursalBanco", { serviciosAsociados: ["Evaluacion para un credito" , "Chequeras", "Asesoramiento"] , zona: "Boedo" } ),
                         new PuntoDeInteres("5","Linea 45 - Remedios de Escalada", "(-34.704478, -58.391965)", "Avenida Hipólito Yrigoyen 4299", "lineaColectivo", { numeroDeLinea: "45" } ),
                         new PuntoDeInteres("6","Linea 33 - Retiro", "(-34.704410, -58.391708)", "Av. Hipólito Yrigoyen 4276", "lineaColectivo", { numeroDeLinea: "33" } ),
                         new PuntoDeInteres("7","CGP 9", "(-34.645662, -58.485099)", "Av Directorio 4360", "CGP", { zona: "Comuna 9", serviciosAsociados: [{servicio: "Tarjeta VOS", horario: "10 - 15 hs"} , {servicio: "EcoBici", horario: "10 -14 hs"}]  } ),
