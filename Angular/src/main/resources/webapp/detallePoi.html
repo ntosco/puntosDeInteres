@@ -2,66 +2,41 @@
 <html lang="es" ng-app="PuntosDeInteresApp">
 <head>
     <title>Detalle de POI</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" href="css/styles.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
-    <!-- Bootstrap core CSS -->
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Angular  Agregar dependencias en JSON-->
-    <script src="node_modules/angular/angular.js"></script>
-
-    <script src="node_modules/angular-animate/angular-animate.min.js"></script>
-
-    <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
-
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
-
 </head>
 
 <body class="grad">
+
     <ul class="menutop">
         <li>Buscador</li>
         <li class="active">Detalle</li>
         <li class="right">Logout</li>
     </ul>
 
-<div>
-    <div class="container-fluid ">
+    <div>
+        <div class="container-fluid ">
 
-        <!-- Ver como hacer para que esto sea al estilo template Method -->
+            <!-- Ver como hacer para que esto sea al estilo template Method -->
+            <h1 class="border-btm">Detalle GENERAL</h1>
+            <!-- Fin comment -->
 
-        <h1 class="border-btm">Detalle GENERAL</h1>
+            <h4>Nombre:</h4>
 
-        <!-- Fin comment -->
+            <span class="mrgn">XXXXXX</span>
 
-        <h4>Nombre:</h4>
+            <h4>Direccion:</h4>
 
-        <span class="mrgn">XXXXXX</span>
+            <span class="mrgn">XXXX</span> <span class="glyphicon glyphicon-map-marker"></span>
 
-        <h4>Direccion:</h4>
 
-        <span class="mrgn">XXXX</span> <span class="glyphicon glyphicon-map-marker"></span> 
+            <div ui-view></div>
 
-        
-        <div ui-view></div>
-       
-     
-        <!-- JQuery --script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> >
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        
+
+            <!-- JQuery --script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> >
+            <!-- Bootstrap core JavaScript -->
+            <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        </div>
     </div>
-</div>
-
-        <!-- Nuestros Scripts -->
-        <script src="js/app.js"></script>
-        <script src="js/POIS.js"></script>
-        <script src="js/controllers.js"></script>
-        <script src="js/states.js"></script>
-
 </body>
 </html>
