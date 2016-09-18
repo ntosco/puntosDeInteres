@@ -1,3 +1,7 @@
+var Poi = function(){
+
+};
+
 function LocalComercial() {
 
 	// Agregar que "herede" de POI los valores que se repiten.

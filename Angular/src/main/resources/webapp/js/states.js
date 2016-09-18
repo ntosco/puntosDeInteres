@@ -29,6 +29,7 @@ app.config(function ($stateProvider, $urlRouterProvider){
             templateUrl: "partials/busquedaPuntosDeinteres.html",
             controller: "controllerBusqueda as busquedaCtrl",
             resolve: {
+                /*
                 repositorio: function(){
                     function PuntoDeInteres (identificador, nombre, point, direccion, tipo, adicionales) {
                         return { id: identificador, nombre: nombre, point: point, direccion: direccion, tipo: tipo, adicionales: adicionales };
@@ -45,6 +46,7 @@ app.config(function ($stateProvider, $urlRouterProvider){
                         new PuntoDeInteres("8","CGP 2", "(-34.596665, -58.398946)", "Pres. José E. Uriburu 1022", "CGP", { zona: "Comuna 2", serviciosAsociados: [{servicio: "Tarjeta VOS", horario: "10 - 15 hs"} , {servicio: "Venta de pasajes - Bus Turístico", horario: "10 -14 hs"}]})
                     ];
                 }
+                */
             }
         })
        .state('detallePOI', {
