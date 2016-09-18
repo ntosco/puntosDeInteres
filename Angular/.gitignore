@@ -1,4 +1,4 @@
-node_modules/
+src/main/resources/webapp/node_modules/
 .idea
 
 
