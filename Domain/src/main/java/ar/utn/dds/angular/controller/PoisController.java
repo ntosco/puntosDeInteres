@@ -1,6 +1,6 @@
-package ar.edu.pois.controller;
+package ar.utn.dds.angular.controller;
 
-import ar.edu.pois.controller.util.JsonTransformer;
+import ar.utn.dds.angular.controller.util.JsonTransformer;
 import ar.utn.dds.POI.POI;
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class PoisController {
 
     public void register(){
         Spark.get("/pois", (request,response) -> {
-           List<POI> puntosDeInteres = Repositorio.getInstance().getPuntosDeInteres();
+            List<POI> puntosDeInteres = Repositorio.getInstance().getPuntosDeInteres();
             response.type("application/json;charset=utf-8");
             return puntosDeInteres;
         }, this.jsonTransformer);

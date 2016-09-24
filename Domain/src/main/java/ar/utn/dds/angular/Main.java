@@ -1,7 +1,7 @@
-package ar.edu.pois;
+package ar.utn.dds.angular;
 
-import ar.edu.pois.controller.util.JsonTransformer;
-import ar.edu.pois.controller.PoisController;
+import ar.utn.dds.angular.controller.PoisController;
+import ar.utn.dds.angular.controller.util.JsonTransformer;
 import com.google.gson.Gson;
 import spark.Spark;
 
@@ -17,4 +17,3 @@ public class Main {
         new PoisController(jsonTransformer).register();
     }
 }
-

@@ -26,11 +26,18 @@ app.controller('controllerBusqueda', function (PoisService) {
     this.puntosDeInteres = [];
 
     this.getPois = function() {
-        PoisService.findAll(function(data){
-            self.puntosDeInteres = _.map(data,function(protoPoi){
-                return angular.extend(new Poi(),protoPoi);
-            })
+        PoisService.findAll(function(response){
+            self.puntosDeInteres = response.data;
         })
+
+        /*
+         function(data){
+             self.puntosDeInteres = _.map(data,function(protoPoi){
+             return angular.extend(new Poi(),protoPoi);
+             })
+         }
+         */
+
     }
 
     this.agregarPalabraClave = function() {
@@ -52,12 +59,12 @@ app.controller('controllerBusqueda', function (PoisService) {
     }
 
     // Al iniciar la pantalla de búsqueda, se reflejan todos los puntos de interes
-    this.getPois();
-    resultadoBusqueda = puntosDeInteres;
+//    this.getPois();
+//    resultadoBusqueda = puntosDeInteres;
 
 });
 
-app.controller('controllerGeneral',function( $state, $stateParams,PoisService){
+app.controller('controllerGeneral',function( $state, $stateParams){
 
     var idpoi =  _.find(repositorio, function(o) { return o.id == $stateParams.POID; });
     var tipo = idpoi.tipo;

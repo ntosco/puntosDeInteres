@@ -1,4 +1,4 @@
-package ar.edu.pois.controller.util;
+package ar.utn.dds.angular.controller.util;
 
 import spark.ResponseTransformer;
 import com.google.gson.Gson;

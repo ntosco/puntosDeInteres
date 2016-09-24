@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import static org.mockito.Mockito.mock;
 
 import org.json.simple.JSONObject;
 import org.uqbar.geodds.Point;
