@@ -2,6 +2,9 @@ package ar.utn.dds.usuarios;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.annotations.Expose;
+
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.POI.Review;
 import ar.utn.dds.exceptions.InvalidPermissionsException;
@@ -16,11 +19,12 @@ import ar.utn.dds.utils.Consulta;
 public class UsuarioConcreto implements Usuario {
 	
 	private List<Observador> accionesObservers = new ArrayList<Observador>();
-	private String nombreUsuario;
+	@Expose private String nombreUsuario;
+	@Expose private String password;
 	private Rol rol;
 	private String email;
 	private EstrategiaPorFallo estrategiaPorFallo = new NoRealizarAccionPorFalla();
-	private List<POI> favoritos = new ArrayList<POI>();
+	@Expose private List<POI> favoritos = new ArrayList<POI>();
 
 
 
@@ -72,7 +76,13 @@ public class UsuarioConcreto implements Usuario {
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
 	}
-
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	@Override
 	public Boolean tieneRolAdministrador() {
 		return (this.rol instanceof RolAdministrador);

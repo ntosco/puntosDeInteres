@@ -6,6 +6,8 @@ import servidor.controller.util.JsonTransformer;
 import ar.utn.dds.POI.POI;
 import java.util.List;
 import ar.utn.dds.repositorio.Repositorio;
+import ar.utn.dds.repositorio.RepositorioDeUsuarios;
+import ar.utn.dds.usuarios.Usuario;
 import spark.Spark;
 
 public class PoisController {
@@ -25,5 +27,22 @@ public class PoisController {
             response.type("application/json;charset=utf-8");
             return todosLosPois;
         }, this.jsonTransformer);
+        
+
+      Spark.get("/usuarios", (request,response) -> {
+    	  String nombreUsuario = "martin";
+    	  String password = "samo";
+          Usuario usuarioQueIngresa;
+    	  boolean ingresoExitoso = RepositorioDeUsuarios.getInstance().ingresar(nombreUsuario, password);
+          if(ingresoExitoso){//se loggea con exito
+        	  usuarioQueIngresa = RepositorioDeUsuarios.getInstance().buscarUsuario(nombreUsuario);
+          }else{
+        	  usuarioQueIngresa = null;
+          }
+          response.type("application/json;charset=utf-8");
+          return usuarioQueIngresa;
+      }, this.jsonTransformer);
+
+        
     }
 }

@@ -19,7 +19,17 @@ public interface Usuario {
 	
 	public void ejecutarProceso(Proceso proceso);
 	
+	public List<POI> getFavoritos();
+	
+	public void setFavoritos(List<POI> favoritos);
+	
 	public String getNombreUsuario();
+	
+	public void setNombreUsuario(String nombreUsuario);
+	
+	public String getPassword();
+
+	public void setPassword(String password);
 
 	public Boolean tieneRolAdministrador();
 	
