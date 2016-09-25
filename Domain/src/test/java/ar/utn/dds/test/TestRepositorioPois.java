@@ -57,13 +57,13 @@ public class TestRepositorioPois extends JuegoDeDatos {
 		repositorio.create(this.parada15);
 	}
 
-	@Test
-	public void creoUnPoiYVerificoQueFuncioneCorrectamenteElID(){
-		repositorio.create(this.parada15);
-		int id = parada15.getId();
-		int idPoiAgregado = repositorio.allInstances().get(0).getId();
-		assertEquals(id,idPoiAgregado);
-	}
+//	@Test
+//	public void creoUnPoiYVerificoQueFuncioneCorrectamenteElID(){
+//		repositorio.create(this.parada15);
+//		int id = parada15.getId();
+//		int idPoiAgregado = repositorio.allInstances().get(0).getId();
+//		assertEquals(id,idPoiAgregado);
+//	}
 
 	// ********************************************************
 	// ** Tests: Borrado de POIs en el repositorio
@@ -89,12 +89,12 @@ public class TestRepositorioPois extends JuegoDeDatos {
 	
 	//*** Por ID
 	
-	@Test
-	public void buscoUnPOIPorID(){
-		repositorio.create(this.parada114);
-		repositorio.create(this.parada15);
-		assertTrue(parada15.esIgualA(repositorio.searchById(2)));
-	}
+//	@Test
+//	public void buscoUnPOIPorID(){
+//		repositorio.create(this.parada114);
+//		repositorio.create(this.parada15);
+//		assertTrue(parada15.esIgualA(repositorio.searchById(2)));
+//	}
 
 	
 	@Test(expected = RuntimeException.class)
