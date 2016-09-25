@@ -11,6 +11,8 @@ import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
 import ar.utn.dds.utils.Jornada;
 import org.apache.commons.lang.StringUtils;
 import ar.utn.dds.exceptions.*;
+import com.google.gson.annotations.*;
+
 @Observable
 //TODO Ver si es necesario realizar un objeto intermediario que sea observable
 public abstract class POI extends Entity {
@@ -19,12 +21,12 @@ public abstract class POI extends Entity {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	private String nombre;
-	private String direccionNombre;
+
+	@Expose private String nombre;
+	@Expose private String direccionNombre;
 	private String barrio;
 	private int direccionNumero;
-	private Point ubicacionActual;
+	@Expose private Point ubicacionActual;
 
 	private final double DISTANCIA_MINIMA_DE_CERCANIA = 0.5;
 	
