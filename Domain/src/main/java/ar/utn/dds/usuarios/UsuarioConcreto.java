@@ -3,6 +3,7 @@ package ar.utn.dds.usuarios;
 import java.util.ArrayList;
 import java.util.List;
 import ar.utn.dds.POI.POI;
+import ar.utn.dds.POI.Review;
 import ar.utn.dds.exceptions.InvalidPermissionsException;
 import ar.utn.dds.observers.Observador;
 import ar.utn.dds.procesos.Proceso;
@@ -19,6 +20,9 @@ public class UsuarioConcreto implements Usuario {
 	private Rol rol;
 	private String email;
 	private EstrategiaPorFallo estrategiaPorFallo = new NoRealizarAccionPorFalla();
+	private List<POI> favoritos = new ArrayList<POI>();
+
+
 
 	@Override
 	public List<POI> buscarPuntos(String pablabraBuscada) {
@@ -26,6 +30,17 @@ public class UsuarioConcreto implements Usuario {
 		Consulta consulta = new Consulta(this,pablabraBuscada);
 
 		return consulta.buscaPuntosYNotificaObservadores();
+	}
+	
+
+	@Override
+	public void opinar(POI punto, String comentario, int valoracion) {
+		if(punto.elUsuarioYaOpino(this.getNombreUsuario())){
+			
+		}else{
+			Review opinion = new Review(comentario,this.getNombreUsuario(),valoracion);
+			punto.agregarReview(opinion);
+		}
 	}
 
 	@Override
@@ -100,12 +115,32 @@ public class UsuarioConcreto implements Usuario {
 		this.estrategiaPorFallo = estrategiaPorFallo;
 	}
 
+	public List<POI> getFavoritos() {
+		return favoritos;
+	}
+
+	public void setFavoritos(List<POI> favoritos) {
+		this.favoritos = favoritos;
+	}
+
+	public void agregarFavorito(POI poiFavorito){
+		List<POI> favoritosActuales = this.getFavoritos();
+		favoritosActuales.add(poiFavorito);
+		this.setFavoritos(favoritosActuales);
+	}
+	
+	public void quitarFavorito(POI poiNoFavorito){
+		List<POI> favoritosActuales = this.getFavoritos();
+		favoritosActuales.remove(poiNoFavorito);
+		this.setFavoritos(favoritosActuales);
+	}	
 
 	@Override
 	public void notificarFalla() {
 		this.setEmail(email);
 		
 	}
+
 
 
 

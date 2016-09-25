@@ -8,6 +8,8 @@ import ar.utn.dds.utils.Consulta;
 
 public interface Usuario {
 	public List<POI> buscarPuntos (String pablabraBuscar);
+		
+	public void opinar(POI punto, String comentario, int valoracion);
 	
 	public void agregarObservador(Observador observerador);
 	

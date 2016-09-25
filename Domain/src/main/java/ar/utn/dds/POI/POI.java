@@ -31,6 +31,7 @@ public abstract class POI extends Entity {
 	private List<Jornada> JornadaDisponible = new ArrayList<Jornada>();
 	private List<EstrategiaDisponibilidad> EstrategiasDisponibilidad = new ArrayList<EstrategiaDisponibilidad>();
 	private List<String> listaPalabrasClave = new ArrayList <String>();
+	private List<Review> reviews = new ArrayList <Review>();
 	
 	// Baja logica
 	
@@ -208,4 +209,39 @@ public abstract class POI extends Entity {
 		this.fechaBaja = fechaBaja;
 	}
 
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
+	
+	public void agregarReview(Review unaRev){
+		List<Review> reviewsActuales = this.getReviews();
+		reviewsActuales.add(unaRev);
+		this.setReviews(reviewsActuales);
+	}
+	
+	public boolean elUsuarioYaOpino(String nombreUsuario){
+		List<String> listaNombres = new ArrayList <String>();
+		this.getReviews().forEach(opinion -> listaNombres.add(opinion.getNombreUsuario()));
+        if(listaNombres.contains(nombreUsuario)){
+        	return true;
+        }else{
+        	return false;
+        }
+	}
+
+	public double calcularValoracionPromedio(){
+        if(this.getReviews().size() > 0){
+			double totalDeValoraciones = 0;        
+			for (int i = 0; i < this.getReviews().size(); i++) {
+	        	totalDeValoraciones = totalDeValoraciones + this.getReviews().get(i).getValoracion();
+	        }
+	        return (totalDeValoraciones/this.getReviews().size());
+        }else{
+        	return 0;
+        }
+	}
 }
