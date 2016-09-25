@@ -25,6 +25,13 @@ public class RepositorioDeUsuarios{
 		}	
 		return Repoinstance;
 	}
+	
+	private RepositorioDeUsuarios(){
+		this.crearUsuario("martin", "samo");
+		this.crearUsuario("nico", "tosco");
+		this.crearUsuario("maca", "lepera");
+		this.crearUsuario("fer", "haspert");
+	}
 
 	public void clean(){
 		Repoinstance = null;

@@ -2,7 +2,14 @@ app.controller('controllerLogin', function ($state, repositorioUsuarios) {
     var self = this;
     this.user;
     this.pass;
+    this.ingresoExitoso;
 
+ this.ingresar = function() {
+        poisService.ingresar(function(response){
+            self.ingresoExitoso = response.data;
+        })
+
+/*
     this.loginExitoso = function () {
         var found = false;
         for(var i = 0; i < repositorioUsuarios.length; i++) {
@@ -15,7 +22,7 @@ app.controller('controllerLogin', function ($state, repositorioUsuarios) {
         if(found == false){
             alert("nombre de usuario y/o contraseña incorrecto/s");
         }
-    };
+    };*/
 });
 
 app.controller('controllerBusqueda', function (poisService) {

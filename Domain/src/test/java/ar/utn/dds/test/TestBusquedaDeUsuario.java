@@ -10,6 +10,7 @@ public class TestBusquedaDeUsuario {
 
 	@Test
 	public void testCrearUsuario() {
+		RepositorioDeUsuarios.getInstance().clean();
 		RepositorioDeUsuarios.getInstance().crearUsuario("martin", "samo");
 		assertTrue(RepositorioDeUsuarios.getInstance().getUsuarios().size() == 1);
 	}

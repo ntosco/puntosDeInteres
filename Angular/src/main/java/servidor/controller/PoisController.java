@@ -27,7 +27,7 @@ public class PoisController {
             response.type("application/json;charset=utf-8");
             return todosLosPois;
         }, this.jsonTransformer);
-        
+       
 
       Spark.get("/usuarios", (request,response) -> {
     	  String nombreUsuario = "martin";
