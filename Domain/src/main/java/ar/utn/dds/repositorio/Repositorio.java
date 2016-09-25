@@ -1,5 +1,11 @@
 package ar.utn.dds.repositorio;
+import ar.utn.dds.POI.CentroGestionParticipacion;
+import ar.utn.dds.POI.LocalComercial;
 import ar.utn.dds.POI.ParadaDeColectivo;
+import ar.utn.dds.POI.Review;
+import ar.utn.dds.POI.Rubro;
+import ar.utn.dds.POI.SucursalBanco;
+
 import org.uqbar.commons.model.*;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
@@ -9,8 +15,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ar.utn.dds.POI.POI;
+import ar.utn.dds.creacionales.BancoBuilder;
+import ar.utn.dds.creacionales.CgpBuilder;
+import ar.utn.dds.creacionales.ColectivoBuilder;
+import ar.utn.dds.creacionales.LocalComercialBuilder;
 import ar.utn.dds.exceptions.RepositoryException;
+import ar.utn.dds.servicios.Servicio;
+import ar.utn.dds.utils.Jornada;
 import ar.utn.dds.utils.OrigenDeDatos;
+
 import org.uqbar.geodds.Point;
 
 public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDatos{
@@ -32,22 +45,99 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 	// ********************************************************
 
 	private Repositorio(){
-		this.crearPoi("Linea 33 - Retiro", "Av. Hipólito Yrigoyen 4276");
-		this.crearPoi("Linea 45 - Remedios de Escalado", "Avenida Hipólito Yrigoyen 4299");
+		this.crearPoi("Linea 33", "Av. Hipolito Yrigoyen 4276", "La boca", 21, new Point(21.0 , 2.1), null, null, null, null);
+		this.crearPoi("Linea 45", "Linea 145", "Boedo", 150, "San juan 12", new Point(21.0 , 2.1), null, null);
 	}
 
-	public POI crearPoi(String unaDescripcion, String unaDireccion){
+	/* Local Comercial */
+	
+	public POI crearPoi(String nombre, String direccion, String barrio, int numero, Point ubicacion, 
+			List<String> palabrasClave, List<Jornada> jornada, List<Rubro> rubros, List<Review> reviews){
+		
+		POI poi = new LocalComercial();
+		LocalComercialBuilder builder = new LocalComercialBuilder();
+		builder.crearListaRubros(rubros)
+						.setNombre(nombre)
+						.setBarrio(barrio)
+						.setDireccion(direccion)
+						.setNumero(numero)
+						.setUbicacion(ubicacion)
+						.setPalabrasClave(palabrasClave)
+						.setJornada(jornada);
+						poi = builder.build();
+						poi.setReviews(reviews);
 
-		ParadaDeColectivo unPoi = new ParadaDeColectivo();
-
-		unPoi.setDireccionNombre(unaDireccion);
-		unPoi.setLinea(unaDescripcion);
-		unPoi.setNombre("bla");
-		unPoi.setUbicacionActual(new Point(2,1));
-
-		this.create(unPoi);
-		return unPoi;
+		this.create(poi);
+		return poi;
 	}
+	
+	/* Parada de Colectivo */ 
+	
+	public POI crearPoi(String nombre, String direccion, String barrio, int numero, String linea, Point ubicacion, 
+			List<String> palabrasClave, List<Review> reviews){
+		
+		POI poi = new ParadaDeColectivo();
+		ColectivoBuilder builder15 = new ColectivoBuilder();
+		builder15.crearLinea(linea)
+					.setNombre(nombre)
+					.setBarrio(barrio)
+					.setDireccion(direccion)
+					.setNumero(numero)
+					.setUbicacion(ubicacion)
+					.setPalabrasClave(palabrasClave);
+					poi = builder15.build();
+					poi.setReviews(reviews);
+			this.create(poi);
+			return poi;	
+					
+	}		
+	
+	/* CGP */
+	
+	public POI crearPoi(String nombre, String direccion, String barrio, int numero, Point ubicacion, List<Point> comuna,
+						List<Servicio> servicios, List<String> palabrasClave, List<Jornada> jornadas, List<Review> reviews){
+		
+		POI poi = new CentroGestionParticipacion();
+		CgpBuilder builder = new CgpBuilder();
+				  builder.crearComuna(comuna)
+						.crearListaServicios(servicios)
+						.setNombre(nombre)
+						.setBarrio(barrio)
+						.setDireccion(direccion)
+						.setNumero(numero)
+						.setUbicacion(ubicacion)
+						.setPalabrasClave(palabrasClave)
+						.setJornada(jornadas);
+						poi = builder.build();
+						poi.setReviews(reviews);
+			this.create(poi);
+			return poi;
+	}
+	
+	/* Sucursal Banco */
+	
+	public POI crearPoi(String nombre, String direccion, int numero, Point ubicacion, String barrio, List<Servicio> servicios,
+			List<String> palabrasClave, List<Jornada> jornadas, List<Review> reviews){
+		
+		POI poi = new SucursalBanco();
+		BancoBuilder builder = new BancoBuilder();
+		builder.crearListaServicios(servicios)
+					.setNombre(nombre)
+					.setBarrio(barrio)
+					.setDireccion(direccion)
+					.setNumero(numero)
+					.setUbicacion(ubicacion)
+					.setPalabrasClave(palabrasClave)
+					.setJornada(jornadas);
+					poi = builder.build();
+					poi.setReviews(reviews);
+			this.create(poi);
+			return poi;
+		
+	}
+	
+	
+	
 
 
 	// ********************************************************
