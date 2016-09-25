@@ -18,7 +18,7 @@ app.controller('controllerLogin', function ($state, repositorioUsuarios) {
     };
 });
 
-app.controller('controllerBusqueda', function (PoisService) {
+app.controller('controllerBusqueda', function (poisService) {
     var self = this;
     this.listaPalabrasClave = [];
     this.palabraClave = "";
@@ -26,14 +26,14 @@ app.controller('controllerBusqueda', function (PoisService) {
     this.puntosDeInteres = [];
 
     this.getPois = function() {
-        PoisService.findAll(function(response){
+        poisService.findAll(function(response){
             self.puntosDeInteres = response.data;
         })
 
         /*
          function(data){
              self.puntosDeInteres = _.map(data,function(protoPoi){
-             return angular.extend(new Poi(),protoPoi);
+             return servidor.extend(new Poi(),protoPoi);
              })
          }
          */
@@ -50,18 +50,15 @@ app.controller('controllerBusqueda', function (PoisService) {
             return ( value.nombre.includes(self.listaPalabrasClave) || value.direccion.includes(self.listaPalabrasClave) )
         };
         self.getPois();
-        this.resultadoBusqueda = puntosDeInteres.filter(condicionDeBusqueda);
+        self.resultadoBusqueda = self.puntosDeInteres.filter(condicionDeBusqueda);
     };
 
     this.limpiarBusqueda = function(){
         self.listaPalabrasClave = [];
-        self.resultadoBusqueda = puntosDeInteres;
+        self.resultadoBusqueda = self.puntosDeInteres;
     }
 
-    // Al iniciar la pantalla de búsqueda, se reflejan todos los puntos de interes
-//    this.getPois();
-//    resultadoBusqueda = puntosDeInteres;
-
+    this.getPois();
 });
 
 app.controller('controllerGeneral',function( $state, $stateParams){

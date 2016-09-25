@@ -1,4 +1,4 @@
-app.service("PoisService", function($http) {
+app.service("poisService", function($http) {
 
     this.findAll = function(successCallback) {
         $http.get("/pois").success(successCallback);
