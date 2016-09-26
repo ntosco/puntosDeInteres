@@ -1,4 +1,4 @@
-var Poi = function(){
+var Poiss = function(){
 
 };
 

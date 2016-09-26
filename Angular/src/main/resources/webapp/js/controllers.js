@@ -4,47 +4,41 @@ app.controller('controllerLogin', function ($state, repositorioUsuarios) {
     this.pass;
     this.ingresoExitoso;
 
- this.ingresar = function() {
-        poisService.ingresar(function(response){
+    this.logUser = function () {
+        poisService.ingresar(function (response) {
             self.ingresoExitoso = response.data;
-        })
+        });
 
-/*
-    this.loginExitoso = function () {
-        var found = false;
-        for(var i = 0; i < repositorioUsuarios.length; i++) {
-            if (repositorioUsuarios[i].user == this.user && repositorioUsuarios[i].pass == this.pass) {
-                found = true;
-                $state.go("busquedaPuntosDeInteres");
-                break;
-            }
-        }
-        if(found == false){
-            alert("nombre de usuario y/o contraseña incorrecto/s");
-        }
-    };*/
+        /*
+         this.loginExitoso = function () {
+         var found = false;
+         for(var i = 0; i < repositorioUsuarios.length; i++) {
+         if (repositorioUsuarios[i].user == this.user && repositorioUsuarios[i].pass == this.pass) {
+         found = true;
+         $state.go("busquedaPuntosDeInteres");
+         break;
+         }
+         }
+         if(found == false){
+         alert("nombre de usuario y/o contraseña incorrecto/s");
+         }
+         };*/
+    };
 });
 
 app.controller('controllerBusqueda', function (poisService) {
     var self = this;
     this.listaPalabrasClave = [];
     this.palabraClave = "";
-    this.resultadoBusqueda = [];
     this.puntosDeInteres = [];
+    this.resultadoBusqueda = [];
 
     this.getPois = function() {
-        poisService.findAll(function(response){
-            self.puntosDeInteres = response.data;
-        })
-
-        /*
-         function(data){
-             self.puntosDeInteres = _.map(data,function(protoPoi){
-             return servidor.extend(new Poi(),protoPoi);
-             })
-         }
-         */
-
+        poisService.findAll(function(data){
+            self.puntosDeInteres = _.map(data,function(protoPoi){
+                return angular.extend(new Poi(),protoPoi);
+            });
+        });
     }
 
     this.agregarPalabraClave = function() {
@@ -66,6 +60,7 @@ app.controller('controllerBusqueda', function (poisService) {
     }
 
     this.getPois();
+
 });
 
 app.controller('controllerGeneral',function( $state, $stateParams){

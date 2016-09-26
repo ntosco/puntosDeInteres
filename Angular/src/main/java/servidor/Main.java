@@ -10,7 +10,6 @@ public class Main {
 
     public static void main(String[] args) {
         Gson gson2 = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-//        Gson gson = new Gson();
         JsonTransformer jsonTransformer = new JsonTransformer(gson2);
 
         Spark.port(9000);

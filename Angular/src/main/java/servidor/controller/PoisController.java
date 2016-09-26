@@ -21,7 +21,6 @@ public class PoisController {
     }
 
     public void register(){
-//        Gson gson2 = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         Spark.get("/pois", (request,response) -> {
             List<POI> todosLosPois = Repositorio.getInstance().allInstances();
             response.type("application/json;charset=utf-8");
@@ -29,10 +28,11 @@ public class PoisController {
         }, this.jsonTransformer);
        
 
-      Spark.get("/usuarios", (request,response) -> {
+      Spark.get("/logUser", (request,response) -> {
     	  String nombreUsuario = "martin";
     	  String password = "samo";
           Usuario usuarioQueIngresa;
+
     	  boolean ingresoExitoso = RepositorioDeUsuarios.getInstance().ingresar(nombreUsuario, password);
           if(ingresoExitoso){//se loggea con exito
         	  usuarioQueIngresa = RepositorioDeUsuarios.getInstance().buscarUsuario(nombreUsuario);
@@ -41,6 +41,7 @@ public class PoisController {
           }
           response.type("application/json;charset=utf-8");
           return usuarioQueIngresa;
+
       }, this.jsonTransformer);
 
         
