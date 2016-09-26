@@ -66,6 +66,7 @@ app.controller('controllerGeneral',function( $state, $stateParams){
     this.servicios = idpoi.adicionales.serviciosAsociados;
     this.zona = idpoi.adicionales.zona;
     this.numeroLinea = idpoi.adicionales.numeroDeLinea;
+    this.reviews = idpoi.adicionales.reviews;
 
     $state.go('detallePOI.' + tipo);
 

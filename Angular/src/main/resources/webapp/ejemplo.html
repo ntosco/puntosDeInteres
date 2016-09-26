@@ -20,6 +20,7 @@
    				</div>
     	</div>
    		<div class="col-sm-2">
+   			<p></p>
       		<select class="form-control">
 				  <option>1</option>
 				  <option>2</option>
@@ -29,8 +30,24 @@
 				  </select>
 					<p></p>
   			<button type="button" class="btn btn-success">Enviar</button>
-    </div>
-  </div>
-</div>
+    	</div>
+  	</div>
 
+  	<h3 class="h3"><span class="label label-info">Opiniones: </span></h3>
+
+  		<form>
+              <table class="table table-striped" >
+                  <tr>
+                    <th>Usuario</th>
+                    <th>Comentario</th>
+                    <th>Calificacion</th>
+                  </tr>
+                  <tr ng-repeat="review in crtlGeneral.reviews">
+                    <td>{{review.nombre}}</td>
+                    <td>{{review.comentario}}</td>
+                    <td>{{review.calificacion}}</td>
+                  </tr>
+              </table>
+          </form>
+	</div>
 </div>
