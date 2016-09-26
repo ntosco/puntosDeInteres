@@ -46,21 +46,18 @@ public class RepositorioDeUsuarios{
 		this.agregarUsuario(usuarioNuevo);
 		return usuarioNuevo;
 	}
-	
+
 	public boolean ingresar(String nombreUsuario, String password){
 		Usuario usuarioBuscado = this.buscarUsuario(nombreUsuario);
-		if(usuarioBuscado.getPassword() == password){
-			return true;
-		}
-		return false;
+		return usuarioBuscado.getPassword().contains(password);
 	}
-	
-	public Usuario buscarUsuario(String nombreUsuario){
-        for(int i=0; i<this.usuarios.size(); i++){
-        	if(this.usuarios.get(i).getNombreUsuario() == nombreUsuario){
-        		return this.usuarios.get(i);
-        	}
-       }
+
+	public Usuario buscarUsuario(String nombre){
+		for(int i=0; i<this.usuarios.size(); i++){
+			if(this.usuarios.get(i).getNombreUsuario().contains(nombre) ){
+				return this.usuarios.get(i);
+			}
+		}
 		return null;
 	}
 	

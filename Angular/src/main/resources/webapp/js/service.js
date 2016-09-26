@@ -5,8 +5,8 @@ app.service("poisService", function($http) {
     };
 
 
-    this.logUser = function(successCallback) {
-        $http.get("/logUser").success(successCallback);
+    this.logUser = function(usuario, successCallback) {
+        $http.get("/logUser/" + usuario.nombre + "/" + usuario.pass).success(successCallback);
     };
 
 /*

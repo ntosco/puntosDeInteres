@@ -1,28 +1,18 @@
-app.controller('controllerLogin', function ($state, repositorioUsuarios) {
+app.controller('controllerLogin', function ($state, poisService) {
     var self = this;
     this.user;
     this.pass;
-    this.ingresoExitoso;
+    this.ingresoExitoso = false;
 
-    this.logUser = function () {
-        poisService.ingresar(function (response) {
-            self.ingresoExitoso = response.data;
+    this.loguearUsuario = function () {
+        poisService.logUser(new Usuario(self.user,self.pass), function (response){
+            self.ingresoExitoso = response;
         });
 
-        /*
-         this.loginExitoso = function () {
-         var found = false;
-         for(var i = 0; i < repositorioUsuarios.length; i++) {
-         if (repositorioUsuarios[i].user == this.user && repositorioUsuarios[i].pass == this.pass) {
-         found = true;
-         $state.go("busquedaPuntosDeInteres");
-         break;
-         }
-         }
-         if(found == false){
-         alert("nombre de usuario y/o contraseña incorrecto/s");
-         }
-         };*/
+         if (self.ingresoExitoso)
+             $state.go("busquedaPuntosDeInteres");
+         else
+             alert("nombre de usuario y/o contraseña incorrecto/s");
     };
 });
 
