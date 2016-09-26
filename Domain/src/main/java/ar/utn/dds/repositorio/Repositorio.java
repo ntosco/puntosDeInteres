@@ -10,24 +10,41 @@ import org.uqbar.commons.model.*;
 import org.apache.commons.collections15.CollectionUtils;
 import org.apache.commons.collections15.Predicate;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import ar.utn.dds.POI.POI;
+import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.creacionales.BancoBuilder;
 import ar.utn.dds.creacionales.CgpBuilder;
 import ar.utn.dds.creacionales.ColectivoBuilder;
+import ar.utn.dds.creacionales.ListaJornadasBuilder;
 import ar.utn.dds.creacionales.LocalComercialBuilder;
 import ar.utn.dds.exceptions.RepositoryException;
 import ar.utn.dds.servicios.Servicio;
 import ar.utn.dds.utils.Jornada;
 import ar.utn.dds.utils.OrigenDeDatos;
+import ar.utn.dds.utils.RangoHorario;
 
 import org.uqbar.geodds.Point;
 
 public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDatos{
 
+	public List<DayOfWeek> lunesAViernes;
+	public RangoHorario rangoDe10a20;
+	public List<Jornada> jornadaNormalLunesAViernes;
+	public List<String> palabrasClave;
+	public Rubro libreriaRubro;
+	public List<Rubro> rubroLibreria;
+	public List<Review> reviews;
+	public List<Point> puntosComuna6;
+	public Servicio pagoDeFacturas;
+	public List<Servicio> servicioPagoDeFacturas;
+	
+	
 	/* Singleton */
 	private static Repositorio repoPois;
 
@@ -45,8 +62,54 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 	// ********************************************************
 
 	private Repositorio(){
-		this.crearPoi("Linea 33", "Av. Hipolito Yrigoyen 4276", "La boca", 21, new Point(21.0 , 2.1), null, null, null, null);
-		this.crearPoi("Linea 45", "Linea 145", "Boedo", 150, "San juan 12", new Point(21.0 , 2.1), null, null);
+		
+		/* Jornada */
+		
+		lunesAViernes = new ArrayList<DayOfWeek>();
+		lunesAViernes.add(DayOfWeek.MONDAY);
+		lunesAViernes.add(DayOfWeek.TUESDAY);
+		lunesAViernes.add(DayOfWeek.WEDNESDAY);
+		lunesAViernes.add(DayOfWeek.THURSDAY);
+		lunesAViernes.add(DayOfWeek.FRIDAY);
+		
+		ListaJornadasBuilder builderJornadaNormal = new ListaJornadasBuilder();
+		rangoDe10a20 = new RangoHorario(LocalTime.of(10,0,0), LocalTime.of(20,0,0));
+		jornadaNormalLunesAViernes = builderJornadaNormal.buildJornadas(lunesAViernes, rangoDe10a20);
+		
+		/* Palabras Clave */
+		
+		palabrasClave = new ArrayList<String>();
+		palabrasClave.add("lapiz");
+		palabrasClave.add("cartuchera");
+		palabrasClave.add("mapa");
+		
+		/* Rubros */
+		
+		libreriaRubro = new Rubro("libreria", 0.4);
+		rubroLibreria = new ArrayList<Rubro>();
+		rubroLibreria.add(libreriaRubro);
+		
+		/* Reviews */
+		
+		reviews = new ArrayList<Review>();
+		
+		/* Comunas */
+		
+		puntosComuna6 = new ArrayList<Point>();
+		puntosComuna6.add(new Point(10.0,5.2));
+		puntosComuna6.add(new Point(5.0, 10.3));
+		
+		/* Servicios */
+		
+		pagoDeFacturas = new Servicio("Pago de facturas",jornadaNormalLunesAViernes);
+		servicioPagoDeFacturas = new ArrayList<Servicio>();
+		servicioPagoDeFacturas.add(pagoDeFacturas);		
+		
+		
+		this.crearPoi("Libreria", "Av. Hipolito Yrigoyen 4276", "La boca", 4276, new Point(21.0 , 2.1), palabrasClave, jornadaNormalLunesAViernes, rubroLibreria, reviews);
+		this.crearPoi("Linea 45", "Av. Santa Fe 3245", "Boedo", 3245, "San juan 12", new Point(21.0 , 2.1), palabrasClave, reviews);
+		this.crearPoi("CGP 481", "Catamarca 256", "Once", 256, new Point(2.0, 5.6), puntosComuna6,	servicioPagoDeFacturas, palabrasClave, jornadaNormalLunesAViernes, reviews);
+		this.crearPoi("Banco Santander", "Medrano 564", 564, new Point(5.0, 6.0), "Palermo", servicioPagoDeFacturas, palabrasClave, jornadaNormalLunesAViernes, reviews);
 	}
 
 	/* Local Comercial */
@@ -217,5 +280,7 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 	public List<POI> buscarPOI(String nombre) {
 		return this.search(nombre);
 	}
+	
+	
 
 }

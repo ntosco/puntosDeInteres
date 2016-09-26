@@ -1,6 +1,6 @@
 var Poi = function(){
     var nombre = "";
-    var direccionNombre = ""
+    var direccionNombre = "";
     var ubicacionActual;
     var self = this;
 
@@ -8,5 +8,5 @@ var Poi = function(){
 
 Poi.prototype.poseeNombre = function(){
     self.nombre = "nuevoNombre";
-}
+};
 
