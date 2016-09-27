@@ -36,7 +36,6 @@ app.controller('controllerBusqueda', function (poisService) {
             });
             self.resultadoBusqueda = self.puntosDeInteres;
         });
-
     }
 
     this.agregarPalabraClave = function() {
@@ -45,11 +44,11 @@ app.controller('controllerBusqueda', function (poisService) {
     };
 
     this.buscarPuntoDeInteres = function() {
-        var condicionDeBusqueda = function (value) {
-            return ( value.nombre.includes(self.listaPalabrasClave) || value.direccion.includes(self.listaPalabrasClave) )
-        };
-        self.getPois();
-        self.resultadoBusqueda = self.puntosDeInteres.filter(condicionDeBusqueda);
+        poisService.searchPoi(self.listaPalabrasClave, function (data) {
+            self.resultadoBusqueda = _.map(data,function(protoPoi){
+                return angular.extend(new Poi(),protoPoi);
+            });
+        });
     };
 
     this.limpiarBusqueda = function(){
