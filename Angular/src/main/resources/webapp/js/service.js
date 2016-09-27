@@ -19,6 +19,9 @@ app.service("poisService", function($http) {
         $http.get("/searchPoi/" + listaPalabrasClave).success(successCallback);
     }
 
+    this.buscarUnPoi = function(idPoi, successCallback) {
+        $http.get("/buscarUnPoi/" + idPoi).success(successCallback);
+    };
 
 
 /*

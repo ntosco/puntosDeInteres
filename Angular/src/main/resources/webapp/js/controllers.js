@@ -129,4 +129,29 @@ app.controller('controllerGeneral',function( $state, $stateParams){
 
  //   $state.go('detallePOI.' + tipo);
 
+
+/*
+        var self = this;
+    this.poi;
+    this.id = $stateParams.POID;
+    this.comentario = "";
+    this.valoracion = "";
+       
+        poisService.buscarUnPoi(this.id, function (response){
+            //self.nombre = response.nombre;
+
+            self.poi = _.map(response,function(protoPoi){
+                return angular.extend(new Poi(),protoPoi);
+            });
+
+            this.nombre = self.poi.nombre;
+
+        });
+
+
+    this.enviarComentario = function(){
+
+    };
+
+*/
 });

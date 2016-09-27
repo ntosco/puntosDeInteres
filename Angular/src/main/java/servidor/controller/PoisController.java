@@ -39,6 +39,11 @@ public class PoisController {
           return ingresoExitoso;
       }, this.jsonTransformer);
 
-        
+      Spark.get("/buscarUnPoi/:idPoi", (request,response) -> {
+    	  int idDelPoi = Integer.parseInt(request.params(":idPoi"));
+    	  POI poiBuscado = Repositorio.getInstance().searchById(idDelPoi);
+          response.type("application/json;charset=utf-8");
+          return poiBuscado;
+      }, this.jsonTransformer);
     }
 }
