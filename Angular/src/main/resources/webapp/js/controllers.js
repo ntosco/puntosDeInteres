@@ -62,19 +62,23 @@ app.controller('controllerBusqueda', function (poisService) {
 
 app.controller('controllerGeneral',function( $state, $stateParams){
 
-    var idpoi =  _.find(repositorio, function(o) { return o.id == $stateParams.POID; });
-    var tipo = idpoi.tipo;
+    //var idpoi =  _.find(repositorio, function(o) { return o.id == $stateParams.POID; });
+   // var tipo = idpoi.tipo;
 
     // Datos relevantes a los tipo de POIS
-    this.tipo = tipo;
+    this.id = $stateParams.POID;
+
+    
+    
+/*  this.tipo = tipo;
     this.nombre1 = idpoi.nombre;
     this.direccion = idpoi.direccion;
     this.rubro = idpoi.adicionales.rubro;
     this.servicios = idpoi.adicionales.serviciosAsociados;
     this.zona = idpoi.adicionales.zona;
     this.numeroLinea = idpoi.adicionales.numeroDeLinea;
-    this.reviews = idpoi.adicionales.reviews;
+    this.reviews = idpoi.adicionales.reviews; */
 
-    $state.go('detallePOI.' + tipo);
+ //   $state.go('detallePOI.' + tipo);
 
 });

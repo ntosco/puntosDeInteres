@@ -17,7 +17,7 @@ app.config(function ($stateProvider, $urlRouterProvider){
              url: "/detalleGeneral/:POID",
              templateUrl: "ejemplo.html",
              controller: "controllerGeneral as crtlGeneral",
-              resolve: {
+             resolve: {
                 repositorio: function(){
                     function PuntoDeInteres (identificador, nombre, point, direccion, tipo, adicionales) {
                         return { id: identificador, nombre: nombre, point: point, direccion: direccion, tipo: tipo, adicionales: adicionales };
