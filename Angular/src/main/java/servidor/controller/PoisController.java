@@ -26,7 +26,12 @@ public class PoisController {
             response.type("application/json;charset=utf-8");
             return todosLosPois;
         }, this.jsonTransformer);
-       
+        
+        Spark.get("/favoritos/:user", (request,response) -> {
+        	List<POI> favoritos = RepositorioDeUsuarios.getInstance().favoritosPorUsuario(request.params(":user"));
+            response.type("application/json;charset=utf-8");
+            return favoritos;
+        }, this.jsonTransformer);       
 
       Spark.get("/logUser/:user/:pass", (request,response) -> {
     	  boolean ingresoExitoso = RepositorioDeUsuarios.getInstance().ingresar(request.params(":user"), request.params(":pass"));

@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.collections15.CollectionUtils;
 import org.uqbar.geodds.Point;
 
+import ar.utn.dds.POI.LocalComercial;
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.POI.ParadaDeColectivo;
 import ar.utn.dds.usuarios.Usuario;
@@ -42,7 +43,19 @@ public class RepositorioDeUsuarios{
 		Usuario usuarioNuevo = new UsuarioConcreto();
 		usuarioNuevo.setNombreUsuario(nombreUsuario);
 		usuarioNuevo.setPassword(password);
-		usuarioNuevo.setFavoritos(new ArrayList<POI>());
+			
+		//Agrego un ejemplo de POI Favorito.
+		
+		POI poi = new LocalComercial();
+				
+		poi.setNombre("Libreria");
+		poi.setDireccionNombre("Av. Hipolito Yrigoyen 4276");				
+			
+		List<POI> aux2 = new ArrayList<POI>();	
+		aux2.add(poi);
+			
+		usuarioNuevo.setFavoritos(aux2);
+		
 		this.agregarUsuario(usuarioNuevo);
 		return usuarioNuevo;
 	}
@@ -61,6 +74,11 @@ public class RepositorioDeUsuarios{
 		return null;
 	}
 	
+	public List<POI> favoritosPorUsuario(String user) {
+			Usuario usuarioAux = this.buscarUsuario(user);
+			return usuarioAux.getFavoritos();
+	}
+	 
 	public List<Usuario> getUsuariosAdministradores(){
 		CollectionUtils.filter(this.usuarios, ((usuario)-> usuario.tieneRolAdministrador()));
 		return usuarios;

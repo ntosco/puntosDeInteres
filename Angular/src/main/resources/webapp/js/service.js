@@ -11,9 +11,15 @@ app.service("poisService", function($http) {
         $http.get("/logUser/" + usuario.nombre + "/" + usuario.pass).success(successCallback);
     };
 
+     this.favoritosSearch = function(nomUsuario, successCallback) {
+        $http.get("/favoritos/" + nomUsuario).success(successCallback);
+    };
+
     this.searchPoi = function(listaPalabrasClave, successCallback){
         $http.get("/searchPoi/" + listaPalabrasClave).success(successCallback);
     }
+
+
 
 /*
     this.update = function(poi, successCallback, onFailCallback) {
