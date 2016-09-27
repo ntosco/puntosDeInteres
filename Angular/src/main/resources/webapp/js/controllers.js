@@ -34,8 +34,9 @@ app.controller('controllerBusqueda', function (poisService) {
             self.puntosDeInteres = _.map(data,function(protoPoi){
                 return angular.extend(new Poi(),protoPoi);
             });
+            self.resultadoBusqueda = self.puntosDeInteres;
         });
-        self.resultadoBusqueda = self.puntosDeInteres;
+
     }
 
     this.agregarPalabraClave = function() {
