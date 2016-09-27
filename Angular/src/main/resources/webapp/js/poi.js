@@ -7,7 +7,7 @@ var Poi = function(){
     var direccionNumero;
     var listaPalabrasClave;
     var reviews;
- 
+ 	var tipo = "";
     var self = this;
 
     this.favorito = false;

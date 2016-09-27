@@ -113,15 +113,15 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 		unReview = new Review("Todo bien", "Nico", 5);
 		
 		
-		this.crearPoi(1,"Libreria", "Av. Hipolito Yrigoyen", "La boca", 4276, new Point(21.0 , 2.1), palabrasClave, jornadaNormalLunesAViernes, rubroLibreria, reviews);
-		this.crearPoi(2,"Linea 45", "Av. Santa Fe", "Boedo", 3245, "San juan 12", new Point(21.0 , 2.1), palabrasClave, reviews);
-		this.crearPoi(3,"CGP 481", "Catamarca", "Once", 256, new Point(2.0, 5.6), puntosComuna6,	servicioPagoDeFacturas, palabrasClave, jornadaNormalLunesAViernes, reviews);
-		this.crearPoi(4,"Banco Santander", "Medrano", 564, new Point(5.0, 6.0), "Palermo", servicioPagoDeFacturas, palabrasClave, jornadaNormalLunesAViernes, reviews);
+		this.crearPoi("local", 1,"Libreria", "Av. Hipolito Yrigoyen", "La boca", 4276, new Point(21.0 , 2.1), palabrasClave, jornadaNormalLunesAViernes, rubroLibreria, reviews);
+		this.crearPoi("colectivo", 2,"Linea 45", "Av. Santa Fe", "Boedo", 3245, "San juan 12", new Point(21.0 , 2.1), palabrasClave, reviews);
+		this.crearPoi("cgp", 3,"CGP 481", "Catamarca", "Once", 256, new Point(2.0, 5.6), puntosComuna6,	servicioPagoDeFacturas, palabrasClave, jornadaNormalLunesAViernes, reviews);
+		this.crearPoi("banco", 4,"Banco Santander", "Medrano", 564, new Point(5.0, 6.0), "Palermo", servicioPagoDeFacturas, palabrasClave, jornadaNormalLunesAViernes, reviews);
 	}
 
 	/* Local Comercial */
 	
-	public POI crearPoi(int id, String nombre, String direccion, String barrio, int numero, Point ubicacion, 
+	public POI crearPoi(String tipo, int id, String nombre, String direccion, String barrio, int numero, Point ubicacion, 
 			List<String> palabrasClave, List<Jornada> jornada, List<Rubro> rubros, List<Review> reviews){
 		
 		POI poi = new LocalComercial();
@@ -137,13 +137,14 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 						poi = builder.build();
 						poi.setReviews(reviews);
 						poi.setId(id);
+						poi.setTipo(tipo);
 		this.create(poi);
 		return poi;
 	}
 	
 	/* Parada de Colectivo */ 
 	
-	public POI crearPoi(int id, String nombre, String direccion, String barrio, int numero, String linea, Point ubicacion, 
+	public POI crearPoi(String tipo, int id, String nombre, String direccion, String barrio, int numero, String linea, Point ubicacion, 
 			List<String> palabrasClave, List<Review> reviews){
 		
 		POI poi = new ParadaDeColectivo();
@@ -158,6 +159,7 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 					poi = builder15.build();
 					poi.setReviews(reviews);
 					poi.setId(id);
+					poi.setTipo(tipo);
 			this.create(poi);
 			return poi;	
 					
@@ -165,7 +167,7 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 	
 	/* CGP */
 	
-	public POI crearPoi(int id, String nombre, String direccion, String barrio, int numero, Point ubicacion, List<Point> comuna,
+	public POI crearPoi(String tipo, int id, String nombre, String direccion, String barrio, int numero, Point ubicacion, List<Point> comuna,
 						List<Servicio> servicios, List<String> palabrasClave, List<Jornada> jornadas, List<Review> reviews){
 		
 		POI poi = new CentroGestionParticipacion();
@@ -182,13 +184,14 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 						poi = builder.build();
 						poi.setReviews(reviews);
 						poi.setId(id);
+						poi.setTipo(tipo);
 			this.create(poi);
 			return poi;
 	}
 	
 	/* Sucursal Banco */
 	
-	public POI crearPoi(int id, String nombre, String direccion, int numero, Point ubicacion, String barrio, List<Servicio> servicios,
+	public POI crearPoi(String tipo, int id, String nombre, String direccion, int numero, Point ubicacion, String barrio, List<Servicio> servicios,
 			List<String> palabrasClave, List<Jornada> jornadas, List<Review> reviews){
 		
 		POI poi = new SucursalBanco();
@@ -204,6 +207,7 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 					poi = builder.build();
 					poi.setReviews(reviews);
 					poi.setId(id);
+					poi.setTipo(tipo);
 			this.create(poi);
 			return poi;
 		

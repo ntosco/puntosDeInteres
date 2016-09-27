@@ -109,6 +109,12 @@ app.controller('controllerGeneral',function( $state, $stateParams){
 
     // Datos relevantes a los tipo de POIS
     this.id = $stateParams.POID;
+    this.comentario = "";
+    this.valoracion = "";
+
+    this.enviarComentario = function(){
+
+    };
 
     
     

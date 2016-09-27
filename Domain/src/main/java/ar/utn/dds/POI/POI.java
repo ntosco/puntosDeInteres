@@ -27,6 +27,7 @@ public abstract class POI extends Entity {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@Expose private String tipo;
 	@Expose private int id;
 	@Expose private String nombre;
 	@Expose private String direccionNombre;
@@ -260,4 +261,14 @@ public abstract class POI extends Entity {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
+	
 }
