@@ -4,13 +4,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.time.LocalDateTime;
 import java.util.List;
+
 import org.uqbar.commons.model.Entity;
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.geodds.*;
+
 import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
 import ar.utn.dds.utils.Jornada;
+
 import org.apache.commons.lang.StringUtils;
+
 import ar.utn.dds.exceptions.*;
+
 import com.google.gson.annotations.*;
 
 @Observable
@@ -21,19 +26,20 @@ public abstract class POI extends Entity {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
+	@Expose private int id;
 	@Expose private String nombre;
 	@Expose private String direccionNombre;
-	private String barrio;
-	private int direccionNumero;
+	@Expose private String barrio;
+	@Expose private int direccionNumero;
 	@Expose private Point ubicacionActual;
 
 	private final double DISTANCIA_MINIMA_DE_CERCANIA = 0.5;
 	
-	private List<Jornada> JornadaDisponible = new ArrayList<Jornada>();
-	private List<EstrategiaDisponibilidad> EstrategiasDisponibilidad = new ArrayList<EstrategiaDisponibilidad>();
-	private List<String> listaPalabrasClave = new ArrayList <String>();
-	private List<Review> reviews = new ArrayList <Review>();
+	@Expose private List<Jornada> JornadaDisponible = new ArrayList<Jornada>();
+	@Expose private List<EstrategiaDisponibilidad> EstrategiasDisponibilidad = new ArrayList<EstrategiaDisponibilidad>();
+	@Expose private List<String> listaPalabrasClave = new ArrayList <String>();
+	@Expose private List<Review> reviews = new ArrayList <Review>();
 	
 	// Baja logica
 	
@@ -245,5 +251,13 @@ public abstract class POI extends Entity {
         }else{
         	return 0;
         }
+	}
+	
+	public  Integer getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

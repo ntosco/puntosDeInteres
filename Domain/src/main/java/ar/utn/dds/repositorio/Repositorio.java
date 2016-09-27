@@ -43,6 +43,7 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 	public List<Point> puntosComuna6;
 	public Servicio pagoDeFacturas;
 	public List<Servicio> servicioPagoDeFacturas;
+	public Review unReview;
 	
 	
 	/* Singleton */
@@ -92,6 +93,8 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 		/* Reviews */
 		
 		reviews = new ArrayList<Review>();
+		unReview = new Review("Todo bien", "Nico", 5);
+		reviews.add(unReview);
 		
 		/* Comunas */
 		
@@ -103,18 +106,22 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 		
 		pagoDeFacturas = new Servicio("Pago de facturas",jornadaNormalLunesAViernes);
 		servicioPagoDeFacturas = new ArrayList<Servicio>();
-		servicioPagoDeFacturas.add(pagoDeFacturas);		
+		servicioPagoDeFacturas.add(pagoDeFacturas);	
+		
+		/* Review */
+		
+		unReview = new Review("Todo bien", "Nico", 5);
 		
 		
-		this.crearPoi("Libreria", "Av. Hipolito Yrigoyen 4276", "La boca", 4276, new Point(21.0 , 2.1), palabrasClave, jornadaNormalLunesAViernes, rubroLibreria, reviews);
-		this.crearPoi("Linea 45", "Av. Santa Fe 3245", "Boedo", 3245, "San juan 12", new Point(21.0 , 2.1), palabrasClave, reviews);
-		this.crearPoi("CGP 481", "Catamarca 256", "Once", 256, new Point(2.0, 5.6), puntosComuna6,	servicioPagoDeFacturas, palabrasClave, jornadaNormalLunesAViernes, reviews);
-		this.crearPoi("Banco Santander", "Medrano 564", 564, new Point(5.0, 6.0), "Palermo", servicioPagoDeFacturas, palabrasClave, jornadaNormalLunesAViernes, reviews);
+		this.crearPoi(1,"Libreria", "Av. Hipolito Yrigoyen", "La boca", 4276, new Point(21.0 , 2.1), palabrasClave, jornadaNormalLunesAViernes, rubroLibreria, reviews);
+		this.crearPoi(2,"Linea 45", "Av. Santa Fe", "Boedo", 3245, "San juan 12", new Point(21.0 , 2.1), palabrasClave, reviews);
+		this.crearPoi(3,"CGP 481", "Catamarca", "Once", 256, new Point(2.0, 5.6), puntosComuna6,	servicioPagoDeFacturas, palabrasClave, jornadaNormalLunesAViernes, reviews);
+		this.crearPoi(4,"Banco Santander", "Medrano", 564, new Point(5.0, 6.0), "Palermo", servicioPagoDeFacturas, palabrasClave, jornadaNormalLunesAViernes, reviews);
 	}
 
 	/* Local Comercial */
 	
-	public POI crearPoi(String nombre, String direccion, String barrio, int numero, Point ubicacion, 
+	public POI crearPoi(int id, String nombre, String direccion, String barrio, int numero, Point ubicacion, 
 			List<String> palabrasClave, List<Jornada> jornada, List<Rubro> rubros, List<Review> reviews){
 		
 		POI poi = new LocalComercial();
@@ -129,14 +136,14 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 						.setJornada(jornada);
 						poi = builder.build();
 						poi.setReviews(reviews);
-
+						poi.setId(id);
 		this.create(poi);
 		return poi;
 	}
 	
 	/* Parada de Colectivo */ 
 	
-	public POI crearPoi(String nombre, String direccion, String barrio, int numero, String linea, Point ubicacion, 
+	public POI crearPoi(int id, String nombre, String direccion, String barrio, int numero, String linea, Point ubicacion, 
 			List<String> palabrasClave, List<Review> reviews){
 		
 		POI poi = new ParadaDeColectivo();
@@ -150,6 +157,7 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 					.setPalabrasClave(palabrasClave);
 					poi = builder15.build();
 					poi.setReviews(reviews);
+					poi.setId(id);
 			this.create(poi);
 			return poi;	
 					
@@ -157,7 +165,7 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 	
 	/* CGP */
 	
-	public POI crearPoi(String nombre, String direccion, String barrio, int numero, Point ubicacion, List<Point> comuna,
+	public POI crearPoi(int id, String nombre, String direccion, String barrio, int numero, Point ubicacion, List<Point> comuna,
 						List<Servicio> servicios, List<String> palabrasClave, List<Jornada> jornadas, List<Review> reviews){
 		
 		POI poi = new CentroGestionParticipacion();
@@ -173,13 +181,14 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 						.setJornada(jornadas);
 						poi = builder.build();
 						poi.setReviews(reviews);
+						poi.setId(id);
 			this.create(poi);
 			return poi;
 	}
 	
 	/* Sucursal Banco */
 	
-	public POI crearPoi(String nombre, String direccion, int numero, Point ubicacion, String barrio, List<Servicio> servicios,
+	public POI crearPoi(int id, String nombre, String direccion, int numero, Point ubicacion, String barrio, List<Servicio> servicios,
 			List<String> palabrasClave, List<Jornada> jornadas, List<Review> reviews){
 		
 		POI poi = new SucursalBanco();
@@ -194,6 +203,7 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 					.setJornada(jornadas);
 					poi = builder.build();
 					poi.setReviews(reviews);
+					poi.setId(id);
 			this.create(poi);
 			return poi;
 		

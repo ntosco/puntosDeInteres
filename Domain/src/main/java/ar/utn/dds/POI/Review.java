@@ -1,11 +1,11 @@
 package ar.utn.dds.POI;
 
-import java.math.BigDecimal;
+import com.google.gson.annotations.Expose;
 
 public class Review {
-	private String comentario;
-	private int valoracion;// de 1 a 5
-	private String nombreUsuario;
+	@Expose private String comentario;
+	@Expose private int valoracion;// de 1 a 5
+	@Expose private String nombreUsuario;
 	
 	public Review(String comentario, String nombre, int valoracion) {
 		this.setComentario(comentario);
