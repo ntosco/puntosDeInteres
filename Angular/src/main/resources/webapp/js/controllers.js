@@ -1,18 +1,24 @@
+"use strict";
+
 app.controller('controllerLogin', function ($state, poisService) {
     var self = this;
     this.user;
     this.pass;
     this.ingresoExitoso = false;
 
+    this.setIngreso = function (respuesta){
+        self.ingresoExitoso = respuesta;
+        self.ingresoExitoso = respuesta;
+    }
+
     this.loguearUsuario = function () {
         poisService.logUser(new Usuario(self.user,self.pass), function (response){
-            self.ingresoExitoso = response;
+            self.setIngreso(response);
+            if (self.ingresoExitoso)
+                $state.go("busquedaPuntosDeInteres");
+            else
+                alert("nombre de usuario y/o contraseña incorrecto/s");
         });
-
-         if (self.ingresoExitoso)
-             $state.go("busquedaPuntosDeInteres");
-         else
-             alert("nombre de usuario y/o contraseña incorrecto/s");
     };
 });
 
@@ -29,6 +35,7 @@ app.controller('controllerBusqueda', function (poisService) {
                 return angular.extend(new Poi(),protoPoi);
             });
         });
+        self.resultadoBusqueda = self.puntosDeInteres;
     }
 
     this.agregarPalabraClave = function() {

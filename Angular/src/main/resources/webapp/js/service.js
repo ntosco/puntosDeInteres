@@ -1,3 +1,5 @@
+"use strict";
+
 app.service("poisService", function($http) {
 
     this.findAll = function(successCallback) {
