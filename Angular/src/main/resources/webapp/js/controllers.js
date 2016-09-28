@@ -123,10 +123,6 @@ app.controller('controllerGeneral',function( $state, $stateParams, poisService){
         });
     };
 
-    this.obtenerPrimerPoi = function(){
-       self.poi = self.poiEncontrado.shift();
-    };
-
     /* Inicializacion */
 
     this.buscarUnPoi();   
