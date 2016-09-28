@@ -30,7 +30,6 @@ app.controller('controllerBusqueda', function ($rootScope,poisService) {
     this.palabraClave = "";
     this.puntosDeInteres = [];
     this.resultadoBusqueda = [];
-
     this.favoritos = [];
 
     this.getPois = function() {
@@ -39,6 +38,7 @@ app.controller('controllerBusqueda', function ($rootScope,poisService) {
                 return angular.extend(new Poi(),protoPoi);
             });
             self.resultadoBusqueda = self.puntosDeInteres;
+            self.getFavoritos();
         });
     };
 
@@ -47,6 +47,9 @@ app.controller('controllerBusqueda', function ($rootScope,poisService) {
             self.favoritos = _.map(data,function(protoPoi){
                 return angular.extend(new Poi(),protoPoi);
             });
+
+            self.actualizarFavoritos();
+
         });
     };
 
@@ -66,7 +69,7 @@ app.controller('controllerBusqueda', function ($rootScope,poisService) {
     this.actualizarFavoritos = function(){
         var auxiliar = self.modificarNombres();
 
-        var listaConFav =  _.map(self.resultadoBusqueda,function(poi2){
+        self.puntosDeInteres =  _.map(self.resultadoBusqueda,function(poi2){
 
             if (poi2.nombre.includes(auxiliar)){
                 poi2.favorito = true;
@@ -75,7 +78,7 @@ app.controller('controllerBusqueda', function ($rootScope,poisService) {
             return poi2;
         });
 
-        self.resultadoBusqueda = listaConFav;
+        self.resultadoBusqueda = self.puntosDeInteres;
     };
 
     this.buscarPuntoDeInteres = function() {
@@ -84,8 +87,6 @@ app.controller('controllerBusqueda', function ($rootScope,poisService) {
                 return angular.extend(new Poi(),protoPoi);
             });
         });
-
-        this.actualizarFavoritos();
     };
 
     this.limpiarBusqueda = function(){
@@ -96,9 +97,6 @@ app.controller('controllerBusqueda', function ($rootScope,poisService) {
     /* Inicializacion */
 
     this.getPois();
-    this.getFavoritos();
-    this.actualizarFavoritos();
-    this.actualizarFavoritos();
 
 });
 
