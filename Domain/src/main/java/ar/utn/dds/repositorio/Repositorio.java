@@ -36,7 +36,10 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 	public List<DayOfWeek> lunesAViernes;
 	public RangoHorario rangoDe10a20;
 	public List<Jornada> jornadaNormalLunesAViernes;
-	public List<String> palabrasClave;
+	public List<String> palabrasClaveLibreria;
+	public List<String> palabrasClaveCGP;
+	public List<String> palabrasClaveColectivo;
+	public List<String> palabrasClaveBanco;
 	public Rubro libreriaRubro;
 	public List<Rubro> rubroLibreria;
 	public List<Review> reviews;
@@ -44,6 +47,28 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 	public Servicio pagoDeFacturas;
 	public List<Servicio> servicioPagoDeFacturas;
 	public Review unReview;
+	private Review reviewCGP1;
+	private Review reviewCGP2;
+	private Review reviewBanco1;
+	private Review reviewBanco2;
+	private Review reviewLibreria1;
+	private Review reviewColectivo1;
+	private Review reviewColectivo2;
+	private List<Review> reviewsBondi;
+	private ArrayList<Review> reviewsCGP;
+	private ArrayList<Review> reviewsLibreria;
+	private ArrayList<Review> reviewsBanco;
+	private Servicio ventaDeArticulos;
+	private ArrayList<Servicio> serviciosLibreria;
+	private Servicio cajeroAutomatico;
+	private ArrayList<Servicio> serviciosBanco;
+	private ArrayList<String> palabrasClaveFallabella;
+	private Rubro ventaRopa;
+	private ArrayList<Rubro> rubroFallabella;
+	private ArrayList<Review> reviewsBanco2;
+	private ArrayList<Review> reviewsCGP2;
+	private ArrayList<Review> reviewsBondi2;
+	private ArrayList<Review> reviewsFallabella;
 	
 	
 	/* Singleton */
@@ -79,22 +104,89 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 		
 		/* Palabras Clave */
 		
-		palabrasClave = new ArrayList<String>();
-		palabrasClave.add("lapiz");
-		palabrasClave.add("cartuchera");
-		palabrasClave.add("mapa");
+		palabrasClaveLibreria = new ArrayList<String>();
+		palabrasClaveLibreria.add("lapiz");
+		palabrasClaveLibreria.add("cartuchera");
+		palabrasClaveLibreria.add("mapa");
+		palabrasClaveLibreria.add("fotocopias");
+		palabrasClaveLibreria.add("libreria");
+		
+		palabrasClaveFallabella = new ArrayList<String>();
+		palabrasClaveFallabella.add("compras");
+		palabrasClaveFallabella.add("muebles");
+		palabrasClaveFallabella.add("ropa");
+		palabrasClaveFallabella.add("nike");
+		
+		palabrasClaveCGP = new ArrayList<String>();
+		palabrasClaveCGP.add("CGP");
+		palabrasClaveCGP.add("cgp");
+		palabrasClaveCGP.add("facturas");
+		
+		palabrasClaveColectivo = new ArrayList<String>();
+		palabrasClaveColectivo.add("parada");
+		palabrasClaveColectivo.add("bondi");
+		palabrasClaveColectivo.add("linea");
+		palabrasClaveColectivo.add("45");
+		palabrasClaveColectivo.add("86");
+		
+		palabrasClaveBanco = new ArrayList<String>();
+		palabrasClaveBanco.add("banco");
+		palabrasClaveBanco.add("santander");
+		palabrasClaveBanco.add("frances");
+		palabrasClaveBanco.add("cajero");
 		
 		/* Rubros */
 		
 		libreriaRubro = new Rubro("Libreria", 0.4);
+		ventaRopa = new Rubro("Venta Ropa", 0.5);
+		rubroFallabella = new ArrayList<Rubro>();
 		rubroLibreria = new ArrayList<Rubro>();
 		rubroLibreria.add(libreriaRubro);
+		rubroFallabella.add(ventaRopa);
+		rubroFallabella.add(libreriaRubro);
+
+		
+		/* Review */
+		
+		reviewCGP1 = new Review("Todo bien", "Juan", 5);
+		reviewCGP2 = new Review("Mala atencion", "Pedro", 1);
+		reviewBanco1 = new Review("Muy rapido", "Ana", 5);
+		reviewBanco2 = new Review("Nunca hay sistema", "Juan", 1);
+		reviewLibreria1 = new Review("Cierra los sabados", "Facu", 2);
+		reviewColectivo1 = new Review("No paro el hdp", "Pedro", 1);
+		reviewColectivo2 = new Review("tarda mucho", "Jose", 2);
 		
 		/* Reviews */
 		
-		reviews = new ArrayList<Review>();
-		unReview = new Review("Todo bien", "Nico", 5);
-		reviews.add(unReview);
+		reviewsBondi = new ArrayList<Review>();
+		reviewsBondi.add(reviewColectivo1);
+		reviewsBondi.add(reviewColectivo2);
+		
+		reviewsBondi2 = new ArrayList<Review>();
+		reviewsBondi2.add(reviewBanco1);
+		reviewsBondi2.add(reviewCGP1);
+		
+		reviewsCGP = new ArrayList<Review>();
+		reviewsCGP.add(reviewCGP1);
+		reviewsCGP.add(reviewCGP2);
+		
+		reviewsCGP2 = new ArrayList<Review>();
+		reviewsCGP2.add(reviewCGP1);
+		reviewsCGP2.add(reviewLibreria1);
+		
+		reviewsLibreria = new ArrayList<Review>();
+		reviewsLibreria.add(reviewLibreria1);
+		
+		reviewsFallabella = new ArrayList<Review>();
+		reviewsFallabella.add(new Review("Muy lindo", "Anita", 5));
+		
+		reviewsBanco = new ArrayList<Review>();
+		reviewsBanco.add(reviewBanco1);
+		reviewsBanco.add(reviewBanco2);
+		
+		reviewsBanco2 = new ArrayList<Review>();
+		reviewsBanco2.add(reviewBanco1);
+		reviewsBanco2.add(reviewBanco2);
 		
 		/* Comunas */
 		
@@ -105,19 +197,25 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 		/* Servicios */
 		
 		pagoDeFacturas = new Servicio("Pago de facturas",jornadaNormalLunesAViernes);
+		cajeroAutomatico = new Servicio("Cajero Automatico", jornadaNormalLunesAViernes);
 		servicioPagoDeFacturas = new ArrayList<Servicio>();
-		pagoDeFacturas.setNombreDeJornada("Lunes a Viernes 10 a 18");
+		pagoDeFacturas.setNombreDeJornada("Lunes a Viernes 10 a 15");
+		cajeroAutomatico.setNombreDeJornada("Lunes a Viernes 10 a 20");
 		servicioPagoDeFacturas.add(pagoDeFacturas);	
 		
-		/* Review */
+		serviciosBanco = new ArrayList<Servicio>();
+		serviciosBanco.add(pagoDeFacturas);
+		serviciosBanco.add(cajeroAutomatico);
 		
-		unReview = new Review("Todo bien", "Nico", 5);
 		
-		
-		this.crearPoi("localComercial", 1,"Libreria El Tano", "Av. Hipolito Yrigoyen", "La boca", 4276, new Point(21.0 , 2.1), palabrasClave, jornadaNormalLunesAViernes, rubroLibreria, reviews);
-		this.crearPoi("lineaColectivo", 2,"Linea 45", "Av. Santa Fe", "Boedo", 3245, "45", new Point(21.0 , 2.1), palabrasClave, reviews);
-		this.crearPoi("CGP", 3,"CGP 481", "Catamarca", "Once", 256, new Point(2.0, 5.6), puntosComuna6,	servicioPagoDeFacturas, palabrasClave, jornadaNormalLunesAViernes, reviews);
-		this.crearPoi("sucursalBanco", 4,"Banco Santander", "Medrano", 564, new Point(5.0, 6.0), "Palermo", servicioPagoDeFacturas, palabrasClave, jornadaNormalLunesAViernes, reviews);
+		this.crearPoi("localComercial", 1,"Libreria El Tano", "Av. Hipolito Yrigoyen", "La boca", 4276, new Point(21.0 , 2.1), palabrasClaveLibreria, jornadaNormalLunesAViernes, rubroLibreria, reviewsLibreria);
+		this.crearPoi("localComercial", 8,"Fallabella", "Av. San Juan", "Recoleta", 4276, new Point(21.0 , 2.1), palabrasClaveFallabella, jornadaNormalLunesAViernes, rubroFallabella, reviewsFallabella);
+		this.crearPoi("lineaColectivo", 2,"Linea 45", "Av. Santa Fe", "Boedo", 3245, "45", new Point(21.0 , 2.1), palabrasClaveColectivo, reviewsBondi2);
+		this.crearPoi("lineaColectivo", 5,"Linea 86", "Av. Corrientes", "Onces", 3245, "86", new Point(21.0 , 2.1), palabrasClaveColectivo, reviewsBondi);
+		this.crearPoi("CGP", 3,"CGP 3", "Catamarca", "Once", 256, new Point(2.0, 5.6), puntosComuna6,	servicioPagoDeFacturas, palabrasClaveCGP, jornadaNormalLunesAViernes, reviewsCGP);
+		this.crearPoi("CGP", 6,"CGP 6", "Av. Callao", "Centro", 1364, new Point(2.0, 5.6), puntosComuna6,	serviciosBanco, palabrasClaveCGP, jornadaNormalLunesAViernes, reviewsCGP2);
+		this.crearPoi("sucursalBanco", 4,"Banco Santander", "Medrano", 564, new Point(5.0, 6.0), "Palermo", serviciosBanco, palabrasClaveBanco, jornadaNormalLunesAViernes, reviewsBanco);
+		this.crearPoi("sucursalBanco", 7,"Banco Frances", "Boyaca", 765, new Point(5.0, 6.0), "San Telmo", serviciosBanco, palabrasClaveBanco, jornadaNormalLunesAViernes, reviewsBanco2);
 	}
 
 	/* Local Comercial */
