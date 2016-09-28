@@ -86,7 +86,7 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 		
 		/* Rubros */
 		
-		libreriaRubro = new Rubro("libreria", 0.4);
+		libreriaRubro = new Rubro("Libreria", 0.4);
 		rubroLibreria = new ArrayList<Rubro>();
 		rubroLibreria.add(libreriaRubro);
 		
@@ -106,6 +106,7 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 		
 		pagoDeFacturas = new Servicio("Pago de facturas",jornadaNormalLunesAViernes);
 		servicioPagoDeFacturas = new ArrayList<Servicio>();
+		pagoDeFacturas.setNombreDeJornada("Lunes a Viernes 10 a 18");
 		servicioPagoDeFacturas.add(pagoDeFacturas);	
 		
 		/* Review */
@@ -113,8 +114,8 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 		unReview = new Review("Todo bien", "Nico", 5);
 		
 		
-		this.crearPoi("localComercial", 1,"Libreria", "Av. Hipolito Yrigoyen", "La boca", 4276, new Point(21.0 , 2.1), palabrasClave, jornadaNormalLunesAViernes, rubroLibreria, reviews);
-		this.crearPoi("lineaColectivo", 2,"Linea 45", "Av. Santa Fe", "Boedo", 3245, "San juan 12", new Point(21.0 , 2.1), palabrasClave, reviews);
+		this.crearPoi("localComercial", 1,"Libreria El Tano", "Av. Hipolito Yrigoyen", "La boca", 4276, new Point(21.0 , 2.1), palabrasClave, jornadaNormalLunesAViernes, rubroLibreria, reviews);
+		this.crearPoi("lineaColectivo", 2,"Linea 45", "Av. Santa Fe", "Boedo", 3245, "45", new Point(21.0 , 2.1), palabrasClave, reviews);
 		this.crearPoi("CGP", 3,"CGP 481", "Catamarca", "Once", 256, new Point(2.0, 5.6), puntosComuna6,	servicioPagoDeFacturas, palabrasClave, jornadaNormalLunesAViernes, reviews);
 		this.crearPoi("sucursalBanco", 4,"Banco Santander", "Medrano", 564, new Point(5.0, 6.0), "Palermo", servicioPagoDeFacturas, palabrasClave, jornadaNormalLunesAViernes, reviews);
 	}

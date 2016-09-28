@@ -1,11 +1,11 @@
-       <h3 class="h3"><span class="label label-info">Zona:</span>{{crtlGeneral.poiEncontrado.nombre}}</h3>
+       <h3 class="h3"><span class="label label-info">Zona:</span>{{crtlGeneral.poiEncontrado.barrio}}</h3>
 
         <table class="table table-striped" >
                   <tr>
                     <th>Servicio que presta</th>
                   </tr>
                   <tr ng-repeat="servicio in crtlGeneral.poiEncontrado.listaServicios">
-                    <td>{{crtlGeneral.poiEncontrado.nombre}}</td>
+                    <td>{{servicio.nombre}}</td>
                   </tr>
 </table>
      

@@ -2,11 +2,11 @@
 <br>
 
  <table class="table table-striped" >
-                 <tr>
+                  <tr>
                     <th>Rubros</th>
-				</tr>
-				 <tr>
-                    <td>{{crtlGeneral.poiEncontrado.nombre}}</td>
-        		</tr>
-</table>
+                  </tr>
+                  <tr ng-repeat="rubro in crtlGeneral.poiEncontrado.listaRubros">
+                    <td>{{rubro.nombre}}</td>
+                  </tr>
+		</table>
 

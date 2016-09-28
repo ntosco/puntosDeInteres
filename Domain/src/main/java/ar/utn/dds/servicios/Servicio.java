@@ -6,14 +6,16 @@ import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
+import com.google.gson.annotations.Expose;
+
 import ar.utn.dds.estrategias.implementacion.DisponibilidadxRangoHorario;
 import ar.utn.dds.utils.Jornada;
 @Observable
 public class Servicio {
-	private String nombre;
-	private List<Jornada> jornadaDisponible = new ArrayList<Jornada>();
-	private String nombreDeJornada;
-	private DisponibilidadxRangoHorario estrategiaDisponibilidad = new DisponibilidadxRangoHorario();
+	@Expose private String nombre;
+	@Expose private List<Jornada> jornadaDisponible = new ArrayList<Jornada>();
+	@Expose private String nombreDeJornada;
+	@Expose private DisponibilidadxRangoHorario estrategiaDisponibilidad = new DisponibilidadxRangoHorario();
 
 	public DisponibilidadxRangoHorario getEstrategiaDisponibilidad() {
 		return estrategiaDisponibilidad;
