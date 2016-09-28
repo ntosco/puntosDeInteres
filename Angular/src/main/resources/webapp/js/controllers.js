@@ -108,10 +108,10 @@ app.controller('controllerGeneral',function( $state, $stateParams, poisService){
     var self = this;
 
     this.poiEncontrado = [];
- 
-    // Datos relevantes a los tipo de POIS
-    // 
     this.id = $stateParams.POID;
+    this.comentario = "";
+    this.valoracion;
+    var tipo = self.poiEncontrado.tipo;
 
     this.enviarComentario = function(){
         /* Agregar */
@@ -120,47 +120,12 @@ app.controller('controllerGeneral',function( $state, $stateParams, poisService){
     this.buscarUnPoi = function() {
         poisService.buscarUnPoi(self.id, function(data){
             self.poiEncontrado = angular.extend(new Poi(),data);
+            $state.go('detallePOI.' + self.poiEncontrado.tipo);
         });
     };
 
     /* Inicializacion */
 
     this.buscarUnPoi();   
-    
-/*  this.tipo = tipo;
-    this.nombre1 = idpoi.nombre;
-    this.direccion = idpoi.direccion;
-    this.rubro = idpoi.adicionales.rubro;
-    this.servicios = idpoi.adicionales.serviciosAsociados;
-    this.zona = idpoi.adicionales.zona;
-    this.numeroLinea = idpoi.adicionales.numeroDeLinea;
-    this.reviews = idpoi.adicionales.reviews; */
 
- //   $state.go('detallePOI.' + tipo);
-
-
-/*
-        var self = this;
-    this.poi;
-    this.id = $stateParams.POID;
-    this.comentario = "";
-    this.valoracion = "";
-       
-        poisService.buscarUnPoi(this.id, function (response){
-            self.nombre = response.nombre;
-
-            self.poi = _.map(response,function(protoPoi){
-                return angular.extend(new Poi(),protoPoi);
-            });
-
-            this.nombre = self.poi.nombre;
-
-        });
-
-
-    this.enviarComentario = function(){
-
-    };
-
-*/
 });

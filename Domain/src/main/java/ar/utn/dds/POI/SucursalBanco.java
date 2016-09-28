@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
+import com.google.gson.annotations.Expose;
+
 import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
 import ar.utn.dds.estrategias.implementacion.DisponibilidadxRangoHorario;
 import ar.utn.dds.estrategias.implementacion.DisponibilidadxServicio;
@@ -18,8 +20,8 @@ import ar.utn.dds.utils.RangoHorario;
 @Observable
 public class SucursalBanco extends POI{
 	
-	private List<Servicio> listaServicios = new ArrayList<Servicio>();
-	private final List<DayOfWeek> DIAS_LABORABLES = new ArrayList<DayOfWeek>(Arrays.asList(DayOfWeek.MONDAY,DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY));	
+	@Expose private List<Servicio> listaServicios = new ArrayList<Servicio>();
+	@Expose private final List<DayOfWeek> DIAS_LABORABLES = new ArrayList<DayOfWeek>(Arrays.asList(DayOfWeek.MONDAY,DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY));	
 
 	public boolean cumpleCondicionBusqueda(String textoLibre){
 		return false;		

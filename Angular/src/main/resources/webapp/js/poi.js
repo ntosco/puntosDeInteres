@@ -8,6 +8,9 @@ var Poi = function(){
     var listaPalabrasClave;
     var reviews;
  	var tipo = "";
+    var linea = "";
+    var listaRubros;
+    var listaServicios;
     var self = this;
 
     this.favorito = false;

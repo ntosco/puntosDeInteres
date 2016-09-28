@@ -6,13 +6,15 @@ import java.util.List;
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.geodds.Point;
 
+import com.google.gson.annotations.Expose;
+
 import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
 import ar.utn.dds.estrategias.implementacion.DisponibilidadFullTime;
 @Observable
 public class ParadaDeColectivo extends POI{
 	
-	final double DISTANCIA_MINIMA_DE_CERCANIA = 0.1;
-	private String linea; //Agrego linea tipo String para cada parada. "linea" es String porque puede incluir el ramal.
+	@Expose final double DISTANCIA_MINIMA_DE_CERCANIA = 0.1;
+	@Expose private String linea; //Agrego linea tipo String para cada parada. "linea" es String porque puede incluir el ramal.
 	
 	
 	public String getLinea() {

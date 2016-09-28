@@ -1,10 +1,9 @@
 <div class="container-fluid">
     <div class="page-header cabecera">
-	    <h1>Detalle de {{crtlGeneral.tipo}} </h1>
+	    <h1>Detalle de {{crtlGeneral.poiEncontrado.tipo}} </h1>
 	</div>
 
 	<div class="divDetallePoi center">
-		<h3 class="h3"><span class="label label-info"> Nombre:</span> {{crtlGeneral.id}}</h3>
     <h3 class="h3"><span class="label label-info"> Nombre:</span> {{crtlGeneral.poiEncontrado.nombre}}</h3>
 		<h3 class="h3"><span class="label label-info"> Direcci&oacute;n:</span> {{crtlGeneral.poiEncontrado.direccionNombre}}</h3>		
 		<div ui-view></div>
@@ -46,10 +45,10 @@
                     <th>Comentario</th>
                     <th>Calificacion</th>
                   </tr>
-                  <tr ng-repeat="review in crtlGeneral.reviews">
-                    <td>{{review.nombre}}</td>
+                  <tr ng-repeat="review in crtlGeneral.poiEncontrado.reviews">
+                    <td>{{review.nombreUsuario}}</td>
                     <td>{{review.comentario}}</td>
-                    <td>{{review.calificacion}}</td>
+                    <td>{{review.valoracion}}</td>
                   </tr>
               </table>
           </form>

@@ -6,6 +6,8 @@ import java.util.List;
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.geodds.*;
 
+import com.google.gson.annotations.Expose;
+
 import java.time.LocalDateTime;
 
 import ar.utn.dds.comunas.Comuna;
@@ -15,9 +17,9 @@ import ar.utn.dds.servicios.Servicio;
 @Observable
 public class CentroGestionParticipacion extends POI{
 
-	private List<Servicio> listaServicios = new ArrayList <Servicio>();
-	private Comuna comuna;	
-	private List<String> listaServiciosString = new ArrayList<String>();
+	@Expose private List<Servicio> listaServicios = new ArrayList <Servicio>();
+	@Expose private Comuna comuna;	
+	@Expose private List<String> listaServiciosString = new ArrayList<String>();
 			
 	public boolean contieneServicio(String textoLibre){
 		for (Servicio servicio : listaServicios){

@@ -2,10 +2,12 @@ package ar.utn.dds.POI;
 
 import org.uqbar.commons.utils.Observable;
 
+import com.google.gson.annotations.Expose;
+
 @Observable
 public class Rubro {
-	private String nombre;
-	private double radioCercania;
+	@Expose private String nombre;
+	@Expose private double radioCercania;
 
 	public double getRadioCercania() {
 		return radioCercania;

@@ -113,10 +113,10 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 		unReview = new Review("Todo bien", "Nico", 5);
 		
 		
-		this.crearPoi("local", 1,"Libreria", "Av. Hipolito Yrigoyen", "La boca", 4276, new Point(21.0 , 2.1), palabrasClave, jornadaNormalLunesAViernes, rubroLibreria, reviews);
-		this.crearPoi("colectivo", 2,"Linea 45", "Av. Santa Fe", "Boedo", 3245, "San juan 12", new Point(21.0 , 2.1), palabrasClave, reviews);
-		this.crearPoi("cgp", 3,"CGP 481", "Catamarca", "Once", 256, new Point(2.0, 5.6), puntosComuna6,	servicioPagoDeFacturas, palabrasClave, jornadaNormalLunesAViernes, reviews);
-		this.crearPoi("banco", 4,"Banco Santander", "Medrano", 564, new Point(5.0, 6.0), "Palermo", servicioPagoDeFacturas, palabrasClave, jornadaNormalLunesAViernes, reviews);
+		this.crearPoi("localComercial", 1,"Libreria", "Av. Hipolito Yrigoyen", "La boca", 4276, new Point(21.0 , 2.1), palabrasClave, jornadaNormalLunesAViernes, rubroLibreria, reviews);
+		this.crearPoi("lineaColectivo", 2,"Linea 45", "Av. Santa Fe", "Boedo", 3245, "San juan 12", new Point(21.0 , 2.1), palabrasClave, reviews);
+		this.crearPoi("CGP", 3,"CGP 481", "Catamarca", "Once", 256, new Point(2.0, 5.6), puntosComuna6,	servicioPagoDeFacturas, palabrasClave, jornadaNormalLunesAViernes, reviews);
+		this.crearPoi("sucursalBanco", 4,"Banco Santander", "Medrano", 564, new Point(5.0, 6.0), "Palermo", servicioPagoDeFacturas, palabrasClave, jornadaNormalLunesAViernes, reviews);
 	}
 
 	/* Local Comercial */

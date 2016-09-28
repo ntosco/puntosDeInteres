@@ -6,14 +6,16 @@ import java.util.List;
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.geodds.Point;
 
+import com.google.gson.annotations.Expose;
+
 import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
 import ar.utn.dds.estrategias.implementacion.DisponibilidadxRangoHorario;
 
 @Observable
 public class LocalComercial extends POI {
 
-	private double cercania = 0;
-	private List<Rubro> listaRubros = new ArrayList<Rubro>();
+	@Expose private double cercania = 0;
+	@Expose private List<Rubro> listaRubros = new ArrayList<Rubro>();
 	
 	public List<Rubro> getListaRubros() {
 		return listaRubros;
