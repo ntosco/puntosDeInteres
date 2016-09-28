@@ -112,6 +112,7 @@ app.controller('controllerGeneral',function( $state, $stateParams, poisService){
 
     this.poiEncontrado = [];
     this.id = $stateParams.POID;
+    this.fav = $stateParams.fav;
     this.comentario = "";
     this.valoracion;
     var tipo = self.poiEncontrado.tipo;

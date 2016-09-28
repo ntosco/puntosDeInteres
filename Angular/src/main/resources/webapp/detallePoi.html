@@ -1,42 +1,56 @@
-<!DOCTYPE html>
-<html lang="es" ng-app="PuntosDeInteresApp">
-<head>
-    <title>Detalle de POI</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+<div class="container-fluid">
+    <div class="page-header cabecera">
+	    <h1>Detalle de {{crtlGeneral.poiEncontrado.tipo}} </h1>
+	</div>
+  
+	<div class="divDetallePoi center">
+    <h3 class="h3"><span class="label label-info"> Nombre:</span> {{crtlGeneral.poiEncontrado.nombre}}</h3>
+		<h3 class="h3"><span class="label label-info"> Direcci&oacute;n:</span> {{crtlGeneral.poiEncontrado.direccionNombre}}</h3>		
+		<div ui-view></div>
+	</div>
 
-<body class="grad">
+	<div class="container">
+  		<div class="row">
+    		<div class="col-sm-2">
+     			 <h3>Tu opinion:</h3>
+   			 </div>
+   		<div class="col-sm-8">
+      		<div class="form-group">
+    		  <textarea class="form-control" 
+                    rows="5" id="comment" 
+                    placeholder="Comentario" 
+                    ng-model="crtlGeneral.comentario"></textarea>
+       				</div>
+    	</div>
+   		<div class="col-sm-2">
+   			<p></p>
+      		<select class="form-control" ng-model="crtlGeneral.valoracion">
+				  <option>1</option>
+				  <option>2</option>
+				  <option>3</option>
+				  <option>4</option>
+				  <option>5</option>
+				  </select>
+					<p></p>
+  			<button type="button" class="btn btn-success" ng-click="crtlGeneral.enviarComentario()">Enviar</button>
+    	</div>
+  	</div>
 
-    <ul class="menutop">
-        <li>Buscador</li>
-        <li class="active">Detalle</li>
-        <li class="right">Logout</li>
-    </ul>
+  	<h3 class="h3"><span class="label label-info">Opiniones: </span></h3>
 
-    <div>
-        <div class="container-fluid ">
-
-            <!-- Ver como hacer para que esto sea al estilo template Method -->
-            <h1 class="border-btm">Detalle GENERAL</h1>
-            <!-- Fin comment -->
-
-            <h4>Nombre:</h4>
-
-            <span class="mrgn">XXXXXX</span>
-
-            <h4>Direccion:</h4>
-
-            <span class="mrgn">XXXX</span> <span class="glyphicon glyphicon-map-marker"></span>
-
-
-            <div ui-view></div>
-
-
-            <!-- JQuery --script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> >
-            <!-- Bootstrap core JavaScript -->
-            <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-        </div>
-    </div>
-</body>
-</html>
+  		<form>
+              <table class="table table-striped" >
+                  <tr>
+                    <th>Usuario</th>
+                    <th>Comentario</th>
+                    <th>Calificacion</th>
+                  </tr>
+                  <tr ng-repeat="review in crtlGeneral.poiEncontrado.reviews">
+                    <td>{{review.nombreUsuario}}</td>
+                    <td>{{review.comentario}}</td>
+                    <td>{{review.valoracion}}</td>
+                  </tr>
+              </table>
+          </form>
+	</div>
+</div>
