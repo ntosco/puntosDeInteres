@@ -27,6 +27,7 @@ app.controller('controllerLogin', function ($state,$rootScope, poisService) {
 app.controller('controllerBusqueda', function ($rootScope,poisService) {
     var self = this;
     this.listaPalabrasClave = [];
+    this.STRINGlistaPalabrasClave = "";
     this.palabraClave = "";
     this.puntosDeInteres = [];
     this.resultadoBusqueda = [];
@@ -55,6 +56,7 @@ app.controller('controllerBusqueda', function ($rootScope,poisService) {
 
     this.agregarPalabraClave = function() {
         self.listaPalabrasClave.push(self.palabraClave);
+        self.STRINGlistaPalabrasClave += "!" + self.palabraClave;
         this.palabraClave = "";
     };
 
@@ -82,7 +84,7 @@ app.controller('controllerBusqueda', function ($rootScope,poisService) {
     };
 
     this.buscarPuntoDeInteres = function() {
-        poisService.searchPoi(self.listaPalabrasClave, function (data) {
+        poisService.searchPoi(self.STRINGlistaPalabrasClave, function (data) {
             self.resultadoBusqueda = _.map(data,function(protoPoi){
                 return angular.extend(new Poi(),protoPoi);
             });
@@ -91,6 +93,7 @@ app.controller('controllerBusqueda', function ($rootScope,poisService) {
 
     this.limpiarBusqueda = function(){
         self.listaPalabrasClave = [];
+        self.STRINGlistaPalabrasClave = "";
         self.resultadoBusqueda = self.puntosDeInteres;
     }
 
