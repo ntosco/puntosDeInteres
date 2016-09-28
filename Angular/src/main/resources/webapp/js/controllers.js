@@ -105,34 +105,29 @@ app.controller('controllerGeneral',function( $state, $stateParams, poisService){
     //var idpoi =  _.find(repositorio, function(o) { return o.id == $stateParams.POID; });
    // var tipo = idpoi.tipo;
 
-    // Datos relevantes a los tipo de POIS
     var self = this;
 
     this.poiEncontrado = [];
-    this.resultadoPoiEncontrado = [];
-    this.poi = {};
+ 
+    // Datos relevantes a los tipo de POIS
+    // 
+    this.id = $stateParams.POID;
+
+    this.enviarComentario = function(){
+        /* Agregar */
+    };
+
+    this.buscarUnPoi = function() {
+        poisService.buscarUnPoi(self.id, function(data){
+            self.poiEncontrado = angular.extend(new Poi(),data);
+        });
+    };
 
     this.obtenerPrimerPoi = function(){
        self.poi = self.poiEncontrado.shift();
     };
 
-    this.id = $stateParams.POID;
-    this.puntosDeInteres = [];
-    this.resultadoBusqueda = [];
-
-    this.enviarComentario = function(){
-
-    };
-
-    this.buscarUnPoi = function() {
-        poisService.buscarUnPoi(self.id, function(data){
-            self.poiEncontrado = _.map(data,function(protoPoi){
-                return angular.extend(new Poi(),protoPoi);
-            });
-            self.resultadoPoiEncontrado = self.poiEncontrado;
-            self.obtenerPrimerPoi();
-        });
-    };
+    /* Inicializacion */
 
     this.buscarUnPoi();   
     
