@@ -227,9 +227,12 @@ public abstract class POI extends Entity {
 	}
 	
 	public void agregarReview(Review unaRev){
-		List<Review> reviewsActuales = this.getReviews();
+		reviews.add(unaRev);
+		/*List<Review> reviewsActuales = this.getReviews();
 		reviewsActuales.add(unaRev);
-		this.setReviews(reviewsActuales);
+		this.setReviews(reviewsActuales);  */
+		
+		
 	}
 	
 	public boolean elUsuarioYaOpino(String nombreUsuario){
