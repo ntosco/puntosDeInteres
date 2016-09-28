@@ -57,6 +57,7 @@ public class PoisController {
     	  int idDelPoi = Integer.parseInt(request.params(":idPoi"));
     	  POI poiBuscado = Repositorio.getInstance().searchById(idDelPoi);
           response.type("application/json;charset=utf-8");
+          poiBuscado.setValoracionPromedio(poiBuscado.calcularValoracionPromedio());
           return poiBuscado;
       }, this.jsonTransformer);
 

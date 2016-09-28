@@ -34,6 +34,7 @@ public abstract class POI extends Entity {
 	@Expose private String barrio;
 	@Expose private int direccionNumero;
 	@Expose private Point ubicacionActual;
+	@Expose private double valoracionPromedio;
 
 	private final double DISTANCIA_MINIMA_DE_CERCANIA = 0.5;
 	
@@ -228,6 +229,8 @@ public abstract class POI extends Entity {
 	
 	public void agregarReview(Review unaRev){
 		reviews.add(unaRev);
+		this.setValoracionPromedio(this.calcularValoracionPromedio());
+		
 		/*List<Review> reviewsActuales = this.getReviews();
 		reviewsActuales.add(unaRev);
 		this.setReviews(reviewsActuales);  */
@@ -251,9 +254,9 @@ public abstract class POI extends Entity {
 			for (int i = 0; i < this.getReviews().size(); i++) {
 	        	totalDeValoraciones = totalDeValoraciones + this.getReviews().get(i).getValoracion();
 	        }
-	        return (totalDeValoraciones/this.getReviews().size());
+			return (totalDeValoraciones/this.getReviews().size());
         }else{
-        	return 0;
+        	return 0.0;
         }
 	}
 	
@@ -272,6 +275,16 @@ public abstract class POI extends Entity {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+
+	public double getValoracionPromedio() {
+		return this.valoracionPromedio;
+	}
+
+	public void setValoracionPromedio(double d) {
+		this.valoracionPromedio = d;
+	}
+	
+	
 	
 	
 }

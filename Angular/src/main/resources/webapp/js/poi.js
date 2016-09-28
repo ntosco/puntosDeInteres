@@ -12,6 +12,7 @@ var Poi = function(){
     var listaRubros;
     var listaServicios;
     var self = this;
+    var valoracionPromedio;
 
     this.favorito = false;
 
