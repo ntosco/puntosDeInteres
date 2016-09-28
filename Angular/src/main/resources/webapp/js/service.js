@@ -17,10 +17,14 @@ app.service("poisService", function($http) {
 
     this.searchPoi = function(listaPalabrasClave, successCallback){
         $http.get("/searchPoi/" + listaPalabrasClave).success(successCallback);
-    }
+    };  
 
     this.buscarUnPoi = function(idPoi, successCallback) {
         $http.get("/buscarUnPoi/" + idPoi).success(successCallback);
+    };
+
+    this.updateComentario = function(comentario, valoracion, idPoi, user, successCallback){
+        $http.put("/comentario/" + idPoi + "/" + comentario + "/" + valoracion + "/" + user).success(successCallback);
     };
 
 

@@ -3,11 +3,14 @@ package servidor.controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
+
 import servidor.controller.util.JsonTransformer;
 import ar.utn.dds.POI.POI;
+import ar.utn.dds.POI.Review;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import ar.utn.dds.repositorio.Repositorio;
 import ar.utn.dds.repositorio.RepositorioDeUsuarios;
 import spark.Spark;
@@ -57,6 +60,16 @@ public class PoisController {
           return poisBuscado;
       }, this.jsonTransformer);
       
+      Spark.put("/comentario/:idPoi/:comentario/:valoracion/:user", (request, response) -> {
+    	  int idDelPoi = Integer.parseInt(request.params(":idPoi"));
+    	  String comentario = request.params(":comentario");
+    	  int valoracion = Integer.parseInt(request.params(":valoracion"));
+    	  String unUsuario = request.params(":user");
+    	  POI poiBuscado = Repositorio.getInstance().searchById(idDelPoi);
+    	  Review unaReview = new Review(comentario, unUsuario, valoracion);
+    	  poiBuscado.agregarReview(unaReview);
+    	  return poiBuscado;
+      }, this.jsonTransformer);      
 
       
       /*

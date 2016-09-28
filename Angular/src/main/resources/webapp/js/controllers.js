@@ -32,6 +32,7 @@ app.controller('controllerBusqueda', function ($rootScope,poisService) {
     this.puntosDeInteres = [];
     this.resultadoBusqueda = [];
     this.favoritos = [];
+    this.nombreDeUsuario = $rootScope.User.nombre;
 
     this.getPois = function() {
         poisService.findAll(function(data){
@@ -105,20 +106,21 @@ app.controller('controllerBusqueda', function ($rootScope,poisService) {
 
 app.controller('controllerGeneral',function( $state, $stateParams, poisService){
 
-    //var idpoi =  _.find(repositorio, function(o) { return o.id == $stateParams.POID; });
-   // var tipo = idpoi.tipo;
-
     var self = this;
 
     this.poiEncontrado = [];
     this.id = $stateParams.POID;
     this.fav = $stateParams.fav;
+    this.user = $stateParams.user;
     this.comentario = "";
     this.valoracion;
     var tipo = self.poiEncontrado.tipo;
 
     this.enviarComentario = function(){
-        /* Agregar */
+        poisService.updateComentario(self.comentario, self.valoracion, self.id, self.user, function(data){
+            self.poiEncontrado = angular.extend(new Poi(),data);
+            $state.go('detallePOI.' + self.poiEncontrado.tipo);
+        });
     };
 
     this.buscarUnPoi = function() {

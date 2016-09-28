@@ -15,7 +15,7 @@ app.config(function ($stateProvider, $urlRouterProvider){
         })
        .state('detallePOI', {
              url: "/detalleGeneral",
-             params: { POID: 0 , fav: false},
+             params: { POID: 0 , fav: false, user: ""},
              templateUrl: "detallePOI.html",
              controller: "controllerGeneral as crtlGeneral"
         })
