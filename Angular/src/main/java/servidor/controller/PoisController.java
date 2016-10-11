@@ -14,9 +14,9 @@ import ar.utn.dds.POI.Review;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-
-
+import java.util.Set;
 
 import ar.utn.dds.repositorio.Repositorio;
 import ar.utn.dds.repositorio.RepositorioDeUsuarios;
@@ -61,13 +61,13 @@ public class PoisController {
           return poiBuscado;
       }, this.jsonTransformer);
 
-      Spark.get("/searchPoi/:listaPalabrasClave", (request,response) -> {
-    	  String palabrasClave = request.params(":listaPalabrasClave");
-    	  String[] arrayPalabrasClave = palabrasClave.split("!");
+      Spark.get("/searchPoi/:palabraclave", (request,response) -> {
+    	  String palabrasClave = request.params(":palabraclave");
+    	  String[] arrayPalabrasClave = palabrasClave.split(",");
     	  List<POI> poisBuscado = buscarPorPalabrasClave(arrayPalabrasClave);
-          poisBuscado = eliminarRepetidos(poisBuscado);
+    	  Set<POI> setListPoisBuscado = new HashSet<POI>(poisBuscado);
           response.type("application/json;charset=utf-8");
-          return poisBuscado;
+          return setListPoisBuscado;
       }, this.jsonTransformer);
       
       Spark.put("/comentario/:idPoi/:comentario/:valoracion/:user", (request, response) -> {
@@ -94,17 +94,6 @@ public class PoisController {
        *  */
     }
     
-    public List<POI> eliminarRepetidos(List<POI> Lista){
-  	  List<POI> sinRepetidos = new ArrayList<POI>();
-  	  for(int a=0; a < Lista.size(); a++){
-  		  if(sinRepetidos.contains(Lista.get(a))){
-  			  
-  		  }else{
-  			sinRepetidos.add(Lista.get(a));
-  		  }
-  	  }
-  	  return sinRepetidos;
-    }
     
     public List<POI> buscarPorPalabrasClave(String[] PalabrasClave){
     	List<POI> poisBuscado = new ArrayList<POI>();
