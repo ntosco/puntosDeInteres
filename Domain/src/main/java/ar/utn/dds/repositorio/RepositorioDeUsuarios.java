@@ -35,7 +35,8 @@ public class RepositorioDeUsuarios{
 	}
 
 	public void clean(){
-		Repoinstance = null;
+		this.usuarios.clear();
+		//Repoinstance = null;
 	}
 	
 

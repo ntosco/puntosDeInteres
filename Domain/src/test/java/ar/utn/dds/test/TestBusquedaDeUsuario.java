@@ -11,8 +11,14 @@ public class TestBusquedaDeUsuario {
 	@Test
 	public void testCrearUsuario() {
 		RepositorioDeUsuarios.getInstance().clean();
-		RepositorioDeUsuarios.getInstance().crearUsuario("martin", "samo");
+		RepositorioDeUsuarios.getInstance().crearUsuario("user", "pass");
 		assertTrue(RepositorioDeUsuarios.getInstance().getUsuarios().size() == 1);
+	}
+	
+	@Test
+	public void cleanRepoUsuarios() {
+		RepositorioDeUsuarios.getInstance().clean();
+		assertTrue(RepositorioDeUsuarios.getInstance().getUsuarios().size() == 0);
 	}
 	
 	@Test
@@ -38,7 +44,7 @@ public class TestBusquedaDeUsuario {
 
 		assertTrue(RepositorioDeUsuarios.getInstance().buscarUsuario("nico").getNombreUsuario() == "nico");
 		assertTrue(RepositorioDeUsuarios.getInstance().buscarUsuario("nico").getPassword() == "tosco");
-		assertTrue(RepositorioDeUsuarios.getInstance().buscarUsuario("nico").getFavoritos().isEmpty());
+		assertTrue(RepositorioDeUsuarios.getInstance().buscarUsuario("nico").getFavoritos().size() == 1);
 	}
 
 	@Test

@@ -38,6 +38,14 @@ public class TestRepositorioPois extends JuegoDeDatos {
 		repositorio.create(this.parada15);
 		assertEquals(repositorio.allInstances().size(),++size);
 	}
+	
+	@Test
+	public void crea2PoisCuandoEsteEsValido(){
+		int size = repositorio.allInstances().size();
+		repositorio.create(this.parada11);
+		repositorio.create(this.parada15);
+		assertEquals(repositorio.allInstances().size(),size + 2);
+	}
 
 	@Test(expected = InvalidModelException.class)
 	public void noCreaPOICuandoEsteEsInvalido(){
@@ -107,13 +115,11 @@ public class TestRepositorioPois extends JuegoDeDatos {
 	@Test
 	public void buscoUnPOIExistente(){
 		repositorio.create(this.parada114);
-		repositorio.create(this.parada15);
 		assertNotEquals(null, repositorio.search("114"));
 	}	
 	@Test
 	public void buscoUnPOIInexistente(){
 		repositorio.create(this.parada114);
-		repositorio.create(this.parada15);
 		assertNotEquals(null, repositorio.search("martinez"));
 	}	
 	
