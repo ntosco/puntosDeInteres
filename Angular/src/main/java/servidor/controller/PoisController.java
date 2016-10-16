@@ -3,7 +3,9 @@ package servidor.controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
+
 import javax.servlet.http.HttpServletResponse;
+
 
 
 
@@ -13,9 +15,11 @@ import ar.utn.dds.POI.Review;
 
 
 
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 import ar.utn.dds.repositorio.Repositorio;
@@ -70,28 +74,23 @@ public class PoisController {
           return setListPoisBuscado;
       }, this.jsonTransformer);
       
-      Spark.put("/comentario/:idPoi/:comentario/:valoracion/:user", (request, response) -> {
+      Spark.put("/comentario/:idPoi", (request, response) -> {
     	  int idDelPoi = Integer.parseInt(request.params(":idPoi"));
-    	  String comentario = request.params(":comentario");
-    	  int valoracion = Integer.parseInt(request.params(":valoracion"));
-    	  String unUsuario = request.params(":user");
+    	  gson = new Gson();
+    	  String json = request.body().toString();
+    	  Properties properties = gson.fromJson(json, Properties.class);
+    	  String comentario = properties.getProperty("comentario");
+    	  int valoracion = Integer.parseInt(properties.getProperty("valoracion"));
+    	  String unUsuario = properties.getProperty("user");
+    	  
     	  POI poiBuscado = Repositorio.getInstance().searchById(idDelPoi);
-    	  Review unaReview = new Review(comentario, unUsuario, valoracion);
+    	   Review unaReview = new Review(comentario, unUsuario, valoracion);
     	  	if(poiBuscado.elUsuarioYaOpino(unUsuario)){
     	  		Spark.halt(400, "El usuario Ya opinio");
-    	  	}
+    	  	} 
     	  	poiBuscado.agregarReview(unaReview);    	  		
     	  	return poiBuscado;
       }, this.jsonTransformer);      
-
-      
-      /*
-       *       Spark.get("/searchPoi", (request,response) -> {
-    	  List<POI> poisBuscados = Repositorio.getInstance().search("cartuchera");
-          response.type("application/json;charset=utf-8");
-          return poisBuscados;
-      }, this.jsonTransformer);
-       *  */
     }
     
     

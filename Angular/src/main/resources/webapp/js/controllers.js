@@ -93,7 +93,7 @@ app.controller('controllerBusqueda', function ($rootScope,poisService) {
     this.limpiarBusqueda = function(){
         self.listaPalabrasClave = [];
         self.resultadoBusqueda = self.puntosDeInteres;
-    }
+    };
 
     /* Inicializacion */
 
@@ -110,7 +110,7 @@ app.controller('controllerGeneral',function( $state, $stateParams, poisService){
     this.fav = $stateParams.fav;
     this.user = $stateParams.user;
     this.comentario = "";
-    this.valoracion;
+    this.valoracion = 0;
     var tipo = self.poiEncontrado.tipo;
 
     this.enviarComentario = function(){

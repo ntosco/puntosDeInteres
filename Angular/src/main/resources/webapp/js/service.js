@@ -2,6 +2,7 @@
 
 app.service("poisService", function($http) {
 
+
     this.findAll = function(successCallback) {
         $http.get("/pois").success(successCallback);
     };
@@ -24,7 +25,11 @@ app.service("poisService", function($http) {
     };
 
     this.updateComentario = function(comentario, valoracion, idPoi, user, successCallback){
-        $http.put("/comentario/" + idPoi + "/" + comentario + "/" + valoracion + "/" + user).success(successCallback);
+        var unaReview = {   comentario: comentario,
+                            valoracion: valoracion,
+                            user: user};
+                            
+        $http.put("/comentario/" + idPoi, unaReview).success(successCallback);
     };
 
 
