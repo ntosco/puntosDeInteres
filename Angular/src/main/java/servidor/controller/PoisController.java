@@ -65,9 +65,8 @@ public class PoisController {
           return poiBuscado;
       }, this.jsonTransformer);
 
-      Spark.get("/searchPoi/:palabraclave", (request,response) -> {
-    	  String palabrasClave = request.params(":palabraclave");
-    	  String[] arrayPalabrasClave = palabrasClave.split(",");
+      Spark.get("/searchPoi/PalabrasClave", (request,response) -> {
+    	  String[] arrayPalabrasClave = request.queryParamsValues("palabra[]");
     	  List<POI> poisBuscado = buscarPorPalabrasClave(arrayPalabrasClave);
     	  Set<POI> setListPoisBuscado = new HashSet<POI>(poisBuscado);
           response.type("application/json;charset=utf-8");

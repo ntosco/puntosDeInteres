@@ -42,8 +42,8 @@ public class TestRepositorioPois extends JuegoDeDatos {
 	@Test
 	public void crea2PoisCuandoEsteEsValido(){
 		int size = repositorio.allInstances().size();
-		repositorio.create(this.parada11);
 		repositorio.create(this.parada15);
+		repositorio.create(this.parada11);
 		assertEquals(repositorio.allInstances().size(),size + 2);
 	}
 
