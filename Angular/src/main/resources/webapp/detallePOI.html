@@ -4,6 +4,7 @@
 	</div>
   
 	<div class="divDetallePoi center">
+    <span class="label label-warning" ng-show = "crtlGeneral.fav">Favorito</span>
     <h3 class="h3"><span class="label label-info"> Nombre:</span> {{crtlGeneral.poiEncontrado.nombre}}</h3>
 		<h3 class="h3"><span class="label label-info"> Direcci&oacute;n:</span> {{crtlGeneral.poiEncontrado.direccionNombre}}</h3>		
 		<div ui-view></div>
@@ -11,6 +12,21 @@
 
   <div class="container">
     <h3 class="h3"><span class="label label-info"> Calificaci&oacute;n General:</span> {{  crtlGeneral.poiEncontrado.valoracionPromedio  }}</h3>
+  </div>
+  
+<div class="favorito center" >
+      <div class="row">
+        <div class="col-sm-9" align="center">
+            <button type="button" class="btn btn-info" 
+                    ng-click="crtlGeneral.updatePOI(crtlGeneral.id,crtlGeneral.fav)" 
+                    ng-show = "!crtlGeneral.fav" >Agregar favorito</button>
+        </div>
+        <div class="col-sm-9" align="center">
+            <button type="button" class="btn btn-warning" 
+                    ng-click="crtlGeneral.updatePOI(crtlGeneral.id,crtlGeneral.fav)"
+                    ng-show = "crtlGeneral.fav" >Eliminar favorito</button>
+        </div>
+      </div>
   </div>
 
 	<div class="container">

@@ -67,15 +67,22 @@ app.controller('controllerBusqueda', function ($rootScope,poisService) {
         return nombres;
     };
 
-    this.actualizarFavoritos = function(){
+    this.existeEn = function(nombreFav,lista){
+        for (var i = 0; i < lista.length; i++) {
+            if (nombreFav.nombre.includes(lista[i])) { 
+                return true;
+            };  
+        };
+    };  
+
+   this.actualizarFavoritos = function(){
         var auxiliar = self.modificarNombres();
 
         self.puntosDeInteres =  _.map(self.resultadoBusqueda,function(poi2){
 
-            if (poi2.nombre.includes(auxiliar)){
-                poi2.favorito = true;
-            };       
-            
+            if (self.existeEn(poi2,auxiliar)){
+                poi2.favorito = true;       
+            };
             return poi2;
         });
 
@@ -101,7 +108,7 @@ app.controller('controllerBusqueda', function ($rootScope,poisService) {
 
 });
 
-app.controller('controllerGeneral',function( $state, $stateParams, poisService){
+app.controller('controllerGeneral',function( $rootScope, $state, $stateParams, poisService){
 
     var self = this;
 
@@ -125,6 +132,13 @@ app.controller('controllerGeneral',function( $state, $stateParams, poisService){
             self.poiEncontrado = angular.extend(new Poi(),data);
             $state.go('detallePOI.' + self.poiEncontrado.tipo);
         });
+    };
+
+    this.updatePOI = function (idParam,esFavorito){
+        poisService.update(idParam,esFavorito,$rootScope.User.nombre,function(){
+            self.poiEncontrado.favorito = !self.poiEncontrado.favorito;
+            self.fav = !self.fav;
+        });       
     };
 
     /* Inicializacion */

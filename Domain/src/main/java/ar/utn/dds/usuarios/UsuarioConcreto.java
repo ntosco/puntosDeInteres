@@ -133,12 +133,14 @@ public class UsuarioConcreto implements Usuario {
 		this.favoritos = favoritos;
 	}
 
+	@Override
 	public void agregarFavorito(POI poiFavorito){
 		List<POI> favoritosActuales = this.getFavoritos();
 		favoritosActuales.add(poiFavorito);
 		this.setFavoritos(favoritosActuales);
 	}
 	
+	@Override
 	public void quitarFavorito(POI poiNoFavorito){
 		List<POI> favoritosActuales = this.getFavoritos();
 		favoritosActuales.remove(poiNoFavorito);

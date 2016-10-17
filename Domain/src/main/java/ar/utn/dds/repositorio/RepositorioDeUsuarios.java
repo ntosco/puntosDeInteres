@@ -79,6 +79,15 @@ public class RepositorioDeUsuarios{
 			Usuario usuarioAux = this.buscarUsuario(user);
 			return usuarioAux.getFavoritos();
 	}
+	
+	public void actualizarFavoritos(POI poi,Boolean esFavorito,String user){
+		Usuario usuario = RepositorioDeUsuarios.getInstance().buscarUsuario(user);
+		if (esFavorito) {
+			usuario.quitarFavorito(poi);		
+		}else{
+			usuario.agregarFavorito(poi);
+		};
+	}
 	 
 	public List<Usuario> getUsuariosAdministradores(){
 		CollectionUtils.filter(this.usuarios, ((usuario)-> usuario.tieneRolAdministrador()));

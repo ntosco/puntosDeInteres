@@ -32,6 +32,10 @@ app.service("poisService", function($http) {
         $http.put("/comentario/" + idPoi, unaReview).success(successCallback);
     };
 
+    this.update = function(id,fav,user, successCallback) {
+        $http.put("/pois/" + id + "/" + fav + "/" + user).success(successCallback);
+    };
+
 
 /*
     this.update = function(poi, successCallback, onFailCallback) {

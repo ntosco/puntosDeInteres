@@ -11,6 +11,10 @@ public interface Usuario {
 		
 	public void opinar(POI punto, String comentario, int valoracion);
 	
+	public void agregarFavorito(POI poi);
+	
+	public void quitarFavorito(POI poi);
+	
 	public void agregarObservador(Observador observerador);
 	
 	public void quitarObservador(Observador observerador);
