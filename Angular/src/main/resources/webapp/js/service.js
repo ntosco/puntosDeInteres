@@ -33,7 +33,10 @@ app.service("poisService", function($http) {
     };
 
     this.update = function(id,fav,user, successCallback) {
-        $http.put("/pois/" + id + "/" + fav + "/" + user).success(successCallback);
+        var usuarioFavorito = {   favorito: fav,
+                                  usuario: user};
+
+        $http.put("/pois/" + id ,usuarioFavorito).success(successCallback);
     };
 
 

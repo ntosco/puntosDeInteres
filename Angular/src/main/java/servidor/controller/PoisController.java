@@ -74,14 +74,20 @@ public class PoisController {
           return setListPoisBuscado;
       }, this.jsonTransformer);
       
-      Spark.put("/pois/:id/:fav/:user", (request, response) -> {
+      Spark.put("/pois/:id", (request, response) -> {
 			//Tarea tarea = this.gson.fromJson(request.body(), Tarea.class);
 	  
 	  	int idDelPoi = Integer.parseInt(request.params(":id"));
-	  	boolean esFavorito;
-	  	String nombreUsuario = request.params(":user");
 	  	
-	  	if (request.params(":fav").equals("true")){
+	  	gson = new Gson();
+	  	String json = request.body().toString();
+	  	Properties properties = gson.fromJson(json, Properties.class);
+	  	
+	  	boolean esFavorito;
+	  	String nombreUsuario = properties.getProperty("usuario");
+
+	  	
+	  	if (properties.getProperty("favorito").equals("true")){
 	  		esFavorito =  true;
 	  	}else{
 	  		esFavorito = false;
@@ -91,8 +97,9 @@ public class PoisController {
 			
 		response.type("application/json;charset=utf-8");
 			
-		return "{\"status\": \"OK\"}";
-		});
+		return "null";
+		//return "{\"status\": \"OK\"}";
+		},this.jsonTransformer);
       
       Spark.put("/comentario/:idPoi", (request, response) -> {
     	  int idDelPoi = Integer.parseInt(request.params(":idPoi"));
