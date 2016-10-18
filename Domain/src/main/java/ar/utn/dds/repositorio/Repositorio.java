@@ -14,7 +14,21 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+
+import javax.persistence.Cache;
+import javax.persistence.EntityGraph;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceUnitUtil;
+import javax.persistence.Query;
+import javax.persistence.SynchronizationType;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.persistence.metamodel.Metamodel;
 
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.comunas.Comuna;
@@ -30,8 +44,14 @@ import ar.utn.dds.utils.OrigenDeDatos;
 import ar.utn.dds.utils.RangoHorario;
 
 import org.uqbar.geodds.Point;
+import org.hibernate.Criteria;
+import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory; 
+import org.hibernate.cfg.Configuration;
 
-public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDatos{
+public class Repositorio implements OrigenDeDatos{
 
 	public List<DayOfWeek> lunesAViernes;
 	public RangoHorario rangoDe10a20;
@@ -73,6 +93,11 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 	
 	/* Singleton */
 	private static Repositorio repoPois;
+	private static final SessionFactory sessionFactory = new Configuration()
+														.configure()
+														.addAnnotatedClass(POI.class)
+														.buildSessionFactory();
+
 
 	public static Repositorio getInstance(){
 		if (Repositorio.repoPois == null) {
@@ -80,6 +105,8 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 		}	
 		return Repositorio.repoPois;
 	}
+	
+	
 
 	public void clean(){Repositorio.repoPois = null;}
 
@@ -329,7 +356,7 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 	public void update(POI poi){
 		poi.validateUpdate();
 		this.validateExistenceByID(poi);
-		super.update(poi);
+		this.update(poi);
 	}
 
 	public List<POI> search(String nombre){
@@ -348,14 +375,29 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 			this.searchById(nuevoPoi.getId());
 	}	
 	
-	@Override
+	public POI searchById(Integer id) {
+		Session session = null;
+        POI poi = null;
+        try {
+            session = Repositorio.sessionFactory.openSession();
+            poi = (POI) session.get(POI.class, id);
+            Hibernate.initialize(poi);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return poi;
+    }
+
 	protected void validateCreate(POI nuevoPoi) {
 		nuevoPoi.validateCreate();
 		if (this.validateExistence(nuevoPoi)) 
 			throw new RepositoryException("El POI ya existe");
 	}
 
-	@Override
 	protected void validateDelete(POI nuevoPoi) {
 		if (!this.validateExistence(nuevoPoi))
 			throw new RepositoryException("El POI no existe en el repositorio");
@@ -366,12 +408,10 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 	// ********************************************************
 	
 	
-	@Override
 	public Class<POI> getEntityType() {
 		return POI.class;
 	}
 
-	@Override
 	public POI createExample() {
 		// TODO Auto-generated method stub
 		return null;
@@ -380,7 +420,6 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 
 //	Redefinir para la utilizacion en searchByExample
 	@SuppressWarnings("unchecked")
-	@Override
 	protected Predicate<POI> getCriterio(POI example) {
 		return new Predicate<POI>(){
 			public boolean evaluate(POI poi) {
@@ -393,6 +432,64 @@ public class Repositorio extends CollectionBasedRepo<POI> implements OrigenDeDat
 	public List<POI> buscarPOI(String nombre) {
 		return this.search(nombre);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<POI> allInstances() {
+		Session session = sessionFactory.openSession();
+		try {
+			return session.createCriteria(POI.class).list();
+		} finally {
+			session.close();
+		}
+	}
+	
+	public static SessionFactory getSessionFactory()
+	{ 
+	    return sessionFactory;
+	}
+	
+	public List<POI> searchByExample(POI poi) {
+		EntityManager entityManager;
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("manager");
+		entityManager = entityManagerFactory.createEntityManager();
+		try {
+			CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
+			CriteriaQuery<POI> query = criteria.createQuery(POI.class);
+			Root<POI> camposZona = query.from(POI.class);
+			query.select(camposZona);
+			if (poi.getId() != null) {
+			query.where(
+					criteria.equal(camposZona.get( "Id"),
+					poi.getId()));
+			}
+			return entityManager.createQuery(query).getResultList();
+		} finally {
+			entityManager.close();
+		}
+	}
+	
+	public void create(POI poi) {
+		Session session = sessionFactory.openSession();
+		try {
+			session.beginTransaction();
+			session.save(poi);
+			session.getTransaction().commit();
+		} catch (HibernateException e) {
+			session.getTransaction().rollback();
+			throw new RuntimeException(e);
+		} finally {
+			session.close();
+		}
+	}
+
+
+
+	public void delete(ParadaDeColectivo parada15) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 	
 	
 

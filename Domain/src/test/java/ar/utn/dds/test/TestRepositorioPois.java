@@ -130,7 +130,7 @@ public class TestRepositorioPois extends JuegoDeDatos {
 	@Test(expected = BusinessException.class)
 	public void quieroActualizarUnPOIInvalidoYLanzaExcepcion(){
 		repositorio.create(this.parada114);
-		parada114.setId(null);
+		parada114.setId((Integer) null);
 		repositorio.update(parada114);
 	}
 	

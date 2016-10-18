@@ -1,51 +1,71 @@
 package ar.utn.dds.POI;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.uqbar.commons.model.Entity;
-import org.uqbar.commons.utils.Observable;
-import org.uqbar.geodds.*;
-
-import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
-import ar.utn.dds.utils.Jornada;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.apache.commons.lang.StringUtils;
+import org.uqbar.commons.utils.Observable;
+import org.uqbar.geodds.Point;
 
-import ar.utn.dds.exceptions.*;
+import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
+import ar.utn.dds.exceptions.InvalidModelException;
+import ar.utn.dds.utils.Jornada;
 
-import com.google.gson.annotations.*;
+import com.google.gson.annotations.Expose;
 
+@Entity
 @Observable
 //TODO Ver si es necesario realizar un objeto intermediario que sea observable
-public abstract class POI extends Entity {
-
+public abstract class POI{
+	
+	@Id
+	@GeneratedValue
+	@Expose private int id;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	@Column(length=150)
 	@Expose private String tipo;
-	@Expose private int id;
+	
+	@Column(length=150)
 	@Expose private String nombre;
+	
+	@Column(length=150)
 	@Expose private String direccionNombre;
+	
+	@Column(length=150)
 	@Expose private String barrio;
+	
 	@Expose private int direccionNumero;
 	@Expose private Point ubicacionActual;
 	@Expose private double valoracionPromedio;
 
 	private final double DISTANCIA_MINIMA_DE_CERCANIA = 0.5;
 	
+	@OneToMany(fetch=FetchType.LAZY)
 	@Expose private List<Jornada> JornadaDisponible = new ArrayList<Jornada>();
+	
 	@Expose private List<EstrategiaDisponibilidad> EstrategiasDisponibilidad = new ArrayList<EstrategiaDisponibilidad>();
+	
+	@OneToMany(fetch=FetchType.LAZY)
 	@Expose private List<String> listaPalabrasClave = new ArrayList <String>();
+	
+	@OneToMany(fetch=FetchType.LAZY)
 	@Expose private List<Review> reviews = new ArrayList <Review>();
 	
 	// Baja logica
 	
-	private String fechaBaja;
+	@Column(length=150)
+	@Expose private String fechaBaja;
 	
 	
 	// ********************************************************
@@ -61,7 +81,6 @@ public abstract class POI extends Entity {
 			throw new InvalidModelException("El POI no posee ubicacion");
 	}
 		
-	@Override
 	public void validateCreate(){
 		this.validate();
 	}
@@ -73,6 +92,11 @@ public abstract class POI extends Entity {
 		}
 	}
 	
+	public boolean isNew() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	@Override
 	public boolean equals(Object obj){
 		try{
