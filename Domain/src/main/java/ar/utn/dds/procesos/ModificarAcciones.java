@@ -31,7 +31,7 @@ public class ModificarAcciones extends Proceso {
 	public void ejecutarse() {
 		Usuario usuario = usuarios().get(0);
 		RepositorioDeUsuarios.getInstance().agregarUsuario(usuario);
-		copiarLista(usuario.getAccionesObservers());
+		//copiarLista(usuario.getAccionesObservers());
 		copiarEstado();		
 		if(puedeEjecutarse()){
 			usuarios().forEach(usr -> usr.actualizarAcciones(acciones));

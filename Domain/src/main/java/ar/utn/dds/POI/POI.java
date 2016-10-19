@@ -59,16 +59,16 @@ public abstract class POI{
 	@Expose private String barrio;
 	
 	@Expose private int direccionNumero;
-	
+
 	@OneToOne
-	//@Column(columnDefinition = "point")
+	@JoinColumn(columnDefinition = "PointJava")
 	@Expose private PointJava ubicacionActual;
 	
 	@Expose private double valoracionPromedio;
 
 	private final double DISTANCIA_MINIMA_DE_CERCANIA = 0.5;
 	
-	@ManyToMany(fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.LAZY)
 	@Expose private List<Jornada> JornadaDisponible = new ArrayList<Jornada>();
 	
 	@OneToMany(fetch=FetchType.LAZY)

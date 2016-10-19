@@ -3,6 +3,16 @@ package ar.utn.dds.usuarios;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import org.uqbar.commons.utils.Observable;
+
 import com.google.gson.annotations.Expose;
 
 import ar.utn.dds.POI.POI;
@@ -16,14 +26,30 @@ import ar.utn.dds.roles.Rol;
 import ar.utn.dds.roles.RolAdministrador;
 import ar.utn.dds.utils.Consulta;
 
+@Entity
+@Observable
 public class UsuarioConcreto implements Usuario {
-	
+	@Id
+	@GeneratedValue
+	private Long id;
+
+	@OneToMany(fetch=FetchType.LAZY)
 	private List<Observador> accionesObservers = new ArrayList<Observador>();
+	
+	@Column(length=150)
 	@Expose private String nombreUsuario;
+	
+	@Column(length=150)
 	@Expose private String password;
+	
 	private Rol rol;
+	
+	@Column(length=150)
 	private String email;
+	
 	private EstrategiaPorFallo estrategiaPorFallo = new NoRealizarAccionPorFalla();
+	
+	@ManyToMany(fetch=FetchType.LAZY)
 	@Expose private List<POI> favoritos = new ArrayList<POI>();
 
 
@@ -90,7 +116,8 @@ public class UsuarioConcreto implements Usuario {
 	public Boolean tieneRolAdministrador() {
 		return (this.rol instanceof RolAdministrador);
 	}
-
+	
+	@OneToMany(fetch=FetchType.LAZY)
 	public List<Observador> getAccionesObservers() {
 		return accionesObservers;
 	}

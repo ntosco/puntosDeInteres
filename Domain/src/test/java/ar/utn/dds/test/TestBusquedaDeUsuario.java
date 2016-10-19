@@ -5,13 +5,14 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import ar.utn.dds.repositorio.RepositorioDeUsuarios;
+import ar.utn.dds.usuarios.UsuarioConcreto;
 
 public class TestBusquedaDeUsuario {
 
 	@Test
 	public void testCrearUsuario() {
 		RepositorioDeUsuarios.getInstance().clean();
-		RepositorioDeUsuarios.getInstance().crearUsuario("user", "pass");
+		RepositorioDeUsuarios.getInstance().setearUsuario(new UsuarioConcreto(), "user", "pass");
 		assertTrue(RepositorioDeUsuarios.getInstance().getUsuarios().size() == 1);
 	}
 	
@@ -23,24 +24,24 @@ public class TestBusquedaDeUsuario {
 	
 	@Test
 	public void testIngresar() {
-		RepositorioDeUsuarios.getInstance().crearUsuario("martin", "samo");
-		RepositorioDeUsuarios.getInstance().crearUsuario("nico", "tosco");
+		RepositorioDeUsuarios.getInstance().setearUsuario(new UsuarioConcreto(), "martin", "samo");
+		RepositorioDeUsuarios.getInstance().setearUsuario(new UsuarioConcreto(), "nico", "tosco");
 		
 		assertTrue(RepositorioDeUsuarios.getInstance().ingresar("martin", "samo"));
 	}
 
 	@Test
 	public void testIngresarMal() {
-		RepositorioDeUsuarios.getInstance().crearUsuario("martin", "samo");
-		RepositorioDeUsuarios.getInstance().crearUsuario("nico", "tosco");
+		RepositorioDeUsuarios.getInstance().setearUsuario(new UsuarioConcreto(), "martin", "samo");
+		RepositorioDeUsuarios.getInstance().setearUsuario(new UsuarioConcreto(), "nico", "tosco");
 
 		assertTrue(RepositorioDeUsuarios.getInstance().ingresar("martin", "passwordIncorrecta") == false);
 	}
 
 	@Test
 	public void testBuscarUsuario() {
-		RepositorioDeUsuarios.getInstance().crearUsuario("martin", "samo");
-		RepositorioDeUsuarios.getInstance().crearUsuario("nico", "tosco");
+		RepositorioDeUsuarios.getInstance().setearUsuario(new UsuarioConcreto(), "martin", "samo");
+		RepositorioDeUsuarios.getInstance().setearUsuario(new UsuarioConcreto(), "nico", "tosco");
 
 		assertTrue(RepositorioDeUsuarios.getInstance().buscarUsuario("nico").getNombreUsuario() == "nico");
 		assertTrue(RepositorioDeUsuarios.getInstance().buscarUsuario("nico").getPassword() == "tosco");
@@ -49,9 +50,9 @@ public class TestBusquedaDeUsuario {
 
 	@Test
 	public void testBuscarUsuarioQueNoExiste() {
-		RepositorioDeUsuarios.getInstance().crearUsuario("martin", "samo");
-		RepositorioDeUsuarios.getInstance().crearUsuario("nico", "tosco");
-
+		RepositorioDeUsuarios.getInstance().setearUsuario(new UsuarioConcreto(), "martin", "samo");
+		RepositorioDeUsuarios.getInstance().setearUsuario(new UsuarioConcreto(), "nico", "tosco");
+		
 		assertTrue(RepositorioDeUsuarios.getInstance().buscarUsuario("dios") == null);
 
 	}

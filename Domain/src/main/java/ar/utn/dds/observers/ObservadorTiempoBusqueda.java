@@ -4,14 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import org.eclipse.xtend.lib.annotations.Accessors;
+import org.uqbar.commons.utils.Observable;
+
 import ar.utn.dds.repositorio.RepositorioDeUsuarios;
 import ar.utn.dds.servicios.MailSender;
 import ar.utn.dds.usuarios.Usuario;
 import ar.utn.dds.utils.Consulta;
 import ar.utn.dds.utils.Mail;
 
-public class ObservadorTiempoBusqueda implements Observador {
-
+@Entity
+@Observable
+@DiscriminatorValue("ObservadorTiempoBusqueda")
+public class ObservadorTiempoBusqueda extends Observador {
+	
 	private Integer tiempoDeBusquedaMaximo;
 	private List<Consulta> listaConsultasNotificar = new ArrayList<Consulta>();
 	
@@ -22,7 +33,6 @@ public class ObservadorTiempoBusqueda implements Observador {
 	public void setListaConsultasNotificar(List<Consulta> listaConsultas) {
 		this.listaConsultasNotificar = listaConsultas;
 	}
-	@Override
 	public void actualizar(Consulta consulta) {
 		if(consulta.getTiempoTranscurrido() > getTiempoDeBusquedaMaximo()){
 			
