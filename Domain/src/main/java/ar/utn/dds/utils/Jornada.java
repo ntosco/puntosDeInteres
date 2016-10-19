@@ -28,12 +28,6 @@ public class Jornada {
 	 * @param diaSemanal
 	 * @param horarioDeAtencion
 	*/
-	public Jornada(DayOfWeek diaSemanal, RangoHorario horarioDeAtencion) {
-		super();
-		this.diaSemanal = diaSemanal;
-		this.horarioDeAtencion = horarioDeAtencion;
-		
-	}
 
 	public DayOfWeek getDiaSemanal() {
 		return diaSemanal;

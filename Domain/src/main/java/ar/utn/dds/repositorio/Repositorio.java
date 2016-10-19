@@ -256,7 +256,6 @@ public class Repositorio implements OrigenDeDatos{
 		serviciosBanco.add(pagoDeFacturas);
 		serviciosBanco.add(cajeroAutomatico);
 		
-		
 		this.crearPoi("localComercial", 1,"Libreria El Tano", "Av. Hipolito Yrigoyen", "La boca", 4276, new Point(21.0 , 2.1), palabrasClaveLibreria, jornadaNormalLunesAViernes, rubroLibreria, reviewsLibreria);
 		this.crearPoi("localComercial", 8,"Fallabella", "Av. San Juan", "Recoleta", 4276, new Point(21.0 , 2.1), palabrasClaveFallabella, jornadaNormalLunesAViernes, rubroFallabella, reviewsFallabella);
 		this.crearPoi("lineaColectivo", 2,"Linea 45", "Av. Santa Fe", "Boedo", 3245, "45", new Point(21.0 , 2.1), palabrasClaveColectivo, reviewsBondi2);

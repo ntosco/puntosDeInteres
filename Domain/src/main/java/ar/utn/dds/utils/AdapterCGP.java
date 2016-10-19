@@ -85,7 +85,9 @@ public class AdapterCGP implements OrigenDeDatos {
 		RangoHorario rangoHorario = new RangoHorario(
 				LocalTime.of(rango.getHorarioDesde(), rango.getMinutosDesde(), 0),
 				LocalTime.of(rango.getHorarioHasta(), rango.getMinutosHasta(), 0));
-		Jornada jornada = new Jornada(getDiaDeLaSemana(rango.getNumeroDia()), rangoHorario);
+				Jornada jornada = new Jornada();
+				jornada.setDiaSemanal(getDiaDeLaSemana(rango.getNumeroDia()));
+				jornada.setHorarioDeAtencion(rangoHorario);
 		return jornada;
 	}
 	

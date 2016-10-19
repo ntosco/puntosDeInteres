@@ -21,7 +21,10 @@ public class ListaJornadasBuilder {
 	}
 	
 	public void agregarALaLista(DayOfWeek dia, RangoHorario rango){
-		jornadas.add(new Jornada(dia, rango));
+		Jornada jornada = new Jornada();
+		jornada.setDiaSemanal(dia);
+		jornada.setHorarioDeAtencion(rango);
+		jornadas.add(jornada);
 	}
 		
 	
