@@ -68,7 +68,7 @@ public abstract class POI{
 
 	private final double DISTANCIA_MINIMA_DE_CERCANIA = 0.5;
 	
-	@OneToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY)
 	@Expose private List<Jornada> JornadaDisponible = new ArrayList<Jornada>();
 	
 	@OneToMany(fetch=FetchType.LAZY)
