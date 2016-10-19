@@ -7,6 +7,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
 import org.uqbar.commons.utils.Observable;
 
 import com.google.gson.annotations.Expose;
@@ -18,9 +25,14 @@ import ar.utn.dds.servicios.Servicio;
 import ar.utn.dds.utils.Jornada;
 import ar.utn.dds.utils.RangoHorario;
 @Observable
+@Entity
+@DiscriminatorValue("SucursalBanco")
 public class SucursalBanco extends POI{
 	
+	@ManyToMany(fetch=FetchType.LAZY)
 	@Expose private List<Servicio> listaServicios = new ArrayList<Servicio>();
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@Expose private final List<DayOfWeek> DIAS_LABORABLES = new ArrayList<DayOfWeek>(Arrays.asList(DayOfWeek.MONDAY,DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY));	
 
 	public boolean cumpleCondicionBusqueda(String textoLibre){

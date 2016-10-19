@@ -3,6 +3,9 @@ package ar.utn.dds.POI;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.geodds.Point;
 
@@ -11,6 +14,8 @@ import com.google.gson.annotations.Expose;
 import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
 import ar.utn.dds.estrategias.implementacion.DisponibilidadFullTime;
 @Observable
+@Entity
+@DiscriminatorValue("ParadaDeColectivo")
 public class ParadaDeColectivo extends POI{
 	
 	@Expose final double DISTANCIA_MINIMA_DE_CERCANIA = 0.1;

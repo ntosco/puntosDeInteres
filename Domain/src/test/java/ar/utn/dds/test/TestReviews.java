@@ -28,7 +28,10 @@ public class TestReviews extends JuegoDeDatos{
 	public void agregarUnaReview() {
 		LocalComercial local = new LocalComercial();
 		local.setReviews(new ArrayList <Review>());
-		Review opinion = new Review("muy buen poi","samo",3);
+		Review opinion = new Review();
+					opinion.setComentario("Muy bueno");
+					opinion.setNombreUsuario("samo");
+					opinion.setValoracion(3);
 		local.agregarReview(opinion);
 		assertTrue(local.getReviews().size() == 1 );
 	}
@@ -37,8 +40,14 @@ public class TestReviews extends JuegoDeDatos{
 	public void calcularValoracionPromedio() {
 		LocalComercial local = new LocalComercial();
 		local.setReviews(new ArrayList <Review>());
-		Review opinion = new Review("muy buen poi","samo",3);
-		Review opinion2 = new Review("muy feo poi","martin",5);
+		Review opinion = new Review();
+		opinion.setComentario("Muy bueno");
+		opinion.setNombreUsuario("samo");
+		opinion.setValoracion(3);
+		Review opinion2 = new Review();
+		opinion2.setComentario("Muy bueno");
+		opinion2.setNombreUsuario("samo");
+		opinion2.setValoracion(5);
 		local.agregarReview(opinion);
 		local.agregarReview(opinion2);
 		assertTrue(local.calcularValoracionPromedio() == 4 );
@@ -48,8 +57,10 @@ public class TestReviews extends JuegoDeDatos{
 	public void calcularValoracionPromedioDouble() {
 		LocalComercial local = new LocalComercial();
 		local.setReviews(new ArrayList <Review>());
-		Review opinion = new Review("muy buen poi","samo",4);
-		Review opinion2 = new Review("muy feo poi","martin",5);
+		Review opinion = new Review();
+		opinion.setValoracion(4);
+		Review opinion2 = new Review();
+		opinion2.setValoracion(5);
 		local.agregarReview(opinion);
 		local.agregarReview(opinion2);
 		assertTrue(local.calcularValoracionPromedio() == 4.5 );

@@ -2,11 +2,17 @@ package ar.utn.dds.estrategias.implementacion;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.estrategias.*;
 import ar.utn.dds.servicios.Servicio;
 
-public class DisponibilidadxRangoHorario implements EstrategiaDisponibilidad {
+@Entity
+@DiscriminatorValue("PorRango")
+public class DisponibilidadxRangoHorario extends EstrategiaDisponibilidad {
 
 	public Boolean estaDisponible(POI poi, List<Servicio> servicios, String nombreServicio,
 			LocalDateTime horarioConsultado) {

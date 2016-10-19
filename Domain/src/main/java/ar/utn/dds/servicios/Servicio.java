@@ -3,18 +3,36 @@ package ar.utn.dds.servicios;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import org.uqbar.commons.utils.Observable;
-
 import com.google.gson.annotations.Expose;
-
 import ar.utn.dds.estrategias.implementacion.DisponibilidadxRangoHorario;
 import ar.utn.dds.utils.Jornada;
+
 @Observable
+@Entity
 public class Servicio {
+	
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+	@Column(length=100)
 	@Expose private String nombre;
+	
+	@OneToMany(fetch=FetchType.LAZY)
 	@Expose private List<Jornada> jornadaDisponible = new ArrayList<Jornada>();
+	
+	@Column(length=100)
 	@Expose private String nombreDeJornada;
+	
+	@OneToOne(fetch=FetchType.LAZY)
 	@Expose private DisponibilidadxRangoHorario estrategiaDisponibilidad = new DisponibilidadxRangoHorario();
 
 	public DisponibilidadxRangoHorario getEstrategiaDisponibilidad() {
@@ -59,9 +77,13 @@ public class Servicio {
 	public void setNombreDeJornada(String nombreDeJornada) {
 		this.nombreDeJornada = nombreDeJornada;
 	}
-	
-	
-	
-	//Agregar contructor
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 		
 }

@@ -110,7 +110,10 @@ public class PoisController {
     	  String unUsuario = properties.getProperty("user");
     	  
     	  POI poiBuscado = Repositorio.getInstance().searchById(idDelPoi);
-    	   Review unaReview = new Review(comentario, unUsuario, valoracion);
+    	   Review unaReview = new Review();
+    	   unaReview.setComentario(comentario);
+    	   unaReview.setNombreUsuario(unUsuario);
+    	   unaReview.setValoracion(valoracion);
     	  	if(poiBuscado.elUsuarioYaOpino(unUsuario)){
     	  		Spark.halt(400, "El usuario Ya opinio");
     	  	} 

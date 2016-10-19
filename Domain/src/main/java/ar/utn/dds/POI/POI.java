@@ -4,14 +4,24 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.annotations.Type;
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.geodds.Point;
 
@@ -23,7 +33,8 @@ import com.google.gson.annotations.Expose;
 
 @Entity
 @Observable
-//TODO Ver si es necesario realizar un objeto intermediario que sea observable
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="tipoCandidato", discriminatorType=DiscriminatorType.STRING)
 public abstract class POI{
 	
 	@Id
@@ -33,6 +44,7 @@ public abstract class POI{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Column(length=150)
 	@Expose private String tipo;
 	
@@ -46,7 +58,11 @@ public abstract class POI{
 	@Expose private String barrio;
 	
 	@Expose private int direccionNumero;
+	
+	@Column(columnDefinition = "point")
+	@Type(type = "Geometry")
 	@Expose private Point ubicacionActual;
+	
 	@Expose private double valoracionPromedio;
 
 	private final double DISTANCIA_MINIMA_DE_CERCANIA = 0.5;
@@ -54,12 +70,15 @@ public abstract class POI{
 	@OneToMany(fetch=FetchType.LAZY)
 	@Expose private List<Jornada> JornadaDisponible = new ArrayList<Jornada>();
 	
+	@OneToMany(fetch=FetchType.LAZY)
 	@Expose private List<EstrategiaDisponibilidad> EstrategiasDisponibilidad = new ArrayList<EstrategiaDisponibilidad>();
 	
-	@OneToMany(fetch=FetchType.LAZY)
+	@ElementCollection
+	@CollectionTable(name="palabraClave", joinColumns=@JoinColumn(name="palabra_id"))
+	@Column(length=150, name="palabras_clave")
 	@Expose private List<String> listaPalabrasClave = new ArrayList <String>();
 	
-	@OneToMany(fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@Expose private List<Review> reviews = new ArrayList <Review>();
 	
 	// Baja logica
@@ -94,7 +113,7 @@ public abstract class POI{
 	
 	public boolean isNew() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -307,8 +326,4 @@ public abstract class POI{
 	public void setValoracionPromedio(double d) {
 		this.valoracionPromedio = d;
 	}
-	
-	
-	
-	
 }

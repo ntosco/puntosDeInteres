@@ -42,7 +42,10 @@ public class UsuarioConcreto implements Usuario {
 		if(punto.elUsuarioYaOpino(this.getNombreUsuario())){
 			
 		}else{
-			Review opinion = new Review(comentario,this.getNombreUsuario(),valoracion);
+			Review opinion = new Review();
+				opinion.setComentario(comentario);
+				opinion.setNombreUsuario(this.getNombreUsuario());
+				opinion.setValoracion(valoracion);
 			punto.agregarReview(opinion);
 		}
 	}

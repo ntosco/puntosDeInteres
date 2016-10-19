@@ -827,13 +827,13 @@ abstract public class JuegoDeDatos {
 
 	public void setUpRubro() {
 
-		indumentaria = new Rubro("indumentaria", 0.2);
+	/*	indumentaria = new Rubro("indumentaria", 0.2);
 		muebleria = new Rubro("muebleria", 0.3);
 		perfumeria = new Rubro("perfumeria", 0.1);
 		cafeteria = new Rubro("cafeteria", 0.2);
 		comidas = new Rubro("comidas", 0.1);
 		farmacia = new Rubro("farmacia", 0.5);
-		libreriaRubro = new Rubro("libreria", 0.4);
+		libreriaRubro = new Rubro("libreria", 0.4); */
 
 		rubroLibreria = new ArrayList<Rubro>();
 		rubroLibreria.add(libreriaRubro);

@@ -1,55 +1,46 @@
 package ar.utn.dds.repositorio;
-import ar.utn.dds.POI.CentroGestionParticipacion;
-import ar.utn.dds.POI.LocalComercial;
-import ar.utn.dds.POI.ParadaDeColectivo;
-import ar.utn.dds.POI.Review;
-import ar.utn.dds.POI.Rubro;
-import ar.utn.dds.POI.SucursalBanco;
-
-import org.uqbar.commons.model.*;
-import org.apache.commons.collections15.CollectionUtils;
-import org.apache.commons.collections15.Predicate;
-
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
-import javax.persistence.Cache;
-import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceUnitUtil;
-import javax.persistence.Query;
-import javax.persistence.SynchronizationType;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import javax.persistence.metamodel.Metamodel;
 
+import org.apache.commons.collections15.CollectionUtils;
+import org.apache.commons.collections15.Predicate;
+import org.hibernate.Hibernate;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.uqbar.geodds.Point;
+
+import ar.utn.dds.POI.CentroGestionParticipacion;
+import ar.utn.dds.POI.LocalComercial;
 import ar.utn.dds.POI.POI;
-import ar.utn.dds.comunas.Comuna;
+import ar.utn.dds.POI.ParadaDeColectivo;
+import ar.utn.dds.POI.Review;
+import ar.utn.dds.POI.Rubro;
+import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.creacionales.BancoBuilder;
 import ar.utn.dds.creacionales.CgpBuilder;
 import ar.utn.dds.creacionales.ColectivoBuilder;
 import ar.utn.dds.creacionales.ListaJornadasBuilder;
 import ar.utn.dds.creacionales.LocalComercialBuilder;
+import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
+import ar.utn.dds.estrategias.implementacion.DisponibilidadFullTime;
+import ar.utn.dds.estrategias.implementacion.DisponibilidadxRangoHorario;
+import ar.utn.dds.estrategias.implementacion.DisponibilidadxServicio;
 import ar.utn.dds.exceptions.RepositoryException;
 import ar.utn.dds.servicios.Servicio;
 import ar.utn.dds.utils.Jornada;
 import ar.utn.dds.utils.OrigenDeDatos;
 import ar.utn.dds.utils.RangoHorario;
-
-import org.uqbar.geodds.Point;
-import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory; 
-import org.hibernate.cfg.Configuration;
 
 public class Repositorio implements OrigenDeDatos{
 
@@ -78,8 +69,6 @@ public class Repositorio implements OrigenDeDatos{
 	private ArrayList<Review> reviewsCGP;
 	private ArrayList<Review> reviewsLibreria;
 	private ArrayList<Review> reviewsBanco;
-	private Servicio ventaDeArticulos;
-	private ArrayList<Servicio> serviciosLibreria;
 	private Servicio cajeroAutomatico;
 	private ArrayList<Servicio> serviciosBanco;
 	private ArrayList<String> palabrasClaveFallabella;
@@ -96,6 +85,14 @@ public class Repositorio implements OrigenDeDatos{
 	private static final SessionFactory sessionFactory = new Configuration()
 														.configure()
 														.addAnnotatedClass(POI.class)
+														.addAnnotatedClass(Review.class)
+														.addAnnotatedClass(Rubro.class)
+														.addAnnotatedClass(Jornada.class)
+														.addAnnotatedClass(RangoHorario.class)
+														.addAnnotatedClass(EstrategiaDisponibilidad.class)
+														.addAnnotatedClass(DisponibilidadFullTime.class)
+														.addAnnotatedClass(DisponibilidadxRangoHorario.class)
+														.addAnnotatedClass(DisponibilidadxServicio.class)
 														.buildSessionFactory();
 
 
@@ -164,8 +161,12 @@ public class Repositorio implements OrigenDeDatos{
 		
 		/* Rubros */
 		
-		libreriaRubro = new Rubro("Libreria", 0.4);
-		ventaRopa = new Rubro("Venta Ropa", 0.5);
+		libreriaRubro = new Rubro();
+		libreriaRubro.setNombre("Libreria");
+		libreriaRubro.setRadioCercania(0.4);
+		ventaRopa = new Rubro();
+		ventaRopa.setNombre("Venta Ropa");
+		ventaRopa.setRadioCercania(0.5);
 		rubroFallabella = new ArrayList<Rubro>();
 		rubroLibreria = new ArrayList<Rubro>();
 		rubroLibreria.add(libreriaRubro);
@@ -175,13 +176,35 @@ public class Repositorio implements OrigenDeDatos{
 		
 		/* Review */
 		
-		reviewCGP1 = new Review("Todo bien", "Juan", 5);
-		reviewCGP2 = new Review("Mala atencion", "Pedro", 1);
-		reviewBanco1 = new Review("Muy rapido", "Ana", 5);
-		reviewBanco2 = new Review("Nunca hay sistema", "Juan", 1);
-		reviewLibreria1 = new Review("Cierra los sabados", "Facu", 2);
-		reviewColectivo1 = new Review("No paro el hdp", "Pedro", 1);
-		reviewColectivo2 = new Review("tarda mucho", "Jose", 2);
+		reviewCGP1 = new Review();
+			reviewCGP1.setComentario("Todo bien");
+			reviewCGP1.setNombreUsuario("Juan");
+			reviewCGP1.setValoracion(5);
+		reviewCGP2 = new Review();
+			reviewCGP2.setComentario("Mala atencion");
+			reviewCGP2.setNombreUsuario("Pedro");
+			reviewCGP2.setValoracion(1);
+		reviewBanco1 = new Review();
+			reviewBanco1.setComentario("Muy rapido");
+			reviewBanco1.setNombreUsuario("Ana");
+			reviewBanco1.setValoracion(5);
+		reviewBanco2 = new Review();
+			reviewBanco2.setComentario("Nunca hay sistema");
+			reviewBanco2.setNombreUsuario("Juan");
+			reviewBanco2.setValoracion(1);
+		reviewLibreria1 = new Review();
+			reviewLibreria1.setComentario("Cierra los sabados");
+			reviewLibreria1.setNombreUsuario("Facu");
+			reviewLibreria1.setValoracion(2);
+		reviewColectivo1 = new Review();
+			reviewColectivo1.setComentario("No paro el ***");
+			reviewColectivo1.setNombreUsuario("Pedro");
+			reviewColectivo1.setValoracion(1);
+		reviewColectivo2 = new Review();
+			reviewColectivo2.setComentario("Tarda mucho");
+			reviewColectivo2.setNombreUsuario("Jose");
+			reviewColectivo2.setValoracion(2);
+			
 		
 		/* Reviews */
 		
@@ -205,7 +228,6 @@ public class Repositorio implements OrigenDeDatos{
 		reviewsLibreria.add(reviewLibreria1);
 		
 		reviewsFallabella = new ArrayList<Review>();
-		reviewsFallabella.add(new Review("Muy lindo", "Anita", 5));
 		
 		reviewsBanco = new ArrayList<Review>();
 		reviewsBanco.add(reviewBanco1);
@@ -419,7 +441,6 @@ public class Repositorio implements OrigenDeDatos{
 
 
 //	Redefinir para la utilizacion en searchByExample
-	@SuppressWarnings("unchecked")
 	protected Predicate<POI> getCriterio(POI example) {
 		return new Predicate<POI>(){
 			public boolean evaluate(POI poi) {

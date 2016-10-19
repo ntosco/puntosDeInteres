@@ -3,6 +3,12 @@ package ar.utn.dds.POI;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.geodds.Point;
 
@@ -12,9 +18,13 @@ import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
 import ar.utn.dds.estrategias.implementacion.DisponibilidadxRangoHorario;
 
 @Observable
+@Entity
+@DiscriminatorValue("LocalComerial")
 public class LocalComercial extends POI {
 
 	@Expose private double cercania = 0;
+	
+	@ManyToMany(fetch=FetchType.LAZY)
 	@Expose private List<Rubro> listaRubros = new ArrayList<Rubro>();
 	
 	public List<Rubro> getListaRubros() {

@@ -1,6 +1,7 @@
 package ar.utn.dds.POI;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -8,6 +9,7 @@ import org.uqbar.commons.utils.Observable;
 
 import com.google.gson.annotations.Expose;
 
+@Entity
 @Observable
 public class Rubro {
 	
@@ -15,7 +17,7 @@ public class Rubro {
 	@GeneratedValue
 	private Long id;
 	
-	@Column(length=150)
+	@Column(length=100)
 	@Expose private String nombre;
 	
 	
@@ -41,9 +43,8 @@ public class Rubro {
 		radioCercania = radio;
 	}
 
-	public Rubro(String nombre,double cercania) {
-		this.nombre = nombre;
-		this.radioCercania = cercania;
+	public Rubro() {
+
 	}
 
 	public Long getId() {
