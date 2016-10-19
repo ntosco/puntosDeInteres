@@ -19,7 +19,7 @@
 			root
 		</property>
 		<property name="hibernate.connection.password">
-			y69jvc8
+			nosenose
 		</property>
 
 		<property name="show_sql">true</property>

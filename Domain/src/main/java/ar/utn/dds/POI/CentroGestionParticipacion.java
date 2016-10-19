@@ -65,7 +65,7 @@ public class CentroGestionParticipacion extends POI{
 	}
 	
 	
-	public Boolean estaCercaDe(Point unPunto){
+	public Boolean estaCercaDe(PointJava unPunto){
 		return comuna.estaCercaDe(unPunto);
 	}
 

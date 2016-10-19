@@ -19,6 +19,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.Type;
@@ -59,9 +60,9 @@ public abstract class POI{
 	
 	@Expose private int direccionNumero;
 	
-	@Column(columnDefinition = "point")
-	@Type(type = "Geometry")
-	@Expose private Point ubicacionActual;
+	@OneToOne
+	//@Column(columnDefinition = "point")
+	@Expose private PointJava ubicacionActual;
 	
 	@Expose private double valoracionPromedio;
 
@@ -153,7 +154,7 @@ public abstract class POI{
 	// ** Geolocalizacion
 	// ********************************************************
 	
-	public Boolean estaCercaDe(Point ubicacionTerminal){
+	public Boolean estaCercaDe(PointJava ubicacionTerminal){
 		double d = ubicacionActual.distance(ubicacionTerminal);	
 		return d < DISTANCIA_MINIMA_DE_CERCANIA;
 	}
@@ -230,7 +231,7 @@ public abstract class POI{
 		this.direccionNumero = direccionNumero;
 	}
 
-	public Point getUbicacionActual() {
+	public PointJava getUbicacionActual() {
 		return ubicacionActual;
 	}
 	
@@ -246,8 +247,8 @@ public abstract class POI{
 		this.listaPalabrasClave = listaPalabrasClave;
 	}
 
-	public void setUbicacionActual(Point unPunto){
-		ubicacionActual = unPunto;
+	public void setUbicacionActual(PointJava ubicacionActual2){
+		ubicacionActual = ubicacionActual2;
 	}
 	
 	public void setNombre(String nombre) {

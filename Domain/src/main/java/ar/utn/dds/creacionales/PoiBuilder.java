@@ -2,6 +2,7 @@ package ar.utn.dds.creacionales;
 
 import org.uqbar.geodds.Point;
 
+import ar.utn.dds.POI.PointJava;
 import ar.utn.dds.utils.Jornada;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class PoiBuilder {
 	protected String direccion;
 	protected String barrio;
 	protected int numero;
-	protected Point ubicacionActual;
+	protected PointJava ubicacionActual;
 	protected List<String> palabrasClave;
 	protected List<Jornada> jornada = new ArrayList<Jornada>();
 	
@@ -38,7 +39,7 @@ public class PoiBuilder {
 		return this;
 	}
 
-	public PoiBuilder setUbicacion(Point punto){
+	public PoiBuilder setUbicacion(PointJava punto){
 		ubicacionActual = punto;
 		return this;
 	}

@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.uqbar.geodds.Point;
 
+import ar.utn.dds.POI.PointJava;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 
 public class TestLocalComercial extends JuegoDeDatos {
@@ -19,7 +20,9 @@ public class TestLocalComercial extends JuegoDeDatos {
 
 	@Test
 	public void estoyCercaDeUnLocalComercial() {
-		assertTrue(fallabella.estaCercaDe(new Point(9,8)));
+		PointJava unPunto = new PointJava();
+		unPunto.setXY(9, 8);
+		assertTrue(fallabella.estaCercaDe(unPunto));
 	}
 
 	@Test

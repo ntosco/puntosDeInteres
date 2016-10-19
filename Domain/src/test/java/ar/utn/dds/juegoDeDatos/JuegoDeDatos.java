@@ -14,6 +14,7 @@ import org.uqbar.geodds.Point;
 import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.POI.LocalComercial;
 import ar.utn.dds.POI.ParadaDeColectivo;
+import ar.utn.dds.POI.PointJava;
 import ar.utn.dds.POI.Rubro;
 import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.comunas.Comuna;
@@ -80,8 +81,8 @@ abstract public class JuegoDeDatos {
 	
 	protected buscadorDeBancos buscadorBancos;
 	
-	protected Point puntoTerminal;
-	protected Point puntoTerminal2;
+	protected PointJava puntoTerminal;
+	protected PointJava puntoTerminal2;
 
 	// Servicios
 
@@ -130,14 +131,14 @@ abstract public class JuegoDeDatos {
 	protected ParadaDeColectivo parada12;// van a ser 2 pois con la mimma
 											// ubicacion
 
-	protected Point ubicacionParada110Paternal;
-	protected Point ubicacionParada110LaBoca;
-	protected Point ubicacionParada15;
-	protected Point ubicacionParada114;
-	protected Point ubicacionParada11;
-	protected Point ubicacionParada7Rojo;
-	protected Point ubicacionParada7Amarillo;
-	protected Point ubicacionParada60;
+	protected PointJava ubicacionParada110Paternal;
+	protected PointJava ubicacionParada110LaBoca;
+	protected PointJava ubicacionParada15;
+	protected PointJava ubicacionParada114;
+	protected PointJava ubicacionParada11;
+	protected PointJava ubicacionParada7Rojo;
+	protected PointJava ubicacionParada7Amarillo;
+	protected PointJava ubicacionParada60;
 
 	protected List<String> paradaDel10Paternal;
 	protected List<String> paradaDel10PLaBoca;
@@ -161,13 +162,13 @@ abstract public class JuegoDeDatos {
 	protected CentroGestionParticipacion cgpAlmagro;
 	protected CentroGestionParticipacion cgpPalermo;
 
-	protected Point ubicacionCGPPaternal;
-	protected Point ubicacionCGPLaBoca;
-	protected Point ubicacionCGPNunez;
-	protected Point ubicacionCGPBoedo;
-	protected Point ubicacionCGPCaballito;
-	protected Point ubicacionCGPAlmagro;
-	protected Point ubicacionCGPPalermo;
+	protected PointJava ubicacionCGPPaternal;
+	protected PointJava ubicacionCGPLaBoca;
+	protected PointJava ubicacionCGPNunez;
+	protected PointJava ubicacionCGPBoedo;
+	protected PointJava ubicacionCGPCaballito;
+	protected PointJava ubicacionCGPAlmagro;
+	protected PointJava ubicacionCGPPalermo;
 
 	protected List<String> palabrasClaveCGPAlmagro;
 	protected List<String> palabrasClaveCGPLaBoca;
@@ -185,58 +186,58 @@ abstract public class JuegoDeDatos {
 	protected Comuna comuna4;
 	protected Comuna comuna5;
 	protected Comuna comuna6;
-	protected Point punto1comuna;
-	protected Point punto2comuna;
-	protected Point punto3comuna;
-	protected Point punto4comuna;
-	protected Point punto5comuna;
-	protected Point punto6comuna;
-	protected Point punto7comuna;
-	protected Point punto8comuna;
-	protected Point punto9comuna;
-	protected Point punto10comuna;
-	protected Point punto11comuna;
-	protected Point punto12comuna;
+	protected PointJava punto1comuna;
+	protected PointJava punto2comuna;
+	protected PointJava punto3comuna;
+	protected PointJava punto4comuna;
+	protected PointJava punto5comuna;
+	protected PointJava punto6comuna;
+	protected PointJava punto7comuna;
+	protected PointJava punto8comuna;
+	protected PointJava punto9comuna;
+	protected PointJava punto10comuna;
+	protected PointJava punto11comuna;
+	protected PointJava punto12comuna;
 
 	// Locales comerciales
 
 	protected LocalComercial heinsenburger;
-	protected Point ubicacionHeinsenbuger;
+	protected PointJava ubicacionHeinsenbuger;
 	protected List<String> listaPalabrasClaveHeinsenburger;
 
 	protected LocalComercial morita;
-	protected Point ubicacionMorita;
+	protected PointJava ubicacionMorita;
 	protected List<String> listaPalabrasClaveMorita;
 
 	protected LocalComercial zapateria;
-	protected Point ubicacionZapateria;
+	protected PointJava ubicacionZapateria;
 	protected List<String> listaPalabrasClaveZapateria;
 
 	protected LocalComercial libreria;
-	protected Point ubicacionLibreria;
+	protected PointJava ubicacionLibreria;
 	protected List<String> listaPalabrasClaveLibreria;
 
 	protected LocalComercial farmacity;
-	protected Point ubicacionFarmacity;
+	protected PointJava ubicacionFarmacity;
 	protected List<String> listaPalabrasClaveFarmacity;
 
 	protected LocalComercial nike;// solo un rubro: indumentaria
-	protected Point ubicacionLocalNike;
+	protected PointJava ubicacionLocalNike;
 	protected List<String> listaPalabrasClaveNike;
 
 	protected LocalComercial fallabella;
-	protected Point ubicacionLocalFallabella;
+	protected PointJava ubicacionLocalFallabella;
 	protected List<String> listaPalabrasClaveFallabella;
 
 	protected LocalComercial cafeMartinez;
-	protected Point ubicacionLocalCafeMartinez;
+	protected PointJava ubicacionLocalCafeMartinez;
 	protected List<String> palabrasClaveCafeMartinez;
 
 	protected LocalComercial adidas;
-	protected Point ubicacionLocalAddidas;
+	protected PointJava ubicacionLocalAddidas;
 
 	protected LocalComercial panquequesCarlitos;
-	protected Point ubicacionLocalPanquequesCarlitos;
+	protected PointJava ubicacionLocalPanquequesCarlitos;
 	
 
 	// Bancos
@@ -248,11 +249,11 @@ abstract public class JuegoDeDatos {
 	protected SucursalBanco bancoGalicia;
 	protected SucursalBanco bancoRio;
 
-	protected Point ubicacionSucursalRetiro;
-	protected Point ubicacionSucursalMartinez;
-	protected Point ubicacionSucursalFrances;
-	protected Point ubicacionSucursalGalicia;
-	protected Point ubicacionSucursalRio;
+	protected PointJava ubicacionSucursalRetiro;
+	protected PointJava ubicacionSucursalMartinez;
+	protected PointJava ubicacionSucursalFrances;
+	protected PointJava ubicacionSucursalGalicia;
+	protected PointJava ubicacionSucursalRio;
 
 	protected List<String> palabrasClaveBancoRetiro;
 	protected List<String> palabrasClaveBancoFrances;
@@ -299,13 +300,13 @@ abstract public class JuegoDeDatos {
 	protected List<DayOfWeek> lunesAViernes;
 	private List<DayOfWeek> todosLosDias;
 
-	protected List<Point> puntosComunaPaternal;
-	protected List<Point> puntosComunaLaBoca;
-	protected List<Point> puntosComunaNunez;
-	protected List<Point> puntosComunaBoedo;
-	protected List<Point> puntosComunaCaballito;
-	protected List<Point> puntosComunaAlmagro;
-	protected List<Point> puntosComunaPalermo;
+	protected List<PointJava> puntosComunaPaternal;
+	protected List<PointJava> puntosComunaLaBoca;
+	protected List<PointJava> puntosComunaNunez;
+	protected List<PointJava> puntosComunaBoedo;
+	protected List<PointJava> puntosComunaCaballito;
+	protected List<PointJava> puntosComunaAlmagro;
+	protected List<PointJava> puntosComunaPalermo;
 
 	protected RangoHorario rangoDe10a20;
 	protected RangoHorario rangoNoche;
@@ -522,44 +523,80 @@ abstract public class JuegoDeDatos {
 
 	public void setUpUbicaciones() {
 
-		ubicacionLocalCafeMartinez = new Point(10.002, 15);
-		ubicacionLocalAddidas = new Point(14, 22);
-		ubicacionLocalPanquequesCarlitos = new Point(10, 20);
-		ubicacionLocalNike = new Point(10, 20);
+		ubicacionLocalCafeMartinez = new PointJava();
+		ubicacionLocalCafeMartinez.setXY(10.002, 15);
 
-		ubicacionSucursalRetiro = new Point(10, 15);
-		ubicacionSucursalMartinez = new Point(14, 18);
-		ubicacionSucursalFrances = new Point(45, 20);
-		ubicacionSucursalGalicia = new Point(45, 20);
-		ubicacionSucursalRio = new Point(40, 25);
-
-		ubicacionCGPPaternal = new Point(30, 20);
-		ubicacionCGPLaBoca = new Point(40, 30);
-		ubicacionCGPNunez = new Point(50, 30);
-		ubicacionCGPBoedo = new Point(50, 20);
-		ubicacionCGPAlmagro = new Point(10, 15.005);
-		ubicacionCGPCaballito = new Point(8, 10);
-		ubicacionCGPPalermo = new Point(15, 15);
+		ubicacionLocalAddidas = new PointJava();
+		ubicacionLocalAddidas.setXY(14, 22);
 		
-		ubicacionParada15 = new Point(10.0008, 20);
-		ubicacionParada60 = new Point(30, 25);
-		ubicacionParada11 = new Point(12, 18);
-		ubicacionParada114 = new Point(11, 13);
-		ubicacionParada110LaBoca = new Point(39, 22);
-		ubicacionParada7Amarillo = new Point(11, 13);
-		ubicacionParada7Rojo = new Point(11, 14);
+		ubicacionLocalPanquequesCarlitos = new PointJava();
+		ubicacionLocalPanquequesCarlitos.setXY(10, 20);
 		
-		ubicacionFarmacity = new Point(11,14);
-		ubicacionMorita = new Point(20,16);
-		ubicacionZapateria = new Point(11,15);
-		ubicacionHeinsenbuger = new Point(15,12);
-		ubicacionLibreria = new Point(23,65);
-		ubicacionLocalNike = new Point(8,9);
-		ubicacionLocalFallabella = new Point(9,8);
-		ubicacionLocalCafeMartinez = new Point(4,16);
-		ubicacionLocalAddidas = new Point(12,23);
-		ubicacionLocalPanquequesCarlitos = new Point(10,10);
+		ubicacionLocalNike = new PointJava().setXY(10, 20);
+		ubicacionLocalNike.setXY(10, 20);
 		
+		ubicacionSucursalRetiro = new PointJava().setXY(10, 15);
+		ubicacionSucursalRetiro.setXY(10, 15);
+		
+		ubicacionSucursalMartinez = new PointJava();
+		ubicacionSucursalMartinez.setXY(14,18);
+		ubicacionSucursalFrances = new PointJava();
+		ubicacionSucursalFrances.setXY(45, 20);
+		ubicacionSucursalGalicia = new PointJava();
+		ubicacionSucursalGalicia.setXY(45, 20);
+		ubicacionSucursalRio = new PointJava();
+		ubicacionSucursalRio.setXY(40, 25);
+		
+		ubicacionCGPPaternal = new PointJava();
+		ubicacionCGPPaternal.setXY(30, 20);
+		ubicacionCGPLaBoca = new PointJava();
+		ubicacionCGPLaBoca.setXY(40, 30);
+		ubicacionCGPNunez = new PointJava();
+		ubicacionCGPNunez.setXY(50, 30);
+		ubicacionCGPBoedo = new PointJava();
+		ubicacionCGPBoedo.setXY(50, 20);
+		ubicacionCGPAlmagro = new PointJava();
+		ubicacionCGPAlmagro.setXY(10, 15.005);
+		ubicacionCGPCaballito = new PointJava();
+		ubicacionCGPCaballito.setXY(8, 10);
+		ubicacionCGPPalermo = new PointJava();
+		ubicacionCGPPalermo.setXY(15, 15);
+		
+		ubicacionParada15 = new PointJava();
+		ubicacionParada15.setXY(10.0008, 20);
+		ubicacionParada60 = new PointJava();
+		ubicacionParada60.setXY(30, 25);
+		ubicacionParada11 = new PointJava();
+		ubicacionParada11.setXY(12, 18);
+		ubicacionParada114 = new PointJava();
+		ubicacionParada114.setXY(11, 13);
+		ubicacionParada110LaBoca = new PointJava();
+		ubicacionParada110LaBoca.setXY(39, 22);
+		ubicacionParada7Amarillo = new PointJava();
+		ubicacionParada7Amarillo.setXY(11, 13);
+		ubicacionParada7Rojo = new PointJava();
+		ubicacionParada7Rojo.setXY(11, 14);
+		
+		ubicacionFarmacity = new PointJava();
+		ubicacionFarmacity.setXY(11, 14);
+		ubicacionMorita = new PointJava();
+		ubicacionMorita.setXY(20, 16);
+		ubicacionZapateria = new PointJava();
+		ubicacionZapateria.setXY(11, 15);
+		ubicacionHeinsenbuger = new PointJava();
+		ubicacionHeinsenbuger.setXY(15, 12);
+		ubicacionLibreria = new PointJava();
+		ubicacionLibreria.setXY(23,65);
+		ubicacionLocalNike = new PointJava();
+		ubicacionLocalNike.setXY(8, 9);
+		ubicacionLocalFallabella = new PointJava();
+		ubicacionLocalFallabella.setXY(9, 8);
+		ubicacionLocalCafeMartinez = new PointJava();
+		ubicacionLocalCafeMartinez.setXY(4, 16);
+		ubicacionLocalAddidas = new PointJava();
+		ubicacionLocalAddidas.setXY(12, 23);
+		ubicacionLocalPanquequesCarlitos = new PointJava();
+		ubicacionLocalPanquequesCarlitos.setXY(10, 10);
 	}
 
 	public void setUpLocalComercial() {
@@ -767,54 +804,66 @@ abstract public class JuegoDeDatos {
 
 	public void setUpComunas() {
 
-		punto1comuna = new Point(11, 20);
-		punto2comuna = new Point(10.005, 20.001);
-		punto3comuna = new Point(10.009, 20.005);
-		punto4comuna = new Point(10, 20);
-		punto5comuna = new Point(20, 20);
-		punto6comuna = new Point(15, 10);
-		punto7comuna = new Point(30, 30);
-		punto8comuna = new Point(40, 30);
-		punto9comuna = new Point(50, 30);
-		punto10comuna = new Point(30, 20);
-		punto11comuna = new Point(40, 20);
-		punto12comuna = new Point(50, 20);
+		punto1comuna = new PointJava();
+		punto1comuna.setXY(11, 20);
+		punto2comuna = new PointJava();
+		punto2comuna.setXY(10.005, 20.001);
+		punto3comuna = new PointJava();
+		punto3comuna.setXY(10.009, 20.005);
+		punto4comuna = new PointJava();
+		punto4comuna.setXY(10, 20);
+		punto5comuna = new PointJava();
+		punto5comuna.setXY(20, 20);
+		punto6comuna = new PointJava();
+		punto6comuna.setXY(15, 20);
+		punto7comuna = new PointJava();
+		punto7comuna.setXY(30, 30);
+		punto8comuna = new PointJava();
+		punto8comuna.setXY(40, 30);
+		punto9comuna = new PointJava();
+		punto9comuna.setXY(50, 30);
+		punto10comuna = new PointJava();
+		punto10comuna.setXY(30, 20);
+		punto11comuna = new PointJava();
+		punto11comuna.setXY(40, 20);
+		punto12comuna = new PointJava();
+		punto12comuna.setXY(50, 20);
 		
-		puntosComunaPaternal = new ArrayList<Point>();
+		puntosComunaPaternal = new ArrayList<PointJava>();
 		puntosComunaPaternal.add(punto1comuna);
 		puntosComunaPaternal.add(punto2comuna);
 		puntosComunaPaternal.add(punto4comuna);
 		puntosComunaPaternal.add(punto10comuna);
 		
-		puntosComunaLaBoca = new ArrayList<Point>();
+		puntosComunaLaBoca = new ArrayList<PointJava>();
 		puntosComunaLaBoca.add(punto8comuna);
 		puntosComunaLaBoca.add(punto5comuna);
 		puntosComunaLaBoca.add(punto6comuna);
 		
-		puntosComunaNunez = new ArrayList<Point>();
+		puntosComunaNunez = new ArrayList<PointJava>();
 		puntosComunaNunez.add(punto8comuna);
 		puntosComunaNunez.add(punto6comuna);
 		puntosComunaNunez.add(punto7comuna);
 		puntosComunaNunez.add(punto9comuna);
 		puntosComunaNunez.add(punto1comuna);
 		
-		puntosComunaBoedo = new ArrayList<Point>();
+		puntosComunaBoedo = new ArrayList<PointJava>();
 		puntosComunaBoedo.add(punto10comuna);
 		puntosComunaBoedo.add(punto11comuna);
 		puntosComunaBoedo.add(punto12comuna);
 		
-		puntosComunaCaballito = new ArrayList<Point>();
+		puntosComunaCaballito = new ArrayList<PointJava>();
 		puntosComunaCaballito.add(punto10comuna);
 		puntosComunaCaballito.add(punto11comuna);
 		puntosComunaCaballito.add(punto1comuna);
 		
-		puntosComunaAlmagro = new ArrayList<Point>();
+		puntosComunaAlmagro = new ArrayList<PointJava>();
 		puntosComunaAlmagro.add(punto1comuna);
 		puntosComunaAlmagro.add(punto4comuna);
 		puntosComunaAlmagro.add(punto10comuna);
 		puntosComunaAlmagro.add(punto7comuna);
 		
-		puntosComunaPalermo = new ArrayList<Point>();
+		puntosComunaPalermo = new ArrayList<PointJava>();
 		puntosComunaPalermo.add(punto1comuna);
 		puntosComunaPalermo.add(punto5comuna);
 		puntosComunaPalermo.add(punto8comuna);
@@ -968,7 +1017,8 @@ abstract public class JuegoDeDatos {
 		palabrasClave110LaBoca.add("110");
 		palabrasClave110LaBoca.add("la boca");
 
-		ubicacionParada110Paternal = new Point(32, 25);
+		ubicacionParada110Paternal = new PointJava();
+		ubicacionParada110Paternal.setXY(32, 25);
 		palabrasClave110Paternal = new ArrayList<String>();
 		palabrasClave110Paternal.add("110");
 		palabrasClave110Paternal.add("paternal");
@@ -1082,8 +1132,10 @@ abstract public class JuegoDeDatos {
 
 	public void setUpPuntos() {
 
-		puntoTerminal = new Point(10, 15);
-		puntoTerminal2 = new Point(1000, 2000);
+		puntoTerminal = new PointJava();
+		puntoTerminal.setXY(10, 15);
+		puntoTerminal2 = new PointJava();
+		puntoTerminal2.setXY(1000, 2000);
 	}
 
 	public void setUpLocalDateTime() {

@@ -10,6 +10,7 @@ import org.junit.*;
 import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.POI;
+import ar.utn.dds.POI.PointJava;
 import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
 import ar.utn.dds.juegoDeDatos.StubBuscadorBanco;
@@ -160,7 +161,7 @@ public class TestBanco extends JuegoDeDatos {
 		SucursalBanco bancoDeLaPlaza = new SucursalBanco();
 		
 		bancoDeLaPlaza.setNombre("Banco de la plaza");
-		bancoDeLaPlaza.setUbicacionActual(new Point(35,72));
+		bancoDeLaPlaza.setUbicacionActual(new PointJava().setXY(35,72));
 		bancoDeLaPlaza.setBarrio("Avellaneda");
 		List<Servicio> listaServ = new ArrayList<Servicio>();
 		
@@ -183,7 +184,7 @@ public class TestBanco extends JuegoDeDatos {
 		SucursalBanco bancoDeLaPlaza2 = new SucursalBanco();
 		
 		bancoDeLaPlaza2.setNombre("Banco de la plaza");
-		bancoDeLaPlaza2.setUbicacionActual(new Point(35,72));
+		bancoDeLaPlaza2.setUbicacionActual(new PointJava().setXY(35,72));
 		bancoDeLaPlaza2.setBarrio("Caballito");
 		List<Servicio> listaServ2 = new ArrayList<Servicio>();
 		

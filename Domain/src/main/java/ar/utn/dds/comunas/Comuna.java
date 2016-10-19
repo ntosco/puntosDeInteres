@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import org.uqbar.geodds.*;
 
+import ar.utn.dds.POI.PointJava;
+import ar.utn.dds.POI.PolygonJava;
+
 @Entity
 public class Comuna {
 	
@@ -13,13 +16,13 @@ public class Comuna {
 	private Long id;
 	
 	
-	private Polygon areaComuna = new Polygon();
+	private PolygonJava areaComuna = new PolygonJava();
 
-	public void setAreaDeComuna(Point punto) {
+	public void setAreaDeComuna(PointJava punto) {
 		areaComuna.add(punto);
 	}
 
-	public Boolean estaCercaDe(Point unPunto) {
+	public Boolean estaCercaDe(PointJava unPunto) {
 		return areaComuna.isInside(unPunto);
 	}
 
@@ -31,11 +34,11 @@ public class Comuna {
 		this.id = id;
 	}
 
-	public Polygon getAreaComuna() {
+	public PolygonJava getAreaComuna() {
 		return areaComuna;
 	}
 
-	public void setAreaComuna(Polygon areaComuna) {
+	public void setAreaComuna(PolygonJava areaComuna) {
 		this.areaComuna = areaComuna;
 	}
 }

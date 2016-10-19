@@ -31,7 +31,7 @@ public class ParadaDeColectivo extends POI{
 	}
 
 
-	public Boolean estaCercaDe(Point ubicacionTerminal){
+	public Boolean estaCercaDe(PointJava ubicacionTerminal){
 		double d = this.getUbicacionActual().distance(ubicacionTerminal);	
 		return d < DISTANCIA_MINIMA_DE_CERCANIA;
 	}

@@ -15,6 +15,7 @@ import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.POI.POI;
+import ar.utn.dds.POI.PointJava;
 import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.extern.cgp.BuscadorDeCGP;
 import ar.utn.dds.juegoDeDatos.JuegoDeDatos;
@@ -163,7 +164,7 @@ public class TestCGP extends JuegoDeDatos {
 		CentroGestionParticipacion CGPRecoleta = new CentroGestionParticipacion();
 		
 		CGPRecoleta.setNombre("comuna1");
-		CGPRecoleta.setUbicacionActual(new Point(10,20));
+		CGPRecoleta.setUbicacionActual(new PointJava().setXY(10,20));
 		CGPRecoleta.setComuna(new Comuna());
 		CGPRecoleta.setBarrio("Recoleta");
 		CGPRecoleta.setDireccionNombre("Jujuy");
@@ -172,7 +173,7 @@ public class TestCGP extends JuegoDeDatos {
 		CentroGestionParticipacion CGPPalermo = new CentroGestionParticipacion();
 		
 		CGPPalermo.setNombre("comuna1");
-		CGPPalermo.setUbicacionActual(new Point(10,20));
+		CGPPalermo.setUbicacionActual(new PointJava().setXY(10,20));
 		CGPPalermo.setComuna(new Comuna());
 		CGPPalermo.setBarrio("Palermo");
 		CGPPalermo.setDireccionNombre("Santa Fe");

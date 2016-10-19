@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.uqbar.geodds.Point;
 import ar.utn.dds.POI.CentroGestionParticipacion;
+import ar.utn.dds.POI.PointJava;
 import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.servicios.Servicio;
 
@@ -19,7 +20,7 @@ public class CgpBuilder extends PoiBuilder {
 		return this;
 	}
 
-	public CgpBuilder crearComuna(List<Point> puntos) {
+	public CgpBuilder crearComuna(List<PointJava> puntos) {
 		comuna = new Comuna();
 		puntos.forEach(punto -> comuna.setAreaDeComuna(punto));
 		return this;

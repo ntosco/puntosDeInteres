@@ -10,7 +10,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import org.uqbar.commons.utils.Observable;
-import org.uqbar.geodds.Point;
 
 import com.google.gson.annotations.Expose;
 
@@ -50,7 +49,7 @@ public class LocalComercial extends POI {
 		this.listaRubros = listaRubros;
 	}
 
-	public Boolean estaCercaDe(Point ubicacionTerminal) {
+	public Boolean estaCercaDe(PointJava ubicacionTerminal) {
 		//me fijo en la lista de rubros cual es la distancia. tomo la más amplia
 		listaRubros.forEach(rubro -> {	if( cercania < rubro.getRadioCercania())
 											cercania = rubro.getRadioCercania();

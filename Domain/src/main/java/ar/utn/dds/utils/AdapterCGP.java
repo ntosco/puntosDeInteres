@@ -12,6 +12,7 @@ import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.POI.POI;
+import ar.utn.dds.POI.PointJava;
 //SACAR
 import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.extern.cgp.BuscadorDeCGP;
@@ -91,14 +92,14 @@ public class AdapterCGP implements OrigenDeDatos {
 		return jornada;
 	}
 	
-	private Point ubicacionDeCGP(int numeroComuna) {
-		Map<Integer, Point> puntos = new HashMap<Integer, Point>();
-		puntos.put(1, new Point(10,20));
-		puntos.put(2, new Point(1,2));
-		puntos.put(3, new Point(15,13));
-		puntos.put(4, new Point(21,14));
-		puntos.put(5, new Point(10,7));
-		puntos.put(6, new Point(10,27));
+	private PointJava ubicacionDeCGP(int numeroComuna) {
+		Map<Integer, PointJava> puntos = new HashMap<Integer, PointJava>();
+		puntos.put(1, new PointJava().setXY(10,20));
+		puntos.put(2, new PointJava().setXY(1,2));
+		puntos.put(3, new PointJava().setXY(15,13));
+		puntos.put(4, new PointJava().setXY(21,14));
+		puntos.put(5, new PointJava().setXY(10,7));
+		puntos.put(6, new PointJava().setXY(10,27));
 		return puntos.get(numeroComuna);
 	}
 

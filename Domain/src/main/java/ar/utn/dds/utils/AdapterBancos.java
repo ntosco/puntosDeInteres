@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.POI;
+import ar.utn.dds.POI.PointJava;
 import ar.utn.dds.POI.SucursalBanco; //SACAR
 import ar.utn.dds.extern.banco.buscadorDeBancos;
 import ar.utn.dds.servicios.Servicio;
@@ -45,7 +46,7 @@ public class AdapterBancos implements OrigenDeDatos{
 		banco.setBarrio(obj.get("sucursal").toString()); 
 		banco.setNombre(obj.get("banco").toString());
 		
-		Point ubcicacionActual = new Point(Integer.parseInt(obj.get("x").toString()), Integer.parseInt(obj.get("y").toString()));
+		PointJava ubcicacionActual = new PointJava().setXY(Integer.parseInt(obj.get("x").toString()), Integer.parseInt(obj.get("y").toString()));
 		banco.setUbicacionActual(ubcicacionActual);
 		
 		String serviciosJson = obj.get("servicios").toString();

@@ -24,6 +24,7 @@ import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.POI.LocalComercial;
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.POI.ParadaDeColectivo;
+import ar.utn.dds.POI.PointJava;
 import ar.utn.dds.POI.Review;
 import ar.utn.dds.POI.Rubro;
 import ar.utn.dds.POI.SucursalBanco;
@@ -54,7 +55,7 @@ public class Repositorio implements OrigenDeDatos{
 	public Rubro libreriaRubro;
 	public List<Rubro> rubroLibreria;
 	public List<Review> reviews;
-	public List<Point> puntosComuna6;
+	public List<PointJava> puntosComuna6;
 	public Servicio pagoDeFacturas;
 	public List<Servicio> servicioPagoDeFacturas;
 	public Review unReview;
@@ -81,6 +82,7 @@ public class Repositorio implements OrigenDeDatos{
 	
 	
 	/* Singleton */
+	
 	private static Repositorio repoPois;
 	private static final SessionFactory sessionFactory = new Configuration()
 														.configure()
@@ -93,7 +95,9 @@ public class Repositorio implements OrigenDeDatos{
 														.addAnnotatedClass(DisponibilidadFullTime.class)
 														.addAnnotatedClass(DisponibilidadxRangoHorario.class)
 														.addAnnotatedClass(DisponibilidadxServicio.class)
+														.addAnnotatedClass(PointJava.class)
 														.buildSessionFactory();
+														
 
 
 	public static Repositorio getInstance(){
@@ -239,9 +243,13 @@ public class Repositorio implements OrigenDeDatos{
 		
 		/* Comunas */
 		
-		puntosComuna6 = new ArrayList<Point>();
-		puntosComuna6.add(new Point(10.0,5.2));
-		puntosComuna6.add(new Point(5.0, 10.3));
+		puntosComuna6 = new ArrayList<PointJava>();
+		PointJava punto1 = new PointJava();
+		punto1.setXY(10.0, 5.2);
+		puntosComuna6.add(punto1);
+		PointJava punto2 = new PointJava();
+		punto2.setXY(10.0, 5.2);
+		puntosComuna6.add(punto2);
 		
 		/* Servicios */
 		
@@ -256,19 +264,19 @@ public class Repositorio implements OrigenDeDatos{
 		serviciosBanco.add(pagoDeFacturas);
 		serviciosBanco.add(cajeroAutomatico);
 		
-		this.crearPoi("localComercial", 1,"Libreria El Tano", "Av. Hipolito Yrigoyen", "La boca", 4276, new Point(21.0 , 2.1), palabrasClaveLibreria, jornadaNormalLunesAViernes, rubroLibreria, reviewsLibreria);
-		this.crearPoi("localComercial", 8,"Fallabella", "Av. San Juan", "Recoleta", 4276, new Point(21.0 , 2.1), palabrasClaveFallabella, jornadaNormalLunesAViernes, rubroFallabella, reviewsFallabella);
-		this.crearPoi("lineaColectivo", 2,"Linea 45", "Av. Santa Fe", "Boedo", 3245, "45", new Point(21.0 , 2.1), palabrasClaveColectivo, reviewsBondi2);
-		this.crearPoi("lineaColectivo", 5,"Linea 86", "Av. Corrientes", "Onces", 3245, "86", new Point(21.0 , 2.1), palabrasClaveColectivo, reviewsBondi);
-		this.crearPoi("CGP", 3,"CGP 3", "Catamarca", "Once", 256, new Point(2.0, 5.6), puntosComuna6,	servicioPagoDeFacturas, palabrasClaveCGP, jornadaNormalLunesAViernes, reviewsCGP);
-		this.crearPoi("CGP", 6,"CGP 6", "Av. Callao", "Centro", 1364, new Point(2.0, 5.6), puntosComuna6,	serviciosBanco, palabrasClaveCGP, jornadaNormalLunesAViernes, reviewsCGP2);
-		this.crearPoi("sucursalBanco", 4,"Banco Santander", "Medrano", 564, new Point(5.0, 6.0), "Palermo", serviciosBanco, palabrasClaveBanco, jornadaNormalLunesAViernes, reviewsBanco);
-		this.crearPoi("sucursalBanco", 7,"Banco Frances", "Boyaca", 765, new Point(5.0, 6.0), "San Telmo", serviciosBanco, palabrasClaveBanco, jornadaNormalLunesAViernes, reviewsBanco2);
+		this.crearPoi("localComercial", 1,"Libreria El Tano", "Av. Hipolito Yrigoyen", "La boca", 4276, new PointJava().setXY(21.0, 2.1), palabrasClaveLibreria, jornadaNormalLunesAViernes, rubroLibreria, reviewsLibreria);
+		this.crearPoi("localComercial", 8,"Fallabella", "Av. San Juan", "Recoleta", 4276, new PointJava().setXY(21.0 , 2.1), palabrasClaveFallabella, jornadaNormalLunesAViernes, rubroFallabella, reviewsFallabella);
+		this.crearPoi("lineaColectivo", 2,"Linea 45", "Av. Santa Fe", "Boedo", 3245, "45", new PointJava().setXY(21.0 , 2.1), palabrasClaveColectivo, reviewsBondi2);
+		this.crearPoi("lineaColectivo", 5,"Linea 86", "Av. Corrientes", "Onces", 3245, "86", new PointJava().setXY(21.0 , 2.1), palabrasClaveColectivo, reviewsBondi);
+		this.crearPoi("CGP", 3,"CGP 3", "Catamarca", "Once", 256, new PointJava().setXY(2.0, 5.6), puntosComuna6,	servicioPagoDeFacturas, palabrasClaveCGP, jornadaNormalLunesAViernes, reviewsCGP);
+		this.crearPoi("CGP", 6,"CGP 6", "Av. Callao", "Centro", 1364, new PointJava().setXY(2.0, 5.6), puntosComuna6,	serviciosBanco, palabrasClaveCGP, jornadaNormalLunesAViernes, reviewsCGP2);
+		this.crearPoi("sucursalBanco", 4,"Banco Santander", "Medrano", 564, new PointJava().setXY(5.0, 6.0), "Palermo", serviciosBanco, palabrasClaveBanco, jornadaNormalLunesAViernes, reviewsBanco);
+		this.crearPoi("sucursalBanco", 7,"Banco Frances", "Boyaca", 765, new PointJava().setXY(5.0, 6.0), "San Telmo", serviciosBanco, palabrasClaveBanco, jornadaNormalLunesAViernes, reviewsBanco2);
 	}
 
 	/* Local Comercial */
 	
-	public POI crearPoi(String tipo, int id, String nombre, String direccion, String barrio, int numero, Point ubicacion, 
+	public POI crearPoi(String tipo, int id, String nombre, String direccion, String barrio, int numero, PointJava ubicacion, 
 			List<String> palabrasClave, List<Jornada> jornada, List<Rubro> rubros, List<Review> reviews){
 		
 		POI poi = new LocalComercial();
@@ -291,7 +299,7 @@ public class Repositorio implements OrigenDeDatos{
 	
 	/* Parada de Colectivo */ 
 	
-	public POI crearPoi(String tipo, int id, String nombre, String direccion, String barrio, int numero, String linea, Point ubicacion, 
+	public POI crearPoi(String tipo, int id, String nombre, String direccion, String barrio, int numero, String linea, PointJava ubicacion, 
 			List<String> palabrasClave, List<Review> reviews){
 		
 		POI poi = new ParadaDeColectivo();
@@ -314,7 +322,7 @@ public class Repositorio implements OrigenDeDatos{
 	
 	/* CGP */
 	
-	public POI crearPoi(String tipo, int id, String nombre, String direccion, String barrio, int numero, Point ubicacion, List<Point> comuna,
+	public POI crearPoi(String tipo, int id, String nombre, String direccion, String barrio, int numero, PointJava ubicacion, List<PointJava> comuna,
 						List<Servicio> servicios, List<String> palabrasClave, List<Jornada> jornadas, List<Review> reviews){
 		
 		POI poi = new CentroGestionParticipacion();
@@ -338,7 +346,7 @@ public class Repositorio implements OrigenDeDatos{
 	
 	/* Sucursal Banco */
 	
-	public POI crearPoi(String tipo, int id, String nombre, String direccion, int numero, Point ubicacion, String barrio, List<Servicio> servicios,
+	public POI crearPoi(String tipo, int id, String nombre, String direccion, int numero, PointJava ubicacion, String barrio, List<Servicio> servicios,
 			List<String> palabrasClave, List<Jornada> jornadas, List<Review> reviews){
 		
 		POI poi = new SucursalBanco();
