@@ -18,6 +18,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Example;
 import org.uqbar.geodds.Point;
 
 import ar.utn.dds.POI.CentroGestionParticipacion;
@@ -25,9 +26,11 @@ import ar.utn.dds.POI.LocalComercial;
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.POI.ParadaDeColectivo;
 import ar.utn.dds.POI.PointJava;
+import ar.utn.dds.POI.PolygonJava;
 import ar.utn.dds.POI.Review;
 import ar.utn.dds.POI.Rubro;
 import ar.utn.dds.POI.SucursalBanco;
+import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.creacionales.BancoBuilder;
 import ar.utn.dds.creacionales.CgpBuilder;
 import ar.utn.dds.creacionales.ColectivoBuilder;
@@ -80,6 +83,10 @@ public class Repositorio implements OrigenDeDatos{
 	private ArrayList<Review> reviewsBondi2;
 	private ArrayList<Review> reviewsFallabella;
 	
+	private EntityManager entityManager;
+	private POI poi1 = new LocalComercial();
+	private POI poi2 = new SucursalBanco();
+	private List<POI> lista = new ArrayList<POI>();
 	
 	/* Singleton */
 	
@@ -87,15 +94,22 @@ public class Repositorio implements OrigenDeDatos{
 	private static final SessionFactory sessionFactory = new Configuration()
 														.configure()
 														.addAnnotatedClass(POI.class)
+														.addAnnotatedClass(LocalComercial.class)
+														.addAnnotatedClass(SucursalBanco.class)
+														.addAnnotatedClass(CentroGestionParticipacion.class)
+														.addAnnotatedClass(ParadaDeColectivo.class)
 														.addAnnotatedClass(Review.class)
 														.addAnnotatedClass(Rubro.class)
 														.addAnnotatedClass(Jornada.class)
+														.addAnnotatedClass(Servicio.class)
+														.addAnnotatedClass(Comuna.class)
 														.addAnnotatedClass(RangoHorario.class)
 														.addAnnotatedClass(EstrategiaDisponibilidad.class)
 														.addAnnotatedClass(DisponibilidadFullTime.class)
 														.addAnnotatedClass(DisponibilidadxRangoHorario.class)
 														.addAnnotatedClass(DisponibilidadxServicio.class)
 														.addAnnotatedClass(PointJava.class)
+														.addAnnotatedClass(PolygonJava.class)
 														.buildSessionFactory();
 														
 
@@ -131,6 +145,9 @@ public class Repositorio implements OrigenDeDatos{
 		jornadaNormalLunesAViernes = builderJornadaNormal.buildJornadas(lunesAViernes, rangoDe10a20);
 		
 		/* Palabras Clave */
+		
+		lista.add(poi1);
+		lista.add(poi2);
 		
 		palabrasClaveLibreria = new ArrayList<String>();
 		palabrasClaveLibreria.add("lapiz");
@@ -253,8 +270,12 @@ public class Repositorio implements OrigenDeDatos{
 		
 		/* Servicios */
 		
-		pagoDeFacturas = new Servicio("Pago de facturas",jornadaNormalLunesAViernes);
-		cajeroAutomatico = new Servicio("Cajero Automatico", jornadaNormalLunesAViernes);
+		pagoDeFacturas = new Servicio();
+			pagoDeFacturas.setNombre("Pago de facturas");
+			pagoDeFacturas.setJornadaDisponible(jornadaNormalLunesAViernes);			
+		cajeroAutomatico = new Servicio();
+			cajeroAutomatico.setNombre("cajero");
+			cajeroAutomatico.setJornadaDisponible(jornadaNormalLunesAViernes);
 		servicioPagoDeFacturas = new ArrayList<Servicio>();
 		pagoDeFacturas.setNombreDeJornada("Lunes a Viernes 10 a 15");
 		cajeroAutomatico.setNombreDeJornada("Lunes a Viernes 10 a 20");
@@ -291,7 +312,7 @@ public class Repositorio implements OrigenDeDatos{
 						.setJornada(jornada);
 						poi = builder.build();
 						poi.setReviews(reviews);
-						poi.setId(id);
+						//poi.setId(id);
 						poi.setTipo(tipo);
 		this.create(poi);
 		return poi;
@@ -313,7 +334,7 @@ public class Repositorio implements OrigenDeDatos{
 					.setPalabrasClave(palabrasClave);
 					poi = builder15.build();
 					poi.setReviews(reviews);
-					poi.setId(id);
+					//poi.setId(id);
 					poi.setTipo(tipo);
 			this.create(poi);
 			return poi;	
@@ -338,7 +359,7 @@ public class Repositorio implements OrigenDeDatos{
 						.setJornada(jornadas);
 						poi = builder.build();
 						poi.setReviews(reviews);
-						poi.setId(id);
+						//poi.setId(id);
 						poi.setTipo(tipo);
 			this.create(poi);
 			return poi;
@@ -361,7 +382,7 @@ public class Repositorio implements OrigenDeDatos{
 					.setJornada(jornadas);
 					poi = builder.build();
 					poi.setReviews(reviews);
-					poi.setId(id);
+					//poi.setId(id);
 					poi.setTipo(tipo);
 			this.create(poi);
 			return poi;
@@ -463,9 +484,10 @@ public class Repositorio implements OrigenDeDatos{
 	
 	@SuppressWarnings("unchecked")
 	public List<POI> allInstances() {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		try {
-			return session.createCriteria(POI.class).list();
+			List<POI> result = session.createCriteria(POI.class).add(Example.create(poi1)).list();
+			return result;
 		} finally {
 			session.close();
 		}

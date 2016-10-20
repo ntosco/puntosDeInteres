@@ -10,6 +10,7 @@ import com.google.gson.annotations.Expose;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
@@ -29,10 +30,10 @@ import ar.utn.dds.servicios.Servicio;
 @DiscriminatorValue("CGP")
 public class CentroGestionParticipacion extends POI{
 
-	@OneToMany(fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@Expose private List<Servicio> listaServicios = new ArrayList <Servicio>();
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@Expose private Comuna comuna;	
 	
 	@ElementCollection
@@ -86,10 +87,10 @@ public class CentroGestionParticipacion extends POI{
 	}
 
 	public CentroGestionParticipacion() {
-		super();
+		/* super();
 		List<EstrategiaDisponibilidad> estrategias = new ArrayList<EstrategiaDisponibilidad>();
 		estrategias.add(new DisponibilidadxServicio());
-		this.setEstrategiasDisponibilidad(estrategias);
+		this.setEstrategiasDisponibilidad(estrategias); */
 	}
 
 	public List<String> getListaServiciosString() {

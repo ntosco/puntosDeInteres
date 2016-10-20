@@ -3,6 +3,7 @@ package ar.utn.dds.POI;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,7 +24,7 @@ public class LocalComercial extends POI {
 
 	@Expose private double cercania = 0;
 	
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@Expose private List<Rubro> listaRubros = new ArrayList<Rubro>();
 	
 	public List<Rubro> getListaRubros() {
@@ -72,10 +73,10 @@ public class LocalComercial extends POI {
 	
 
 	public LocalComercial() {
-		super();
+		/*super();
 		List<EstrategiaDisponibilidad> estrategias = new ArrayList<EstrategiaDisponibilidad>();
 		estrategias.add(new DisponibilidadxRangoHorario());
-		this.setEstrategiasDisponibilidad(estrategias);
+		this.setEstrategiasDisponibilidad(estrategias); */
 	}
 
 }

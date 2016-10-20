@@ -72,7 +72,9 @@ public class AdapterCGP implements OrigenDeDatos {
 	}
 
 	private Servicio crearSerivicioEnBaseAlString(ServicioDTO servicioDTO) {
-		Servicio servicio = new Servicio(servicioDTO.getNombreServicio(), crearJornadasParaElServicioDTO(servicioDTO));
+		Servicio servicio = new Servicio();
+		servicio.setNombre(servicioDTO.getNombreServicio());
+		servicio.setJornadaDisponible(crearJornadasParaElServicioDTO(servicioDTO));
 		return servicio;
 	}
 

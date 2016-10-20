@@ -53,7 +53,8 @@ public class AdapterBancos implements OrigenDeDatos{
 		String[] arrayServicios = serviciosJson.split(",");
 		List<Servicio> listaServicios = new ArrayList<Servicio>();
 		for(int i=0; i<arrayServicios.length; i++){
-			Servicio servicioBanco = new Servicio(arrayServicios[i], null);
+			Servicio servicioBanco = new Servicio();
+			servicioBanco.setNombre(arrayServicios[i]);
 			listaServicios.add(servicioBanco);
         }
 		banco.setListaServicios(listaServicios);

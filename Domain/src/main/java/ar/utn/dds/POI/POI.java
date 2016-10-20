@@ -13,6 +13,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -39,7 +40,7 @@ import com.google.gson.annotations.Expose;
 public abstract class POI{
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Expose private int id;
 	/**
 	 * 
@@ -60,18 +61,18 @@ public abstract class POI{
 	
 	@Expose private int direccionNumero;
 
-	@OneToOne
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(columnDefinition = "PointJava")
 	@Expose private PointJava ubicacionActual;
 	
 	@Expose private double valoracionPromedio;
 
-	private final double DISTANCIA_MINIMA_DE_CERCANIA = 0.5;
+	@Expose private final double DISTANCIA_MINIMA_DE_CERCANIA = 0.5;
 	
-	@OneToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@Expose private List<Jornada> JornadaDisponible = new ArrayList<Jornada>();
 	
-	@OneToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@Expose private List<EstrategiaDisponibilidad> EstrategiasDisponibilidad = new ArrayList<EstrategiaDisponibilidad>();
 	
 	@ElementCollection
@@ -327,4 +328,10 @@ public abstract class POI{
 	public void setValoracionPromedio(double d) {
 		this.valoracionPromedio = d;
 	}
+
+	public double getDISTANCIA_MINIMA_DE_CERCANIA() {
+		return DISTANCIA_MINIMA_DE_CERCANIA;
+	}
+	
+	
 }

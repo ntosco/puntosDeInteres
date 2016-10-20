@@ -8,9 +8,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
@@ -29,10 +35,12 @@ import ar.utn.dds.utils.RangoHorario;
 @DiscriminatorValue("SucursalBanco")
 public class SucursalBanco extends POI{
 	
-	@ManyToMany(fetch=FetchType.LAZY)
-	@Expose private List<Servicio> listaServicios = new ArrayList<Servicio>();
+	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@Expose private List<Servicio> listaServicios = new ArrayList<Servicio>();	
 	
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@ElementCollection(targetClass = DayOfWeek.class)
+	@Column(name = "diasDeLaSemana")
+	@Enumerated(EnumType.STRING)
 	@Expose private final List<DayOfWeek> DIAS_LABORABLES = new ArrayList<DayOfWeek>(Arrays.asList(DayOfWeek.MONDAY,DayOfWeek.TUESDAY,DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,DayOfWeek.FRIDAY));	
 
 	public boolean cumpleCondicionBusqueda(String textoLibre){
@@ -48,12 +56,12 @@ public class SucursalBanco extends POI{
 	}
 
 	public SucursalBanco() {
-		super();
+		/* super();
 		
 		List<EstrategiaDisponibilidad> estrategias = new ArrayList<EstrategiaDisponibilidad>();
 		estrategias.add(new DisponibilidadxServicio());
 		estrategias.add(new DisponibilidadxRangoHorario());
-		this.setEstrategiasDisponibilidad(estrategias);
+		this.setEstrategiasDisponibilidad(estrategias); 
 
 		RangoHorario rangoAtencion = new RangoHorario(LocalTime.of(10, 0, 0),LocalTime.of(15, 0, 0));
 		List<Jornada> jornadasSemanales = new ArrayList<Jornada>();
@@ -64,7 +72,7 @@ public class SucursalBanco extends POI{
 			jornadasSemanales.add(jornada);
 		}
 
-		this.setJornadaDisponible(jornadasSemanales);
+		this.setJornadaDisponible(jornadasSemanales); */
 
 	}
 

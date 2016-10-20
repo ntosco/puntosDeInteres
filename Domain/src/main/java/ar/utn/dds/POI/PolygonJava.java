@@ -1,8 +1,18 @@
 package ar.utn.dds.POI;
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 import org.eclipse.xtend.lib.annotations.Accessors;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pure;
@@ -17,13 +27,21 @@ import org.uqbar.geodds.NumberUtils;
  */
 @Accessors
 @SuppressWarnings("all")
+@Entity
 public class PolygonJava {
+	
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+  @ElementCollection(targetClass = PointJava.class, fetch=FetchType.LAZY)
   protected List<PointJava> surface;
   
   /**
    * Constructor default, obliga luego a agregar los puntos manualmente mediante el mensaje add(Point point). <br><br>
    * Para trabajar con un polígono inmutable, no debe usarse este constructor ni el add posterior.<br>
    */
+  
   public PolygonJava() {
     ArrayList<PointJava> _arrayList = new ArrayList<PointJava>();
     this.surface = _arrayList;
@@ -123,4 +141,14 @@ public class PolygonJava {
   public void setSurface(final List<PointJava> surface) {
     this.surface = surface;
   }
+
+public Long getId() {
+	return id;
+}
+
+public void setId(Long id) {
+	this.id = id;
+}
+  
+  
 }

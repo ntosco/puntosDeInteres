@@ -3,6 +3,8 @@ package ar.utn.dds.servicios;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,8 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
 import org.uqbar.commons.utils.Observable;
+
 import com.google.gson.annotations.Expose;
+
 import ar.utn.dds.estrategias.implementacion.DisponibilidadxRangoHorario;
 import ar.utn.dds.utils.Jornada;
 
@@ -26,13 +31,13 @@ public class Servicio {
 	@Column(length=100)
 	@Expose private String nombre;
 	
-	@OneToMany(fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@Expose private List<Jornada> jornadaDisponible = new ArrayList<Jornada>();
 	
 	@Column(length=100)
 	@Expose private String nombreDeJornada;
 	
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@Expose private DisponibilidadxRangoHorario estrategiaDisponibilidad = new DisponibilidadxRangoHorario();
 
 	public DisponibilidadxRangoHorario getEstrategiaDisponibilidad() {
@@ -43,9 +48,7 @@ public class Servicio {
 		this.estrategiaDisponibilidad = estrategiaDisponibilidad;
 	}
 
-	public Servicio(String nombre, List<Jornada> jornadaDisponible) {
-		this.nombre = nombre;
-		setJornadaDisponible(jornadaDisponible);
+	public Servicio(){
 	
 	}
 

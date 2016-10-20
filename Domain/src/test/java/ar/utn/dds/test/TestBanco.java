@@ -165,11 +165,16 @@ public class TestBanco extends JuegoDeDatos {
 		bancoDeLaPlaza.setBarrio("Avellaneda");
 		List<Servicio> listaServ = new ArrayList<Servicio>();
 		
-		Servicio servCobro = new Servicio("cobrocheques",null);
-		Servicio servDepo = new Servicio("depositos",null);
-		Servicio servExtracciones = new Servicio("extracciones",null);
-		Servicio servTransferencias = new Servicio("transferencias",null);
-		Servicio servSeguros = new Servicio("seguros",null);
+		Servicio servCobro = new Servicio();
+			servCobro.setNombre("cobrocheques");
+		Servicio servDepo = new Servicio();
+			servDepo.setNombre("depositos");
+		Servicio servExtracciones = new Servicio();
+			servExtracciones.setNombre("extracciones");
+		Servicio servTransferencias = new Servicio();
+			servTransferencias.setNombre("transferencias");
+		Servicio servSeguros = new Servicio();
+			servSeguros.setNombre("seguros");
 		
 		listaServ.add(servCobro);
 		listaServ.add(servDepo);

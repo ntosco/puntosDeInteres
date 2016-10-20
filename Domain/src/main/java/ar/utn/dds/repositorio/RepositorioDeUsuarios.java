@@ -9,12 +9,16 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.uqbar.geodds.Point;
 
+import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.POI.LocalComercial;
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.POI.ParadaDeColectivo;
 import ar.utn.dds.POI.PointJava;
+import ar.utn.dds.POI.PolygonJava;
 import ar.utn.dds.POI.Review;
 import ar.utn.dds.POI.Rubro;
+import ar.utn.dds.POI.SucursalBanco;
+import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
 import ar.utn.dds.estrategias.implementacion.DisponibilidadFullTime;
 import ar.utn.dds.estrategias.implementacion.DisponibilidadxRangoHorario;
@@ -38,9 +42,14 @@ public class RepositorioDeUsuarios{
 														.configure()
 														.addAnnotatedClass(UsuarioConcreto.class)
 														.addAnnotatedClass(POI.class)
+														.addAnnotatedClass(LocalComercial.class)
+														.addAnnotatedClass(SucursalBanco.class)
+														.addAnnotatedClass(CentroGestionParticipacion.class)
+														.addAnnotatedClass(ParadaDeColectivo.class)
 														.addAnnotatedClass(Review.class)
 														.addAnnotatedClass(Rubro.class)
 														.addAnnotatedClass(Jornada.class)
+														.addAnnotatedClass(Comuna.class)
 														.addAnnotatedClass(RangoHorario.class)
 														.addAnnotatedClass(EstrategiaDisponibilidad.class)
 														.addAnnotatedClass(DisponibilidadFullTime.class)
@@ -48,6 +57,7 @@ public class RepositorioDeUsuarios{
 														.addAnnotatedClass(DisponibilidadxServicio.class)
 														.addAnnotatedClass(PointJava.class)
 														.addAnnotatedClass(Observador.class)
+														.addAnnotatedClass(PolygonJava.class)
 														.buildSessionFactory();
 	
 	@SuppressWarnings("unchecked")

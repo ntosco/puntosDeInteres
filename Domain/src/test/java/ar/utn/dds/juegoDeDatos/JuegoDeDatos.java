@@ -493,14 +493,30 @@ abstract public class JuegoDeDatos {
 	
 	public void setUpServicios() {
 
-		pagoDeFacturas = new Servicio("Pago de facturas",jornadaNormalLunesAViernes);
-		asesoramientoLegal = new Servicio("Asesoramiento Legal",jornadaNormalLunesAViernes);
-		asesoramientoTecnico = new Servicio("Asesoramieno Tecnico",	jornadaNormalLunesAViernes);
-		rentas = new Servicio("rentas", jornadaBancaria);
-		servicioCP = new Servicio("CP", jornadaBancaria);
-		depositos = new Servicio("depositos", jornadaBancaria);
-		extracciones = new Servicio("extracciones", jornada24x7);
-		consultarSaldo = new Servicio("consultar saldo", jornada24x7);
+		pagoDeFacturas = new Servicio();
+				pagoDeFacturas.setNombre("Pago de facturas");
+				pagoDeFacturas.setJornadaDisponible(jornadaNormalLunesAViernes);
+		asesoramientoLegal = new Servicio();
+				pagoDeFacturas.setNombre("Asesoramiento Legal");
+				pagoDeFacturas.setJornadaDisponible(jornadaNormalLunesAViernes);
+		asesoramientoTecnico = new Servicio();
+				pagoDeFacturas.setNombre("Asesoramieno Tecnico");
+				pagoDeFacturas.setJornadaDisponible(jornadaNormalLunesAViernes);
+		rentas = new Servicio();
+				pagoDeFacturas.setNombre("rentas");
+				pagoDeFacturas.setJornadaDisponible(jornadaBancaria);
+		servicioCP = new Servicio();
+				pagoDeFacturas.setNombre("CP");
+				pagoDeFacturas.setJornadaDisponible(jornadaBancaria);
+		depositos = new Servicio();
+				pagoDeFacturas.setNombre("depositos");
+				pagoDeFacturas.setJornadaDisponible(jornadaBancaria);
+		extracciones = new Servicio();
+				pagoDeFacturas.setNombre("extracciones");
+				pagoDeFacturas.setJornadaDisponible(jornada24x7);
+		consultarSaldo = new Servicio();
+				pagoDeFacturas.setNombre("consultar saldo");
+				pagoDeFacturas.setJornadaDisponible(jornada24x7);
 
 		servicioCajeroAutomatico = new ArrayList<Servicio>();
 		servicioCajeroAutomatico.add(depositos);

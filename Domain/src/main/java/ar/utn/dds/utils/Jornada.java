@@ -16,7 +16,7 @@ public class Jornada {
 	
 	@Id
 	@GeneratedValue
-	private Long id;
+	private long id;
 	
 	@Enumerated(EnumType.STRING)
 	private DayOfWeek diaSemanal;
