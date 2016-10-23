@@ -3,6 +3,7 @@ package ar.utn.dds.usuarios;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.uqbar.commons.utils.Observable;
 
@@ -33,7 +35,7 @@ public class UsuarioConcreto implements Usuario {
 	@GeneratedValue
 	private Long id;
 
-	@OneToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY)
 	private List<Observador> accionesObservers = new ArrayList<Observador>();
 	
 	@Column(length=150)
@@ -42,12 +44,16 @@ public class UsuarioConcreto implements Usuario {
 	@Column(length=150)
 	@Expose private String password;
 	
+	@Transient
 	private Rol rol;
 	
 	@Column(length=150)
 	private String email;
 	
+	@Transient
 	private EstrategiaPorFallo estrategiaPorFallo = new NoRealizarAccionPorFalla();
+	
+	//No puede determinar el tipo
 	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@Expose private List<POI> favoritos = new ArrayList<POI>();

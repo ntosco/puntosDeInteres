@@ -18,8 +18,10 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import ar.utn.dds.comunas.Comuna;
 import ar.utn.dds.estrategias.EstrategiaDisponibilidad;
@@ -30,10 +32,11 @@ import ar.utn.dds.servicios.Servicio;
 @DiscriminatorValue("CGP")
 public class CentroGestionParticipacion extends POI{
 
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@Expose private List<Servicio> listaServicios = new ArrayList <Servicio>();
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	
+	@Transient
 	@Expose private Comuna comuna;	
 	
 	@ElementCollection

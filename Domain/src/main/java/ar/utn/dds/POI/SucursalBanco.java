@@ -19,6 +19,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import org.uqbar.commons.utils.Observable;
 
@@ -35,7 +36,8 @@ import ar.utn.dds.utils.RangoHorario;
 @DiscriminatorValue("SucursalBanco")
 public class SucursalBanco extends POI{
 	
-	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	//@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@Transient
 	@Expose private List<Servicio> listaServicios = new ArrayList<Servicio>();	
 	
 	@ElementCollection(targetClass = DayOfWeek.class)

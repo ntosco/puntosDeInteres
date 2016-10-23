@@ -24,6 +24,7 @@ import ar.utn.dds.estrategias.implementacion.DisponibilidadFullTime;
 import ar.utn.dds.estrategias.implementacion.DisponibilidadxRangoHorario;
 import ar.utn.dds.estrategias.implementacion.DisponibilidadxServicio;
 import ar.utn.dds.observers.Observador;
+import ar.utn.dds.servicios.Servicio;
 import ar.utn.dds.usuarios.Usuario;
 import ar.utn.dds.usuarios.UsuarioConcreto;
 import ar.utn.dds.utils.Jornada;
@@ -48,6 +49,7 @@ public class RepositorioDeUsuarios{
 														.addAnnotatedClass(ParadaDeColectivo.class)
 														.addAnnotatedClass(Review.class)
 														.addAnnotatedClass(Rubro.class)
+														.addAnnotatedClass(Servicio.class)
 														.addAnnotatedClass(Jornada.class)
 														.addAnnotatedClass(Comuna.class)
 														.addAnnotatedClass(RangoHorario.class)

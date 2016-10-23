@@ -282,19 +282,18 @@ public class Repositorio implements OrigenDeDatos{
 		servicioPagoDeFacturas.add(pagoDeFacturas);	
 		
 		serviciosBanco = new ArrayList<Servicio>();
-		serviciosBanco.add(pagoDeFacturas);
+		//serviciosBanco.add(pagoDeFacturas);
 		serviciosBanco.add(cajeroAutomatico);
 		
 		this.crearPoi("localComercial", 1,"Libreria El Tano", "Av. Hipolito Yrigoyen", "La boca", 4276, new PointJava().setXY(21.0, 2.1), palabrasClaveLibreria, jornadaNormalLunesAViernes, rubroLibreria, reviewsLibreria);
 		this.crearPoi("localComercial", 8,"Fallabella", "Av. San Juan", "Recoleta", 4276, new PointJava().setXY(21.0 , 2.1), palabrasClaveFallabella, jornadaNormalLunesAViernes, rubroFallabella, reviewsFallabella);
 		this.crearPoi("lineaColectivo", 2,"Linea 45", "Av. Santa Fe", "Boedo", 3245, "45", new PointJava().setXY(21.0 , 2.1), palabrasClaveColectivo, reviewsBondi2);
 		this.crearPoi("lineaColectivo", 5,"Linea 86", "Av. Corrientes", "Onces", 3245, "86", new PointJava().setXY(21.0 , 2.1), palabrasClaveColectivo, reviewsBondi);
-		this.crearPoi("CGP", 3,"CGP 3", "Catamarca", "Once", 256, new PointJava().setXY(2.0, 5.6), puntosComuna6,	servicioPagoDeFacturas, palabrasClaveCGP, jornadaNormalLunesAViernes, reviewsCGP);
-		this.crearPoi("CGP", 6,"CGP 6", "Av. Callao", "Centro", 1364, new PointJava().setXY(2.0, 5.6), puntosComuna6,	serviciosBanco, palabrasClaveCGP, jornadaNormalLunesAViernes, reviewsCGP2);
-		this.crearPoi("sucursalBanco", 4,"Banco Santander", "Medrano", 564, new PointJava().setXY(5.0, 6.0), "Palermo", serviciosBanco, palabrasClaveBanco, jornadaNormalLunesAViernes, reviewsBanco);
-		this.crearPoi("sucursalBanco", 7,"Banco Frances", "Boyaca", 765, new PointJava().setXY(5.0, 6.0), "San Telmo", serviciosBanco, palabrasClaveBanco, jornadaNormalLunesAViernes, reviewsBanco2);
+//		this.crearPoi("CGP", 3,"CGP 3", "Catamarca", "Once", 256, new PointJava().setXY(2.0, 5.6), puntosComuna6,	serviciosBanco, palabrasClaveCGP, jornadaNormalLunesAViernes, reviewsCGP);
+//		this.crearPoi("CGP", 6,"CGP 6", "Av. Callao", "Centro", 1364, new PointJava().setXY(2.0, 5.6), puntosComuna6,	serviciosBanco, palabrasClaveCGP, jornadaNormalLunesAViernes, reviewsCGP2);
+//		this.crearPoi("sucursalBanco", 4,"Banco Santander", "Medrano", 564, new PointJava().setXY(5.0, 6.0), "Palermo", serviciosBanco, palabrasClaveBanco, jornadaNormalLunesAViernes, reviewsBanco);
+//		this.crearPoi("sucursalBanco", 7,"Banco Frances", "Boyaca", 765, new PointJava().setXY(5.0, 6.0), "San Telmo", serviciosBanco, palabrasClaveBanco, jornadaNormalLunesAViernes, reviewsBanco2);
 	}
-
 	/* Local Comercial */
 	
 	public POI crearPoi(String tipo, int id, String nombre, String direccion, String barrio, int numero, PointJava ubicacion, 
@@ -484,9 +483,9 @@ public class Repositorio implements OrigenDeDatos{
 	
 	@SuppressWarnings("unchecked")
 	public List<POI> allInstances() {
-		Session session = sessionFactory.getCurrentSession();
+		Session session = sessionFactory.openSession();
 		try {
-			List<POI> result = session.createCriteria(POI.class).add(Example.create(poi1)).list();
+			List<POI> result = session.createCriteria(POI.class).list();
 			return result;
 		} finally {
 			session.close();

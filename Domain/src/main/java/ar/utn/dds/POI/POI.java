@@ -80,7 +80,7 @@ public abstract class POI{
 	@Column(length=150, name="palabras_clave")
 	@Expose private List<String> listaPalabrasClave = new ArrayList <String>();
 	
-	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@Expose private List<Review> reviews = new ArrayList <Review>();
 	
 	// Baja logica
