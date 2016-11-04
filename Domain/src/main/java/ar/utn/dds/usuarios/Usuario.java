@@ -34,6 +34,10 @@ public interface Usuario {
 	public String getPassword();
 
 	public void setPassword(String password);
+	
+	public int getId();
+
+	public void setId(int id);
 
 	public Boolean tieneRolAdministrador();
 	

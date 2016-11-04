@@ -3,6 +3,8 @@ package ar.utn.dds.usuarios;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.xtext.xbase.lib.Pure;
+
 import com.google.gson.annotations.Expose;
 
 import ar.utn.dds.POI.POI;
@@ -19,6 +21,7 @@ import ar.utn.dds.utils.Consulta;
 public class UsuarioConcreto implements Usuario {
 	
 	private List<Observador> accionesObservers = new ArrayList<Observador>();
+	@Expose private int idUser;
 	@Expose private String nombreUsuario;
 	@Expose private String password;
 	private Rol rol;
@@ -69,6 +72,7 @@ public class UsuarioConcreto implements Usuario {
 		
 	}
 	
+	@Pure
 	public String getNombreUsuario() {
 		return nombreUsuario;
 	}
@@ -77,6 +81,7 @@ public class UsuarioConcreto implements Usuario {
 		this.nombreUsuario = nombreUsuario;
 	}
 	
+	@Pure
 	public String getPassword() {
 		return password;
 	}
@@ -110,6 +115,19 @@ public class UsuarioConcreto implements Usuario {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	@Override
+	@Pure
+	public int getId() {
+		return idUser;
+	}
+
+
+	@Override
+	public void setId(int id) {
+		this.idUser = id;
+		
 	}
 	
 	@Override
@@ -152,6 +170,10 @@ public class UsuarioConcreto implements Usuario {
 		this.setEmail(email);
 		
 	}
+
+
+
+	
 
 
 
