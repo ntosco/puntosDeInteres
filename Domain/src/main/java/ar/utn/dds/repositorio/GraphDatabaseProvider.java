@@ -13,7 +13,7 @@ import com.google.common.base.Objects;
 @Accessors
 @SuppressWarnings("all")
 public class GraphDatabaseProvider {
-  private static String PATH = "/home/fernando/apps/neo4j-community-3.0.4/data/databases";
+  private static String PATH = "C:/Users/Samo/Documents/Neo4j/default.graphdb/data/dbms";
   
   private static GraphDatabaseProvider instance;
   
@@ -21,7 +21,7 @@ public class GraphDatabaseProvider {
   
   private GraphDatabaseProvider() {
     final GraphDatabaseFactory dbFactory = new GraphDatabaseFactory();
-    File _file = new File((GraphDatabaseProvider.PATH + "/graph.db"));
+    File _file = new File((GraphDatabaseProvider.PATH + "/Usuarios.db"));
     GraphDatabaseService _newEmbeddedDatabase = dbFactory.newEmbeddedDatabase(_file);
     this.graphDb = _newEmbeddedDatabase;
   }

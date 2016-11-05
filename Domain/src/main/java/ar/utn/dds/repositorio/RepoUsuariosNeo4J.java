@@ -70,9 +70,9 @@ public class RepoUsuariosNeo4J  extends AbstractRepoNeo4J{
 	  
 	  private Iterator<Node> basicSearch(final String where) {
 	    GraphDatabaseService _graphDb = this.getGraphDb();
-	    final Result result = _graphDb.execute((("match (usuario:Person) where " + where) + " return usuario"));
-	    final Iterator<Node> peli_column = result.<Node>columnAs("usuario");
-	    return peli_column;
+	    final Result result = _graphDb.execute((("match (usuario:Usuario) where " + where) + " return usuario"));
+	    final Iterator<Node> usuario_column = result.<Node>columnAs("usuario");
+	    return usuario_column;
 	  }
 	  
 	  private void actualizarUsuario(final Usuario usuario, final Node nodeUsuario) {
@@ -89,13 +89,15 @@ public class RepoUsuariosNeo4J  extends AbstractRepoNeo4J{
 		    ObjectExtensions.<Node>operator_doubleArrow(nodeUsuario, _function);
 		  }
 	  
+	  
+	  
 	  public void saveOrUpdateUsuario(final Usuario usuario) {
 		    GraphDatabaseService _graphDb = this.getGraphDb();
 		    final Transaction transaction = _graphDb.beginTx();
 		    try {
 		      Node nodoUsuario = null;
 		      int _id = usuario.getId();
-		      boolean _equals = Objects.equal(_id, null);
+		      boolean _equals = Objects.equal(_id, 0);
 		      if (_equals) {
 		        GraphDatabaseService _graphDb_1 = this.getGraphDb();
 		        Node _createNode = _graphDb_1.createNode();
@@ -116,10 +118,23 @@ public class RepoUsuariosNeo4J  extends AbstractRepoNeo4J{
 		    }
 		  }
 	  
-	  private Label labelUsuario() {
+	  public Label labelUsuario() {
 		    return Label.label("Usuario");
 		  }
 	  
+	  
+	  public void eliminarUsuario(final Usuario usuario) {
+		    GraphDatabaseService _graphDb = this.getGraphDb();
+		    final Transaction transaction = _graphDb.beginTx();
+		    try {
+		      int _id = usuario.getId();
+		      Node _nodoUsuario = this.getNodoUsuarioById(_id);
+		      _nodoUsuario.delete();
+		      transaction.success();
+		    } finally {
+		      this.cerrarTransaccion(transaction);
+		    }
+		  }
 	  
 	  
 }

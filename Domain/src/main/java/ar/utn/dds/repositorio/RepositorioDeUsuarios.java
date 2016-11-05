@@ -6,12 +6,20 @@ import java.util.List;
 import org.apache.commons.collections15.CollectionUtils;
 import org.uqbar.geodds.Point;
 
+import com.google.common.base.Objects;
+
 import ar.utn.dds.POI.LocalComercial;
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.POI.ParadaDeColectivo;
 import ar.utn.dds.usuarios.Usuario;
 import ar.utn.dds.usuarios.UsuarioConcreto;
 import ar.utn.dds.utils.Jornada;
+
+import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Label;
+import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Result;
+import org.neo4j.graphdb.Transaction;
 
 public class RepositorioDeUsuarios{
 	//TODO Ver si es conveniente extender de CollectionBaseRepo
@@ -103,6 +111,5 @@ public class RepositorioDeUsuarios{
 		return usuarios;
 	}
 	
-
 	
 }

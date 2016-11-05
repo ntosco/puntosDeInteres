@@ -19,7 +19,7 @@ public class AbstractRepoNeo4J {
     this.graphDb = _graphDb;
   }
   
-  protected void cerrarTransaccion(final Transaction transaction) {
+  public void cerrarTransaccion(final Transaction transaction) {
     boolean _notEquals = (!Objects.equal(transaction, null));
     if (_notEquals) {
       transaction.close();
