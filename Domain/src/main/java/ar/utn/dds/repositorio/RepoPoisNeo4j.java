@@ -47,9 +47,10 @@ public class RepoPoisNeo4j extends AbstractRepoNeo4J {
 	
 	private Iterator<Node> getNodosPois(final String valor) {
 		GraphDatabaseService db = this.getGraphDb();
-		String query = "MATCH (p)";
+		
+		String query = "MATCH (p:Poi {nombre: '" + valor + "'}) return p";
 		Result result = db.execute(query);
-		Iterator<Node> poi_column = result.<Node>columnAs("usuario");
+		Iterator<Node> poi_column = result.<Node>columnAs("p");
 		return poi_column;
 	  //  return this.basicSearch((("Poi.nombre =~ \'(?i).*" + valor) + ".*\'"));
 	  }

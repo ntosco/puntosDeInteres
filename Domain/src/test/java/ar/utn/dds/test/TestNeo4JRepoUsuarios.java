@@ -18,7 +18,6 @@ import ar.utn.dds.usuarios.UsuarioConcreto;
 
 public class TestNeo4JRepoUsuarios {
 	RepoUsuariosNeo4J _instance;
-	int cantidadDeJuanes;
 	@Before
 	public void setUp() throws Exception {
 		_instance  = RepoUsuariosNeo4J.getInstance();
@@ -30,12 +29,18 @@ public class TestNeo4JRepoUsuarios {
 		UsuarioConcreto usuarioJuan = new UsuarioConcreto();
 		usuarioJuan.setNombreUsuario("juan");
 		usuarioJuan.setPassword("qwrty");
-		_instance.saveOrUpdateUsuario(usuario);
-		
-		cantidadDeJuanes = _instance.getUsuarios("juan").size();
+		_instance.saveOrUpdateUsuario(usuarioJuan);
 		
 	}
+	
+	@Test
+	public void converNodoToUsuario() {		
+		Node nodoUsuario = _instance.getNodoUsuarioById(1);
+		UsuarioConcreto nodoConvertidoToUsuario = UsuarioToNodeConverter.convertToUsuario(nodoUsuario);
 
+		assertEquals(nodoConvertidoToUsuario.getNombreUsuario(), "juan");
+		assertEquals(nodoConvertidoToUsuario.getPassword(), "qwrty");
+	}
 	@Test
 	public void testGetInstance() {
 		assertEquals(_instance.getClass(), RepoUsuariosNeo4J.class);
@@ -85,13 +90,5 @@ public class TestNeo4JRepoUsuarios {
 		assertEquals(_instance.getUsuarios("martin").size(), 1);
 	}
 	
-	
-	@Test
-	public void converNodoToUsuario() {		
-		Node nodoUsuario = _instance.getNodoUsuarioById(1);
-		UsuarioConcreto nodoConvertidoToUsuario = UsuarioToNodeConverter.convertToUsuario(nodoUsuario);
 
-		assertEquals(nodoConvertidoToUsuario.getNombreUsuario(), "nico");
-		assertEquals(nodoConvertidoToUsuario.getPassword(), "tosco");
-	}
 }
