@@ -17,7 +17,7 @@ import org.neo4j.graphdb.Transaction;
 
 import com.google.common.base.Objects;
 
-
+import ar.utn.dds.POI.POI;
 import ar.utn.dds.usuarios.Usuario;
 import ar.utn.dds.usuarios.UsuarioConcreto;
 
@@ -135,6 +135,56 @@ public class RepoUsuariosNeo4J  extends AbstractRepoNeo4J{
 		      this.cerrarTransaccion(transaction);
 		    }
 		  }
+	  
+	  
+	  
+	  public List<POI> getPoisFavoritos (String nombreDelUsuario){
+		  List<POI> listaPois = null;
+		    {
+		      GraphDatabaseService graphService = this.getGraphDb();
+		      final Transaction transaction = graphService.beginTx();
+		      List<POI> tryListaPois = null;
+		      try {
+		        Iterator<Node> nodosUsuarios = this.getNodosFavoritos(nombreDelUsuario);
+		        final Function1<Node, POI> function = (Node node) -> {
+		          return POIToNodeConverter.convertToPOI(node);
+		        };
+		        Iterator<POI> map = IteratorExtensions.<Node, POI>map(nodosUsuarios, function);
+		        tryListaPois = IteratorExtensions.<POI>toList(map);
+		      } finally {
+		        this.cerrarTransaccion(transaction);
+		      }
+		      listaPois = tryListaPois;
+		    }
+		    return listaPois;  
+	  }
+	  
+	  private Iterator<Node> getNodosFavoritos(final String nombreUsuario) {
+			GraphDatabaseService db = this.getGraphDb();
+								
+			String query = "MATCH (U:Usuario{nombreUsuario:'"+ nombreUsuario + "'})-[o:Favorito]->(p:Poi) return p";
+			
+			Result result = db.execute(query);
+			
+			Iterator<Node> poi_column = result.<Node>columnAs("p");
+			
+			return poi_column;
+			
+		  }
+	  
+	  public void crearFavorito (final String nombreUsuario , POI poi){
+		  
+		  GraphDatabaseService db = this.getGraphDb();
+			
+		  String query = "MATCH (p:Poi {nombre: '"+ poi.getNombre()+ "'}), (user: Usuario {nombreUsuario: '"+ nombreUsuario + "'}) CREATE (user)-[:Favorito]->(p);";
+			
+		  Result result = db.execute(query);
+			
+		  Iterator<Node> poi_column = result.<Node>columnAs("p");	  
+		  
+	  }
+	  
+	  
 	  
 	  
 }
