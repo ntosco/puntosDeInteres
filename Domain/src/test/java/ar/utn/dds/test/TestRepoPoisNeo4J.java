@@ -27,7 +27,7 @@ public class TestRepoPoisNeo4J {
 	
 	@Test
 	public void testAgregarReview() {
-		//repoPois.agregarReview("fer", "parada 144", "4", "no tarda mucho en venir");
+		repoPois.agregarReview("fer", "parada 144", "4", "no tarda mucho en venir");
 		assertEquals(repoPois.getPois("parada 144").size(),  1);
 	}
 	

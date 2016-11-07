@@ -11,6 +11,7 @@ import org.neo4j.graphdb.Transaction;
 
 import com.google.common.base.Objects;
 
+import ar.utn.dds.POI.ParadaDeColectivo;
 import ar.utn.dds.repositorio.RepoUsuariosNeo4J;
 import ar.utn.dds.repositorio.UsuarioToNodeConverter;
 import ar.utn.dds.usuarios.Usuario;
@@ -48,9 +49,6 @@ public class TestNeo4JRepoUsuarios {
 
 	@Test
 	public void testGetUsuarios() {
-
-		//crea un usuario por primera vez en base de datos
-		
 		assertEquals(_instance.getUsuarios("juan").size(),  1);
 	}
 
@@ -88,6 +86,23 @@ public class TestNeo4JRepoUsuarios {
 		
 		_instance.saveOrUpdateUsuario(usuario);
 		assertEquals(_instance.getUsuarios("martin").size(), 1);
+	}
+	
+	@Test
+	public void getFavoritos() {
+		assertEquals(_instance.getPoisFavoritos("fer").size(), 2);
+		assertEquals(_instance.getPoisFavoritos("fer").get(0).getNombre(), "cgp Almagro");
+		assertEquals(_instance.getPoisFavoritos("fer").get(1).getNombre(), "banco rio");
+	}
+	
+	@Test
+	public void agregarFavorito() {
+		UsuarioConcreto usuario = new UsuarioConcreto();
+		usuario.setNombreUsuario("maca");
+		ParadaDeColectivo parada = new ParadaDeColectivo();
+		parada.setNombre("nike");
+		_instance.crearFavorito(usuario, parada);
+		assertEquals(_instance.getPoisFavoritos("maca").get(0).getNombre(), "nike");
 	}
 	
 

@@ -172,16 +172,16 @@ public class RepoUsuariosNeo4J  extends AbstractRepoNeo4J{
 			
 		  }
 	  
-	  public void crearFavorito (final String nombreUsuario , POI poi){
+	  public void crearFavorito (final Usuario usuario , POI poi){
 		  
 		  GraphDatabaseService db = this.getGraphDb();
 			
-		  String query = "MATCH (p:Poi {nombre: '"+ poi.getNombre()+ "'}), (user: Usuario {nombreUsuario: '"+ nombreUsuario + "'}) CREATE (user)-[:Favorito]->(p);";
-			
+		  String query = "MATCH (p:Poi {nombre: '"+ poi.getNombre()+ "'}), (user: Usuario {nombreUsuario: '"+ usuario.getNombreUsuario() + "'}) CREATE (user)-[:Favorito]->(p)";
 		  Result result = db.execute(query);
-			
-		  Iterator<Node> poi_column = result.<Node>columnAs("p");	  
+				  
+		  usuario.agregarFavorito(poi);
 		  
+
 	  }
 	  
 	  
