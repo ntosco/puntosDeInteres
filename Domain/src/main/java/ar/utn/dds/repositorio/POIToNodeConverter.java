@@ -1,8 +1,11 @@
 package ar.utn.dds.repositorio;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -33,12 +36,39 @@ public class POIToNodeConverter {
 			String numeroDeLinea = (String) nodePoi.getProperty("linea", null);
 			it.setLinea(numeroDeLinea);
 			
-			
 		};
 			String tipoDePoi2 = (String) nodePoi.getProperty("tipo", "");
 			POI unPoi = POIToNodeConverter.getTipoDePoi(tipoDePoi2);
 			return ObjectExtensions.<POI>operator_doubleArrow(unPoi, function);
 	
+	}
+			
+	public static CentroGestionParticipacion convertToCGP(Node nodeCGP, boolean deep){
+			CentroGestionParticipacion unCGP = new CentroGestionParticipacion();
+			Procedure1<CentroGestionParticipacion> function = (CentroGestionParticipacion cgp) -> {
+					int id = (int) nodeCGP.getId();
+					cgp.setId(id);
+					String nombreDePoi = (String) nodeCGP.getProperty("nombre", "");
+					cgp.setNombre(nombreDePoi);
+					String tipoDePoi = (String) nodeCGP.getProperty("tipo", "");	
+					cgp.setTipo(tipoDePoi);
+					String direccionDePoi = (String) nodeCGP.getProperty("direccionNombre", "");
+					cgp.setDireccionNombre(direccionDePoi);
+					int numeroDelPoi = Integer.parseInt((String) nodeCGP.getProperty("direccionNumero", ""));
+					cgp.setDireccionNumero(numeroDelPoi);
+					if(deep){
+						List<Servicio> servicios = new ArrayList<Servicio>();
+						for(Relationship relationship : nodeCGP.getRelationships(RelacionesPoi.DaServicio)){
+							Node servicio1 = relationship.getOtherNode(nodeCGP);
+							String unNombre1 = (String)servicio1.getProperty("nombre", null);
+							Servicio unServicio = new Servicio(unNombre1, null);
+							servicios.add(unServicio);	
+						}
+						unCGP.setListaServicios(servicios);
+					}
+				};
+			
+			return ObjectExtensions.<CentroGestionParticipacion>operator_doubleArrow(unCGP, function);
 	}
 	
 	public static POI getTipoDePoi(String tipoDePoi){

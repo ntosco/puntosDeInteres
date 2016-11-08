@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.neo4j.graphdb.Node;
 
+import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.repositorio.POIToNodeConverter;
 import ar.utn.dds.repositorio.RepoPoisNeo4j;
@@ -63,6 +64,16 @@ public class TestRepoPoisNeo4J {
 		assertEquals(cgp.getTipo(), "cgp");
 		assertEquals(banco.getTipo(), "sucursalBanco");
 		assertEquals(local.getTipo(), "localComercial");
+	}
+	
+	@Test
+	public void convertirCGP(){
+		Node nodoCgp = repoPois.getNodoPoiById(7);
+		CentroGestionParticipacion cgp = POIToNodeConverter.convertToCGP(nodoCgp, true);
+		assertEquals(cgp.getTipo(), "cgp");
+		assertEquals(cgp.getDireccionNumero(), 2300);
+		assertEquals(cgp.getListaServicios().size(), 3);
+		assertEquals(cgp.getListaServicios().get(0).getNombre(), "a comercial");
 	}
 	
 }
