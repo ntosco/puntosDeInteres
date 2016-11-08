@@ -33,7 +33,7 @@ public class RepoPoisNeo4j extends AbstractRepoNeo4J {
 	      try {
 	        Iterator<Node> nodosUsuarios = this.getNodosPois(valor);
 	        final Function1<Node, POI> function = (Node node) -> {
-	          return POIToNodeConverter.convertToPOI(node);
+	          return POIToNodeConverter.convertToPOI(node, true);
 	        };
 	        Iterator<POI> map = IteratorExtensions.<Node, POI>map(nodosUsuarios, function);
 	        tryListaPois = IteratorExtensions.<POI>toList(map);
@@ -73,15 +73,5 @@ public class RepoPoisNeo4j extends AbstractRepoNeo4J {
 		    final Iterator<Node> poi_column = result.<Node>columnAs("poi");
 		    return poi_column;
 		  }
-	
-	
-/*	private Iterator<Node> basicSearch(String valor) {
-	    GraphDatabaseService graphDb = this.getGraphDb();
-	    String query = "MATCH (n:Label) where n.username =~ ".*foo regex.*" RETURN n;"
-	    Result  result = graphDb.execute((("match (poi:Poi) where " + valor) + " return usuario"));
-	    Result result1 = graphDb.execute((("match (p:Poi)-[a]->(x)" + valor) + " return usuario"));
-	    Iterator<Node> poi_column = result.<Node>columnAs("usuario");
-	    return poi_column;
-	  } */
 
 }

@@ -39,8 +39,8 @@ public class TestNeo4JRepoUsuarios {
 		Node nodoUsuario = _instance.getNodoUsuarioById(1);
 		UsuarioConcreto nodoConvertidoToUsuario = UsuarioToNodeConverter.convertToUsuario(nodoUsuario);
 
-		assertEquals(nodoConvertidoToUsuario.getNombreUsuario(), "juan");
-		assertEquals(nodoConvertidoToUsuario.getPassword(), "qwrty");
+		assertEquals(nodoConvertidoToUsuario.getNombreUsuario(), "nico");
+		assertEquals(nodoConvertidoToUsuario.getPassword(), "tosco");
 	}
 	@Test
 	public void testGetInstance() {

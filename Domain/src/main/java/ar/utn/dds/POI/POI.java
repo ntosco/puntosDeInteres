@@ -164,7 +164,8 @@ public abstract class POI extends Entity {
 	}
 
 	public String getDireccionNombre() {
-		return (direccionNombre.concat(" ").concat(Integer.toString(direccionNumero)));
+		//return (direccionNombre.concat(" ").concat(Integer.toString(direccionNumero)));
+		return direccionNombre;
 	}
 	
 	public String getBarrio(){
@@ -282,6 +283,16 @@ public abstract class POI extends Entity {
 
 	public void setValoracionPromedio(double d) {
 		this.valoracionPromedio = d;
+	}
+	
+	public String getLinea() {
+		// TODO Auto-generated method stub
+		return "";
+	}
+
+	public void setLinea(String numeroDeLinea) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

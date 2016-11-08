@@ -45,18 +45,21 @@ public class TestRepoPoisNeo4J {
 	@Test
 	public void convertirNodoToPoi() {		
 		Node nodoParada = repoPois.getNodoPoiById(5);
-		POI parada = POIToNodeConverter.convertToPOI(nodoParada);
+		POI parada = POIToNodeConverter.convertToPOI(nodoParada, true);
 		
 		Node nodoCgp = repoPois.getNodoPoiById(7);
-		POI cgp = POIToNodeConverter.convertToPOI(nodoCgp);
+		POI cgp = POIToNodeConverter.convertToPOI(nodoCgp, true);
 		
 		Node nodoBanco = repoPois.getNodoPoiById(8);
-		POI banco = POIToNodeConverter.convertToPOI(nodoBanco);
+		POI banco = POIToNodeConverter.convertToPOI(nodoBanco, true);
 		
 		Node nodoLocal = repoPois.getNodoPoiById(6);
-		POI local = POIToNodeConverter.convertToPOI(nodoLocal);
+		POI local = POIToNodeConverter.convertToPOI(nodoLocal, true);
 		
 		assertEquals(parada.getTipo(), "paradaColectivo");
+		assertEquals(parada.getDireccionNombre(), "Mozart");
+		assertEquals(parada.getDireccionNumero(), 2300);
+		assertEquals(parada.getLinea(), "114");
 		assertEquals(cgp.getTipo(), "cgp");
 		assertEquals(banco.getTipo(), "sucursalBanco");
 		assertEquals(local.getTipo(), "localComercial");

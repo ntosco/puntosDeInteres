@@ -147,7 +147,7 @@ public class RepoUsuariosNeo4J  extends AbstractRepoNeo4J{
 		      try {
 		        Iterator<Node> nodosUsuarios = this.getNodosFavoritos(nombreDelUsuario);
 		        final Function1<Node, POI> function = (Node node) -> {
-		          return POIToNodeConverter.convertToPOI(node);
+		          return POIToNodeConverter.convertToPOI(node, true);
 		        };
 		        Iterator<POI> map = IteratorExtensions.<Node, POI>map(nodosUsuarios, function);
 		        tryListaPois = IteratorExtensions.<POI>toList(map);
