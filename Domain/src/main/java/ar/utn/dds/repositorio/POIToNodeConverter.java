@@ -162,8 +162,8 @@ public class POIToNodeConverter {
 							
 							Node rubro1 = relationship.getOtherNode(nodeLocal);
 													
-							double radioCercania = (double) rubro1.getProperty("radioCercania", null);
-							
+							Double radioCercania = Double.parseDouble(rubro1.getProperty("radioCercania", null).toString());
+
 							String unNombre1 = (String) rubro1.getProperty("nombre",null);
 							
 							Rubro unRubro = new Rubro(unNombre1,radioCercania);

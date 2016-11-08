@@ -96,15 +96,15 @@ public class TestRepoPoisNeo4J {
 	@Test
 	public void convertirLocalComercial(){
 		
-		Node nodeLocal = repoPois.getNodoPoiById(7);
+		Node nodeLocal = repoPois.getNodoPoiById(6);
 				
 		LocalComercial local = POIToNodeConverter.convertToLocalComercial(nodeLocal, true);
 		
 		assertEquals(local.getTipo(), "localComercial");
 		
 		assertEquals(local.getListaRubros().size(), 2);
-		assertEquals(local.getListaRubros().get(0).getNombre(), "indumentaria");
-		assertEquals(local.getListaRubros().get(1).getNombre(), "calzado");
+		assertEquals(local.getListaRubros().get(0).getNombre(), "calzado");
+		assertEquals(local.getListaRubros().get(1).getNombre(), "indumentaria");
 		
 	}
 	
