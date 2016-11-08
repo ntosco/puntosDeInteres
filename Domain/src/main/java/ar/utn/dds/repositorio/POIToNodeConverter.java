@@ -29,6 +29,11 @@ import java.time.LocalTime;
 public class POIToNodeConverter {
 
 	public static POI convertToPOI(Node nodePoi, boolean deep) {
+		
+			String tipoDePoi2 = (String) nodePoi.getProperty("tipo", "");
+			
+			POI unPoi = POIToNodeConverter.getTipoDePoi(tipoDePoi2, nodePoi);
+			
 			Procedure1<POI> function = (POI it) -> {
 			int id = (int) nodePoi.getId();
 			it.setId(id);
@@ -44,28 +49,30 @@ public class POIToNodeConverter {
 			it.setLinea(numeroDeLinea);
 			
 		};
-			String tipoDePoi2 = (String) nodePoi.getProperty("tipo", "");
-			POI unPoi = POIToNodeConverter.getTipoDePoi(tipoDePoi2);
+			
 			return ObjectExtensions.<POI>operator_doubleArrow(unPoi, function);
 	
 	}
 	
+	public static POI getTipoDePoi(String tipoDePoi, Node nodePoi){
+		switch (tipoDePoi) {
+		case "paradaColectivo":
+		case "localComercial":
+			return POIToNodeConverter.convertToLocalComercial(nodePoi, true);
+		case "cgp":
+			return POIToNodeConverter.convertToCGP(nodePoi, true);
+		case "sucursalBanco":
+			return POIToNodeConverter.convertToBanco(nodePoi, true);
+		default:
+			throw new RuntimeException("El tipo del Poi no se encuentra");
+		}	
+	}
 	// CGP --------------------------------------------------------------------------------------------------------
 	
 	
 	public static CentroGestionParticipacion convertToCGP(Node nodeCGP, boolean deep){
 			CentroGestionParticipacion unCGP = new CentroGestionParticipacion();
 			Procedure1<CentroGestionParticipacion> function = (CentroGestionParticipacion cgp) -> {
-					int id = (int) nodeCGP.getId();
-					cgp.setId(id);
-					String nombreDePoi = (String) nodeCGP.getProperty("nombre", "");
-					cgp.setNombre(nombreDePoi);
-					String tipoDePoi = (String) nodeCGP.getProperty("tipo", "");	
-					cgp.setTipo(tipoDePoi);
-					String direccionDePoi = (String) nodeCGP.getProperty("direccionNombre", "");
-					cgp.setDireccionNombre(direccionDePoi);
-					int numeroDelPoi = Integer.parseInt((String) nodeCGP.getProperty("direccionNumero", ""));
-					cgp.setDireccionNumero(numeroDelPoi);
 					if(deep){
 						List<Servicio> servicios = new ArrayList<Servicio>();
 						for(Relationship relationship : nodeCGP.getRelationships(RelacionesPoi.DaServicio)){
@@ -86,16 +93,6 @@ public class POIToNodeConverter {
 	public static SucursalBanco convertToBanco(Node nodeBanco, boolean deep){
 		SucursalBanco unBanco = new SucursalBanco();
 		Procedure1<SucursalBanco> function = (SucursalBanco banco) -> {
-				int id = (int) nodeBanco.getId();
-				banco.setId(id);
-				String nombreDePoi = (String) nodeBanco.getProperty("nombre", "");
-				banco.setNombre(nombreDePoi);
-				String tipoDePoi = (String) nodeBanco.getProperty("tipo", "");	
-				banco.setTipo(tipoDePoi);
-				String direccionDePoi = (String) nodeBanco.getProperty("direccionNombre", "");
-				banco.setDireccionNombre(direccionDePoi);
-				int numeroDelPoi = Integer.parseInt((String) nodeBanco.getProperty("direccionNumero", ""));
-				banco.setDireccionNumero(numeroDelPoi);
 				if(deep){
 					List<Jornada> jornadas = new ArrayList<Jornada>();
 					for(Relationship relationship : nodeBanco.getRelationships(RelacionesPoi.atiende)){
@@ -137,23 +134,7 @@ public class POIToNodeConverter {
 	
 		public static LocalComercial convertToLocalComercial(Node nodeLocal, boolean deep){
 			LocalComercial unLocalComercial = new LocalComercial();
-			Procedure1<LocalComercial> function = (LocalComercial local) -> {
-					
-					//Realizar un metodo - General a todos los pois.
-					
-					int id = (int) nodeLocal.getId();
-					local.setId(id);
-					String nombreDePoi = (String) nodeLocal.getProperty("nombre", "");
-					local.setNombre(nombreDePoi);
-					String tipoDePoi = (String) nodeLocal.getProperty("tipo", "");	
-					local.setTipo(tipoDePoi);
-					String direccionDePoi = (String) nodeLocal.getProperty("direccionNombre", "");
-					local.setDireccionNombre(direccionDePoi);
-					int numeroDelPoi = Integer.parseInt((String) nodeLocal.getProperty("direccionNumero", ""));
-					local.setDireccionNumero(numeroDelPoi);
-					
-					//Especifico del tipo.
-					
+			Procedure1<LocalComercial> function = (LocalComercial local) -> {		
 					if(deep){
 						
 						List<Rubro> rubros = new ArrayList<Rubro>();
@@ -181,18 +162,5 @@ public class POIToNodeConverter {
 	
 	
 	
-	public static POI getTipoDePoi(String tipoDePoi){
-		switch (tipoDePoi) {
-		case "paradaColectivo":
-			POI parada = new ParadaDeColectivo(); return parada;
-		case "localComercial":
-			POI local = new LocalComercial(); return local;
-		case "cgp":
-			POI cgp = new CentroGestionParticipacion(); return cgp;
-		case "sucursalBanco":
-			POI banco = new SucursalBanco(); return banco;
-		default:
-			throw new RuntimeException("El tipo del Poi no se encuentra");
-		}	
-	}
+
 }
