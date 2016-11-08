@@ -18,6 +18,7 @@ import ar.utn.dds.POI.POI;
 import ar.utn.dds.POI.ParadaDeColectivo;
 import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.POI.LocalComercial;
+import ar.utn.dds.POI.Rubro;
 import ar.utn.dds.POI.CentroGestionParticipacion;
 
 import ar.utn.dds.servicios.Servicio;
@@ -48,7 +49,10 @@ public class POIToNodeConverter {
 			return ObjectExtensions.<POI>operator_doubleArrow(unPoi, function);
 	
 	}
-			
+	
+	// CGP --------------------------------------------------------------------------------------------------------
+	
+	
 	public static CentroGestionParticipacion convertToCGP(Node nodeCGP, boolean deep){
 			CentroGestionParticipacion unCGP = new CentroGestionParticipacion();
 			Procedure1<CentroGestionParticipacion> function = (CentroGestionParticipacion cgp) -> {
@@ -76,6 +80,8 @@ public class POIToNodeConverter {
 			
 			return ObjectExtensions.<CentroGestionParticipacion>operator_doubleArrow(unCGP, function);
 	}
+	
+	// SucursalBanco -----------------------------------------------------------------------------------------------
 	
 	public static SucursalBanco convertToBanco(Node nodeBanco, boolean deep){
 		SucursalBanco unBanco = new SucursalBanco();
@@ -126,6 +132,54 @@ public class POIToNodeConverter {
 			};
 		return ObjectExtensions.<SucursalBanco>operator_doubleArrow(unBanco, function);
 }
+	
+	// LocalComercial ---------------------------------------------------------------------------------------
+	
+		public static LocalComercial convertToLocalComercial(Node nodeLocal, boolean deep){
+			LocalComercial unLocalComercial = new LocalComercial();
+			Procedure1<LocalComercial> function = (LocalComercial local) -> {
+					
+					//Realizar un metodo - General a todos los pois.
+					
+					int id = (int) nodeLocal.getId();
+					local.setId(id);
+					String nombreDePoi = (String) nodeLocal.getProperty("nombre", "");
+					local.setNombre(nombreDePoi);
+					String tipoDePoi = (String) nodeLocal.getProperty("tipo", "");	
+					local.setTipo(tipoDePoi);
+					String direccionDePoi = (String) nodeLocal.getProperty("direccionNombre", "");
+					local.setDireccionNombre(direccionDePoi);
+					int numeroDelPoi = Integer.parseInt((String) nodeLocal.getProperty("direccionNumero", ""));
+					local.setDireccionNumero(numeroDelPoi);
+					
+					//Especifico del tipo.
+					
+					if(deep){
+						
+						List<Rubro> rubros = new ArrayList<Rubro>();
+						
+						for(Relationship relationship : nodeLocal.getRelationships(RelacionesPoi.PerteneceA)){
+							
+							Node rubro1 = relationship.getOtherNode(nodeLocal);
+													
+							double radioCercania = (double) rubro1.getProperty("radioCercania", null);
+							
+							String unNombre1 = (String) rubro1.getProperty("nombre",null);
+							
+							Rubro unRubro = new Rubro(unNombre1,radioCercania);
+										
+							rubros.add(unRubro);	
+						}
+						unLocalComercial.setListaRubros(rubros);
+					}
+				};
+			
+			return ObjectExtensions.<LocalComercial>operator_doubleArrow(unLocalComercial, function);
+	}
+	
+	
+	
+	
 	
 	public static POI getTipoDePoi(String tipoDePoi){
 		switch (tipoDePoi) {
