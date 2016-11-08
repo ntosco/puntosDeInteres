@@ -2,6 +2,9 @@ package ar.utn.dds.test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.neo4j.graphdb.Node;
@@ -76,4 +79,15 @@ public class TestRepoPoisNeo4J {
 		assertEquals(cgp.getListaServicios().get(0).getNombre(), "a comercial");
 	}
 	
+	
+	@Test
+	public void getPoisPorPalabraClave() {
+		List<String> palabrasClave = new ArrayList<String>();
+		palabrasClave.add("hola");
+		palabrasClave.add("chau");
+		assertEquals(repoPois.getPoisPorPalabraClave(palabrasClave).size(), 1);
+		assertEquals(repoPois.getPoisPorPalabraClave(palabrasClave).get(0).getNombre(), "parada 7");
+	}
+	
+
 }

@@ -73,5 +73,40 @@ public class RepoPoisNeo4j extends AbstractRepoNeo4J {
 		    final Iterator<Node> poi_column = result.<Node>columnAs("poi");
 		    return poi_column;
 		  }
-
+	  
+		public List<POI> getPoisPorPalabraClave(final List<String> palabrasClave) {
+		    List<POI> listaPois = null;
+		    {
+		      GraphDatabaseService graphService = this.getGraphDb();
+		      final Transaction transaction = graphService.beginTx();
+		      List<POI> tryListaPois = null;
+		      try {
+		        Iterator<Node> nodosUsuarios = this.getNodosPoisPorPalabraClave(palabrasClave);
+		        final Function1<Node, POI> function = (Node node) -> {
+		          return POIToNodeConverter.convertToPOI(node, false);
+		        };
+		        Iterator<POI> map = IteratorExtensions.<Node, POI>map(nodosUsuarios, function);
+		        tryListaPois = IteratorExtensions.<POI>toList(map);
+		      } finally {
+		        this.cerrarTransaccion(transaction);
+		      }
+		      listaPois = tryListaPois;
+		    }
+		    return listaPois;
+		}
+		
+		private Iterator<Node> getNodosPoisPorPalabraClave(final List<String> palabrasClave) {
+			GraphDatabaseService db = this.getGraphDb();
+			String query = "MATCH (p:Poi) WHERE all(w in [";
+			for(int i=0 ; i < palabrasClave.size() - 1 ; i++)
+			{
+				query = query + "'" + palabrasClave.get(i) + "',";
+			}
+			query = query + "'" + palabrasClave.get(palabrasClave.size()-1) + "'";
+			query = query + "] where w IN p.palabrasClave) return p";
+			Result result = db.execute(query);
+			Iterator<Node> poi_column = result.<Node>columnAs("p");
+			return poi_column;
+		  }
+		
 }
