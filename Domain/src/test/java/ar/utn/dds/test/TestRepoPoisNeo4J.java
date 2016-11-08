@@ -2,6 +2,7 @@ package ar.utn.dds.test;
 
 import static org.junit.Assert.*;
 
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.neo4j.graphdb.Node;
 
 import ar.utn.dds.POI.CentroGestionParticipacion;
 import ar.utn.dds.POI.POI;
+import ar.utn.dds.POI.SucursalBanco;
 import ar.utn.dds.repositorio.POIToNodeConverter;
 import ar.utn.dds.repositorio.RepoPoisNeo4j;
 import ar.utn.dds.repositorio.UsuarioToNodeConverter;
@@ -77,6 +79,17 @@ public class TestRepoPoisNeo4J {
 		assertEquals(cgp.getDireccionNumero(), 2300);
 		assertEquals(cgp.getListaServicios().size(), 3);
 		assertEquals(cgp.getListaServicios().get(0).getNombre(), "a comercial");
+	}
+	
+	@Test
+	public void convertirBanco(){
+		Node nodoBanco = repoPois.getNodoPoiById(18);
+		SucursalBanco banco = POIToNodeConverter.convertToBanco(nodoBanco, true);
+		assertEquals(banco.getTipo(), "sucursalBanco");
+		assertEquals(banco.getNombre(), "banco superville");
+		assertEquals(banco.getDireccionNumero(), 2300);
+		assertEquals(banco.getJornadaDisponible().size(), 3);
+		assertEquals(banco.getJornadaDisponible().get(0).getDiaSemanal(), DayOfWeek.SUNDAY);
 	}
 	
 	

@@ -4,6 +4,6 @@ import org.neo4j.graphdb.RelationshipType;
 
 public enum RelacionesPoi implements RelationshipType {
 
-	DaServicio
+	DaServicio,Favorito,Opino,PerteneceA,atiende
 
 }
