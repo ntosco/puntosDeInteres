@@ -35,7 +35,8 @@ public class TestRepoPoisNeo4J {
 	@Test
 	public void testAgregarReview() {
 		repoPois.agregarReview("fer", "parada 144", "4", "no tarda mucho en venir");
-		assertEquals(repoPois.getPois("parada 144").size(),  1);
+		assertEquals(repoPois.getReviewById(15).getComentario(), "no tarda mucho en venir");
+		assertEquals(repoPois.getReviewById(15).getValoracion(), 4);
 	}
 	
 	@Test
@@ -84,10 +85,11 @@ public class TestRepoPoisNeo4J {
 	
 	@Test
 	public void convertirBanco(){
-		Node nodoBanco = repoPois.getNodoPoiById(18);
-		SucursalBanco banco = (SucursalBanco)POIToNodeConverter.convertToPOI(nodoBanco, true);
+		Node nodoBanco = repoPois.getNodoPoiById(8);
+		SucursalBanco banco = new SucursalBanco();
+		banco = (SucursalBanco)POIToNodeConverter.convertToPOI(nodoBanco, true);
 		assertEquals(banco.getTipo(), "sucursalBanco");
-		assertEquals(banco.getNombre(), "banco superville");
+		assertEquals(banco.getNombre(), "banco rio");
 		assertEquals(banco.getDireccionNumero(), 2300);
 		assertEquals(banco.getJornadaDisponible().size(), 3);
 		assertEquals(banco.getJornadaDisponible().get(0).getDiaSemanal(), DayOfWeek.SUNDAY);
@@ -117,6 +119,5 @@ public class TestRepoPoisNeo4J {
 		assertEquals(repoPois.getPoisPorPalabraClave(palabrasClave).size(), 1);
 		assertEquals(repoPois.getPoisPorPalabraClave(palabrasClave).get(0).getNombre(), "parada 7");
 	}
-	
 
 }

@@ -1,5 +1,6 @@
 package ar.utn.dds.repositorio;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -7,10 +8,15 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.PropertyContainer;
+import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Result;
 import org.neo4j.graphdb.Transaction;
 
 import ar.utn.dds.POI.POI;
+import ar.utn.dds.POI.Review;
+import ar.utn.dds.servicios.Servicio;
 import ar.utn.dds.usuarios.UsuarioConcreto;
 
 public class RepoPoisNeo4j extends AbstractRepoNeo4J {
@@ -43,6 +49,15 @@ public class RepoPoisNeo4j extends AbstractRepoNeo4J {
 	      listaPois = tryListaPois;
 	    }
 	    return listaPois;
+	}
+	
+	public Review getReviewById(int numeroId){
+		GraphDatabaseService db = this.getGraphDb();
+		Relationship relationship = db.getRelationshipById(numeroId);
+		Review unaReview = new Review("", "", 0);
+		unaReview.setComentario((String)relationship.getProperty("opinion", null));
+		unaReview.setValoracion(Integer.parseInt((String)relationship.getProperty("valoracion", null)));
+		return unaReview;
 	}
 	
 	private Iterator<Node> getNodosPois(final String valor) {

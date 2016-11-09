@@ -79,18 +79,19 @@ public class TestNeo4JRepoUsuarios {
 		assertEquals(nodoUsuario.getId(), 1);
 	}
 	
-	/*
+	
 	@Test
 	public void agregarOactualizarUsuario() {
 		
 		UsuarioConcreto usuario = new UsuarioConcreto();
+		usuario.setId(2);
 	    usuario.setNombreUsuario("martin");
-		usuario.setPassword("samo");
+		usuario.setPassword("samolovich");
 		
 		_instance.saveOrUpdateUsuario(usuario);
-		assertEquals(_instance.getUsuarios("martin").size(), 1);
+		assertEquals(_instance.getUsuarios("martin").get(0).getPassword(), "samolovich");
 	}
-	*/
+	
 	@Test
 	public void getFavoritos() {
 		assertEquals(_instance.getPoisFavoritos("fer").size(), 2);
