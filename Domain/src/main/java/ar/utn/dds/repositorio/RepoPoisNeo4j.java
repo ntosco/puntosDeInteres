@@ -6,7 +6,9 @@ import java.util.List;
 
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Label;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.PropertyContainer;
 import org.neo4j.graphdb.Relationship;
@@ -37,11 +39,11 @@ public class RepoPoisNeo4j extends AbstractRepoNeo4J {
 	      final Transaction transaction = graphService.beginTx();
 	      List<POI> tryListaPois = null;
 	      try {
-	        Iterator<Node> nodosUsuarios = this.getNodosPois(valor);
+	        Iterator<Node> nodosPois = this.getNodosPois(valor);
 	        final Function1<Node, POI> function = (Node node) -> {
 	          return POIToNodeConverter.convertToPOI(node, true);
 	        };
-	        Iterator<POI> map = IteratorExtensions.<Node, POI>map(nodosUsuarios, function);
+	        Iterator<POI> map = IteratorExtensions.<Node, POI>map(nodosPois, function);
 	        tryListaPois = IteratorExtensions.<POI>toList(map);
 	      } finally {
 	        this.cerrarTransaccion(transaction);
@@ -60,6 +62,40 @@ public class RepoPoisNeo4j extends AbstractRepoNeo4J {
 		return unaReview;
 	}
 	
+public List<Review> getReviews (String nombrePoi){
+		
+		List<Review> listRev = null;
+		{ 
+			GraphDatabaseService graphService = this.getGraphDb();
+		
+			final Transaction transaction = graphService.beginTx();
+		      List<Review> aux = new ArrayList<Review>();
+		      try {
+		        
+		        Node nodoPoi = graphService.findNode( Label.label("Poi"), "nombre", nombrePoi );
+		        
+		        for(Relationship relationship : nodoPoi.getRelationships(Direction.INCOMING,RelacionesPoi.Opino)){
+		        	
+		        	String comentario = (String) relationship.getProperty("opinion");
+		        	int valoracion = Integer.parseInt((String) relationship.getProperty("valoracion"));	        	
+		        	String nombreUsuario = (String) relationship.getStartNode().getProperty("nombreUsuario");
+		        	
+		        	Review reviewAux = new Review(comentario,nombreUsuario,valoracion);
+		       		        	
+		        	aux.add(reviewAux);
+		        		        	
+		        }
+		              
+		      } finally {
+		        this.cerrarTransaccion(transaction);
+		      }
+		      listRev = aux;
+		
+		}
+	      
+			return listRev;
+		}
+
 	private Iterator<Node> getNodosPois(final String valor) {
 		GraphDatabaseService db = this.getGraphDb();
 		
@@ -67,7 +103,6 @@ public class RepoPoisNeo4j extends AbstractRepoNeo4J {
 		Result result = db.execute(query);
 		Iterator<Node> poi_column = result.<Node>columnAs("p");
 		return poi_column;
-	  //  return this.basicSearch((("Poi.nombre =~ \'(?i).*" + valor) + ".*\'"));
 	  }
 	
 	public void agregarReview(String nombreUsuario, String nombrePoi, String valoracion, String review){

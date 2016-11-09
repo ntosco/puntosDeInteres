@@ -33,11 +33,26 @@ public class TestRepoPoisNeo4J {
 	}
 	
 	@Test
-	public void testAgregarReview() {
+	public void testAgregarReviewPorId() {
 		repoPois.agregarReview("fer", "parada 144", "4", "no tarda mucho en venir");
 		assertEquals(repoPois.getReviewById(15).getComentario(), "no tarda mucho en venir");
 		assertEquals(repoPois.getReviewById(15).getValoracion(), 4);
 	}
+	
+	@Test
+	public void testObtenerReviewsDeUnPoi() {
+		assertEquals(repoPois.getReviews("banco rio").size(),2);
+	}
+	
+	@Test
+	public void testAgregarUnReviewYConsultarlo() {	
+		repoPois.agregarReview("fer", "parada 144", "4", "no tarda mucho en venir");
+		
+		assertEquals(repoPois.getReviews("parada 144").get(0).getNombreUsuario(),"fer");	
+		assertEquals(repoPois.getReviews("parada 144").get(0).getComentario(),"no tarda mucho en venir");
+		assertEquals(repoPois.getReviews("parada 144").get(0).getValoracion(),4);
+	}
+	
 	
 	@Test
 	public void testGetNodoPoiById() {
