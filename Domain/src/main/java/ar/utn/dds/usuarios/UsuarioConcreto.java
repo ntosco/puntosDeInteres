@@ -3,6 +3,7 @@ package ar.utn.dds.usuarios;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.eclipse.xtext.xbase.lib.Pure;
 
 import com.google.gson.annotations.Expose;
@@ -17,23 +18,27 @@ import ar.utn.dds.procesos.estrategiaFallo.NoRealizarAccionPorFalla;
 import ar.utn.dds.roles.Rol;
 import ar.utn.dds.roles.RolAdministrador;
 import ar.utn.dds.utils.Consulta;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Property;
+import org.mongodb.morphia.annotations.Transient;
 
+@Entity ("usuarioss")
 public class UsuarioConcreto implements Usuario {
-	
-	private List<Observador> accionesObservers = new ArrayList<Observador>();
-	@Expose private int idUser;
-	@Expose private String nombreUsuario;
-	@Expose private String password;
-	private Rol rol;
-	private String email;
-	private EstrategiaPorFallo estrategiaPorFallo = new NoRealizarAccionPorFalla();
-	@Expose private List<POI> favoritos = new ArrayList<POI>();
 
+	@Id	ObjectId id;
 
+	@Transient private List<Observador> accionesObservers = new ArrayList<Observador>();
+	@Property @Expose private int idUser;
+	@Property @Expose private String nombreUsuario;
+	@Transient @Expose private String password;
+	@Transient private Rol rol;
+	@Transient private String email;
+	@Transient private EstrategiaPorFallo estrategiaPorFallo = new NoRealizarAccionPorFalla();
+	@Transient @Expose private List<POI> favoritos = new ArrayList<POI>();
 
 	@Override
 	public List<POI> buscarPuntos(String pablabraBuscada) {
-		
 		Consulta consulta = new Consulta(this,pablabraBuscada);
 
 		return consulta.buscaPuntosYNotificaObservadores();

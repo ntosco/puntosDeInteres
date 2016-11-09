@@ -2,15 +2,25 @@ package ar.utn.dds.reportes;
 
 import java.util.Hashtable;
 
+import ar.utn.dds.repositorio.AbstractRepoMongo;
 import ar.utn.dds.utils.Consulta;
 
-public class ReportePorFecha implements Reporte {
+public class ReportePorFecha extends AbstractRepoMongo{
 	
 	private Hashtable<String,Integer> BusquedasPorFecha = new Hashtable<String,Integer>();
 	
-	private ReportePorFecha(){
-		super();
+	public void procesarConsulta(Consulta consulta) {
+		
+		if(getBusquedasPorFecha().containsKey(consulta.getFecha())){
+			 BusquedasPorFecha.put(consulta.getFecha().toString(), BusquedasPorFecha.get(consulta.getFecha()) + consulta.getCantidadDeResultados());
+		}else{
+			 getBusquedasPorFecha().put(consulta.getFecha().toString(), consulta.getCantidadDeResultados());
+		}	
+		
+		this.getDatastore().save(consulta);
 	}
+	
+	////Singleton
 	
 	public static ReportePorFecha instance;
 		
@@ -21,22 +31,11 @@ public class ReportePorFecha implements Reporte {
 		return instance;
 	}
 	
-	@Override
-	public void procesarConsulta(Consulta consulta) {
-	
-		if(getBusquedasPorFecha().containsKey(consulta.getFecha())){
-			 BusquedasPorFecha.put(consulta.getFecha().toString(), BusquedasPorFecha.get(consulta.getFecha()) + consulta.getCantidadDeResultados());
-		}else{
-			 getBusquedasPorFecha().put(consulta.getFecha().toString(), consulta.getCantidadDeResultados());
-		}	
+	private ReportePorFecha(){
+		super();
 	}
-
 	
-	@Override
-	public void emitirse() {
-		// Implementar cuando realice el Actualizador de reportes.
-		
-	}
+	////Getters and Setters
 		
 	public Hashtable<String,Integer> getBusquedasPorFecha() {
 		return BusquedasPorFecha;

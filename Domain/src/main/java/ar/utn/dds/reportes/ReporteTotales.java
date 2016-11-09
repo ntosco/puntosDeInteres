@@ -2,34 +2,13 @@ package ar.utn.dds.reportes;
 
 import java.util.Hashtable;
 
+import ar.utn.dds.repositorio.AbstractRepoMongo;
 import ar.utn.dds.utils.Consulta;
 
-public class ReporteTotales implements Reporte{
+public class ReporteTotales extends AbstractRepoMongo{
 
 	private Hashtable<String,Integer> TotalesPorUsuario = new Hashtable<String,Integer>();
 	
-	private ReporteTotales (){
-		super();
-	}
-	
-	public static ReporteTotales instance;
-	
-	public static ReporteTotales getInstance(){
-		if (instance == null) {
-			instance = new ReporteTotales();
-		}
-		return instance;
-	}
-		
-	
-	
-	@Override
-	public void emitirse() {
-		// Implementar a futuro
-		
-	}
-
-	@Override
 	public void procesarConsulta(Consulta consulta) {
 		
 		if(getTotalesPorUsuario().containsKey(consulta.getUsuarioEjecutor().getNombreUsuario())){
@@ -45,7 +24,26 @@ public class ReporteTotales implements Reporte{
 			
 			getTotalesPorUsuario().put(nombreUsuario, cantidadDeResultadosConsulta);
 		}
+		
+		this.getDatastore().save(consulta);
 	}
+		
+	//// Singleton
+	
+	private ReporteTotales (){
+		super();
+	}
+	
+	public static ReporteTotales instance;
+	
+	public static ReporteTotales getInstance(){
+		if (instance == null) {
+			instance = new ReporteTotales();
+		}
+		return instance;
+	}
+		
+	//// Getters and Setters
 	
 	public Hashtable<String,Integer> getTotalesPorUsuario() {
 		return TotalesPorUsuario;

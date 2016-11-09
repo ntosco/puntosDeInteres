@@ -6,14 +6,20 @@ import java.util.List;
 
 import ar.utn.dds.POI.POI;
 import ar.utn.dds.usuarios.Usuario;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.*;
+import org.mongodb.morphia.annotations.Entity;
 
+@Entity("consultas")
 public class Consulta {
-	
-	private Usuario usuarioEjecutor;
-	private int cantidadDeResultados;
-	private LocalDate fecha;
-	private String palabraBuscada;
-	private long	tiempoTranscurrido; //En segundos
+
+	@Id ObjectId id;
+	@Embedded private Usuario usuarioEjecutor;
+	@Property private int cantidadDeResultados;
+	@Transient private LocalDate fecha;
+
+	@Property private String palabraBuscada;
+	@Transient private long tiempoTranscurrido; //En segundosS
 	
 	
 	public Consulta (Usuario usuario, String palabraBusqueda){
@@ -33,7 +39,8 @@ public class Consulta {
 		this.cantidadDeResultados = listaResultado.size();
 		
 		usuarioEjecutor.notificarObservadores(this);
-		
+
+
 		return listaResultado;
 	}
 
